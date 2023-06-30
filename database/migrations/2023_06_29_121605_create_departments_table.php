@@ -19,6 +19,7 @@ return new class extends Migration
             $t->string('name')->nullable();
             $t->foreignIdFor(User::class)->comment('Creator ID');
             $t->foreignIdFor(Company::class)->comment('department belongs to this company');
+            $t->boolean("is_active")->default(true);
             $t->timestamps();
         });
     }

@@ -14,7 +14,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.settings.organization.department.create');
+        $departments = Department::where('user_id', Auth::user()->id)->get();
+        return view('admin.pages.settings.organization.department.list', ['departments' => $departments]);
     }
 
     /**
@@ -22,7 +23,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.settings.organization.department.create');
     }
 
     /**
@@ -35,11 +36,14 @@ class DepartmentController extends Controller
     public function store(Request $req)
     {
         $company = Company::where('user_id', Auth::user()->id)->first();
-
-        $dep = Department::create(array_merge($req->all(), ['user_id' =>  Auth::user()->id, 'company_id' => $company->id]));
+        if ($company instanceof Company) {
+            $dep = Department::create(array_merge($req->all(), ['user_id' =>  Auth::user()->id, 'company_id' => $company->id]));
+        } else {
+            return redirect()->back()->with('error', 'Please add company details first !');
+        }
 
         if ($dep instanceof Department) {
-            return redirect()->back()->with('success', 'Department created successfully');
+            return redirect()->route('department.list')->with('success', 'Department created successfully');
         } else {
             return redirect()->back()->with('error', 'Department creation failed');
         }

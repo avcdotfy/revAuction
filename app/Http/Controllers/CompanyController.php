@@ -13,7 +13,6 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.settings.organization.company.create');
     }
 
     /**
@@ -21,7 +20,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.settings.organization.company.create');
     }
 
     /**

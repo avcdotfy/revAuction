@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('permissions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('permissions', function (Blueprint $t) {
+            $t->id();
+            $t->string('name');
+            $t->string('url_path');
+            $t->timestamps();
         });
     }
 

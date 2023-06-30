@@ -38,8 +38,7 @@ return new class extends Migration
             $t->string('logo')->nullable();
             $t->boolean('is_approved')->nullable();
             $t->foreignId('approved_by')->nullable()->comment('User ID of Admin');
-            $t->enum('user_type', USER_TYPES)->default(USER_TYPES[1]);
-
+            $t->enum('user_type', USER_TYPES);
             $t->timestamp('email_verified_at')->nullable();
             $t->string('password');
 
