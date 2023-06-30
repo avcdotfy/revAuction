@@ -152,7 +152,7 @@
                                      href="{{ route('permission_role.create') }}"><span
                                          class="dot-icon">.</span><span>Role &
                                          Permissions</span></a></li>
-                             <li id="organization_setting_employee"><a href="employee.aspx"><span
+                             <li id="organization_setting_employee"><a href="{{ route('employee.list') }}"><span
                                          class="dot-icon">.</span><span>Employee</span></a></li>
                          </ul>
                      </li>
