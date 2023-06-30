@@ -217,7 +217,7 @@
     </section>
     <!-- /.content -->
 
-    @include('admin.partials.logout-modal')
+
 @endsection
 
 @push('scripts')

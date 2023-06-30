@@ -23,7 +23,7 @@
                         style="color: #333;text-transform: uppercase;font-weight: 600; font-family: 'IBM Plex Sans', sans-serif;">
                         <span id="spn_username" class="hidden-xs"
                             style="text-transform: capitalize; padding-top: 20px">Welcome Hi, Admin &nbsp;</span>
-                        <img src="images/user.jpg" style="width: 30px">
+                        <img src="{{ asset('images/user.jpg') }}" style="width: 30px">
                     </a>
                     <ul class="dropdown-menu">
                         <!-- Menu Footer-->

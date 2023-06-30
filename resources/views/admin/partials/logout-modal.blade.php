@@ -1,7 +1,3 @@
-<!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-<!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -15,7 +11,7 @@
                 <p>Are you sure you want to logout ?? </p>
             </div>
             <div class="modal-footer">
-                <a href="{{ route('logout') }}" class="btn btn-danger" >Yes</a>
+                <a href="{{ route('logout') }}" class="btn btn-danger">Yes</a>
                 <a class="btn btn-primary" data-dismiss="modal">No</a>
 
             </div>

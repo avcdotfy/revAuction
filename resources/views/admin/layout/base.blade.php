@@ -7,22 +7,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="images/logo/favicon.ico" />
+    <link rel="icon" type="image/png" href="{{ asset('images/logo/favicon.ico') }}" />
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}" />
     <!-- Ionicons -->
-    <link rel="stylesheet" href="Ionicons/css/ionicons.min.css" />
-    <link href="simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('Ionicons/css/ionicons.min.css') }}" />
+    <link href="{{ asset('simple-line-icons/simple-line-icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <!-- DataTables -->
-    <link rel="stylesheet" href="datatables/dataTables.bootstrap.css" />
-    <link rel="stylesheet" href="dist/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="dist/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" href="{{ asset('datatables/dataTables.bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('dist/css/jquery.dataTables.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('dist/css/buttons.dataTables.min.css') }}" />
     <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/AdminLTE.min.css" />
-    <link rel="stylesheet" href="dist/css/skins/all-skins.min.css" />
+    <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('dist/css/skins/all-skins.min.css') }}" />
     <!-- Google Font -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
@@ -43,7 +43,7 @@
             font-size: 18px;
         }
     </style>
-    <script src="jquery/dist/jquery.min.js"></script>
+    <script src="{{ asset('jquery/dist/jquery.min.js') }}"></script>
 
     <title>Home | Dashboard</title>
     <style type="text/css">
@@ -135,6 +135,9 @@
 
     </div>
     <!-- /.content-wrapper -->
+
+    @include('admin.partials.logout-modal')
+
     @include('admin.partials.footer')
 
     @include('admin.partials.scripts')

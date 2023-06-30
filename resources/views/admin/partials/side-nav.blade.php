@@ -144,13 +144,12 @@
                              </span>
                          </a>
                          <ul class="treeview-menu">
-                             <li id="organization_setting_company_setup"><a href="company-setup.aspx"><span
+                             <li id="organization_setting_company_setup"><a href="{{ route('company.form') }}"><span
                                          class="dot-icon">.</span><span>Company Setup</span></a></li>
-                             <li id="organization_setting_department"><a href="department.aspx"><span
+                             <li id="organization_setting_department"><a href="{{ route('department.form') }}"><span
                                          class="dot-icon">.</span><span>Department</span></a></li>
                              <li id="organization_setting_role_permissions"><a href="role-and-permission.aspx"><span
-                                         class="dot-icon">.</span><span>Role &
-                                         Permissions</span></a></li>
+                                         class="dot-icon">.</span><span>Role & Permissions</span></a></li>
                              <li id="organization_setting_employee"><a href="employee.aspx"><span
                                          class="dot-icon">.</span><span>Employee</span></a></li>
                          </ul>
