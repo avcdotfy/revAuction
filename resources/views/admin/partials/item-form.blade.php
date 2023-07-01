@@ -182,8 +182,8 @@
                 style="color: red; font-size: small">*</span></label>
         <div class="col-sm-12">
             <select name="is_active" class="form-control">
-                <option value="0">Activate</option>
-                <option value="1">Deactivate</option>
+                <option value=1>Activate</option>
+                <option value=0>Deactivate</option>
 
             </select>
         </div>

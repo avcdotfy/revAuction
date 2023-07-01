@@ -61,9 +61,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($items as $i)
+                                            @foreach ($items as $key => $i)
                                                 <tr role="row" class="odd">
-                                                    <td>1</td>
+                                                    <td>{{ $key + 1 }}</td>
                                                     <td>{{ $i->cat_name }}</td>
                                                     <td>{{ $i->item_code }}/{{ $i->description }}</td>
                                                     <td>{{ $i->unit }}</td>
