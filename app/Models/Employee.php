@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

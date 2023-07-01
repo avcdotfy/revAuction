@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CompanyController extends Controller
 {
@@ -29,6 +30,7 @@ class CompanyController extends Controller
     public function store(Request $req)
     {
         $company = Company::create(array_merge($req->all(), ['user_id' =>  Auth::user()->id]));
+
         if ($company instanceof Company) {
             return redirect()->back()->with('success', 'Company setup successfully');
         } else {

@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\RolePermissionController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +30,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/create', [DepartmentController::class, 'store'])->name('department.store');
         });
         Route::group(['prefix' => 'permission'], function () {
+            Route::get('/', [RolePermissionController::class, 'index'])->name('permission_role.list');
             Route::get('/create', [RolePermissionController::class, 'create'])->name('permission_role.create');
             Route::post('/create', [RolePermissionController::class, 'store'])->name('permission_role.store');
         });
@@ -35,6 +38,20 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/', [EmployeeController::class, 'index'])->name('employee.list');
             Route::get('/create', [EmployeeController::class, 'create'])->name('employee.create');
             Route::post('/create', [EmployeeController::class, 'store'])->name('employee.store');
+        });
+
+
+        Route::group(['prefix' => 'catalog'], function () {
+            Route::group(['prefix' => 'category'], function () {
+                Route::get('/', [CategoryController::class, 'index'])->name('category.list');
+                Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
+                Route::post('/create', [CategoryController::class, 'store'])->name('category.store');
+            });
+            Route::group(['prefix' => 'item'], function () {
+                Route::get('/', [ItemController::class, 'index'])->name('item.list');
+                Route::get('/create', [ItemController::class, 'create'])->name('item.create');
+                Route::post('/create', [ItemController::class, 'store'])->name('item.store');
+            });
         });
     });
 });

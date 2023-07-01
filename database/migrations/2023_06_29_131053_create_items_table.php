@@ -16,11 +16,11 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $t) {
             $t->id();
-            $t->string('code');
-            $t->string('name');
+            $t->string('code')->nullable();
+            $t->string('name')->nullable();
             $t->foreignIdFor(UnitOfMeasure::class);
-            $t->integer('description');
-            $t->integer('decrement_price');
+            $t->text('description')->nullable();
+            $t->integer('decrement_price')->nullable();
             $t->boolean('is_active');
             $t->boolean('is_manually_change_bidding_price');
             $t->foreignIdFor(Category::class)->comment("item belong to this category ");

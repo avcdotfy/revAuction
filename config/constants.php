@@ -128,3 +128,26 @@ define('PERMISSIONS', [
     ],
 
 ]);
+
+
+
+define(
+    'UOMs',
+    [
+        'Ampere',
+        'Arpent',
+        'Box',
+        'Bucket',
+        'Bundle',
+        'Centimeter',
+        'Cubic',
+        'Decimeter',
+        'Dozen',
+        'Foot',
+        'Gram',
+        'Gross',
+        'Inch',
+        'Kg',
+        'Kilogram',
+    ]
+);

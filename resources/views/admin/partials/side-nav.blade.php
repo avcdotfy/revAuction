@@ -27,9 +27,10 @@
                      </span>
                  </a>
                  <ul class="treeview-menu">
-                     <li id="catalog_category"><a href="category.aspx"><span
+                     <li id="catalog_category"><a href="{{ route('category.list') }}"><span
                                  class="dot-icon">.</span><span>Category</span></a></li>
-                     <li id="catalog_items"><a href="items.aspx"><span class="dot-icon">.</span><span>Items</span></a>
+                     <li id="catalog_items"><a href="{{ route('item.list') }}"><span
+                                 class="dot-icon">.</span><span>Items</span></a>
                      </li>
                  </ul>
              </li>
@@ -149,7 +150,7 @@
                              <li id="organization_setting_department"><a href="{{ route('department.list') }}"><span
                                          class="dot-icon">.</span><span>Department</span></a></li>
                              <li id="organization_setting_role_permissions"><a
-                                     href="{{ route('permission_role.create') }}"><span
+                                     href="{{ route('permission_role.list') }}"><span
                                          class="dot-icon">.</span><span>Role &
                                          Permissions</span></a></li>
                              <li id="organization_setting_employee"><a href="{{ route('employee.list') }}"><span

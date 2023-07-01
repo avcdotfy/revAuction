@@ -3,11 +3,10 @@
 @section('main_section')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h3 style="margin-top: 10px; margin-bottom: 20px">Home | Organization Setting | Employee </h3>
+        <h3 style="margin-top: 10px; margin-bottom: 20px">Catalog | Items List </h3>
         <ol class="breadcrumb">
-            <a href="{{ route('employee.create') }}" style="color: white; font-weight: 600"
-                class="btn-block btn-primary btn-sm">
-                + Create New Employee</a>
+            <a href="{{ route('item.create') }}" style="color: white; font-weight: 600" class="btn-block btn-primary btn-sm">
+                + Create New Item</a>
         </ol>
     </section>
     <!-- Main content -->
@@ -42,68 +41,64 @@
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
                                                     style="width: 43.3333px;">S.No.</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 109.812px;">Employee Role</th>
+                                                    style="width: 109.812px;">Product Range</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 120.156px;">Employee ID</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 109.812px;">Employee Name</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 120.156px;">Department</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 120.156px;">Designation</th>
+                                                    style="width: 230.156px;">Item Code & Description</th>
 
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 120.156px;">Mobile No.</th>
+                                                    style="width: 59.812px;">UoM</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 120.156px;">Email ID</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 120.156px;">Password</th>
-
+                                                    style="width: 120.156px;">Item Region & Price</th>
 
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
                                                     style="width: 90.3125px;">Status</th>
+
+                                                <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                    style="width: 90.3125px;">Updates on</th>
 
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
                                                     style="width: 56.375px;">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-
-                                            @foreach ($employees as $key => $emp)
+                                            @foreach ($items as $i)
                                                 <tr role="row" class="odd">
-                                                    <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $emp->role }}</td>
-                                                    <td>{{ $emp->employee_id }}</td>
-                                                    <td>{{ $emp->name }}</td>
-                                                    <td>{{ $emp->department }}</td>
-                                                    <td>{{ $emp->designation }}</td>
-                                                    <td>{{ $emp->phone }}</td>
-                                                    <td>{{ $emp->email }}</td>
-                                                    <td>*******</td>
-                                                    {{-- <td>{{ $emp->password }}</td> --}}
+                                                    <td>1</td>
+                                                    <td>{{ $i->cat_name }}</td>
+                                                    <td>{{ $i->item_code }}/{{ $i->description }}</td>
+                                                    <td>{{ $i->unit }}</td>
 
-                                                    <td><label class="label label-success"
-                                                            style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
-                                                    </td>
+                                                    <td><a href="#" href="#demo-modal">View</a></td>
 
+                                                    @if ($i->is_active)
+                                                        <td>
+                                                            <label class="label label-success"
+                                                                style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
+                                                        </td>
+                                                    @else
+                                                        <td>
+                                                            <label class="label label-danger"
+                                                                style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Deactivated</label>
+                                                        </td>
+                                                    @endif
+
+
+                                                    <td>{{ $i->updated_at }}</td>
                                                     <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
                                                 </tr>
                                             @endforeach
 
+
                                         </tbody>
                                     </table>
 
-                                    <div class="col-lg-12 " style="padding-left: 0px; padding-right: 0px">
-                                        <p class="col-lg-6" style="text-align: left;padding-left: 8px; line-height: 30px">
-                                        </p>
-                                        <div class="col-lg-6" style="text-align: right;">
-                                            <div class="pagination " style="margin: 0px 0; ">
-                                                <!--  <a href="#">&laquo;</a> -->
-                                                <a href="#">Prev</a>
-                                                <a class="active" href="#">1</a>
-                                                <a href="#">Next</a>
+                                    <div class="col-lg-12 " style="text-align: right;">
+                                        <div class="pagination">
+                                            <!--  <a href="#">&laquo;</a> -->
+                                            <a href="#">Previous</a>
+                                            <a class="active" href="#">1</a>
+                                            <a href="#">Next</a>
 
-                                            </div>
                                         </div>
                                     </div>
 
@@ -113,6 +108,9 @@
                     </div>
                 </div>
             </div>
+
+
+            <!-- /.row -->
     </section>
     <!-- /.content -->
 @endsection

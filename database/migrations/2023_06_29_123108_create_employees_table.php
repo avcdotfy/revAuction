@@ -21,7 +21,6 @@ return new class extends Migration
             $t->foreignIdFor(Department::class);
             $t->string('designation');
             $t->string('employee_id');
-            $t->foreignIdFor(Category::class)->comment('this employee will deal in this category');
             $t->foreignId('emp_user_id')->comment('this employee information belong to this user');
             $t->foreignId('user_id')->comment('Creator ID');
             $t->foreignIdFor(Company::class)->comment('This employee belong to this company');

@@ -3,11 +3,11 @@
 @section('main_section')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h3 style="margin-top: 10px; margin-bottom: 20px">Home | Organization Setting | Employee </h3>
+        <h4>Home | Catalog | Category <small id="ContentPlaceHolder1_hTag">List</small></h4>
         <ol class="breadcrumb">
-            <a href="{{ route('employee.create') }}" style="color: white; font-weight: 600"
-                class="btn-block btn-primary btn-sm">
-                + Create New Employee</a>
+            <a href="{{ route('category.create') }}" style="color: white; font-weight: 600"
+                class="btn-block btn-primary btn-sm">+ Create New
+                Category</a>
         </ol>
     </section>
     <!-- Main content -->
@@ -36,83 +36,64 @@
                                             name="">
                                     </div>
                                     <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
-                                        role="grid">
+                                        role="grid" aria-describedby="dtable_info">
                                         <thead>
                                             <tr role="row">
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
                                                     style="width: 43.3333px;">S.No.</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 109.812px;">Employee Role</th>
+                                                    style="width: 109.812px;">Category Code</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 120.156px;">Employee ID</th>
+                                                    style="width: 120.156px;">Category Name</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 109.812px;">Employee Name</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 120.156px;">Department</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 120.156px;">Designation</th>
-
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 120.156px;">Mobile No.</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 120.156px;">Email ID</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 120.156px;">Password</th>
-
-
+                                                    style="width: 358.625px;">Is Enable Item Time Trigger?</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
                                                     style="width: 90.3125px;">Status</th>
-
+                                                <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                    style="width: 104.052px;">Updated Date</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
                                                     style="width: 56.375px;">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-
-                                            @foreach ($employees as $key => $emp)
+                                            @foreach ($categories as $key => $cat)
                                                 <tr role="row" class="odd">
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $emp->role }}</td>
-                                                    <td>{{ $emp->employee_id }}</td>
-                                                    <td>{{ $emp->name }}</td>
-                                                    <td>{{ $emp->department }}</td>
-                                                    <td>{{ $emp->designation }}</td>
-                                                    <td>{{ $emp->phone }}</td>
-                                                    <td>{{ $emp->email }}</td>
-                                                    <td>*******</td>
-                                                    {{-- <td>{{ $emp->password }}</td> --}}
-
-                                                    <td><label class="label label-success"
-                                                            style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
+                                                    <td>{{ $cat->code }}</td>
+                                                    <td>{{ $cat->name }}</td>
+                                                    <td><b>{{ $cat->item_time_trigger == 0 ? 'No' : 'yes' }}</b> | TG <i
+                                                            class="fa fa-arrows-h"></i> Each Item is
+                                                        <b>{{ $cat->time_gap_between_each_item }}</b>
+                                                        Min
+                                                        | CT <i class="fa fa-arrow-up"></i> in Last <b>
+                                                            {{ $cat->last_minute_closing_time_increment }}</b> Min
                                                     </td>
+                                                    @if ($cat->is_active)
+                                                        <td><label class="label label-success"
+                                                                style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
+                                                        </td>
+                                                    @else
+                                                        <td><label class="label label-danger"
+                                                                style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Deactivated</label>
+                                                        </td>
+                                                    @endif
 
+                                                    <td>{{ $cat->updated_at }}</td>
                                                     <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
                                                 </tr>
                                             @endforeach
 
                                         </tbody>
                                     </table>
-
-                                    <div class="col-lg-12 " style="padding-left: 0px; padding-right: 0px">
-                                        <p class="col-lg-6" style="text-align: left;padding-left: 8px; line-height: 30px">
-                                        </p>
-                                        <div class="col-lg-6" style="text-align: right;">
-                                            <div class="pagination " style="margin: 0px 0; ">
-                                                <!--  <a href="#">&laquo;</a> -->
-                                                <a href="#">Prev</a>
-                                                <a class="active" href="#">1</a>
-                                                <a href="#">Next</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+            <!-- /.row -->
     </section>
     <!-- /.content -->
 @endsection

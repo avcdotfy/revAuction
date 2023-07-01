@@ -2,33 +2,26 @@
 
 @section('main_section')
     <!-- Content Header (Page header) -->
-    <section class="content-header" style="margin-bottom: 20px">
-        <h3>Home | Settings| Employee Create </h3>
-
+    <section class="content-header">
+        <h4>Create Category </h4>
     </section>
     <!-- Main content -->
     <section class="content">
-        @include('admin.partials.alerts')
+        <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-xs-12">
-
                 <div class="box">
                     <div class="box-body">
                         <div id="ContentPlaceHolder1_div_nr" class="row">
-                            <form action="" method="post">
+                            <form action="{{ route('category.store') }}" method="post">
                                 @csrf
-                                @include('admin.partials.employee-form')
+                                @include('admin.partials.category-form')
                             </form>
                         </div>
-
-
+                        <!-- /.box-body -->
                     </div>
-                    <!-- /.box-body -->
                 </div>
-
-
-            </div>
-        </div>
+                <!-- /.row -->
     </section>
     <!-- /.content -->
 @endsection

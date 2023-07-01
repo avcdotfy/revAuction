@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class RolePermissionController extends Controller
 {
+    function index()
+    {
+        return view('admin.pages.settings.organization.permissions.list');
+    }
+
     public function create()
     {
         $permissions = Permission::all();
