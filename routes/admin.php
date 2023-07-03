@@ -6,7 +6,9 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\RequestController;
 use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin'], function () {
@@ -52,6 +54,18 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::get('/create', [ItemController::class, 'create'])->name('item.create');
                 Route::post('/create', [ItemController::class, 'store'])->name('item.store');
             });
+        });
+
+
+        Route::group(['prefixed' => 'vendor'], function () {
+            Route::get('/new-requests', [RequestController::class, 'new_requests'])->name('vendor.new_requests');
+            Route::get('/approved-requests', [RequestController::class, 'approved'])->name('vendor.approved_requests');
+            Route::get('/rejected-requests', [RequestController::class, 'rejected'])->name('vendor.rejected_requests');
+        });
+
+        Route::group(['prefixed' => 'request'], function () {
+            Route::get('/accept', [RequestController::class, 'accept'])->name('request.accept');
+            Route::get('/reject', [RequestController::class, 'reject'])->name('request.reject');
         });
     });
 });

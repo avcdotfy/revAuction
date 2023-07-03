@@ -5,19 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class Request extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function user()
+    public function vendor()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Vendor::class);
     }
 
-    public function request()
+    public function remark()
     {
-        return $this->hasMany(Request::class);
+        return $this->hasMany(Remark::class);
     }
+
+    
 }

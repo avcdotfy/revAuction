@@ -42,11 +42,11 @@
                      </span>
                  </a>
                  <ul class="treeview-menu">
-                     <li id="vendors_new_vendor_request"><a href="new-vendor-request.aspx"><span
+                     <li id="vendors_new_vendor_request"><a href="{{ route('vendor.new_requests') }}"><span
                                  class="dot-icon">.</span><span>New Vendor Request</span></a></li>
-                     <li id="vendors_approved_vendor"><a href="approved-vendor.aspx"><span
+                     <li id="vendors_approved_vendor"><a href="{{ route('vendor.approved_requests') }}"><span
                                  class="dot-icon">.</span><span>Approved Vendor</span></a></li>
-                     <li id="vendors_rejected_vendor"><a href="rejected-vendor.aspx"><span
+                     <li id="vendors_rejected_vendor"><a href="{{ route('vendor.rejected_requests') }}"><span
                                  class="dot-icon">.</span><span>Rejected Vendor</span></a></li>
                      <li id="vendors_new_items_update_to_all"><a href="new-item-update.aspx"><span
                                  class="dot-icon">.</span><span>New Items Update To All</span></a></li>

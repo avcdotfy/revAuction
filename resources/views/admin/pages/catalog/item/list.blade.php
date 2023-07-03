@@ -68,7 +68,14 @@
                                                     <td>{{ $i->item_code }}/{{ $i->description }}</td>
                                                     <td>{{ $i->unit }}</td>
 
-                                                    <td><a href="#" href="#demo-modal">View</a></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                            data-target="#exampleModalLong">
+                                                            View
+                                                        </button>
+
+                                                        {{-- <a data-toggle="modal" data-target="#exampleModalLong">View</a> --}}
+                                                    </td>
 
                                                     @if ($i->is_active)
                                                         <td>
@@ -81,14 +88,10 @@
                                                                 style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Deactivated</label>
                                                         </td>
                                                     @endif
-
-
                                                     <td>{{ $i->updated_at }}</td>
                                                     <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
                                                 </tr>
                                             @endforeach
-
-
                                         </tbody>
                                     </table>
 
@@ -109,8 +112,8 @@
                 </div>
             </div>
 
+            @include('admin.partials.item-details-modal')
 
-            <!-- /.row -->
     </section>
     <!-- /.content -->
 @endsection

@@ -129,7 +129,7 @@ define('PERMISSIONS', [
 
 ]);
 
-
+define('REQUEST_STATUS',  ['APPROVED', 'REJECTED', 'NOT REPONDED']);
 
 define(
     'UOMs',
