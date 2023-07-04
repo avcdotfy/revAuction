@@ -17,13 +17,13 @@
 
                 <div class="" style="border:1px solid #eaeaea; padding: 12px">
                     <h6 style="margin-top: 0px; margin-bottom: 4px;">Accept Reason</h6>
-                    <textarea class="form-control" rows="2" placeholder="Please write reason of Acception"
+                    <textarea class="form-control" name="remark" id="remark" rows="2" placeholder="Please write reason "
                         style="margin-bottom: 0px; "></textarea>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Accept Request</button>
+                    <button type="button" onclick="acceptReq()" class="btn btn-success">Accept Request</button>
                 </div>
             </div>
         </div>

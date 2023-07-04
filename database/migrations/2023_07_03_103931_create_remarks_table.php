@@ -18,7 +18,6 @@ return new class extends Migration
             $t->id();
             $t->text('message');
             $t->foreignIdFor(Request::class);
-            $t->foreignIdFor(Vendor::class);
             $t->foreignIdFor(User::class)->comment('remark giver id');
             $t->timestamps();
         });

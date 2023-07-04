@@ -17,13 +17,14 @@
 
                 <div class="" style="border:1px solid #eaeaea; padding: 12px">
                     <h6 style="margin-top: 0px; margin-bottom: 4px;">Rejection Reason</h6>
-                    <textarea class="form-control" rows="2" placeholder="Please write reason of rejection"
+                    <textarea class="form-control" name="remark" id="remark" rows="2" placeholder="Please write reason "
                         style="margin-bottom: 0px; "></textarea>
+
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Reject Request</button>
+                    <button type="button" onclick="rejectReq()" class="btn btn-danger">Reject Request</button>
                 </div>
             </div>
         </div>

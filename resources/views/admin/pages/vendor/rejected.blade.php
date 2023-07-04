@@ -66,7 +66,7 @@
                                                 <tr role="row" class="odd">
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>
-                                                        <input type="checkbox" name="ids[]" value="{{ $req->id }}">
+                                                        <input type="checkbox" name="ids" value="{{ $req->id }}">
                                                     </td>
                                                     <td>{{ $req->vendor->company_name }}</td>
                                                     <td>{{ $req->vendor->vendor_type }}</td>
@@ -80,7 +80,7 @@
                                                             id="ContentPlaceHolder1_lvNvR_lblemail_0">{{ $req->vendor->user->email }}</span>
                                                     </td>
                                                     <td>{{ $req->vendor->created_at }}</td>
-                                                    <td>{{ $req->remak->message }}</td>
+                                                    <td>{{ $req->remark->message }}</td>
                                                     <td><a href="p#">View</a></td>
                                                 </tr>
                                             @endforeach
@@ -101,3 +101,40 @@
             @include('admin.partials.accept-request-remark-modal')
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        function setIds() {
+
+            let val = $("input[name='ids']:checked").map(function() {
+                return this.value;
+            }).get().join(",");
+
+            return val;
+        }
+
+        function acceptReq(ids) {
+            let msg = $('#remark').val();
+            $.ajax({
+                type: "get",
+                url: "{{ route('request.accept') }}",
+                data: {
+                    "ids": setIds(),
+                    "msg": msg
+                },
+                success: function(res) {
+                    console.log(res.status);
+                    if (res.status) {
+                        $('#exampleModalLong').modal(
+                            'hide'
+                        )
+                        location.reload();
+                    }
+                },
+                error: function(er) {
+                    console.log(er);
+                }
+            });
+        }
+    </script>
+@endpush

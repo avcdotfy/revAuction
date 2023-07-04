@@ -6,6 +6,8 @@ use App\Models\Request as ModelsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use function PHPSTORM_META\type;
+
 class RequestController extends Controller
 {
 
@@ -30,21 +32,52 @@ class RequestController extends Controller
 
     public function accept(Request $r)
     {
-        dd($r->all());
-        $ids = explode(',', $r->id);
-        $request = ModelsRequest::whereIn('id', $ids)->update([
+
+        $ids = explode(',', $r->ids);
+        $requests = ModelsRequest::whereIn('id', $ids);
+        $rowsAffected = $requests->update([
             'status' => REQUEST_STATUS[0]
         ]);
-        return redirect()->back();
+
+        // dd($requests);
+        foreach ($requests->get() as $key => $req) {
+            $req->remark()->create([
+                'message' => $r->msg,
+                'request_id' => $req->id,
+                'user_id' =>  Auth::user()->id
+            ]);
+        }
+
+
+        if ($rowsAffected) {
+            return response()->json(['status' => true, 'rows_affected' => $rowsAffected, 'messages' => 'request accepted successfully'], 200);
+        } else {
+            return response()->json(['status' => false, 'rows_affected' => 0, 'messages' => 'someting went wrong'], 419);
+        }
+        // return redirect()->back();
     }
 
     public function reject(Request $r)
     {
-        dd($r->all());
-        $ids = explode(',', $r->id);
-        $request = ModelsRequest::whereIn('id', $ids)->update([
+        $ids = explode(',', $r->ids);
+        $requests = ModelsRequest::whereIn('id', $ids);
+        $rowsAffected = $requests->update([
             'status' => REQUEST_STATUS[1]
         ]);
-        return redirect()->back();
+
+        // dd($requests);
+        foreach ($requests->get() as $key => $req) {
+            $req->remark()->create([
+                'message' => $r->msg,
+                'request_id' => $req->id,
+                'user_id' =>  Auth::user()->id
+            ]);
+        }
+
+        if ($rowsAffected) {
+            return response()->json(['status' => true, 'rows_affected' => $rowsAffected, 'messages' => 'request rejected successfully'], 200);
+        } else {
+            return response()->json(['status' => false, 'rows_affected' => 0, 'messages' => 'someting went wrong'], 419);
+        }
     }
 }

@@ -121,11 +121,17 @@
                     "ids": setIds(),
                     "msg": msg
                 },
-                success: function(response) {
-                    console.log(response);
+                success: function(res) {
+                    console.log(res.status);
+                    if (res.status) {
+                        $('#exampleModalLong').modal(
+                            'hide'
+                        )
+                        location.reload();
+                    }
                 },
                 error: function(er) {
-                    console.log(err);
+                    console.log(er);
                 }
             });
         }
@@ -139,11 +145,16 @@
                     "ids": setIds(),
                     "msg": msg
                 },
-                success: function(response) {
-                    console.log(response);
+                success: function(res) {
+                    if (res.status) {
+                        $('#exampleModalLong').modal(
+                            'hide'
+                        )
+                        location.reload();
+                    }
                 },
                 error: function(er) {
-                    console.log(err);
+                    console.log(er);
                 }
             });
         }

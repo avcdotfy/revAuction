@@ -18,8 +18,6 @@ class Request extends Model
 
     public function remark()
     {
-        return $this->hasMany(Remark::class);
+        return $this->hasOne(Remark::class);
     }
-
-    
 }
