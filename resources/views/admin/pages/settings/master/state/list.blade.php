@@ -5,7 +5,7 @@
     <section class="content-header">
         <h3 style="margin-top: 10px; margin-bottom: 20px">Region List </h3>
         <ol class="breadcrumb">
-            <a href="#" style="color: white; font-weight: 600" class="btn-block btn-primary btn-sm">
+            <a href="{{ route('state.create') }}" style="color: white; font-weight: 600" class="btn-block btn-primary btn-sm">
                 + Create New Region</a>
         </ol>
     </section>
@@ -124,8 +124,8 @@
                                                 <a class="active" href="#">1</a>
                                                 <a href="#">Next</a>
                                                 <!-- <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">6</a> -->
+              <a href="#">5</a>
+              <a href="#">6</a> -->
                                                 <!-- <a href="#">&raquo;</a> -->
                                             </div>
                                         </div>

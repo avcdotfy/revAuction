@@ -14,7 +14,8 @@
                 <div class="box">
                     <div class="box-body">
                         <div id="ContentPlaceHolder1_div_nr" class="row">
-                            <form action="" method="post">
+                            <form action="{{ route('region.store') }}" method="post">
+                                @csrf
                                 @include('admin.pages.settings.master.region.form')
                             </form>
                         </div>

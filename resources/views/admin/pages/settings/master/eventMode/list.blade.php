@@ -5,7 +5,8 @@
     <section class="content-header">
         <h3 style="margin-top: 10px; margin-bottom: 20px">Event Mode List</h3>
         <ol class="breadcrumb">
-            <a href="#" style="color: white; font-weight: 600" class="btn-block btn-primary btn-sm">
+            <a href="{{ route('eventmode.create') }}" style="color: white; font-weight: 600"
+                class="btn-block btn-primary btn-sm">
                 + Create New Event Mode</a>
         </ol>
     </section>
@@ -16,8 +17,6 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">
-
-
                         <div id="ContentPlaceHolder1_div_list" class="row">
                             <div class="col-sm-12">
                                 <div id="dtable_wrapper" class="dataTables_wrapper no-footer">
@@ -56,73 +55,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
-
-
-                                            <tr role="row" class="odd">
-                                                <td>1</td>
-                                                <td>Monthly</td>
-
-
-
-                                                <td>18-03-2023</td>
-
-
-
-                                                <td><label class="label label-success"
-                                                        style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
-                                                </td>
-
-                                                <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
-                                            </tr>
-
-
-
-
-
-                                            <tr role="row" class="even">
-                                                <td>2</td>
-                                                <td>Daily</td>
-
-
-
-                                                <td>18-03-2023</td>
-
-
-
-                                                <td><label class="label label-success"
-                                                        style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
-                                                </td>
-
-                                                <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
-                                            </tr>
-
-
-
-                                            <tr role="row" class="odd">
-                                                <td>3</td>
-                                                <td>Weekly</td>
-
-
-
-                                                <td>18-03-2023</td>
-
-
-
-                                                <td><label class="label label-success"
-                                                        style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
-                                                </td>
-
-                                                <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
-                                            </tr>
-
-
-
-
-
-
-
-
+                                            @foreach ($eventModes as $key => $ev)
+                                                <tr role="row" class="even">
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $ev->mode }}</td>
+                                                    <td>{{ $ev->updated_at }}</td>
+                                                    <td><label
+                                                            class="label {{ $ev->is_active ? 'label-success' : 'label-danger' }}"
+                                                            style="font-size: 11px; font-weight: 600;text-transform:capitalize;">{{ $ev->is_active ? 'Active' : 'Deactive' }}</label>
+                                                    </td>
+                                                    <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
 
@@ -136,8 +80,8 @@
                                                 <a class="active" href="#">1</a>
                                                 <a href="#">Next</a>
                                                 <!-- <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a> -->
+                                                                                                    <a href="#">5</a>
+                                                                                                    <a href="#">6</a> -->
                                                 <!-- <a href="#">&raquo;</a> -->
                                             </div>
                                         </div>

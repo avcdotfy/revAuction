@@ -6,8 +6,7 @@
             <span id="ContentPlaceHolder1_RequiredFieldValidator3"
                 style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter
                 Region Name</span>
-            <input name="ctl00$ContentPlaceHolder1$txt_region_name" type="text" class="form-control"
-                placeholder="Enter Region Name">
+            <input name="name" type="text" class="form-control" placeholder="Enter Region Name">
         </div>
     </div>
 </div>
@@ -40,9 +39,8 @@
                 style="color: red; font-size: 13px;">*</span></label>
         <div class="col-sm-12">
             <select class="form-control">
-                <option value="1">Activate</option>
-                <option value="0">Deactivate</option>
-
+                <option value=1>Activate</option>
+                <option value=0>Deactivate</option>
             </select>
         </div>
     </div>

@@ -3,15 +3,18 @@
 @section('main_section')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h3 style="margin-top: 10px; margin-bottom: 20px">Region List </h3>
+        <h3 style="margin-top: 10px; margin-bottom: 20px">UoM List </h3>
         <ol class="breadcrumb">
-            <a href="#" style="color: white; font-weight: 600" class="btn-block btn-primary btn-sm">
-                + Create New Region</a>
+            <a href="{{ route('uom.create') }}" style="color: white; font-weight: 600" class="btn-block btn-primary btn-sm">
+                + Create New UoM</a>
         </ol>
     </section>
     <!-- Main content -->
     <section class="content">
+
         <!-- Small boxes (Stat box) -->
+        @include('admin.partials.alerts')
+
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
@@ -42,15 +45,14 @@
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
                                                     style="width: 43.3333px;">S.No.</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width:100.812px;">Region Name</th>
+                                                    style="width:150.812px;">UoM Code</th>
 
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 190.156px;">Region Message </th>
+                                                    style="width: 120.156px;">UoM Name </th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 80.156px;">Is Alert ?</th>
+                                                    style="width: 150.156px;">Updated Date</th>
 
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 90.156px;">Updated on</th>
+
 
 
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
@@ -62,55 +64,20 @@
                                         </thead>
                                         <tbody>
 
-
-
-                                            <tr role="row" class="odd">
-                                                <td>1</td>
-                                                <td>PAN India</td>
-
-
-                                                <td>Please check all t&c related Pan India.</td>
-
-                                                <td>No</td>
-
-                                                <td>18-03-2023</td>
-
-
-
-                                                <td><label class="label label-success"
-                                                        style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
-                                                </td>
-
-                                                <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
-                                            </tr>
-
-                                            <tr role="row" class="odd">
-                                                <td>2</td>
-                                                <td>North East</td>
-
-
-                                                <td>Please check all t&c related Pan India.</td>
-
-                                                <td>No</td>
-
-                                                <td>18-03-2023</td>
-
-
-
-                                                <td><label class="label label-danger"
-                                                        style="font-size: 11px; font-weight: 600;text-transform:capitalize;">deactivate</label>
-                                                </td>
-
-                                                <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
-                                            </tr>
-
-
-
-
-
-
-
-
+                                            @php
+                                                $i = 1;
+                                            @endphp
+                                            @foreach ($uoms as $uom)
+                                                <tr>
+                                                    <td>{{ $i++ }}</td>
+                                                    <td>{{ $uom->code }}</td>
+                                                    <td>{{ $uom->name }}</td>
+                                                    <td><label class="label label-success"
+                                                            style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
+                                                    </td>
+                                                    <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
+                                            @endforeach
+                                           
                                         </tbody>
                                     </table>
 
@@ -124,8 +91,8 @@
                                                 <a class="active" href="#">1</a>
                                                 <a href="#">Next</a>
                                                 <!-- <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">6</a> -->
+                                                  <a href="#">5</a>
+                                                  <a href="#">6</a> -->
                                                 <!-- <a href="#">&raquo;</a> -->
                                             </div>
                                         </div>

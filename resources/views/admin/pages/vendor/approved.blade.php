@@ -82,7 +82,8 @@
                                                     </td>
                                                     <td>{{ $req->vendor->created_at }}</td>
                                                     <td>{{ $req->remark->message }}</td>
-                                                    <td><a href="p#">View</a></td>
+                                                    <td><a href="{{ route('vendor.profile', [$req->vendor->id]) }}">View</a>
+
                                                 </tr>
                                             @endforeach
 
@@ -141,12 +142,16 @@
                         $('#exampleModalLong').modal(
                             'hide'
                         )
-                        location.reload();
+                        showToast(res.messages);
+                        setTimeout(() => {
+                            location.reload();
+
+                        }, 2000);
+
                     }
                 },
-
                 error: function(er) {
-                    console.log(err);
+                    console.log(er);
                 }
             });
         }

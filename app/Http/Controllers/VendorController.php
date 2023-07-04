@@ -98,5 +98,10 @@ class VendorController extends Controller
         return "vendor Dashboad ";
     }
 
+    function profile($id)
+    {
+        $v = Vendor::find($id);
 
+        return view('admin.pages.vendor.profile', compact('v'));
+    }
 }

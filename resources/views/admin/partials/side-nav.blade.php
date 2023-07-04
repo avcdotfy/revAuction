@@ -190,15 +190,15 @@
                              </span>
                          </a>
                          <ul class="treeview-menu">
-                             <li id="master_setting_country"><a href="country.aspx"><span
+                             <li id="master_setting_country"><a href="{{ route('country.list') }}"><span
                                          class="dot-icon">.</span><span>Country</span></a></li>
-                             <li id="master_setting_state"><a href="state.aspx"><span
+                             <li id="master_setting_state"><a href="{{ route('state.list') }}"><span
                                          class="dot-icon">.</span><span>State</span></a></li>
-                             <li id="master_setting_region"><a href="region.aspx"><span
+                             <li id="master_setting_region"><a href="{{ route('region.list') }}"><span
                                          class="dot-icon">.</span><span>Region</span></a></li>
-                             <li id="master_setting_uom"><a href="unit.aspx"><span
+                             <li id="master_setting_uom"><a href="{{ route('uom.list') }}"><span
                                          class="dot-icon">.</span><span>UoM</span></a></li>
-                             <li id="master_setting_event_mode"><a href="event-mode.aspx"><span
+                             <li id="master_setting_event_mode"><a href="{{ route('eventmode.list') }}"><span
                                          class="dot-icon">.</span><span>Event Mode</span></a></li>
                          </ul>
                      </li>

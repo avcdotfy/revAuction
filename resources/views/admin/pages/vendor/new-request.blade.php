@@ -127,7 +127,11 @@
                         $('#exampleModalLong').modal(
                             'hide'
                         )
-                        location.reload();
+                        showToast(res.messages);
+                        setTimeout(() => {
+                            location.reload();
+
+                        }, 2000);
                     }
                 },
                 error: function(er) {
@@ -150,7 +154,12 @@
                         $('#exampleModalLong').modal(
                             'hide'
                         )
-                        location.reload();
+                        showToast(res.messages);
+                        setTimeout(() => {
+                            location.reload();
+
+                        }, 2000);
+
                     }
                 },
                 error: function(er) {

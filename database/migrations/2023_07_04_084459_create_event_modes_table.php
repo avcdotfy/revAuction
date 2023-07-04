@@ -12,13 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('regions', function (Blueprint $t) {
+        Schema::create('event_modes', function (Blueprint $t) {
             $t->id();
-            $t->string('name')->nullable();
-            $t->text('description')->nullable();
-            $t->boolean('is_alert')->nullable();
-            $t->foreignIdFor(User::class)->comment('creator_id');
-            $t->boolean('is_active')->nullable();
+            $t->string('mode');
+            $t->boolean('is_active');
+            $t->foreignIdFor(User::class)->comment('creator id');
             $t->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('regions');
+        Schema::dropIfExists('event_modes');
     }
 };

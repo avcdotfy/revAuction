@@ -2,8 +2,8 @@
 
 @section('main_section')
     <!-- Content Header (Page header) -->
-    <section class="content-header" style="margin-bottom: 20px">
-        <h3>Home | Settings| Master Setting | Region </h3>
+    <section class="content-header">
+        <h3 style="margin-top: 10px; margin-bottom: 20px">Home | Create New UoM </h3>
 
     </section>
     <!-- Main content -->
@@ -13,17 +13,15 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">
-                        <div id="ContentPlaceHolder1_div_nr" class="row">
-                            <form action="" method="post">
-                                @include('admin.pages.settings.master.region.form')
+                        <div class="row">
+                            <form action="{{ route('uom.store') }}" method="post">
+                                @csrf
+                                @include('admin.pages.settings.master.uom.form')
                             </form>
                         </div>
-
-
                     </div>
+                    <!-- /.box-body -->
                 </div>
-
-
                 <!-- /.row -->
     </section>
     <!-- /.content -->
