@@ -1,7 +1,6 @@
 <?php
 
-use App\Models\Company;
-use App\Models\User;
+use App\Models\Event;
 use App\Models\Vendor;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,12 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('requests', function (Blueprint $t) {
+        Schema::create('event_vendors', function (Blueprint $t) {
             $t->id();
-            $t->foreignIdFor(Vendor::class);
-            $t->foreignIdFor(Company::class);
-            $t->foreignIdFor(User::class)->nullable()->commet('Accepter or rejector id');
-            $t->enum('status', REQUEST_STATUS)->default(REQUEST_STATUS[2]);
+            $t->foreignIdFor(Vendor::class)->comment('vendor ids who are invited for this event');
+            $t->foreignIdFor(Event::class)->comment('event id');
             $t->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('requests');
+        Schema::dropIfExists('event_vendors');
     }
 };

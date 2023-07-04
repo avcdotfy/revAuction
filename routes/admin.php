@@ -6,6 +6,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\EventModeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\RegionController;
@@ -109,6 +110,14 @@ Route::group(['prefix' => 'admin'], function () {
                     Route::post('create', [TemplateController::class, 'emailTemplateStore'])->name('template.email.store');
                 });
             });
+        });
+
+        Route::group(['prefix' => 'event'], function () {
+            Route::get('', [EventController::class, 'index'])->name('event.list');
+            Route::get('create', [EventController::class, 'create'])->name('event.create');
+            Route::post('create', [EventController::class, 'store'])->name('event.store');
+            Route::get('upcoming', [EventController::class, 'upcoming'])->name('event.upcoming');
+            Route::get('running', [EventController::class, 'running'])->name('event.running');
         });
     });
 });

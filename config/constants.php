@@ -4,7 +4,7 @@ define('USER_TYPES', ['ADMIN',  'VENDOR']);
 
 define('ADMIN_SIDE', 'Admin Side');
 define('VENDOR_SIDE', 'Vendor Side');
-define('EVENT_STATUS', ['ACTIVE', 'COMPLETED', 'DEACTIVE']);
+define('EVENT_STATUS', ['SCHEDULED', 'RUNNING', 'COMPLETED', 'DEACTIVE']);
 define('PERMISSIONS', [
     [
         'name' => ' Catalog - Category ',

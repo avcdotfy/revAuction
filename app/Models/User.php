@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function eventMode()
+    {
+        return $this->hasMany(EventMode::class);
+    }
 }

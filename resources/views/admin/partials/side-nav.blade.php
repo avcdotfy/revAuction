@@ -60,11 +60,12 @@
                      </span>
                  </a>
                  <ul class="treeview-menu">
-                     <li id="events_create_new_event"><a href="event.aspx"><span class="dot-icon">.</span><span>Create
+                     <li id="events_create_new_event"><a href="{{ route('event.create') }}"><span
+                                 class="dot-icon">.</span><span>Create
                                  New Event</span></a></li>
-                     <li id="events_upcoming_events"><a href="upcoming-event.aspx"><span
+                     <li id="events_upcoming_events"><a href="{{ route('event.upcoming') }}"><span
                                  class="dot-icon">.</span><span>Upcoming Events</span></a></li>
-                     <li id="events_running_events"><a href="running-event.aspx"><span
+                     <li id="events_running_events"><a href="{{ route('event.running') }}"><span
                                  class="dot-icon">.</span><span>Running Events</span></a></li>
                      <li id="events_closed_events"><a href="closed-event.aspx"><span
                                  class="dot-icon">.</span><span>Closed Events</span></a></li>
@@ -166,7 +167,7 @@
                          <ul class="treeview-menu">
                              <li id="mail_setting_configuration"><a href="mail-configuration.aspx"><span
                                          class="dot-icon">.</span><span>Configuration</span></a></li>
-                             <li id="mail_setting_template"><a href="{{route('template.email.create')}}"><span
+                             <li id="mail_setting_template"><a href="{{ route('template.email.create') }}"><span
                                          class="dot-icon">.</span><span>Template</span></a></li>
                          </ul>
                      </li>

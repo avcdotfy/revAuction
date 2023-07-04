@@ -5,14 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EventMode extends Model
+class EventVendor extends Model
 {
     use HasFactory;
-
-    protected $guarded = [];
-
-    public function events()
-    {
-        return $this->hasMany(Event::class);
-    }
 }
