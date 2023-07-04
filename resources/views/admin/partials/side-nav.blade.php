@@ -166,7 +166,7 @@
                          <ul class="treeview-menu">
                              <li id="mail_setting_configuration"><a href="mail-configuration.aspx"><span
                                          class="dot-icon">.</span><span>Configuration</span></a></li>
-                             <li id="mail_setting_template"><a href="mail-template.aspx"><span
+                             <li id="mail_setting_template"><a href="{{route('template.email.create')}}"><span
                                          class="dot-icon">.</span><span>Template</span></a></li>
                          </ul>
                      </li>

@@ -2,9 +2,9 @@
 
 define('USER_TYPES', ['ADMIN',  'VENDOR']);
 
-
+define('ADMIN_SIDE', 'Admin Side');
+define('VENDOR_SIDE', 'Vendor Side');
 define('EVENT_STATUS', ['ACTIVE', 'COMPLETED', 'DEACTIVE']);
-
 define('PERMISSIONS', [
     [
         'name' => ' Catalog - Category ',
@@ -128,9 +128,7 @@ define('PERMISSIONS', [
     ],
 
 ]);
-
 define('REQUEST_STATUS',  ['APPROVED', 'REJECTED', 'NOT REPONDED']);
-
 define(
     'UOMs',
     [
@@ -151,3 +149,15 @@ define(
         'Kilogram',
     ]
 );
+
+define('SERVICE_TYPE', [
+    "New Registration",
+    "Request",
+    "Accepted",
+    "Request",
+    "Rejected",
+    "Forgot",
+    "Password",
+    "New Event",
+    "Invitation",
+]);

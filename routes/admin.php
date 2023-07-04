@@ -12,6 +12,7 @@ use App\Http\Controllers\RegionController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\StateController;
+use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\UOMController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
@@ -73,31 +74,40 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/reject', [RequestController::class, 'reject'])->name('request.reject');
         });
 
-        Route::group(['prefix' => 'setting/master'], function () {
-            Route::group(['prefix' => 'country'], function () {
-                Route::get('/', [CountryController::class, 'index'])->name('country.list');
-                Route::get('/create', [CountryController::class, 'create'])->name('country.create');
-                Route::post('/create', [CountryController::class, 'store'])->name('country.store');
+        Route::group(['prefix' => 'setting'], function () {
+            Route::group(['prefix' => 'master'], function () {
+                Route::group(['prefix' => 'country'], function () {
+                    Route::get('/', [CountryController::class, 'index'])->name('country.list');
+                    Route::get('/create', [CountryController::class, 'create'])->name('country.create');
+                    Route::post('/create', [CountryController::class, 'store'])->name('country.store');
+                });
+                Route::group(['prefix' => 'state'], function () {
+                    Route::get('/', [StateController::class, 'index'])->name('state.list');
+                    Route::get('/create', [StateController::class, 'create'])->name('state.create');
+                    Route::post('/create', [StateController::class, 'store'])->name('state.store');
+                });
+                Route::group(['prefix' => 'region'], function () {
+                    Route::get('/', [RegionController::class, 'index'])->name('region.list');
+                    Route::get('/create', [RegionController::class, 'create'])->name('region.create');
+                    Route::post('/create', [RegionController::class, 'store'])->name('region.store');
+                });
+                Route::group(['prefix' => 'eventmode'], function () {
+                    Route::get('/', [EventModeController::class, 'index'])->name('eventmode.list');
+                    Route::get('/create', [EventModeController::class, 'create'])->name('eventmode.create');
+                    Route::post('/create', [EventModeController::class, 'store'])->name('eventmode.store');
+                });
+                Route::group(['prefix' => 'uom'], function () {
+                    Route::get('/', [UOMController::class, 'index'])->name('uom.list');
+                    Route::get('/create', [UOMController::class, 'create'])->name('uom.create');
+                    Route::post('/create', [UOMController::class, 'store'])->name('uom.store');
+                });
             });
-            Route::group(['prefix' => 'state'], function () {
-                Route::get('/', [StateController::class, 'index'])->name('state.list');
-                Route::get('/create', [StateController::class, 'create'])->name('state.create');
-                Route::post('/create', [StateController::class, 'store'])->name('state.store');
-            });
-            Route::group(['prefix' => 'region'], function () {
-                Route::get('/', [RegionController::class, 'index'])->name('region.list');
-                Route::get('/create', [RegionController::class, 'create'])->name('region.create');
-                Route::post('/create', [RegionController::class, 'store'])->name('region.store');
-            });
-            Route::group(['prefix' => 'eventmode'], function () {
-                Route::get('/', [EventModeController::class, 'index'])->name('eventmode.list');
-                Route::get('/create', [EventModeController::class, 'create'])->name('eventmode.create');
-                Route::post('/create', [EventModeController::class, 'store'])->name('eventmode.store');
-            });
-            Route::group(['prefix' => 'uom'], function () {
-                Route::get('/', [UOMController::class, 'index'])->name('uom.list');
-                Route::get('/create', [UOMController::class, 'create'])->name('uom.create');
-                Route::post('/create', [UOMController::class, 'store'])->name('uom.store');
+
+            Route::group(['prefix' => 'mail'], function () {
+                Route::group(['prefix' => 'template'], function () {
+                    Route::get('create', [TemplateController::class, 'emailTemplate'])->name('template.email.create');
+                    Route::post('create', [TemplateController::class, 'emailTemplateStore'])->name('template.email.store');
+                });
             });
         });
     });
