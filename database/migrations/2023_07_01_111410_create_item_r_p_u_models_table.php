@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\Item;
 use App\Models\Region;
 use App\Models\User;
@@ -22,7 +23,8 @@ return new class extends Migration
             $t->integer('item_unit');
             $t->text('item_unit_details');
             $t->foreignIdFor(Category::class);
-            $t->foreignIdFor(User::class);
+            $t->foreignIdFor(User::class)->comment('creator user id');
+            $t->foreignIdFor(Company::class)->comment('creator company id');
             $t->foreignIdFor(Item::class);
             $t->timestamps();
         });

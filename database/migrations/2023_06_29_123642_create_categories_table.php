@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -22,6 +23,7 @@ return new class extends Migration
             $t->integer('last_minute_closing_time_increment');
             $t->boolean('is_active');
             $t->foreignIdFor(User::class)->comment("Creator ID");
+            $t->foreignIdFor(Company::class)->comment("company ID");
             $t->enum('status', EVENT_STATUS);
             $t->timestamps();
         });

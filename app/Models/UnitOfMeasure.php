@@ -10,4 +10,9 @@ class UnitOfMeasure extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function item()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

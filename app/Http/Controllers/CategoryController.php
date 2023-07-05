@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RoleHelper;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::where('user_id', Auth::user()->id)->get();
+        $categories = Category::where('company_id', $this->company_id)->get();
         return view('admin.pages.catalog.category.list', compact('categories'));
     }
 
@@ -46,7 +46,8 @@ class CategoryController extends Controller
             'last_minute_closing_time_increment' => $req->last_minute_closing_time_increment,
             'last_minute_closing_time_increment' => $req->last_minute_closing_time_increment,
             'is_active' => $req->is_active,
-            'user_id' => Auth::user()->id,
+            'company_id' => $this->company_id,
+            'user_id' => $this->user_id,
         ]);
 
         if ($category instanceof Category)

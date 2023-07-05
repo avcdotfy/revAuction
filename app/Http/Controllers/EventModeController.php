@@ -6,8 +6,13 @@ use App\Models\EventMode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class EventModeController extends Controller
+class EventModeController extends BaseController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     function index()
     {
         $eventModes = EventMode::all();
@@ -19,7 +24,7 @@ class EventModeController extends Controller
     }
     function store(Request $req)
     {
-        $reg = EventMode::create(array_merge($req->all(), ['user_id' => Auth::user()->id]));
+        $reg = EventMode::create(array_merge($req->all(), ['user_id' => $this->user_id, 'company_id' => $this->company_id]));
         if ($reg instanceof EventMode) {
             return redirect()->route('eventmode.list')->with('success', 'event mode Created Successfully');
         } else {

@@ -9,14 +9,13 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NewVendorMail extends Mailable implements ShouldQueue
+class EventInviteMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-
     public $data;
     public function __construct($data)
     {
@@ -29,7 +28,7 @@ class NewVendorMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Vendor Registration',
+            subject: 'Event Invite ',
         );
     }
 
@@ -39,7 +38,7 @@ class NewVendorMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            view: 'email.new-vendor',
+            view: 'email.new-event-invite',
         );
     }
 

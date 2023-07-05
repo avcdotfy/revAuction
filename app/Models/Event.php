@@ -13,12 +13,12 @@ class Event extends Model
 
     public function vendors()
     {
-        return $this->hasMany(Vendor::class);
+        return $this->belongsToMany(Vendor::class);
     }
 
     public function items()
     {
-        return $this->hasMany(Item::class);
+        return $this->belongsToMany(Item::class);
     }
 
     public function user()

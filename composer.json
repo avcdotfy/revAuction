@@ -36,7 +36,8 @@
         },
         "files": [
             "app/helpers/DepartmentHelper.php",
-            "app/helpers/RoleHelper.php"
+            "app/helpers/RoleHelper.php",
+            "app/helpers/EventInvitationHelper.php"
         ]
     },
     "scripts": {

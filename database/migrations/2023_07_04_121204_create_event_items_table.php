@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('event_items', function (Blueprint $t) {
+        Schema::create('event_item', function (Blueprint $t) {
             $t->id();
             $t->foreignIdFor(Event::class)->comment('event id');
             $t->foreignIdFor(Item::class);

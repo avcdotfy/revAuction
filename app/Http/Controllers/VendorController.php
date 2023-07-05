@@ -52,6 +52,7 @@ class VendorController extends Controller
                 'establish_year' => $req->establish_year,
                 'establish_year' => $req->establish_year,
                 'mse_registration_number' => $req->mse_registration_number,
+                'pan_tan' => $req->pan_tan,
                 'user_id' => $user->id,
                 'preference_category' => $req->preference_category,
                 'preference_region' => $req->preference_region,

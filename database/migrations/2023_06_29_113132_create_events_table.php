@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\EventMode;
 use App\Models\Item;
 use App\Models\User;
@@ -26,6 +27,7 @@ return new class extends Migration
             $t->text('terms_condition')->nullable();
             $t->text('subject_line');
             $t->foreignIdFor(User::class)->comment('creator id');
+            $t->foreignIdFor(Company::class)->comment('company creator id');
             $t->enum('status', EVENT_STATUS)->default(EVENT_STATUS[0]);
             $t->timestamps();
         });

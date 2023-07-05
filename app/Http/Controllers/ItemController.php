@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RoleHelper;
 
-class ItemController extends Controller
+class ItemController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -54,7 +54,8 @@ class ItemController extends Controller
             'decrement_price' => $req->decrement_price,
             'is_manually_change_bidding_price' => $req->is_manually_change_bidding_price,
             'is_active' => $req->is_active,
-            'user_id' => Auth::user()->id,
+            'user_id' => $this->user_id,
+            'company_id' => $this->company_id
         ]);
 
         for ($i = 0; $i < count($req->region); $i++) {
@@ -65,7 +66,9 @@ class ItemController extends Controller
                 'item_unit_details' => $req->unit_details[$i],
                 'category_id' => $req->category_id,
                 'item_id' => $item->id,
-                'user_id' => Auth::user()->id
+                'user_id' => $this->user_id,
+                'company_id' => $this->company_id
+
             ]);
         }
 

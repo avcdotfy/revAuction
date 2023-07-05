@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\UnitOfMeasure;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -25,6 +26,7 @@ return new class extends Migration
             $t->boolean('is_manually_change_bidding_price');
             $t->foreignIdFor(Category::class)->comment("item belong to this category ");
             $t->foreignIdFor(User::class)->comment("Creator ID");
+            $t->foreignIdFor(Company::class)->comment("Creator company ID");
             $t->timestamps();
         });
     }
