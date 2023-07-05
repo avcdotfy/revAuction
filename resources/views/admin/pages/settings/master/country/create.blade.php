@@ -3,7 +3,7 @@
 @section('main_section')
     <!-- Content Header (Page header) -->
     <section class="content-header" style="margin-bottom: 20px">
-        <h3>Home | Settings| Master Setting | Region </h3>
+        <h3>Home | Settings| Master Setting | Country </h3>
 
     </section>
     <!-- Main content -->
@@ -16,11 +16,9 @@
                         <div id="ContentPlaceHolder1_div_nr" class="row">
                             <form action="{{ route('country.store') }}" method="post">
                                 @csrf
-                                @include('admin.pages.settings.master.region.form')
+                                @include('admin.pages.settings.master.country.form')
                             </form>
                         </div>
-
-
                     </div>
                 </div>
 

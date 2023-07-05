@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\EventInvitationHelper;
 use App\Models\Category;
 use App\Models\Event;
-use App\Models\EventMode;
+use App\Models\Eventmode;
 use App\Models\ItemRPUModel;
 use App\Models\Request as ModelsRequest;
 use App\Models\Vendor;
@@ -27,7 +27,7 @@ class EventController extends BaseController
      */
     public function create()
     {
-        $eventModes = EventMode::where(['company_id' => $this->company_id])->get();
+        $eventModes = Eventmode::where(['company_id' => $this->company_id])->get();
         $categories = Category::where(['company_id' => $this->company_id])->get();
         $requests = ModelsRequest::where(['company_id' => $this->user_id, 'status' => REQUEST_STATUS[0]])->get();
         $itemRpus = ItemRPUModel::where(['company_id' => $this->company_id])->get();
@@ -41,10 +41,9 @@ class EventController extends BaseController
     {
         // dd($req->all());
         $data = [
-            "event_mode_id" => $req->event_mode_id,
+            "eventmode_id" => $req->eventmode_id,
             "opening_date" => $req->opening_date,
             "opening_time" => $req->opening_time,
-
             "closing_date" => $req->closing_date,
             "closing_time" => $req->closing_time,
             "category_id" => $req->category_id,
@@ -53,6 +52,7 @@ class EventController extends BaseController
             'user_id' => $this->user_id,
             'company_id' => $this->company_id,
         ];
+
         $event =  Event::create($data);
         $event->vendors()->attach($req->vendor_id);
         $event->items()->attach($req->itemRpu);
@@ -109,11 +109,18 @@ class EventController extends BaseController
 
     public function running()
     {
-        return view('admin.pages.event.running');
+        $events = Event::where(['status' => EVENT_STATUS[1], 'company_id' => $this->company_id])->get();
+        return view('admin.pages.event.running', compact('events'));
     }
 
     public function upcoming()
     {
-        return view('admin.pages.event.upcoming');
+        $events = Event::where(['status' => EVENT_STATUS[0], 'company_id' => $this->company_id])->get();
+        return view('admin.pages.event.upcoming', compact('events'));
+    }
+    public function closed()
+    {
+        $events = Event::where(['status' => EVENT_STATUS[2], 'company_id' => $this->company_id])->get();
+        return view('admin.pages.event.closed', compact('events'));
     }
 }

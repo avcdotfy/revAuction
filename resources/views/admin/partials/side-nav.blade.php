@@ -67,7 +67,7 @@
                                  class="dot-icon">.</span><span>Upcoming Events</span></a></li>
                      <li id="events_running_events"><a href="{{ route('event.running') }}"><span
                                  class="dot-icon">.</span><span>Running Events</span></a></li>
-                     <li id="events_closed_events"><a href="closed-event.aspx"><span
+                     <li id="events_closed_events"><a href="{{ route('event.closed') }}"><span
                                  class="dot-icon">.</span><span>Closed Events</span></a></li>
                      <li id="events_decision_taken_events"><a href="decision-taken-event.aspx"><span
                                  class="dot-icon">.</span><span>Decision Taken Events</span></a></li>
@@ -146,7 +146,8 @@
                              </span>
                          </a>
                          <ul class="treeview-menu">
-                             <li id="organization_setting_company_setup"><a href="{{ route('company.create') }}"><span
+                             <li id="organization_setting_company_setup"><a
+                                     href="{{ route('company.create') }}"><span
                                          class="dot-icon">.</span><span>Company Setup</span></a></li>
                              <li id="organization_setting_department"><a href="{{ route('department.list') }}"><span
                                          class="dot-icon">.</span><span>Department</span></a></li>

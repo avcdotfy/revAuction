@@ -3,7 +3,7 @@
          <label for="inputPassword3" class="col-sm-2 control-label">Event Mode</label>
          <div class="col-sm-10">
 
-             <select name="event_mode_id" class="form-control">
+             <select name="eventmode_id" class="form-control">
                  <option value="0">Select Event Mode</option>
                  @foreach ($eventModes as $em)
                      <option value="{{ $em->id }}">{{ $em->mode }}</option>

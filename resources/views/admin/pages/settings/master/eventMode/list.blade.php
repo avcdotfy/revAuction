@@ -12,6 +12,7 @@
     </section>
     <!-- Main content -->
     <section class="content">
+        @include('admin.partials.alerts')
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-xs-12">
@@ -80,8 +81,8 @@
                                                 <a class="active" href="#">1</a>
                                                 <a href="#">Next</a>
                                                 <!-- <a href="#">4</a>
-                                                                                                    <a href="#">5</a>
-                                                                                                    <a href="#">6</a> -->
+                                                                                                        <a href="#">5</a>
+                                                                                                        <a href="#">6</a> -->
                                                 <!-- <a href="#">&raquo;</a> -->
                                             </div>
                                         </div>

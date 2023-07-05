@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,6 +18,8 @@ return new class extends Migration
             $t->string('name')->nullable();
             $t->string('code')->nullable();
             $t->foreignIdFor(User::class)->comment('Creator ID');
+            $t->foreignIdFor(Company::class)->comment('Company creator ID');
+            $t->boolean('is_active')->default(1);
             $t->string('description')->nullable();
             $t->timestamps();
         });

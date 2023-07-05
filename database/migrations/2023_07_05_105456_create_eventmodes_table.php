@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('event_modes', function (Blueprint $t) {
+        Schema::create('eventmodes', function (Blueprint $t) {
             $t->id();
             $t->string('mode');
             $t->boolean('is_active');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('event_modes');
+        Schema::dropIfExists('eventmodes');
     }
 };

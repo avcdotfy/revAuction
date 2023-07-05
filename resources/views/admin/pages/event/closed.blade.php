@@ -1,9 +1,10 @@
 @extends('admin.layout.base')
 
+
 @section('main_section')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h3 style="margin-top: 10px; margin-bottom: 20px">Upcoming Event List </h3>
+        <h3 style="margin-top: 10px; margin-bottom: 20px">Closed Event List </h3>
 
     </section>
     <!-- Main content -->
@@ -45,6 +46,8 @@
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
                                                     style="width: 70.6354px;">Event Mode</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                    style="width: 70.6354px;">Closed At</th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1"
                                                     style="width: 76.0521px;">Posted Event</th>
 
 
@@ -60,10 +63,10 @@
                                                     <td>{{ $event->subject_line }}</td>
 
                                                     <td>{{ $event->eventmode->mode }}</td>
+                                                    <td>200 INR</td>
                                                     <td></td>
                                                 </tr>
                                             @endforeach
-
 
                                         </tbody>
                                     </table>
@@ -78,8 +81,8 @@
                                                 <a class="active" href="#">1</a>
                                                 <a href="#">Next</a>
                                                 <!-- <a href="#">4</a>
-                                                            <a href="#">5</a>
-                                                            <a href="#">6</a> -->
+                                                <a href="#">5</a>
+                                                <a href="#">6</a> -->
                                                 <!-- <a href="#">&raquo;</a> -->
                                             </div>
                                         </div>

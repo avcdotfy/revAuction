@@ -118,6 +118,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('create', [EventController::class, 'store'])->name('event.store');
             Route::get('upcoming', [EventController::class, 'upcoming'])->name('event.upcoming');
             Route::get('running', [EventController::class, 'running'])->name('event.running');
+            Route::get('closed', [EventController::class, 'closed'])->name('event.closed');
         });
     });
 });

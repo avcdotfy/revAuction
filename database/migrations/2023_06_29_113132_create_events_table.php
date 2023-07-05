@@ -2,7 +2,7 @@
 
 use App\Models\Category;
 use App\Models\Company;
-use App\Models\EventMode;
+use App\Models\Eventmode;
 use App\Models\Item;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -18,7 +18,7 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $t) {
             $t->id();
-            $t->foreignIdFor(EventMode::class)->commet('daily , weekly , monthly');
+            $t->foreignIdFor(Eventmode::class)->commet('daily , weekly , monthly');
             $t->string('opening_date');
             $t->string('opening_time');
             $t->string('closing_date');

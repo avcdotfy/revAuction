@@ -30,8 +30,8 @@ class Event extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function eventMode()
+    public function eventmode()
     {
-        return $this->belongsTo(EventMode::class);
+        return $this->belongsTo(Eventmode::class);
     }
 }
