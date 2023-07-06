@@ -179,9 +179,11 @@
                 <span id="RequiredFieldValidator11"
                     style="font-size:12px;color:red;font-weight:600;display:none;">Please
                     Select Country</span>
-                <select name="country_id" class="form-control" style="padding: 2px 2px;">
-                    <option value="0">Select Country</option>
-                    <option selected="selected" value="1">India (IN)</option>
+                <select name="country_id" id="countrySelect" class="form-control" style="padding: 2px 2px;">
+                    <option selected="selected" value="">Select Country</option>
+                    @foreach ($countries as $c)
+                        <option value="{{ $c->id }}">I{{ $c->name }}</option>
+                    @endforeach
 
                 </select>
             </div>
@@ -193,10 +195,8 @@
                 <span id="RequiredFieldValidator8"
                     style="font-size:12px;color:red;font-weight:600;display:none;">Please
                     Select State</span>
-                <select name="state_id" id="ddl_state" class="form-control" style="padding: 2px 2px;">
+                <select name="state_id" id="stateSelect" class="form-control" style="padding: 2px 2px;">
                     <option selected="selected" value="0">Select State</option>
-                    <option value="1">Delhi (DL)</option>
-
                 </select>
             </div>
         </div>
@@ -233,7 +233,10 @@
                 style="font-size: 12px; color: red; font-weight: 600; display: inline;">Please
                 Select Preference Category</span>
             <select name="preference_category" class="form-control">
-                <option value="05">Area, Ethnic, Cultural, Gender, And Group
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+                {{-- <option value="05">Area, Ethnic, Cultural, Gender, And Group
                     Studies</option>
                 <option value="13">Education</option>
                 <option value="03">Natural Resources And Conservation</option>
@@ -266,7 +269,7 @@
                 <option value="24">Liberal Arts And Sciences, General Studies And
                     Humanities</option>
                 <option value="54">History</option>
-                <option value="26">Biological And Biomedical Sciences</option>
+                <option value="26">Biological And Biomedical Sciences</option> --}}
 
             </select>
 

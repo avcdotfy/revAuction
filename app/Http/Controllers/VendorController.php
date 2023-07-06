@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CategoryHelper;
+use App\Helpers\CompanyHelper;
 use App\Mail\NewVendorMail;
 use App\Models\Company;
+use App\Models\Country;
 use App\Models\Request as ModelsRequest;
+use App\Models\State;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\VendorCompany;
@@ -16,13 +20,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use stdClass;
 
-class VendorController extends Controller
+class VendorController extends BaseController
 {
     function create()
     {
-        // return "Hello World";
-        return view('public.pages.register.vendor-register');
+        $countries = Country::where(['company_id' => CompanyHelper::getCompanyFromHost()->id])->get();
+        $categories = CategoryHelper::getCategories();
+        return view('public.pages.register.vendor-register', compact('countries', 'categories'));
     }
 
     function store(Request $req)
@@ -68,7 +74,8 @@ class VendorController extends Controller
             $company = Company::where('web_url', $domain)->first();
             $r = ModelsRequest::create([
                 'vendor_id' => $user->vendor->id,
-                'company_id' => $company->id
+                'company_id' => $company->id,
+                'category_id' => $req->preference_category
             ]);
 
             if ($r instanceof ModelsRequest)
@@ -79,21 +86,6 @@ class VendorController extends Controller
         }
     }
 
-
-    function login()
-    {
-        return view('public.pages.login.vendor-login');
-    }
-
-    function login_process(Request $req)
-    {
-        $data = $req->only('username', 'password');
-
-        if (Auth::attempt($data)) return redirect()->route('vendor.dashboard');
-
-        return redirect()->back()->with('error', 'Username or password is wrong');
-    }
-
     function dashboard()
     {
         return "vendor Dashboad ";
@@ -102,7 +94,24 @@ class VendorController extends Controller
     function profile($id)
     {
         $v = Vendor::find($id);
-
         return view('admin.pages.vendor.profile', compact('v'));
+    }
+
+
+    public function getVendorsFromCategoryId(Request $req)
+    {
+        $cat_id = $req->cat_id;
+        $requests = ModelsRequest::where(['category_id' => $cat_id, 'status' => REQUEST_STATUS[0]])->get();
+        $vendors = [];
+        foreach ($requests  as $key => $req) {
+            $vendorObj = new stdClass;
+            $vendorObj->id = $req->vendor->id;
+            $vendorObj->company_name = $req->vendor->company_name;
+            $vendorObj->username =  $req->vendor->user->username;
+            $vendorObj->phone =  $req->vendor->user->phone;
+            $vendorObj->email =  $req->vendor->user->email;
+            array_push($vendors, $vendorObj);
+        }
+        return response()->json(['vendors' => $vendors, 'status' => true]);
     }
 }

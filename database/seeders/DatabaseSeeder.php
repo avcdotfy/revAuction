@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UnitOfMeasurementSeeder::class,
             RegionSeeder::class,
+            CountrySeeder::class,
+            EventmodeSeeder::class,
+            StateSeeder::class,
         ]);
     }
 }

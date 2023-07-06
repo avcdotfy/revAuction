@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\PublicDataController;
+use App\Http\Controllers\StateController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +21,7 @@ Route::get('/', function () {
    return redirect()->route('login');
 });
 
+Route::get('/vendors/{cat_id}', [VendorController::class, 'getVendors'])->name('vendorsOf.category');
+Route::get('/items/{cat_id}', [ItemController::class, 'getItems'])->name('itemsOf.category');
 
+Route::get('/state', [PublicDataController::class, 'stateByCounryId'])->name('states.byCountry');

@@ -32,7 +32,6 @@ class RequestController extends Controller
 
     public function accept(Request $r)
     {
-
         $ids = explode(',', $r->ids);
         $requests = ModelsRequest::whereIn('id', $ids);
         $rowsAffected = $requests->update([
@@ -80,4 +79,6 @@ class RequestController extends Controller
             return response()->json(['status' => false, 'rows_affected' => 0, 'messages' => 'someting went wrong'], 419);
         }
     }
+
+ 
 }

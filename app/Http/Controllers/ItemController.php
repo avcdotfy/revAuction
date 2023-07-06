@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RoleHelper;
+use stdClass;
 
 class ItemController extends BaseController
 {
@@ -73,5 +74,34 @@ class ItemController extends BaseController
         }
 
         return redirect()->route('item.list')->with('success', 'item has been created');
+    }
+
+    public function getItems($cat_id)
+    {
+
+        $itemRpus = ItemRPUModel::where(['company_id' => $this->company_id])->get();
+    }
+
+    public function getItemRPUsFromCategoryId(Request $req)
+    {
+        $catId = $req->cat_id;
+
+        $itemRpusData = ItemRPUModel::where(['company_id' => $this->company_id, 'category_id' => $catId])->get();
+
+        $itemRpus = [];
+
+        foreach ($itemRpusData as $key => $rpu) {
+            $rpuObj = new stdClass;
+            $rpuObj->id = $rpu->id;
+            $rpuObj->code =  $rpu->item->code;
+            $rpuObj->description  = $rpu->item->description;
+            $rpuObj->unit_name  =  $rpu->item->unit->name;
+            $rpuObj->region  =  $rpu->region->name;
+            $rpuObj->price  =   $rpu->price;
+
+            array_push($itemRpus, $rpuObj);
+        }
+
+        return response()->json(['items' => $itemRpus, 'status' => true]);
     }
 }

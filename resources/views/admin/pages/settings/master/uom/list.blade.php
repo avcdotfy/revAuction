@@ -72,12 +72,13 @@
                                                     <td>{{ $i++ }}</td>
                                                     <td>{{ $uom->code }}</td>
                                                     <td>{{ $uom->name }}</td>
+                                                    <td>{{ $uom->updated_at }}</td>
                                                     <td><label class="label label-success"
                                                             style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
                                                     </td>
                                                     <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
                                             @endforeach
-                                           
+
                                         </tbody>
                                     </table>
 
@@ -91,8 +92,8 @@
                                                 <a class="active" href="#">1</a>
                                                 <a href="#">Next</a>
                                                 <!-- <a href="#">4</a>
-                                                  <a href="#">5</a>
-                                                  <a href="#">6</a> -->
+                                                      <a href="#">5</a>
+                                                      <a href="#">6</a> -->
                                                 <!-- <a href="#">&raquo;</a> -->
                                             </div>
                                         </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CountryController;
@@ -21,13 +22,13 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'admin'], function () {
 
     Route::group(['middleware' => 'guest'], function () {
-        Route::get('login', [AdminController::class, 'login'])->name('login');
-        Route::post('login', [AdminController::class, 'login_process'])->name('admin-login');
+        Route::get('login', [AuthenticateController::class, 'login'])->name('login');
+        Route::post('login', [AuthenticateController::class, 'login_process'])->name('admin-login');
     });
 
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin-dashboard');
-        Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
+        Route::get('/logout', [AuthenticateController::class, 'logout'])->name('logout');
 
         Route::group(['prefix' => 'company'], function () {
             Route::get('/create', [CompanyController::class, 'create'])->name('company.create');
@@ -119,6 +120,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('upcoming', [EventController::class, 'upcoming'])->name('event.upcoming');
             Route::get('running', [EventController::class, 'running'])->name('event.running');
             Route::get('closed', [EventController::class, 'closed'])->name('event.closed');
+            Route::get('vendors', [VendorController::class, 'getVendorsFromCategoryId'])->name('event.vendors');
+            Route::get('itemsRpu', [ItemController::class, 'getItemRPUsFromCategoryId'])->name('event.itemsRpu');
         });
     });
 });

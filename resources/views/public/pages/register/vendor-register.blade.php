@@ -103,67 +103,47 @@
     </section>
 
     <!-- Bootstrap 3.3.7 -->
+    <script src="{{ asset('jquery/dist/jquery.min.js') }}"></script>
+
     <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- DataTables -->
     <script type="text/javascript" src="{{ asset('dist/js/jquery.dataTables.min.js') }}"></script>
 
     <script>
-        $(function() {
+        $(document).ready(function() {
 
-            setCheckboxSelectLabels();
+            $('#countrySelect').on('change', function(ev) {
+                fetchStates(ev.target.value);
+            })
 
-            $('.toggle-next').click(function() {
-                $(this).next('.checkboxes').slideToggle(400);
-            });
+            function fetchStates(country_id) {
+                $.ajax({
+                    type: "get",
+                    url: `{{ route('states.byCountry') }}`,
+                    data: {
+                        'country_id': country_id
+                    },
 
-            $('.ckkBox').change(function() {
-                toggleCheckedAll(this);
-                setCheckboxSelectLabels();
-            });
+                    success: function(res) {
+                        $('#stateSelect').empty();
+                        $('#stateSelect').append(
+                            `<option value="">-- select state--</option>`
+                        );
 
-        });
-
-        function setCheckboxSelectLabels(elem) {
-            var wrappers = $('.wrapper');
-            $.each(wrappers, function(key, wrapper) {
-                var checkboxes = $(wrapper).find('.ckkBox');
-                var label = $(wrapper).find('.checkboxes').attr('id');
-                var prevText = '';
-                $.each(checkboxes, function(i, checkbox) {
-                    var button = $(wrapper).find('button');
-                    if ($(checkbox).prop('checked') == true) {
-                        var text = $(checkbox).next().html();
-                        var btnText = prevText + text;
-                        var numberOfChecked = $(wrapper).find('input.val:checkbox:checked').length;
-                        if (numberOfChecked >= 4) {
-                            btnText = numberOfChecked + ' ' + label + ' selected';
-                        }
-                        $(button).text(btnText);
-                        prevText = btnText + ', ';
+                        console.log(res.state);
+                        res.state.forEach(state => {
+                            $('#stateSelect').append(
+                                `<option value=${state.id}>${state.name}</option>`
+                            );
+                        });
+                        //
+                    },
+                    error: function(err) {
+                        console.log(err);
                     }
                 });
-            });
-        }
-
-        function toggleCheckedAll(checkbox) {
-            var apply = $(checkbox).closest('.wrapper').find('.apply-selection');
-            apply.fadeIn('slow');
-
-            var val = $(checkbox).closest('.checkboxes').find('.val');
-            var all = $(checkbox).closest('.checkboxes').find('.all');
-            var ckkBox = $(checkbox).closest('.checkboxes').find('.ckkBox');
-
-            if (!$(ckkBox).is(':checked')) {
-                $(all).prop('checked', true);
-                return;
             }
-
-            if ($(checkbox).hasClass('all')) {
-                $(val).prop('checked', false);
-            } else {
-                $(all).prop('checked', false);
-            }
-        }
+        });
     </script>
 </body>
 

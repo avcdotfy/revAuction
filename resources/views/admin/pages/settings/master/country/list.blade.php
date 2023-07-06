@@ -63,8 +63,9 @@
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $c->name }}</td>
                                                     <td>{{ $c->updated_at }}</td>
-                                                  
-                                                    <td><label class="label {{ $c->is_active == 1 ? 'label-success' : 'label-danger' }}"
+
+                                                    <td><label
+                                                            class="label {{ $c->is_active == 1 ? 'label-success' : 'label-danger' }}"
                                                             style="font-size: 11px; font-weight: 600;text-transform:capitalize;">{{ $c->is_active == 1 ? 'Active' : 'Deactive' }}</label>
                                                     </td>
                                                     <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
@@ -85,8 +86,8 @@
                                                 <a class="active" href="#">1</a>
                                                 <a href="#">Next</a>
                                                 <!-- <a href="#">4</a>
-                                                                                          <a href="#">5</a>
-                                                                                          <a href="#">6</a> -->
+                                                                                                              <a href="#">5</a>
+                                                                                                              <a href="#">6</a> -->
                                                 <!-- <a href="#">&raquo;</a> -->
                                             </div>
                                         </div>

@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Company;
 use App\Models\Department;
+use App\Models\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CompanyHelper
@@ -17,6 +18,12 @@ class CompanyHelper
     static public function getCompany()
     {
         $company = Company::where('user_id', Auth::user()->id)->first();
+        return $company;
+    }
+
+    static public function getCompanyFromHost()
+    {
+        $company = Company::where('web_url',  request()->getHost())->first();
         return $company;
     }
 }

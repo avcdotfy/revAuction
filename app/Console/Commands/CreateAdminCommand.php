@@ -30,7 +30,7 @@ class CreateAdminCommand extends Command
         User::create([
             'username' => 'admin',
             'name' => 'Admin', 'password' => Hash::make('Admin'),
-            'email' => 'admin@admin.com', 
+            'email' => 'admin@admin.com',
             'user_type' => USER_TYPES[1]
         ]);
     }

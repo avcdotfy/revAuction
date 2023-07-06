@@ -20,7 +20,7 @@
                  placeholder="Enter Opening Date">
          </div>
          <div class="col-sm-1">
-             <select   class="form-control" onchange="change_opening_time()">
+             <select id="opening_hrs" class="form-control" onchange="change_opening_time()">
                  <option value="01">01</option>
                  <option value="02">02</option>
                  <option value="03">03</option>
@@ -37,7 +37,7 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select name="opening_time" class="form-control" onchange="change_opening_time()">
+             <select id="opening_minutes" name="opening_time" class="form-control" onchange="change_opening_time()">
                  <option selected="selected" value="00">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
@@ -102,7 +102,7 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select name="ddlAMPM1" class="form-control" onchange="change_opening_time()">
+             <select name="opening_ampm" class="form-control" onchange="change_opening_time()">
                  <option selected="selected" value="AM">AM</option>
                  <option value="PM">PM</option>
 
@@ -120,7 +120,7 @@
                  placeholder="Enter Closing Date">
          </div>
          <div class="col-sm-1">
-             <select  class="form-control" onchange="change_closing_time()">
+             <select id="closing_hrs" class="form-control" onchange="change_closing_time()">
                  <option value="01">01</option>
                  <option value="02">02</option>
                  <option value="03">03</option>
@@ -137,7 +137,7 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select  class="form-control" onchange="change_closing_time()">
+             <select id="closing_minutes" class="form-control" onchange="change_closing_time()">
                  <option selected="selected" value="00">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
@@ -202,7 +202,7 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select class="form-control" onchange="change_closing_time()">
+             <select id="closing_ampm" class="form-control" onchange="change_closing_time()">
                  <option value="AM">AM</option>
                  <option selected="selected" value="PM">PM</option>
 
@@ -217,7 +217,7 @@
          <label for="inputPassword3" class="col-sm-2 control-label">Product Range</label>
          <div class="col-sm-10">
 
-             <select name="category_id" class="form-control">
+             <select name="category_id" class="form-control" id="categorySelect">
                  <option selected="selected" value="0">Select Product Range</option>
 
                  @foreach ($categories as $category)
@@ -271,21 +271,8 @@
 
                      </tr>
                  </thead>
-                 <tbody>
-                     @foreach ($requests as $key => $req)
-                         <tr role="row" class="odd">
-                             <td>{{ $key + 1 }}</td>
-                             <td> <input type="checkbox" name="vendor_id[]" value="{{ $req->vendor->id }}"> </td>
-                             <td>{{ $req->vendor->company_name }}</td>
-                             <td><span>{{ $req->vendor->user->username }}</span>
-                             </td>
-                             <td><span>{{ $req->vendor->user->phone }}</span>
-                             </td>
-                             <td><span>{{ $req->vendor->user->email }}</span>
-                             </td>
-                             <td><a href="profile-view.html">View</a></td>
-                         </tr>
-                     @endforeach
+                 <tbody id="vendorTableBody">
+
 
                  </tbody>
              </table>
@@ -350,8 +337,8 @@
                              Item Region, Price & Unit Details</th>
                      </tr>
                  </thead>
-                 <tbody>
-                     @foreach ($itemRpus as $key => $rpu)
+                 <tbody id="itemTableBody">
+                     {{-- @foreach ($itemRpus as $key => $rpu)
                          <tr role="row" class="odd">
                              <td>{{ $key + 1 }}</td>
                              <td>
@@ -374,7 +361,7 @@
                                  </div>
                              </td>
                          </tr>
-                     @endforeach
+                     @endforeach --}}
 
 
                  </tbody>
@@ -418,8 +405,8 @@
          <label for="inputPassword3" class="col-sm-12 control-label" style="padding: 0px">Subject Line <span
                  style="color: red; font-size: 13px; ">*</span></label>
          <div class="col-sm-12" style=" padding: 0px">
-             <input type="text" class="form-control" value="subject line" placeholder="Preparation of Event for Aluminium Pipe"
-                 name="subject_line">
+             <input type="text" class="form-control" value="subject line"
+                 placeholder="Preparation of Event for Aluminium Pipe" name="subject_line">
 
          </div>
      </div>

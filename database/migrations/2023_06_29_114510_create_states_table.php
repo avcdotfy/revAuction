@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Company;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\User;
@@ -20,7 +21,8 @@ return new class extends Migration
             $t->string('code')->nullable();
             $t->string('description')->nullable();
             $t->foreignIdFor(Country::class);
-            $t->foreignIdFor(User::class);
+            $t->foreignIdFor(User::class)->comment('creator id');
+            $t->foreignIdFor(Company::class)->comment('company  creator id');
             $t->boolean('is_active')->nullable();
             $t->timestamps();
         });

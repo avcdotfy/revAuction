@@ -20,7 +20,8 @@
                                     <span class="info-box-icon"><i class="ion ion-person-add"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">New Vendor Request</span>
-                                        <span id="ContentPlaceHolder1_lblnewR" class="info-box-number">1366</span>
+                                        <span id="ContentPlaceHolder1_lblnewR"
+                                            class="info-box-number">{{ $newRequest }}</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -32,7 +33,8 @@
                                     <span class="info-box-icon"><i class="ion ion-person-add"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Approved Vendor</span>
-                                        <span id="ContentPlaceHolder1_lblappc" class="info-box-number">9</span>
+                                        <span id="ContentPlaceHolder1_lblappc"
+                                            class="info-box-number">{{ $approvedRequest }}</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -44,7 +46,8 @@
                                     <span class="info-box-icon"><i class="ion ion-person-add"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Rejected Vendor</span>
-                                        <span id="ContentPlaceHolder1_lblrc" class="info-box-number">2</span>
+                                        <span id="ContentPlaceHolder1_lblrc"
+                                            class="info-box-number">{{ $rejectRequest }}</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -57,7 +60,7 @@
                                             style="font-size: 44px;"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Empty Event</span>
-                                        <span id="ContentPlaceHolder1_lblEe" class="info-box-number">11</span>
+                                        <span id="ContentPlaceHolder1_lblEe" class="info-box-number">0</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -79,7 +82,8 @@
                                             style="font-size: 44px;"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Upcoming Event</span>
-                                        <span id="ContentPlaceHolder1_lbl_UeC" class="info-box-number">1</span>
+                                        <span id="ContentPlaceHolder1_lbl_UeC"
+                                            class="info-box-number">{{ $upcomingEvents }}</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -91,7 +95,8 @@
                                             style="font-size: 44px;"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Running Event</span>
-                                        <span id="ContentPlaceHolder1_lbl_ReC" class="info-box-number">0</span>
+                                        <span id="ContentPlaceHolder1_lbl_ReC"
+                                            class="info-box-number">{{ $runningEvents }}</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -104,7 +109,8 @@
                                             style="font-size: 44px;"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Closed Event</span>
-                                        <span id="ContentPlaceHolder1_lbl_CeC" class="info-box-number">13</span>
+                                        <span id="ContentPlaceHolder1_lbl_CeC"
+                                            class="info-box-number">{{ $closedEvents }}</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -117,7 +123,7 @@
                                             style="font-size: 44px;"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Decision Taken Event</span>
-                                        <span id="ContentPlaceHolder1_lbl_DTeC" class="info-box-number">4</span>
+                                        <span id="ContentPlaceHolder1_lbl_DTeC" class="info-box-number">0</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -216,8 +222,6 @@
         <!-- /.row -->
     </section>
     <!-- /.content -->
-
-
 @endsection
 
 @push('scripts')
