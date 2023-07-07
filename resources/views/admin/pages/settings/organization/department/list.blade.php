@@ -73,7 +73,7 @@
                                                         </td>
                                                     @endif
 
-                                                    {{-- <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td> --}}
+                                                    <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
                                                 </tr>
                                             @endforeach
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CompanyHelper;
 use App\Models\Request as ModelsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ class RequestController extends Controller
 
     function new_requests()
     {
-        $new_reqs = ModelsRequest::where(['company_id' => Auth::user()->company->id, 'status' => REQUEST_STATUS[2]])
+        $new_reqs = ModelsRequest::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => REQUEST_STATUS[2]])
             ->paginate(10);
 
         return view('admin.pages.vendor.new-request', compact('new_reqs'));
@@ -21,12 +22,12 @@ class RequestController extends Controller
 
     function approved()
     {
-        $requests  = ModelsRequest::where(['company_id' => Auth::user()->company->id, 'status' => REQUEST_STATUS[0]])->paginate(10);
+        $requests  = ModelsRequest::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => REQUEST_STATUS[0]])->paginate(10);
         return view('admin.pages.vendor.approved', compact('requests'));
     }
     function rejected()
     {
-        $requests  = ModelsRequest::where(['company_id' => Auth::user()->company->id, 'status' => REQUEST_STATUS[1]])->paginate(10);
+        $requests  = ModelsRequest::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => REQUEST_STATUS[1]])->paginate(10);
         return view('admin.pages.vendor.rejected', compact('requests'));
     }
 
@@ -79,6 +80,4 @@ class RequestController extends Controller
             return response()->json(['status' => false, 'rows_affected' => 0, 'messages' => 'someting went wrong'], 419);
         }
     }
-
- 
 }

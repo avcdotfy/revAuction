@@ -15,7 +15,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employee_categories', function (Blueprint $t) {
+        Schema::create('employee_category', function (Blueprint $t) {
             $t->id();
             $t->foreignIdFor(Category::class);
             $t->foreignIdFor(Employee::class);
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employee_categories');
+        Schema::dropIfExists('employee_category');
     }
 };

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Company;
 use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -18,6 +19,7 @@ return new class extends Migration
             $t->string('name')->nullable();
             $t->string('description')->nullable();
             $t->foreignIdFor(User::class)->comment('Creator ID');
+            $t->foreignIdFor(Company::class)->comment('Creator Company ID');
             $t->timestamps();
         });
     }

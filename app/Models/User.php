@@ -45,6 +45,11 @@ class User extends Authenticatable
         return $this->hasOne(Vendor::class);
     }
 
+    public function employee()
+    {
+        return $this->hasOne(Employee::class, 'emp_user_id');
+    }
+
     public function company()
     {
         return $this->hasOne(Company::class);
@@ -68,5 +73,10 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->user_type == USER_TYPES[0];
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 }

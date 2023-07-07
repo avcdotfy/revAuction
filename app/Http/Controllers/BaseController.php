@@ -14,7 +14,11 @@ class BaseController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            $this->company_id = Auth::user()->company->id;
+            try {
+                $this->company_id = Auth::user()->company->id;
+            } catch (\Throwable $th) {
+            }
+
             $this->user_id = Auth::user()->id;
             return $next($request);
         });

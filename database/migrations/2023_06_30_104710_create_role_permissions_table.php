@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Company;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -14,11 +15,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('role_permissions', function (Blueprint $t) {
+        Schema::create('role_permission', function (Blueprint $t) {
             $t->id();
             $t->foreignIdFor(Role::class);
             $t->foreignIdFor(Permission::class);
             $t->foreignIdFor(User::class)->comment('Creator ID');
+            $t->foreignIdFor(Company::class)->comment('Company Creator ID');
             $t->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('role_permissions');
+        Schema::dropIfExists('role_permission');
     }
 };

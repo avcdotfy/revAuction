@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -27,6 +28,7 @@ return new class extends Migration
             $t->enum('user_type', USER_TYPES);
             $t->timestamp('email_verified_at')->nullable();
             $t->string('password');
+            $t->foreignIdFor(Role::class)->nullable();
             $t->rememberToken();
             $t->timestamps();
         });

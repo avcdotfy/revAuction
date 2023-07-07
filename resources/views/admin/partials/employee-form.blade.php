@@ -24,7 +24,7 @@
         <select class="form-control" name="department_id">
             <option value="">Select Employee Department</option>
             @foreach ($departments as $d)
-                <option value="{{ $d->id }}">{{ $d->code | $d->name }}</option>
+                <option value="{{ $d->id }}">{{  $d->code .' | '.  $d->name }}</option>
             @endforeach
         </select>
     </div>

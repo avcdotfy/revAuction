@@ -13,6 +13,8 @@ class AdminController extends BaseController
 {
     function index()
     {
+        
+
         $newRequest = ModelsRequest::where(['company_id' => $this->company_id, 'status' => REQUEST_STATUS[2]])->get()->count();
 
         $approvedRequest = ModelsRequest::where(['company_id' => $this->company_id, 'status' => REQUEST_STATUS[0]])->get()->count();

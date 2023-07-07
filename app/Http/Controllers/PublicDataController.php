@@ -23,4 +23,10 @@ class PublicDataController extends Controller
     //         'category_id' => $cat_id
     //     ])->get();
     // }
+
+
+    function unauthorized()
+    {
+        return view('errors.403');
+    }
 }

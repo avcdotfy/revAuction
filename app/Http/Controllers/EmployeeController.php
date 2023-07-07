@@ -13,6 +13,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use RoleHelper;
 
@@ -23,6 +24,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+
+
         $employees = DB::table('employees')
             ->select('employees.id', 'roles.name as role', 'employees.employee_id', 'employees.designation', 'departments.name as department', 'users.name', 'users.phone', 'users.email', 'users.password')
             ->join('users', 'users.id', '=', 'employees.emp_user_id')
@@ -38,7 +41,8 @@ class EmployeeController extends Controller
     public function create()
     {
         $roles = Role::where('user_id', Auth::user()->id)->get();
-        $departments = Department::where('user_id', Auth::user()->id)->get();
+        $departments = Department::where('company_id', CompanyHelper::getCompanyFromHost()->id)->get();
+        // dd($departments);
         return view(
             'admin.pages.settings.organization.employee.create',
             compact('roles', 'departments')
@@ -70,7 +74,7 @@ class EmployeeController extends Controller
         $cat_ids = $req->cat_ids;
 
         try {
-            $user = User::create(['name' => $name, 'email' => $email, 'username' => $username, 'password' => $password, 'phone' => $phone]);
+            $user = User::create(['name' => $name, 'email' => $email, 'username' => $username, 'password' => Hash::make($password), 'phone' => $phone, 'role_id' => $role_id]);
         } catch (QueryException $e) {
             return redirect()->back()->with('error', 'email or username is already  in use , please try another')->withInput();
         }
