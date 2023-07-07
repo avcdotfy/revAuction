@@ -13,7 +13,8 @@ class RolePermissionController extends Controller
 {
     function index()
     {
-        return view('admin.pages.settings.organization.permissions.list');
+        $rolePermissions = Role::where('company_id', CompanyHelper::getCompanyFromHost()->id)->get();
+        return view('admin.pages.settings.organization.permissions.list', compact('rolePermissions'));
     }
 
     public function create()

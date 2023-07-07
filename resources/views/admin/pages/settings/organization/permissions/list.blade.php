@@ -59,204 +59,31 @@
                                         </thead>
                                         <tbody>
 
+                                            @foreach ($rolePermissions as $key => $role)
+                                                <tr role="row" class="odd">
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $role->name }}</td>
+                                                    <td>{{ $role->description }}</td>
 
-
-                                            <tr role="row" class="odd">
-                                                <td>1</td>
-                                                <td>Sr. Sales Manager</td>
-                                                <td>Sr. Sales Manager</td>
-
-                                                <td>
-
-
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px; text-align: left;">
-                                                        <div class="mN"><label>Vendors - New Vendor Request</label>
+                                                    <td>
+                                                        <div class="row">
+                                                            @foreach ($role->permissions as $item)
+                                                                <div class="col-sm-4 col-md-4 col-lg-4"
+                                                                    style="padding: 4px; text-align: left;">
+                                                                    <div class="mN"><label>{{ $item->name }}</label>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
                                                         </div>
-                                                    </div>
+                                                    </td>
 
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px; text-align: left;">
-                                                        <div class="mN"><label>Vendors - Approved Vendor</label></div>
-                                                    </div>
+                                                    <td><label class="label label-success"
+                                                            style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
+                                                    </td>
 
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px; text-align: left;">
-                                                        <div class="mN"><label>Vendors - Rejected Vendor</label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px; text-align: left;">
-                                                        <div class="mN"><label>Vendors - New Items Update </label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px; text-align: left;">
-                                                        <div class="mN"><label>Events - Create New Event</label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px;  text-align: left;">
-                                                        <div class="mN"><label>Events - Upcoming Events</label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px; text-align: left;">
-                                                        <div class="mN"><label>Events - Running Events</label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px; text-align: left;">
-                                                        <div class="mN"><label>Events - Closed Events</label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px;  text-align: left;">
-                                                        <div class="mN"><label>Events - Decision Taken Events</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px;  text-align: left;">
-                                                        <div class="mN"><label>Reports - Running Event Report</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px;  text-align: left;">
-                                                        <div class="mN"><label>Reports - Closed Event Report</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px;  text-align: left;">
-                                                        <div class="mN"><label>Reports - Decision Taken Event
-                                                                Report</label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px;  text-align: left;">
-                                                        <div class="mN"><label>Login Trail - Employee Login
-                                                                Report</label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px;  text-align: left;">
-                                                        <div class="mN"><label>Login Trail - Vendor Login
-                                                                Report</label></div>
-                                                    </div>
-
-                                                </td>
-
-
-                                                <td><label class="label label-success"
-                                                        style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
-                                                </td>
-
-                                                <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
-                                            </tr>
-
-
-
-                                            <tr role="row" class="even">
-                                                <td>1</td>
-                                                <td>Sr. Sales Manager</td>
-                                                <td>Sr. Sales Manager</td>
-
-                                                <td>
-
-
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px; text-align: left;">
-                                                        <div class="mN"><label>Vendors - New Vendor Request</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px; text-align: left;">
-                                                        <div class="mN"><label>Vendors - Approved Vendor</label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px; text-align: left;">
-                                                        <div class="mN"><label>Vendors - Rejected Vendor</label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px; text-align: left;">
-                                                        <div class="mN"><label>Vendors - New Items Update </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px; text-align: left;">
-                                                        <div class="mN"><label>Events - Create New Event</label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px;  text-align: left;">
-                                                        <div class="mN"><label>Events - Upcoming Events</label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px; text-align: left;">
-                                                        <div class="mN"><label>Events - Running Events</label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px; text-align: left;">
-                                                        <div class="mN"><label>Events - Closed Events</label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px;  text-align: left;">
-                                                        <div class="mN"><label>Events - Decision Taken Events</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px;  text-align: left;">
-                                                        <div class="mN"><label>Reports - Running Event Report</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px;  text-align: left;">
-                                                        <div class="mN"><label>Reports - Closed Event Report</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px;  text-align: left;">
-                                                        <div class="mN"><label>Reports - Decision Taken Event
-                                                                Report</label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px;  text-align: left;">
-                                                        <div class="mN"><label>Login Trail - Employee Login
-                                                                Report</label></div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 col-md-4 col-lg-4"
-                                                        style="padding: 4px;  text-align: left;">
-                                                        <div class="mN"><label>Login Trail - Vendor Login
-                                                                Report</label></div>
-                                                    </div>
-
-                                                </td>
-
-
-                                                <td><label class="label label-success"
-                                                        style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
-                                                </td>
-
-                                                <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
-                                            </tr>
-
-
+                                                    <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
+                                                </tr>
+                                            @endforeach
 
 
 
