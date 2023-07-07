@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use stdClass;
 
-class VendorController extends BaseController
+class VendorController extends Controller
 {
     function create()
     {

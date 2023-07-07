@@ -17,6 +17,7 @@ use App\Http\Controllers\StateController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\UOMController;
 use App\Http\Controllers\VendorController;
+use App\Http\Middleware\CheckForAdmin;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin'], function () {
@@ -26,7 +27,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('login', [AuthenticateController::class, 'login_process'])->name('admin-login');
     });
 
-    Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => ['auth', CheckForAdmin::class]], function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin-dashboard');
         Route::get('/logout', [AuthenticateController::class, 'logout'])->name('logout');
 

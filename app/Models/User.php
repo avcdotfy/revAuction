@@ -59,4 +59,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(EventMode::class);
     }
+
+
+    public function isVendor()
+    {
+        return $this->user_type == USER_TYPES[1];
+    }
+    public function isAdmin()
+    {
+        return $this->user_type == USER_TYPES[0];
+    }
 }
