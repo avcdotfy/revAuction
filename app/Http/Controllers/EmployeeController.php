@@ -74,9 +74,9 @@ class EmployeeController extends Controller
         $cat_ids = $req->cat_ids;
 
         try {
-            $user = User::create(['name' => $name, 'email' => $email, 'username' => $username, 'password' => Hash::make($password), 'phone' => $phone, 'role_id' => $role_id]);
+            $user = User::create(['name' => $name, 'email' => $email, 'username' => $username, 'password' => Hash::make($password), 'phone' => $phone, 'role_id' => $role_id, 'user_type' => USER_TYPES[2]]);
         } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'email or username is already  in use , please try another')->withInput();
+            return redirect()->back()->with('error', 'email or username is already  in use , please try another'.$e)->withInput();
         }
         $emp = Employee::create([
             'role_id' => $role_id,

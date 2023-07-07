@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CompanyHelper;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\RolePermission;
@@ -34,6 +35,7 @@ class RolePermissionController extends Controller
             'name' => $req->name,
             'description' => $req->description,
             'user_id' =>  Auth::user()->id,
+            'company_id' => CompanyHelper::getCompanyFromHost()->id
         ];
 
         $role = Role::create($role_data);
@@ -43,7 +45,8 @@ class RolePermissionController extends Controller
                 RolePermission::create([
                     'role_id' => $role->id,
                     'permission_id' => $p,
-                    'user_id' => Auth::user()->id
+                    'user_id' => Auth::user()->id,
+                    'company_id' => CompanyHelper::getCompanyFromHost()->id
                 ]);
             }
             return redirect()->back()->with('success', 'Role added successfully');

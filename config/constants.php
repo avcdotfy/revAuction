@@ -1,6 +1,6 @@
 <?php
 
-define('USER_TYPES', ['ADMIN',  'VENDOR']);
+define('USER_TYPES', ['ADMIN',  'VENDOR', 'EMPLOYEE']);
 
 define('ADMIN_SIDE', 'Admin Side');
 define('VENDOR_SIDE', 'Vendor Side');

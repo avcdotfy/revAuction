@@ -43,6 +43,7 @@
             font-size: 18px;
         }
     </style>
+    @yield('page_style')
     <script src="{{ asset('jquery/dist/jquery.min.js') }}"></script>
 
     <title>Home | Dashboard</title>

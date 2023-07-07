@@ -24,7 +24,7 @@
         <select class="form-control" name="department_id">
             <option value="">Select Employee Department</option>
             @foreach ($departments as $d)
-                <option value="{{ $d->id }}">{{  $d->code .' | '.  $d->name }}</option>
+                <option value="{{ $d->id }}">{{ $d->code . ' | ' . $d->name }}</option>
             @endforeach
         </select>
     </div>
@@ -111,7 +111,7 @@
             style="font-size:12px;color:red;font-weight:600;display:none;">Please Select
             Category</span>
         <span class="multiselect-native-select">
-            <select name="cat_ids[]" multiple="multiple" id="ContentPlaceHolder1_lb_product_category">
+            <select name="cat_ids[]" multiple="multiple" id="ContentPlaceHolder1_lb_product_category" required>
                 <option value="1">Aluminium Pipe</option>
                 <option value="5">Cotton</option>
                 <option value="3">Iron</option>
