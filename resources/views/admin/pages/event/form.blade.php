@@ -16,11 +16,12 @@
          <label for="inputPassword3" class="col-sm-2 control-label">Opening Date &amp;
              Time</label>
          <div class="col-sm-5">
-             <input name="opening_date" type="date" value="2023-07-04" class="form-control"
+             <input name="opening_date" id="opening_date" type="" value="2023-07-04" class="form-control"
                  placeholder="Enter Opening Date">
          </div>
          <div class="col-sm-1">
-             <select id="opening_hrs" class="form-control" onchange="change_opening_time()">
+             <select id="opening_hrs" class="form-control">
+                 <option selected="selected" value="">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
                  <option value="03">03</option>
@@ -29,7 +30,7 @@
                  <option value="06">06</option>
                  <option value="07">07</option>
                  <option value="08">08</option>
-                 <option selected="selected" value="09">09</option>
+                 <option value="09">09</option>
                  <option value="10">10</option>
                  <option value="11">11</option>
                  <option value="12">12</option>
@@ -37,8 +38,8 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select id="opening_minutes" name="opening_time" class="form-control" onchange="change_opening_time()">
-                 <option selected="selected" value="00">00</option>
+             <select id="opening_minutes" class="form-control" required>
+                 <option selected="selected" value="">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
                  <option value="03">03</option>
@@ -102,31 +103,37 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select name="opening_ampm" class="form-control" onchange="change_opening_time()">
-                 <option selected="selected" value="AM">AM</option>
+             <select name="opening_ampm" id="opening_ampm" class="form-control">
+                 <option selected="selected" value="">select</option>
+                 <option value="AM">AM</option>
                  <option value="PM">PM</option>
 
              </select>
          </div>
          <div class="col-sm-2">
-             <input name="opening_time" type="text" value="09:00 AM" disabled="disabled" class="form-control">
+             <input name="opening_time" id="full_opening_time" type="text" value=""  
+                 required class="form-control">
+             <input name="opening_date_time" id="opening_date_time_millis" type="hidden" value="" required
+                 class="form-control">
          </div>
      </div>
+     {{-- //////////////////////////////////////////////////////////// Closing Date --}}
      <div class="col-sm-12">
          <label for="inputPassword3" class="col-sm-2 control-label">Closing Date &amp;
              Time</label>
          <div class="col-sm-5">
-             <input name="closing_date" type="date" value="2023-07-04" class="form-control"
+             <input name="closing_date" id="closing_date" type="" value="2023-07-04" class="form-control"
                  placeholder="Enter Closing Date">
          </div>
          <div class="col-sm-1">
-             <select id="closing_hrs" class="form-control" onchange="change_closing_time()">
+             <select id="closing_hrs" class="form-control" required>
+                 <option selected="selected" value="">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
                  <option value="03">03</option>
                  <option value="04">04</option>
                  <option value="05">05</option>
-                 <option selected="selected" value="06">06</option>
+                 <option value="06">06</option>
                  <option value="07">07</option>
                  <option value="08">08</option>
                  <option value="09">09</option>
@@ -137,8 +144,8 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select id="closing_minutes" class="form-control" onchange="change_closing_time()">
-                 <option selected="selected" value="00">00</option>
+             <select id="closing_minutes" class="form-control">
+                 <option selected="selected" value="">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
                  <option value="03">03</option>
@@ -202,15 +209,18 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select id="closing_ampm" class="form-control" onchange="change_closing_time()">
+             <select id="closing_ampm" class="form-control">
+                 <option selected value="">select</option>
                  <option value="AM">AM</option>
-                 <option selected="selected" value="PM">PM</option>
-
+                 <option value="PM">PM</option>
              </select>
          </div>
          <div class="col-sm-2">
-             <input name="closing_time" type="text" value="06:00 PM"  
+             <input name="closing_time" id="full_closing_time" type="text" value="" required
                  class="aspNetDisabled form-control">
+
+             <input name="closing_date_time" id="closing_date_time_millis" type="hidden" value=""
+                 class="form-control">
          </div>
      </div>
      <div class="col-sm-12">

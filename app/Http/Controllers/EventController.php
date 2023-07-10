@@ -46,6 +46,8 @@ class EventController extends BaseController
             "opening_time" => $req->opening_time,
             "closing_date" => $req->closing_date,
             "closing_time" => $req->closing_time,
+            "closing_date_time_millis" => $req->closing_date_time,
+            "opening_date_time_millis" => $req->opening_date_time,
             "category_id" => $req->category_id,
             "terms_condition" => $req->terms_condition,
             "subject_line" => $req->subject_line,

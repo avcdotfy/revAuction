@@ -26,4 +26,6 @@ Route::get('/items/{cat_id}', [ItemController::class, 'getItems'])->name('itemsO
 
 Route::get('/state', [PublicDataController::class, 'stateByCounryId'])->name('states.byCountry');
 
+
+
 Route::get('/403', [PublicDataController::class, 'unauthorized'])->name('unauthorized');

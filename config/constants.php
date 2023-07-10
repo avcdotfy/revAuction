@@ -166,6 +166,14 @@ define('PERMISSIONS', [
         'name' => 'Master Setting - Region Create',
         'url_path' => 'admin/setting/master/region/create'
     ],
+    [
+        'name' => 'Vendor - Approve Request',
+        'url_path' => 'admin/request/accept'
+    ],
+    [
+        'name' => 'Vendor - Reject Request',
+        'url_path' => 'admin/request/reject'
+    ],
 
 ]);
 define('REQUEST_STATUS',  ['APPROVED', 'REJECTED', 'NOT REPONDED']);

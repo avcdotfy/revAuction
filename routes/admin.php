@@ -32,6 +32,14 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/logout', [AuthenticateController::class, 'logout'])->name('logout');
 
+        Route::group(['prefix' => 'request'], function () {
+            Route::get('/accept', [RequestController::class, 'accept'])->name('request.accept');
+            Route::get('/reject', [RequestController::class, 'reject'])->name('request.reject');
+        });
+
+        Route::get('vendors', [VendorController::class, 'getVendorsFromCategoryId'])->name('event.vendors');
+        Route::get('itemsRpu', [ItemController::class, 'getItemRPUsFromCategoryId'])->name('event.itemsRpu');
+
         Route::group(['middleware' => PermissionChecker::class], function () {
 
             Route::get('/', [AdminController::class, 'index'])->name('admin-dashboard');
@@ -77,10 +85,6 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::get('/{id}/profile', [VendorController::class, 'profile'])->name('vendor.profile');
             });
 
-            Route::group(['prefix' => 'request'], function () {
-                Route::get('/accept', [RequestController::class, 'accept'])->name('request.accept');
-                Route::get('/reject', [RequestController::class, 'reject'])->name('request.reject');
-            });
 
             Route::group(['prefix' => 'setting'], function () {
                 Route::group(['prefix' => 'master'], function () {
@@ -126,8 +130,6 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::get('upcoming', [EventController::class, 'upcoming'])->name('event.upcoming');
                 Route::get('running', [EventController::class, 'running'])->name('event.running');
                 Route::get('closed', [EventController::class, 'closed'])->name('event.closed');
-                Route::get('vendors', [VendorController::class, 'getVendorsFromCategoryId'])->name('event.vendors');
-                Route::get('itemsRpu', [ItemController::class, 'getItemRPUsFromCategoryId'])->name('event.itemsRpu');
             });
         });
     });

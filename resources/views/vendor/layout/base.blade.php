@@ -26,8 +26,8 @@
     <!-- Google Font -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css"
-        />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" />
     <link
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap"
         rel="stylesheet" />
@@ -128,9 +128,9 @@
 
 <body class="sidebar-mini skin-blue" style="background: #222d32;">
 
-    @include('admin.partials.top-nav')
+    @include('vendor.partials.top-nav')
 
-    @include('admin.partials.side-nav')
+    @include('vendor.partials.side-nav')
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="min-height: 926px;">
@@ -140,11 +140,11 @@
     </div>
     <!-- /.content-wrapper -->
 
-    @include('admin.partials.logout-modal')
+    @include('vendor.partials.logout-modal')
 
-    @include('admin.partials.footer')
+    @include('vendor.partials.footer')
 
-    @include('admin.partials.scripts')
+    @include('vendor.partials.scripts')
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="text/javascript"

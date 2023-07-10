@@ -33,16 +33,74 @@
 
 @push('scripts')
     <script>
+        $('#opening_date').datepicker({
+            minDate: 0
+        });
+        $('#closing_date').datepicker({
+            minDate: 0
+        });
+
         $(document).ready(function() {
+            let openingHrs = '';
+            let openingMinutes = '';
+            let openingAmPM = '';
+
+
 
             $('#opening_hrs').on('change', function(ev) {
                 console.log(ev.target.value);
+                openingHrs = ev.target.value
+                $('#full_opening_time').val(openingHrs + " : ");
             })
             $('#opening_minutes').on('change', function(ev) {
                 console.log(ev.target.value);
+                openingMinutes = ev.target.value;
+                $('#full_opening_time').val(openingHrs + ":" + openingMinutes);
             })
             $('#opening_ampm').on('change', function(ev) {
+                openingAmPM = ev.target.value;
+                $('#full_opening_time').val(openingHrs + ":" + openingMinutes + " " + openingAmPM);
+
+                $('#opening_date_time_millis').val(convertDateTimeToMillis($('#opening_date').val() + " " +
+                    $('#full_opening_time').val()))
+
+                console.log($('#opening_date').val() + " " + $('#full_opening_time').val())
+                console.log(convertDateTimeToMillis($('#opening_date').val() + " " +
+                    $('#full_opening_time').val()))
+
+                // var dateTimeString = '07/10/2023 01:01 AM';
+                // var millis = convertDateTimeToMillis(dateTimeString);
+                // console.log("TEST" ,millis);
+
+            })
+
+
+            /* Closing time section */
+            let closingHrs = '';
+            let closingMinutes = '';
+            let closingAmPM = '';
+
+            $('#closing_hrs').on('change', function(ev) {
                 console.log(ev.target.value);
+                closingHrs = ev.target.value
+                $('#full_closing_time').val(closingHrs + " : ");
+            })
+            $('#closing_minutes').on('change', function(ev) {
+                console.log(ev.target.value);
+                closingMinutes = ev.target.value;
+                $('#full_closing_time').val(closingHrs + ":" + closingMinutes);
+            })
+            $('#closing_ampm').on('change', function(ev) {
+                closingAmPM = ev.target.value;
+                $('#full_closing_time').val(closingHrs + ":" + closingMinutes + " " + closingAmPM);
+
+                $('#closing_date_time_millis').val(convertDateTimeToMillis($('#closing_date').val() + " " +
+                    $('#full_closing_time').val()))
+
+                // console.log($('#closing_date').val() + " " + $('#full_closing_time').val())
+                // console.log(convertDateTimeToMillis($('#closing_date').val() + " " +
+                //     $('#full_closing_time').val()))
+
             })
 
             // closing_minutes
@@ -68,7 +126,7 @@
                         console.log(res.vendors)
                         $("#vendorTableBody").empty();
 
-                        res.vendors.forEach((vendor , key) => {
+                        res.vendors.forEach((vendor, key) => {
                             $('#vendorTableBody').append(
                                 `<tr role="row" class="odd">
                                     <td> ${key+1} </td>
@@ -103,7 +161,7 @@
                     success: function(res) {
                         console.log(res.items)
                         $("#itemTableBody").empty();
-                        res.items.forEach((rpu  , key)=> {
+                        res.items.forEach((rpu, key) => {
                             $("#itemTableBody").append(
                                 ` <tr role="row" class="odd">
                                     <td> ${ key +1  }</td>
@@ -136,5 +194,31 @@
                 });
             }
         });
+
+        function convertDateTimeToMillis(dateTimeString) {
+            var dateTimeParts = dateTimeString.split(' ');
+
+            var dateParts = dateTimeParts[0].split('/');
+            var month = parseInt(dateParts[0], 10) - 1; // Month is zero-based in JavaScript						
+            var day = parseInt(dateParts[1], 10);
+            var year = parseInt(dateParts[2], 10);
+
+            var timeParts = dateTimeParts[1].split(':');
+            var hour = parseInt(timeParts[0], 10);
+            var minute = parseInt(timeParts[1], 10);
+            var period = dateTimeParts[2].toUpperCase();
+
+            console.log(period);
+            if (period === 'PM' && hour !== 12) {
+                hour += 12;
+            } else if (period === 'AM' && hour === 12) {
+                hour = 0;
+            }
+
+            var dateTime = new Date(year, month, day, hour, minute);
+            var milliseconds = dateTime.getTime();
+
+            return milliseconds;
+        }
     </script>
 @endpush

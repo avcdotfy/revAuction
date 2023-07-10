@@ -88,7 +88,7 @@ class VendorController extends Controller
 
     function dashboard()
     {
-        return "vendor Dashboad ";
+        return view('vendor.pages.dashboard');
     }
 
     function profile($id)
@@ -113,5 +113,55 @@ class VendorController extends Controller
             array_push($vendors, $vendorObj);
         }
         return response()->json(['vendors' => $vendors, 'status' => true]);
+    }
+
+    public function upCommingEvents()
+    {
+        return view('vendor.pages.upcomming-events');
+    }
+    public function runningEvents()
+    {
+        return view('vendor.pages.running-events');
+    }
+    public function participatedEvents()
+    {
+        return view('vendor.pages.participated-events');
+    }
+    public function participatedEventsStatus()
+    {
+        return view('vendor.pages.participated-event-status');
+    }
+
+    public function participatedEventItemList()
+    {
+        return view('vendor.pages.participate-events-item-list');
+    }
+
+    public function postedEventInfo()
+    {
+        return view('vendor.pages.post-event-info');
+    }
+
+    public function participatedEventReports()
+    {
+        return view('vendor.pages.participated-events-reports');
+    }
+    public function participatedEventStatusReports()
+    {
+        return view('vendor.pages.participated-events-status-report');
+    }
+
+    public function noticeNews()
+    {
+        return view('vendor.pages.notice-news');
+    }
+    public function detailNews()
+    {
+        return view('vendor.pages.news-details');
+    }
+
+    public function helpSupport()
+    {
+        return view('vendor.pages.help-support');
     }
 }

@@ -23,6 +23,8 @@ return new class extends Migration
             $t->string('opening_time');
             $t->string('closing_date');
             $t->string('closing_time');
+            $t->string('closing_date_time_millis');
+            $t->string('opening_date_time_millis');
             $t->foreignIdFor(Category::class);
             $t->text('terms_condition')->nullable();
             $t->text('subject_line');

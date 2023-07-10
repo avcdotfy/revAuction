@@ -19,6 +19,7 @@ class PermissionChecker
         // dd(request()->path());
         foreach (Auth::user()->role->permissions as $key => $permission) {
             if (request()->path() == $permission->url_path) {
+
                 return $next($request);
             }
         }
