@@ -30,7 +30,6 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::group(['middleware' => ['auth', CheckForAdmin::class]], function () {
 
-        Route::get('/logout', [AuthenticateController::class, 'logout'])->name('logout');
 
         Route::group(['prefix' => 'request'], function () {
             Route::get('/accept', [RequestController::class, 'accept'])->name('request.accept');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PublicDataController;
 use App\Http\Controllers\StateController;
@@ -29,3 +30,8 @@ Route::get('/state', [PublicDataController::class, 'stateByCounryId'])->name('st
 
 
 Route::get('/403', [PublicDataController::class, 'unauthorized'])->name('unauthorized');
+
+
+Route::group(['middleware' => 'auth'], function () {
+   Route::get('/logout', [AuthenticateController::class, 'logout'])->name('logout');
+});
