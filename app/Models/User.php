@@ -70,6 +70,7 @@ class User extends Authenticatable
     {
         return $this->user_type == USER_TYPES[1];
     }
+
     public function isAdminOrEmployee()
     {
         return ($this->user_type == USER_TYPES[0] || $this->user_type == USER_TYPES[2]);

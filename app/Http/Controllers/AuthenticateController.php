@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthenticateController extends Controller
 {
@@ -16,8 +17,14 @@ class AuthenticateController extends Controller
     {
         $data = $req->only('username', 'password');
 
-        if (Auth::attempt($data)) return redirect()->route('admin-dashboard');
-
+        if (Auth::attempt($data)) {
+            if (Auth::user()->user_type == 'VENDOR') {
+                Auth::logout();
+                return redirect()->back()->withErrors('Unautherized access denied');
+            } else {
+                return redirect()->route('admin-dashboard');
+            }
+        }
         return redirect()->back()->withErrors('Username or password is wrong');
     }
 
@@ -36,8 +43,20 @@ class AuthenticateController extends Controller
     {
         $data = $req->only('username', 'password');
 
-        if (Auth::attempt($data)) return redirect()->route('vendor.dashboard');
+        if (Auth::attempt($data)) {
 
+            if (Auth::user()->user_type == "ADMIN") {
+                Auth::logout();
+                return redirect()->back()->with('error', 'Unautherized access denied');
+            }
+
+            if (Auth::user()->vendor->is_approved) {
+                return redirect()->route('vendor.dashboard');
+            } else {
+                Auth::logout();
+                return redirect()->back()->with('info', 'Your account is under process.');
+            }
+        }
         return redirect()->back()->with('error', 'Username or password is wrong');
     }
 }

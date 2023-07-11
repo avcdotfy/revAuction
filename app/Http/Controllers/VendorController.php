@@ -117,11 +117,13 @@ class VendorController extends Controller
 
     public function upCommingEvents()
     {
-        return view('vendor.pages.upcomming-events');
+        $events =  Auth::user()->vendor->events;
+        return view('vendor.pages.upcomming-events', compact('events'));
     }
     public function runningEvents()
     {
-        return view('vendor.pages.running-events');
+        $events =  Auth::user()->vendor->events;
+        return view('vendor.pages.running-events', compact('events'));
     }
     public function participatedEvents()
     {
@@ -163,5 +165,10 @@ class VendorController extends Controller
     public function helpSupport()
     {
         return view('vendor.pages.help-support');
+    }
+
+    public function liveAuction()
+    {
+        return view('vendor.pages.live-auction');
     }
 }

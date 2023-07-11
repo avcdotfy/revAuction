@@ -20,4 +20,9 @@ class Request extends Model
     {
         return $this->hasOne(Remark::class)->latest();
     }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }

@@ -2,7 +2,6 @@
      <div class="col-sm-12">
          <label for="inputPassword3" class="col-sm-2 control-label">Event Mode</label>
          <div class="col-sm-10">
-
              <select name="eventmode_id" class="form-control">
                  <option value="0">Select Event Mode</option>
                  @foreach ($eventModes as $em)
@@ -111,8 +110,8 @@
              </select>
          </div>
          <div class="col-sm-2">
-             <input name="opening_time" id="full_opening_time" type="text" value=""  
-                 required class="form-control">
+             <input name="opening_time" id="full_opening_time" type="text" value="" required
+                 class="form-control">
              <input name="opening_date_time" id="opening_date_time_millis" type="hidden" value="" required
                  class="form-control">
          </div>
@@ -234,6 +233,13 @@
                      <option value="{{ $category->id }}">{{ $category->name }}</option>
                  @endforeach
              </select>
+         </div>
+     </div>
+     <div class="col-sm-12">
+         <label for="inputPassword3" class="col-sm-2 control-label">Event Title</label>
+         <div class="col-sm-10">
+
+             <input type="text" name="title" class="form-control" value="SOme Event Title">
          </div>
      </div>
  </div>

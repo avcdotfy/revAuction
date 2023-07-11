@@ -41,6 +41,7 @@ class EventController extends BaseController
     {
         // dd($req->all());
         $data = [
+            'title' => $req->title,
             "eventmode_id" => $req->eventmode_id,
             "opening_date" => $req->opening_date,
             "opening_time" => $req->opening_time,

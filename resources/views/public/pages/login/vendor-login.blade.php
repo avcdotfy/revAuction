@@ -44,7 +44,7 @@
         <div class="login-logo" style="margin-bottom:0px;padding-top:20px;">
             <a href="login.html"><img src="{{ asset('images/logo.png') }}" style="height:70px;" /></a>
         </div>
-        @include('admin.partials.alerts')
+        @include('vendor.partials.alerts')
         <form action="{{ route('vendor.login') }}" method="post">
             @csrf
             @include('public.partials.login-form')

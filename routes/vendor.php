@@ -1,9 +1,14 @@
 <?php
 
+use App\Helpers\CompanyHelper;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\VendorController;
 use App\Http\Middleware\CheckForVendor;
+use App\Models\EventVendor;
+use App\Models\Request;
+use App\Models\Vendor;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'guest'], function () {
@@ -15,6 +20,12 @@ Route::group(['middleware' => 'guest'], function () {
     });
 });
 
+Route::get(
+    '/vendor',
+    function () {
+        dd(Auth::user()->vendor->events);
+    }
+);
 Route::group(['middleware' => ['auth', CheckForVendor::class]], function () {
     Route::group(['prefix' => 'vendor'], function () {
 
@@ -36,6 +47,10 @@ Route::group(['middleware' => ['auth', CheckForVendor::class]], function () {
 
         Route::get('help-support', [VendorController::class, 'helpSupport'])->name('vendor.help-support');
 
+
+        Route::group(['prefix' => 'auction'], function () {
+            Route::get('live', [VendorController::class, 'liveAuction'])->name('vendor.liveAuction');
+        });
 
 
         Route::get('logout', [AuthenticateController::class, 'logout'])->name('vendor.logout');
