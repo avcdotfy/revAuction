@@ -24,7 +24,11 @@
                         </span>
 
                         <span>
-                            <label id="time_left0">23:49:18</label>
+                            <label id="time_left0">
+
+                                <span class="countDown" title="12-07-2023 06:08:PM"></span>
+
+                            </label>
                         </span>
                     </div>
                 </div>
@@ -37,12 +41,12 @@
                                 <div class="col-sm-12">
                                 </div>
                                 <div class="col-sm-12">
-                                    <label for="inputPassword3" class="col-sm-3">Base Price  </label>
+                                    <label for="inputPassword3" class="col-sm-3">Base Price </label>
 
                                     <div class="col-sm-3">
                                         <label>25000</label>
                                     </div>
-                                    <label for="inputPassword3" class="col-sm-3">Last Bidder Price   </label>
+                                    <label for="inputPassword3" class="col-sm-3">Last Bidder Price </label>
 
                                     <div class="col-sm-3">
                                         <label id="lbl_last_bidder_price0">0.00</label>
@@ -50,7 +54,7 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <label for="inputPassword3" class="col-sm-3" title="Minimum Bidding Price Limit">Set
-                                        Capping Price   </label>
+                                        Capping Price </label>
 
                                     <div class="col-sm-3">
                                         <input type="number" id="txt_auto_biding_price0"

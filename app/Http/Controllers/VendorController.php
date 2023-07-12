@@ -7,6 +7,7 @@ use App\Helpers\CompanyHelper;
 use App\Mail\NewVendorMail;
 use App\Models\Company;
 use App\Models\Country;
+use App\Models\Event;
 use App\Models\Request as ModelsRequest;
 use App\Models\State;
 use App\Models\User;
@@ -167,8 +168,12 @@ class VendorController extends Controller
         return view('vendor.pages.help-support');
     }
 
-    public function liveAuction()
+    public function liveAuction($eventId)
     {
-        return view('vendor.pages.live-auction');
+        $event = Event::where('id', $eventId)->first();
+
+        return view('vendor.pages.live-auction', compact('event'));
     }
+
+
 }

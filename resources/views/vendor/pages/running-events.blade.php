@@ -52,7 +52,8 @@
                                                             {{ $event->title }} <span class="badge "
                                                                 style="background-color: yellow ; color:black !important">{{ $event->status }}</span>
                                                         </td>
-                                                        <td><a href="{{ route('vendor.liveAuction') }}">Participate now</a>
+                                                        <td><a href="{{ route('vendor.liveAuction', $event->id) }}">Participate
+                                                                now</a>
                                                         </td>
                                                     </tr>
                                                     @php

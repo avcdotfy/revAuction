@@ -1,13 +1,10 @@
 <?php
 
-use App\Helpers\CompanyHelper;
-use App\Http\Controllers\AdminController;
+
 use App\Http\Controllers\AuthenticateController;
+use App\Http\Controllers\BidController;
 use App\Http\Controllers\VendorController;
 use App\Http\Middleware\CheckForVendor;
-use App\Models\EventVendor;
-use App\Models\Request;
-use App\Models\Vendor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -49,7 +46,8 @@ Route::group(['middleware' => ['auth', CheckForVendor::class]], function () {
 
 
         Route::group(['prefix' => 'auction'], function () {
-            Route::get('live', [VendorController::class, 'liveAuction'])->name('vendor.liveAuction');
+            Route::get('live/{eventId}', [VendorController::class, 'liveAuction'])->name('vendor.liveAuction');
+            Route::post('submit-bid', [BidController::class, 'store'])->name('vendor.submit-bid');
         });
 
 
