@@ -97,13 +97,19 @@
                                                     </td>
                                                     <td style="text-align: center">
                                                         <span class="countDown" title="12-07-2023 06:08:PM"></span>
-
-
                                                     </td>
                                                     <td>
-                                                        <a href="#" data-toggle="modal"
+
+                                                        <a href="#" data-toggle="modal" class="btn btn-success"
                                                             data-target="#bidModal{{ $item->id }}" id="btn_bid"
-                                                            style="padding:8px 9px;"> Bid Now </a>
+                                                            style="padding:8px 9px; display:{{ $event->status == COMPLETED ? 'none' : '' }}">
+                                                            Bid Now </a>
+
+                                                        <a href="#" class="btn btn-danger" id="btn_closed"
+                                                            style="padding:8px 9px; display:{{ $event->status == RUNNING ? 'none' : '' }}">
+                                                            Closed </a>
+
+
                                                     </td>
                                                 </tr>
 
@@ -111,7 +117,8 @@
                                                 <div id="bidModal{{ $item->id }}" class="modal fade" role="dialog">
                                                     <form action="{{ route('vendor.submit-bid') }}" method="post">
                                                         @csrf
-                                                        <input type="hidden" name="event_id" value="{{ $event->id }}">
+                                                        <input type="hidden" name="event_id"
+                                                            value="{{ $event->id }}">
                                                         <input type="hidden" name="item_id"
                                                             value="{{ $item->id }}">
                                                         <div class="modal-dialog">
@@ -291,7 +298,14 @@
 
             function updateTimer() {
                 let remaing_time = duration - Date.now();
-                var formattedTime = convertMillisecondsToHMS(remaing_time);
+                if (remaing_time < 0) {
+                    var formattedTime = 00;
+                    $('#btn_closed').show();
+                    $('#btn_bid').hide();
+                } else {
+                    var formattedTime = convertMillisecondsToHMS(remaing_time);
+                }
+
                 $('.countDown').text(formattedTime);
             }
 

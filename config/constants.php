@@ -4,7 +4,12 @@ define('USER_TYPES', ['ADMIN',  'VENDOR', 'EMPLOYEE']);
 
 define('ADMIN_SIDE', 'Admin Side');
 define('VENDOR_SIDE', 'Vendor Side');
+define('SCHEDULED', 'SCHEDULED');
+define('RUNNING', 'RUNNING');
+define('COMPLETED', 'COMPLETED');
+
 define('EVENT_STATUS', ['SCHEDULED', 'RUNNING', 'COMPLETED', 'DEACTIVE']);
+
 define('PERMISSIONS', [
     [
         'name' => 'Dashboard',
