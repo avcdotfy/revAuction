@@ -39,8 +39,15 @@ class RequestController extends Controller
             'status' => REQUEST_STATUS[0]
         ]);
 
+
         // dd($requests);
         foreach ($requests->get() as $key => $req) {
+
+
+            $req->vendor->update([
+                'is_approved' => true
+            ]);
+
             $req->remark()->create([
                 'message' => $r->msg,
                 'request_id' => $req->id,
@@ -67,6 +74,10 @@ class RequestController extends Controller
 
         // dd($requests);
         foreach ($requests->get() as $key => $req) {
+            $req->vendor->update([
+                'is_approved' => false
+            ]);
+
             $req->remark()->create([
                 'message' => $r->msg,
                 'request_id' => $req->id,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\BidHelper;
 use App\Helpers\EventHelper;
 use App\Models\Bid;
 use Illuminate\Database\QueryException;
@@ -18,8 +19,13 @@ class BidController extends Controller
         // $data =
         if (EventHelper::isEventFinished($req->event_id)) {
             return redirect()->back()->with('error', 'event is no longer running');
+        }
+        $minBidAmount = BidHelper::getLowestPrice($req->event_id, $req->item_id);
+        if ($req->bidding_price > $minBidAmount) {
+            return redirect()->back()->with('error', 'Bidding price should be less than last bid price :' . $minBidAmount);
         } else {
             try {
+
                 $bid = Bid::create([
                     'event_id' => $req->event_id,
                     'item_id' => $req->item_id,

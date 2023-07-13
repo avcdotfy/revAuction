@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\BidHelper;
 use App\Helpers\CategoryHelper;
 use App\Helpers\CompanyHelper;
+use App\Helpers\EventHelper;
 use App\Mail\NewVendorMail;
 use App\Models\Company;
 use App\Models\Country;
@@ -171,9 +173,6 @@ class VendorController extends Controller
     public function liveAuction($eventId)
     {
         $event = Event::where('id', $eventId)->first();
-
         return view('vendor.pages.live-auction', compact('event'));
     }
-
-
 }

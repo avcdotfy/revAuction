@@ -40,6 +40,14 @@ class EventController extends BaseController
     public function store(Request $req)
     {
         // dd($req->all());
+
+        if (empty($req->vendor_id)) {
+            return redirect()->back()->with('error', 'please select vendor');
+        }
+        if (empty($req->itemRpu)) {
+            return redirect()->back()->with('error', 'please select category items');
+        }
+
         $data = [
             'title' => $req->title,
             "eventmode_id" => $req->eventmode_id,

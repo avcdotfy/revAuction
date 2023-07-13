@@ -2,8 +2,8 @@
      <div class="col-sm-12">
          <label for="inputPassword3" class="col-sm-2 control-label">Event Mode</label>
          <div class="col-sm-10">
-             <select name="eventmode_id" class="form-control">
-                 <option value="0">Select Event Mode</option>
+             <select name="eventmode_id" class="form-control" required>
+                 <option value="">Select Event Mode</option>
                  @foreach ($eventModes as $em)
                      <option value="{{ $em->id }}">{{ $em->mode }}</option>
                  @endforeach
@@ -15,11 +15,11 @@
          <label for="inputPassword3" class="col-sm-2 control-label">Opening Date &amp;
              Time</label>
          <div class="col-sm-5">
-             <input name="opening_date" id="opening_date" type="" value="2023-07-04" class="form-control"
-                 placeholder="Enter Opening Date">
+             <input name="opening_date" autocomplete="off" id="opening_date" type="" value=""
+                 class="form-control" placeholder="Enter Opening Date" required>
          </div>
          <div class="col-sm-1">
-             <select id="opening_hrs" class="form-control">
+             <select id="opening_hrs" class="form-control" required>
                  <option selected="selected" value="">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
@@ -102,7 +102,7 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select name="opening_ampm" id="opening_ampm" class="form-control">
+             <select name="opening_ampm" id="opening_ampm" class="form-control" required>
                  <option selected="selected" value="">select</option>
                  <option value="AM">AM</option>
                  <option value="PM">PM</option>
@@ -121,8 +121,8 @@
          <label for="inputPassword3" class="col-sm-2 control-label">Closing Date &amp;
              Time</label>
          <div class="col-sm-5">
-             <input name="closing_date" id="closing_date" type="" value="2023-07-04" class="form-control"
-                 placeholder="Enter Closing Date">
+             <input name="closing_date" autocomplete="off" id="closing_date" type="" value=""
+                 class="form-control" placeholder="Enter Closing Date" required>
          </div>
          <div class="col-sm-1">
              <select id="closing_hrs" class="form-control" required>
@@ -143,7 +143,7 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select id="closing_minutes" class="form-control">
+             <select id="closing_minutes" class="form-control" required>
                  <option selected="selected" value="">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
@@ -208,7 +208,7 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select id="closing_ampm" class="form-control">
+             <select id="closing_ampm" class="form-control" required>
                  <option selected value="">select</option>
                  <option value="AM">AM</option>
                  <option value="PM">PM</option>
@@ -226,8 +226,8 @@
          <label for="inputPassword3" class="col-sm-2 control-label">Product Range</label>
          <div class="col-sm-10">
 
-             <select name="category_id" class="form-control" id="categorySelect">
-                 <option selected="selected" value="0">Select Product Range</option>
+             <select name="category_id" class="form-control" id="categorySelect" required>
+                 <option selected="selected" value="">Select Product Range</option>
 
                  @foreach ($categories as $category)
                      <option value="{{ $category->id }}">{{ $category->name }}</option>

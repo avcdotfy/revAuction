@@ -10,4 +10,9 @@ class Bid extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function vendor()
+    {
+        return $this->belongsToMany(Vendor::class);
+    }
 }

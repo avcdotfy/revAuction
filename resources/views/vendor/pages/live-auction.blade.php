@@ -93,21 +93,27 @@
                                                     </td>
                                                     <td style="text-align: center">
                                                         <span
-                                                            id="lbl_r1_price0">{{ BidHelper::getLowestPrice($event->id, $item->id) }}</span>
+                                                            id="lbl_r1_price0">{{ BidHelper::getLowestPrice($event->id, $item->id) ?? 00 }}</span>
                                                     </td>
                                                     <td style="text-align: center">
                                                         <span class="countDown" title="12-07-2023 06:08:PM"></span>
                                                     </td>
                                                     <td>
 
-                                                        <a href="#" data-toggle="modal" class="btn btn-success"
-                                                            data-target="#bidModal{{ $item->id }}" id="btn_bid"
-                                                            style="padding:8px 9px; display:{{ $event->status == COMPLETED ? 'none' : '' }}">
-                                                            Bid Now </a>
+                                                        @if (BidHelper::checkIfVendorhasLowestBid($event->id, $item->id))
+                                                            <a href="#" class="btn btn-primary" id="btn_bid"
+                                                                style="padding:8px 9px;"> L1</a>
+                                                        @else
+                                                            <a href="#" data-toggle="modal" class="btn btn-success"
+                                                                data-target="#bidModal{{ $item->id }}" id="btn_bid"
+                                                                style="padding:8px 9px; display:{{ $event->status == COMPLETED ? 'none' : '' }}">
+                                                                Bid Now </a>
 
-                                                        <a href="#" class="btn btn-danger" id="btn_closed"
-                                                            style="padding:8px 9px; display:{{ $event->status == RUNNING ? 'none' : '' }}">
-                                                            Closed </a>
+                                                            <a href="#" class="btn btn-danger" id="btn_closed"
+                                                                style="padding:8px 9px; display:{{ $event->status == RUNNING ? 'none' : '' }}">
+                                                                Closed </a>
+                                                        @endif
+
 
 
                                                     </td>
@@ -187,7 +193,7 @@
 
                                                                                         <div class="col-sm-3">
                                                                                             <label
-                                                                                                id="lbl_last_bidder_price0">{{ BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price }}</label>
+                                                                                                id="lbl_last_bidder_price0">{{ BidHelper::getLastBidderPrice($event->id, $item->id) ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price : '00' }}</label>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-sm-12">
