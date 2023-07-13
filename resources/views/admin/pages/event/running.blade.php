@@ -49,8 +49,6 @@
                                                     style="width: 70.6354px;">Live Auction</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
                                                     style="width: 76.0521px;">Posted Event</th>
-
-
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -63,8 +61,9 @@
                                                     <td>{{ $event->subject_line }}</td>
 
                                                     <td>{{ $event->eventmode->mode }}</td>
-                                                    <td>200 INR</td>
-                                                    <td></td>
+                                                    <td><a href="{{ route('event.statistics', $event->id) }}">View
+                                                            Statistics</a></td>
+                                                    <td><a href="{{ route('event.statistics' , $event->id) }}">View Information</a></td>
                                                 </tr>
                                             @endforeach
 
@@ -76,14 +75,11 @@
                                             Showing 1 to 4 of 4 entries</p>
                                         <div class="col-lg-6" style="text-align: right;">
                                             <div class="pagination " style="margin: 0px 0; ">
-                                                <!--  <a href="#">&laquo;</a> -->
+
                                                 <a href="#">Prev</a>
                                                 <a class="active" href="#">1</a>
                                                 <a href="#">Next</a>
-                                                <!-- <a href="#">4</a>
-                                    <a href="#">5</a>
-                                    <a href="#">6</a> -->
-                                                <!-- <a href="#">&raquo;</a> -->
+
                                             </div>
                                         </div>
                                     </div>

@@ -130,5 +130,7 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::get('closed', [EventController::class, 'closed'])->name('event.closed');
             });
         });
+
+        Route::get('event-statistics/{eId}', [EventController::class, 'statistics'])->name('event.statistics');
     });
 });

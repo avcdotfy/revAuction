@@ -15,4 +15,9 @@ class Bid extends Model
     {
         return $this->belongsToMany(Vendor::class);
     }
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
 }

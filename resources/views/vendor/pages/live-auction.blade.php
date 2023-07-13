@@ -92,28 +92,28 @@
                                                             title="0.00">{{ $item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price }}</span>
                                                     </td>
                                                     <td style="text-align: center">
-                                                        <span
-                                                            id="lbl_r1_price0">{{ BidHelper::getLowestPrice($event->id, $item->id) ?? 00 }}</span>
+                                                        <span class="clsbidPrice{{ $item->id }}"
+                                                            id="bidPrice{{ $item->id }}">{{ BidHelper::getLowestPrice($event->id, $item->id) ?? 00 }}</span>
                                                     </td>
                                                     <td style="text-align: center">
                                                         <span class="countDown" title="12-07-2023 06:08:PM"></span>
                                                     </td>
                                                     <td>
+                                                        <a href="#" class="btn btn-primary "
+                                                            id="statusBtn{{ $item->id }}"
+                                                            style="padding:8px 9px; display:{{ !BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) ? 'none' : '' }}">
+                                                            L1</a>
 
-                                                        @if (BidHelper::checkIfVendorhasLowestBid($event->id, $item->id))
-                                                            <a href="#" class="btn btn-primary" id="btn_bid"
-                                                                style="padding:8px 9px;"> L1</a>
-                                                        @else
-                                                            <a href="#" data-toggle="modal" class="btn btn-success"
-                                                                data-target="#bidModal{{ $item->id }}" id="btn_bid"
-                                                                style="padding:8px 9px; display:{{ $event->status == COMPLETED ? 'none' : '' }}">
-                                                                Bid Now </a>
+                                                        <a href="#" data-toggle="modal" class="btn btn-success"
+                                                            data-target="#bidModal{{ $item->id }}"
+                                                            id="btn_bid{{ $item->id }}"
+                                                            style="padding:8px 9px; display:{{ $event->status == COMPLETED || BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) ? 'none' : '' }}">
+                                                            Bid Now </a>
 
-                                                            <a href="#" class="btn btn-danger" id="btn_closed"
-                                                                style="padding:8px 9px; display:{{ $event->status == RUNNING ? 'none' : '' }}">
-                                                                Closed </a>
-                                                        @endif
-
+                                                        <a href="#" class="btn btn-danger"
+                                                            id="btn_closed{{ $item->id }}"
+                                                            style="padding:8px 9px; display:{{ $event->status == RUNNING ? 'none' : '' }}">
+                                                            Closed </a>
 
 
                                                     </td>
@@ -193,7 +193,7 @@
 
                                                                                         <div class="col-sm-3">
                                                                                             <label
-                                                                                                id="lbl_last_bidder_price0">{{ BidHelper::getLastBidderPrice($event->id, $item->id) ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price : '00' }}</label>
+                                                                                                id="lastBidderPrice{{ $item->id }}">{{ BidHelper::getLastBidderPrice($event->id, $item->id) ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price : '00' }}</label>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-sm-12">
@@ -258,6 +258,43 @@
 
                                                 </div>
                                                 {{-- Bidding Modal Ends --}}
+
+                                                @push('scripts')
+                                                    <script>
+                                                        setInterval(() => {
+                                                            console.log("RES");
+
+                                                            $.ajax({
+                                                                type: "post",
+                                                                url: "{{ route('vendor.live-data') }}",
+                                                                data: {
+                                                                    '_token': "{{ csrf_token() }}",
+                                                                    'eId': '{{ $event->id }}',
+                                                                    'iId': '{{ $item->id }}',
+                                                                },
+
+                                                                success: function(res) {
+                                                                    $("#bidPrice{{ $item->id }}").text(res.lowestBid);
+                                                                    $("#lastBidderPrice{{ $item->id }}").text(res.lastBidderPrice);
+
+                                                                    if (res.isMyBidIsLowest) {
+                                                                        $("#statusBtn{{ $item->id }}").show();
+
+                                                                        $("#btn_bid{{ $item->id }}").hide();
+                                                                    } else {
+                                                                        $("#statusBtn{{ $item->id }}").hide();
+
+                                                                        $("#btn_bid{{ $item->id }}").show();
+                                                                    }
+
+                                                                },
+                                                                error: function(err) {
+                                                                    console.log("ERR", err);
+                                                                }
+                                                            });
+                                                        }, 1500);
+                                                    </script>
+                                                @endpush
                                             @endforeach
 
                                         </tbody>

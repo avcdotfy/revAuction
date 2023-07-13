@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\EventInvitationHelper;
+use App\Models\Bid;
 use App\Models\Category;
 use App\Models\Event;
 use App\Models\Eventmode;
@@ -133,5 +134,12 @@ class EventController extends BaseController
     {
         $events = Event::where(['status' => EVENT_STATUS[2], 'company_id' => $this->company_id])->get();
         return view('admin.pages.event.closed', compact('events'));
+    }
+
+    public function statistics($eId)
+    {
+        $events = Event::find($eId);
+        dd($events->items[0]->bids->unique('vendor_id'));
+        return view('admin.pages.event.statistics');
     }
 }

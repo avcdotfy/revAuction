@@ -16,7 +16,7 @@ class BidController extends Controller
     function store(Request $req)
     {
         // dd($req->all());
-        // $data =
+
         if (EventHelper::isEventFinished($req->event_id)) {
             return redirect()->back()->with('error', 'event is no longer running');
         }
@@ -39,5 +39,16 @@ class BidController extends Controller
                 return redirect()->back()->with('error', $e->getMessage());
             }
         }
+    }
+
+
+    function getLiveDataVendorSite(Request $r)
+    {
+        $data = [
+            'lowestBid' => BidHelper::getLowestPrice($r->eId, $r->iId),
+            'isMyBidIsLowest' => BidHelper::checkIfVendorhasLowestBid($r->eId, $r->iId),
+            'lastBidderPrice' => BidHelper::getLastBidderPrice($r->eId, $r->iId)->bidding_price,
+        ];
+        return response()->json($data);
     }
 }

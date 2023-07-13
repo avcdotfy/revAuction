@@ -23,7 +23,7 @@ class BidHelper
     public static function checkIfVendorhasLowestBid($eId, $iId)
     {
         $lowestBid = Bid::where(['event_id' => $eId, 'item_id' => $iId])->min('bidding_price');
-        $lowestBidRow = Bid::orderBy('created_at', 'desc')->where(['event_id' => $eId, 'item_id' => $iId, 'bidding_price' => $lowestBid])->first();
+        $lowestBidRow = Bid::where(['event_id' => $eId, 'item_id' => $iId, 'bidding_price' => $lowestBid])->first();
         // dd($lowestBidRow->vendor->first()->id);
         if ($lowestBidRow) {
             return $lowestBidRow->vendor->first()->id == Auth::user()->vendor->id;
