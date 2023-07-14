@@ -34,4 +34,9 @@ class Event extends Model
     {
         return $this->belongsTo(Eventmode::class);
     }
+
+    public function regions()
+    {
+        return $this->belongsToMany(Region::class);
+    }
 }

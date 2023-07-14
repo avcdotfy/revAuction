@@ -22,7 +22,7 @@ class ItemController extends BaseController
      */
     public function index()
     {
-       
+
         $items = DB::table('items')
             ->select('items.id', 'categories.name as cat_name', 'items.code as item_code', 'items.description', 'unit_of_measures.name as unit', 'items.updated_at', 'items.is_active')
             ->join('categories', 'categories.id', '=', 'items.category_id')
@@ -61,6 +61,7 @@ class ItemController extends BaseController
         ]);
 
         for ($i = 0; $i < count($req->region); $i++) {
+
             ItemRPUModel::create([
                 'region_id' => $req->region[$i],
                 'price' => $req->price[$i],
@@ -70,7 +71,6 @@ class ItemController extends BaseController
                 'item_id' => $item->id,
                 'user_id' => $this->user_id,
                 'company_id' => $this->company_id
-
             ]);
         }
 

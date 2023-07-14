@@ -41,11 +41,15 @@
                                                             <label for="inputPassword3"
                                                                 class="col-sm-9 control-label">Region</label>
                                                             <div class="col-sm-3">
-                                                                <select name="ctl00$ContentPlaceHolder1$ddlPort"
-                                                                    onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ddlPort\',\'\')', 0)"
-                                                                    id="ContentPlaceHolder1_ddlPort">
-                                                                    <option selected="selected" value="PAN India">PAN
-                                                                        India</option>
+                                                                <select name="region" id="region_select">
+                                                                    @foreach ($event->items as $item)
+                                                                        @foreach ($item->regionPriceUnit as $rpu)
+                                                                            <option value="{{ $rpu->region->id }}">
+                                                                                {{ $rpu->region->name }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    @endforeach
+
 
                                                                 </select>
                                                             </div>
@@ -96,7 +100,7 @@
                                                             id="bidPrice{{ $item->id }}">{{ BidHelper::getLowestPrice($event->id, $item->id) ?? 00 }}</span>
                                                     </td>
                                                     <td style="text-align: center">
-                                                        <span class="countDown" title="12-07-2023 06:08:PM"></span>
+                                                        <span class="countDown" title=""></span>
                                                     </td>
                                                     <td>
                                                         <a href="#" class="btn btn-primary "
@@ -127,6 +131,7 @@
                                                             value="{{ $event->id }}">
                                                         <input type="hidden" name="item_id"
                                                             value="{{ $item->id }}">
+                                                        <input type="hidden" name="item_rpu_id" value="1">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content" style="border-radius: 4px;">
                                                                 <div class="modal-header" style="padding-bottom: 0px;">
@@ -219,24 +224,36 @@
                                                                                             Price
                                                                                         </label>
 
-                                                                                        <div class="col-sm-3"
-                                                                                            style="display:none">
-                                                                                            <label style="color: green;"
-                                                                                                id="lbl_bidding_price0"
-                                                                                                title="Yes">24500.00</label>
-                                                                                        </div>
-                                                                                        <div class="col-sm-3"
-                                                                                            style="display:block">
-                                                                                            <input type="number"
-                                                                                                id="txt_bidding_price0"
-                                                                                                onchange="checking_manual_bidding_price_0()"
-                                                                                                maxlength="10"
-                                                                                                name="bidding_price"
-                                                                                                class="form-control"
-                                                                                                style="height: 25px; color: green"
-                                                                                                placeholder="Bidding Price"
-                                                                                                title="24500.00">
-                                                                                        </div>
+                                                                                        @if ($item->is_manually_change_bidding_price)
+                                                                                            <div class="col-sm-3"
+                                                                                                style="display:block">
+                                                                                                <input type="number"
+                                                                                                    id="txt_bidding_price0"
+                                                                                                    onchange="checking_manual_bidding_price_0()"
+                                                                                                    maxlength="10"
+                                                                                                    name="bidding_price"
+                                                                                                    class="form-control"
+                                                                                                    style="height: 25px; color: green"
+                                                                                                    placeholder="Bidding Price"
+                                                                                                    title="24500.00">
+                                                                                            </div>
+                                                                                        @else
+                                                                                            <div class="col-sm-3">
+                                                                                                <label
+                                                                                                    style="color: green;"
+                                                                                                    id="lbl_bidding_price">{{ BidHelper::getLastBidderPrice($event->id, $item->id) != null ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price - $item->decrement_price : $item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price - $item->decrement_price }}</label>
+                                                                                                <input type="hidden"
+                                                                                                    id="bidding_price_hidden"
+                                                                                                    onchange="checking_manual_bidding_price_0()"
+                                                                                                    name="bidding_price"
+                                                                                                    class="form-control"
+                                                                                                    style="height: 25px; color: green"
+                                                                                                    placeholder="Bidding Price"
+                                                                                                    value="{{ BidHelper::getLastBidderPrice($event->id, $item->id) != null ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price - $item->decrement_price : $item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price - $item->decrement_price }}">
+                                                                                            </div>
+                                                                                        @endif
+
+
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -287,6 +304,9 @@
                                                                         $("#btn_bid{{ $item->id }}").show();
                                                                     }
 
+
+                                                                    $("#bidding_price_hidden").val(res.lastBidderPrice - res.decrementAmount);
+                                                                    $("#lbl_bidding_price").text(res.lastBidderPrice - res.decrementAmount);
                                                                 },
                                                                 error: function(err) {
                                                                     console.log("ERR", err);
@@ -312,6 +332,13 @@
         </div>
         @include('vendor.partials.bidding-modal')
     </section>
+
+
+    <form action="{{ route('vendor.filterLiveAuction') }}" method="post" id="filterForm">
+        @csrf
+        <input type="hidden" name="event_id" value="{{ $event->id }}">
+        <input type="hidden" name="region_id" value="" id="reg_id">
+    </form>
 @endsection
 
 @push('scripts')
@@ -358,6 +385,13 @@
 
                 updateTimer();
             }, 1000);
+        });
+    </script>
+
+    <script>
+        $('#region_select').change(function(e) {
+            $("#reg_id").val(e.target.value);
+            $("#filterForm").submit();
         });
     </script>
 @endpush

@@ -238,8 +238,7 @@
      <div class="col-sm-12">
          <label for="inputPassword3" class="col-sm-2 control-label">Event Title</label>
          <div class="col-sm-10">
-
-             <input type="text" name="title" class="form-control" value="SOme Event Title">
+             <input type="text" name="title" class="form-control" id="title_box" value="SOme Event Title">
          </div>
      </div>
  </div>

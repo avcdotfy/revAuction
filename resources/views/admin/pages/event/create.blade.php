@@ -16,7 +16,7 @@
                     <div class="box-body">
                         <div id="ContentPlaceHolder1_div_nr" class="row">
 
-                            <form action="{{ route('event.store') }}" method="post">
+                            <form action="{{ route('event.store') }}" method="post" id="eventForm">
                                 @csrf
                                 @include('admin.pages.event.form')
                             </form>
@@ -220,5 +220,12 @@
 
             return milliseconds;
         }
+    </script>
+
+    <script>
+        // $("selector").submit(function(e) {
+        //     e.preventDefault();
+
+        // });
     </script>
 @endpush

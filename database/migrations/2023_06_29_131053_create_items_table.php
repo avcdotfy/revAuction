@@ -23,6 +23,8 @@ return new class extends Migration
             $t->text('description')->nullable();
             $t->integer('decrement_price')->nullable();
             $t->boolean('is_active');
+            $t->bigInteger('total_unit')->nullable();
+            $t->bigInteger('total_base_price')->nullable();
             $t->boolean('is_manually_change_bidding_price');
             $t->foreignIdFor(Category::class)->comment("item belong to this category ");
             $t->foreignIdFor(User::class)->comment("Creator ID");

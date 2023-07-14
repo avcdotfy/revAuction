@@ -68,6 +68,7 @@ class EventController extends BaseController
         $event =  Event::create($data);
         $event->vendors()->attach($req->vendor_id);
         $event->items()->attach($req->itemRpu);
+        // $event->regions()->attach($req->itemRpu);
 
         if ($event instanceof Event) {
             $data = [
@@ -136,10 +137,20 @@ class EventController extends BaseController
         return view('admin.pages.event.closed', compact('events'));
     }
 
+
     public function statistics($eId)
     {
-        $events = Event::find($eId);
-        dd($events->items[0]->bids->unique('vendor_id'));
-        return view('admin.pages.event.statistics');
+        $bid = Bid::where('event_id', $eId)->first();
+        if ($bid) {
+            if (date('Y-m-d') == date('Y-m-d', strtotime($bid->created_at))) {
+                dd("TOday");
+            }
+
+            $events = Event::find($eId);
+            dd($events->items[0]->bids->unique('vendor_id'));
+        } else {
+            $data = [];
+        }
+        return view('admin.pages.event.statistics', compact('data'));
     }
 }
