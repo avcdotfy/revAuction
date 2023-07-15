@@ -2,7 +2,7 @@
      <div class="col-sm-12">
          <label for="inputPassword3" class="col-sm-2 control-label">Event Mode</label>
          <div class="col-sm-10">
-             <select name="eventmode_id" class="form-control" required>
+             <select name="eventmode_id" class="form-control" required id="eventMode">
                  <option value="">Select Event Mode</option>
                  @foreach ($eventModes as $em)
                      <option value="{{ $em->id }}">{{ $em->mode }}</option>
@@ -19,7 +19,7 @@
                  class="form-control" placeholder="Enter Opening Date" required>
          </div>
          <div class="col-sm-1">
-             <select id="opening_hrs" class="form-control" required>
+             <select id="opening_hrs" class="form-control" required onchange="setTitle()">
                  <option selected="selected" value="">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
@@ -37,7 +37,7 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select id="opening_minutes" class="form-control" required>
+             <select id="opening_minutes" class="form-control" required onchange="setTitle()">
                  <option selected="selected" value="">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
@@ -102,7 +102,7 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select name="opening_ampm" id="opening_ampm" class="form-control" required>
+             <select name="opening_ampm" id="opening_ampm" class="form-control" required onchange="setTitle()">
                  <option selected="selected" value="">select</option>
                  <option value="AM">AM</option>
                  <option value="PM">PM</option>
@@ -125,7 +125,7 @@
                  class="form-control" placeholder="Enter Closing Date" required>
          </div>
          <div class="col-sm-1">
-             <select id="closing_hrs" class="form-control" required>
+             <select id="closing_hrs" class="form-control" required onchange="setTitle()">
                  <option selected="selected" value="">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
@@ -143,7 +143,7 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select id="closing_minutes" class="form-control" required>
+             <select id="closing_minutes" class="form-control" required onchange="setTitle()">
                  <option selected="selected" value="">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
@@ -208,7 +208,7 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select id="closing_ampm" class="form-control" required>
+             <select id="closing_ampm" class="form-control" required onchange="setTitle()">
                  <option selected value="">select</option>
                  <option value="AM">AM</option>
                  <option value="PM">PM</option>
@@ -226,7 +226,7 @@
          <label for="inputPassword3" class="col-sm-2 control-label">Product Range</label>
          <div class="col-sm-10">
 
-             <select name="category_id" class="form-control" id="categorySelect" required>
+             <select name="category_id" class="form-control" id="categorySelect" required onchange="setTitle()">
                  <option selected="selected" value="">Select Product Range</option>
 
                  @foreach ($categories as $category)
@@ -410,7 +410,7 @@
              <h4>Terms & Conditions</h4>
          </div>
          <div class="col-sm-12" style="margin-bottom: 5px;">
-             <textarea id="default" name="terms_condition" style="height: 80px">Hello, World!</textarea>
+             <textarea id="default" name="terms_condition" style="height: 80px">{{ TERMS_AND_CONDITIONS }}</textarea>
 
          </div>
      </div>
@@ -431,7 +431,7 @@
              <h4>Mail Format</h4>
          </div>
          <div class="col-sm-12" style="margin-bottom: 5px;">
-             <textarea id="default" style="height: 80px">Hello, World!</textarea>
+             <textarea id="default" style="height: 80px">{{ EMAIL_FORMAT }}</textarea>
 
          </div>
      </div>

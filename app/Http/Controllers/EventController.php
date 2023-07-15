@@ -12,6 +12,8 @@ use App\Models\Request as ModelsRequest;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use stdClass;
 
 class EventController extends BaseController
 {
@@ -81,7 +83,7 @@ class EventController extends BaseController
                 "item_ids" => $req->itemRpu
             ];
             EventInvitationHelper::inviteViaEmail($data);
-            return redirect()->back()->with('success', 'Event Created Successfully');
+            return redirect()->route('event.list')->with('success', 'Event Created Successfully');
         } else {
             return redirect()->back()->with('error', 'Something Went Wrong');
         }
@@ -140,17 +142,44 @@ class EventController extends BaseController
 
     public function statistics($eId)
     {
-        $bid = Bid::where('event_id', $eId)->first();
-        if ($bid) {
-            if (date('Y-m-d') == date('Y-m-d', strtotime($bid->created_at))) {
-                dd("TOday");
+        $event = Event::find($eId);
+        $bids = Bid::where('event_id', $eId)->get();
+
+        $data = [];
+        $itemsIdOnWhichBidHasStarted = [];
+        if (count($bids) > 0) {
+            $events = Event::find($eId);
+
+            foreach ($bids as $key => $bid) {
+                if (date('Y-m-d') == date('Y-m-d', strtotime($bid->created_at))) {
+                    $data['isTodaysBidAvailable'] = true;
+                    $itemsIdOnWhichBidHasStarted[] =  $bid->item_id;
+
+                    $data['bids'] = Bid::groupBy('vendor_id')->get();
+                    // dd(Bid::groupBy('vendor_id')->first()->vendor);
+                }
             }
 
-            $events = Event::find($eId);
-            dd($events->items[0]->bids->unique('vendor_id'));
-        } else {
-            $data = [];
+
+            $data['itemsIdOnWhichBidHasStarted'] = $itemsIdOnWhichBidHasStarted;
+
+            // dd($data['itemsIdOnWhichBidHasStarted'][0]);
         }
-        return view('admin.pages.event.statistics', compact('data'));
+        return view('admin.pages.event.statistics', compact('data', 'event'));
+    }
+
+
+    public function getLiveBiddersStatus(Request $r)
+    {
+        $bids = Bid::where(['event_id' => $r->eId, 'item_id' => $r->iId])->get();
+
+        $bidGroupByVendorId = Bid::select('vendor_id',  DB::raw('MIN(bidding_price) as bidding_price'))->groupBy('vendor_id')->get();
+        $vendors = [];
+        foreach ($bids as $key => $bid) {
+            $vendor = $bid->vendor;
+            // dd($bid->vendor);
+            $vendors[] = $vendor;
+        }
+        return response()->json(['vendors' => $vendors, 'bidsGrupBy' => $bidGroupByVendorId]);
     }
 }

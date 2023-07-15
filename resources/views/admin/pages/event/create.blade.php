@@ -223,9 +223,16 @@
     </script>
 
     <script>
-        // $("selector").submit(function(e) {
-        //     e.preventDefault();
+        function setTitle() {
 
-        // });
+
+            let title = "Event for " + $("#categorySelect :selected").text() + " " + "Opening date " + $(
+                "#opening_date").val() + " " + $(
+                "#full_opening_time").val() + " " + "& Closing Date " + $("#closing_date").val() + " " + $(
+                "#full_closing_time").val() + " " + "(" + $("#eventMode :selected").text() + ")"
+
+            $("#title_box").val(title);
+
+        }
     </script>
 @endpush

@@ -6,7 +6,7 @@
             <span id="ContentPlaceHolder1_RequiredFieldValidator4"
                 style="font-size:12px;color:red;font-weight:600;display:none;">Please Select
                 Product Range</span>
-            <select name="category_id" class="form-control">
+            <select name="category_id" class="form-control" required>
                 <option value="">Select Product Range</option>
                 @foreach ($categories as $cat)
                     <option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -22,7 +22,7 @@
         <div class="col-sm-12">
             <span style="font-size:12px;color:red;font-weight:600;display:none;">
                 Please Enter Item Code</span>
-            <input type="text" name="code" class="form-control" placeholder="Enter Item Code">
+            <input type="text" name="code" class="form-control" required placeholder="Enter Item Code">
         </div>
     </div>
 </div>
@@ -33,7 +33,7 @@
         <div class="col-sm-12">
             <span style="font-size:12px;color:red;font-weight:600;display:none;">Please Select
                 UoM</span>
-            <select class="form-control" name="unit_of_measure_id">
+            <select class="form-control" name="unit_of_measure_id" required>
                 <option value="">Select UoM</option>
                 @foreach ($uOm as $u)
                     <option value="{{ $u->id }}">{{ $u->name }}</option>
@@ -95,7 +95,7 @@
         <div class="col-sm-12">
             <span style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter
                 Item Description</span>
-            <input type="text" name="description" class="form-control" placeholder="Enter Item Description">
+            <input type="text" name="description" class="form-control" placeholder="Enter Item Description" required>
         </div>
     </div>
 </div>
@@ -132,18 +132,18 @@
                     <td>
                         <span style="font-size:11px;color:red;font-weight:600;display:none;">Please
                             Enter Item Price</span>
-                        <input type="number" name='price[]' class="form-control">
+                        <input type="number" name='price[]' class="form-control" required>
                     </td>
                     <td>
                         <span style="font-size:11px;color:red;font-weight:600;display:none;">Please
                             Enter Item Unit</span>
-                        <input type="number" name='unit[]' class="form-control">
+                        <input type="number" name='unit[]' class="form-control" required>
                     </td>
                     <td>
                         <span id="ContentPlaceHolder1_RequiredFieldValidator8"
                             style="font-size:11px;color:red;font-weight:600;display:none;">Please
                             Enter Item Unit Details</span>
-                        <input type="text" name='unit_details[]' class="form-control">
+                        <input type="text" name='unit_details[]' class="form-control" required>
                     </td>
                     <td>
                         <button id="add_btn" type="button" class="btn btn-sm btn-primary"><span
@@ -163,14 +163,15 @@
         <div class="col-sm-12">
             <span style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter
                 Decrement Price</span>
-            <input type="number" name="decrement_price" class="form-control" placeholder="Enter Item Decrement Price">
+            <input type="number" name="decrement_price" class="form-control" placeholder="Enter Item Decrement Price"
+                required>
         </div>
     </div>
     <div class="col-sm-4" style="padding: 0px;">
         <label for="inputPassword3" class="col-sm-12 control-label">Is Enable To Manually
             Change Bidding Price? <span style="color: red; font-size: small">*</span></label>
         <div class="col-sm-12">
-            <select class="form-control" name="is_manually_change_bidding_price">
+            <select class="form-control" name="is_manually_change_bidding_price" required>
                 <option value=0>No</option>
                 <option value=1>Yes</option>
 
@@ -184,7 +185,6 @@
             <select name="is_active" class="form-control">
                 <option value=1>Activate</option>
                 <option value=0>Deactivate</option>
-
             </select>
         </div>
     </div>

@@ -105,4 +105,23 @@ class ItemController extends BaseController
 
         return response()->json(['items' => $itemRpus, 'status' => true]);
     }
+
+
+    public function getItemDetails(Request $re)
+    {
+        $item = Item::find($re->item_id);
+
+        $rpus = [];
+
+        foreach ($item->regionPriceUnit as $key => $itemRpu) {
+            $rpu = new stdClass;
+            $rpu->region = $itemRpu->region->name;
+            $rpu->price = $itemRpu->price;
+            $rpu->unit = $itemRpu->item_unit;
+            $rpu->unit_details = $itemRpu->item_unit_details;
+            $rpus[] = $rpu;
+        }
+
+        return response()->json(['item' => $item, 'itemRpu' => $rpus, 'category' => $item->category]);
+    }
 }

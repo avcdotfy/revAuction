@@ -69,8 +69,8 @@
                                                     <td>{{ $i->unit }}</td>
 
                                                     <td>
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                            data-target="#exampleModalLong">
+                                                        <button type="button" class="btn btn-primary"
+                                                            onclick="getDetails({{ $i->id }})">
                                                             View
                                                         </button>
 
@@ -117,3 +117,56 @@
     </section>
     <!-- /.content -->
 @endsection
+
+
+@push('scripts')
+    <script>
+        function getDetails(iId) {
+            $.ajax({
+                type: "get",
+                url: "{{ route('item.rpu-details') }}",
+                data: {
+                    "item_id": iId
+                },
+                success: function(res) {
+                    $("#decrement_price").text(res.item.decrement_price);
+                    $("#item_title").text(res.item.code + " " + res.item.description);
+                    $("#category").text(res.category.name);
+                    $("#total_base_price").text(res.item.total_base_price);
+                    $("#total_unit").text(res.item.total_unit);
+
+                    $("#is_manually_change_bidding_price").text(res.item.is_manually_change_bidding_price == 1 ?
+                        "Yes" : "No");
+                    $("#itemDetailModel").modal('show');
+
+                    appendRowToTable(res.itemRpu)
+                    console.log(res)
+                },
+                error: function(err) {
+                    console.log(err)
+                }
+            });
+        }
+
+
+        function appendRowToTable(itemRpus) {
+            $("#tblebody").empty();
+            console.log(itemRpus);
+            itemRpus.forEach((rpu, key) => {
+                let row = `
+                        <tr>
+                            <td>${key + 1}</td>
+                            <td>${rpu.price}</td>
+                            <td>${rpu.region}</td>
+                            <td>${rpu.unit}</td>
+                            <td>${rpu.unit_details}</td>
+                            <td></td>
+                        </tr>
+                `;
+
+                $("#tblebody").append(row);
+
+            });
+        }
+    </script>
+@endpush

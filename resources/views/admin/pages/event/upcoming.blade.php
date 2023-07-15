@@ -57,10 +57,10 @@
                                                     <td>{{ $key + 1 }}</td>
 
                                                     <td>{{ $event->id }}</td>
-                                                    <td>{{ $event->subject_line }}</td>
+                                                    <td>{{ $event->title }}</td>
 
                                                     <td>{{ $event->eventmode->mode }}</td>
-                                                    <td></td>
+                                                    <td>-</td>
                                                 </tr>
                                             @endforeach
 
@@ -78,8 +78,8 @@
                                                 <a class="active" href="#">1</a>
                                                 <a href="#">Next</a>
                                                 <!-- <a href="#">4</a>
-                                                            <a href="#">5</a>
-                                                            <a href="#">6</a> -->
+                                                                <a href="#">5</a>
+                                                                <a href="#">6</a> -->
                                                 <!-- <a href="#">&raquo;</a> -->
                                             </div>
                                         </div>

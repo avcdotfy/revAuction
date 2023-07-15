@@ -134,3 +134,6 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('event-statistics/{eId}', [EventController::class, 'statistics'])->name('event.statistics');
     });
 });
+
+Route::get('live-bidder-status' , [EventController::class , 'getLiveBiddersStatus'])->name('liveBidderStatus');
+Route::get('item-details', [ItemController::class, 'getItemDetails'])->name('item.rpu-details');

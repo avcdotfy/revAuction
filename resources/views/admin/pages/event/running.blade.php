@@ -58,12 +58,13 @@
                                                     <td>{{ $key + 1 }}</td>
 
                                                     <td>{{ $event->id }}</td>
-                                                    <td>{{ $event->subject_line }}</td>
+                                                    <td>{{ $event->title }}</td>
 
                                                     <td>{{ $event->eventmode->mode }}</td>
                                                     <td><a href="{{ route('event.statistics', $event->id) }}">View
                                                             Statistics</a></td>
-                                                    <td><a href="{{ route('event.statistics' , $event->id) }}">View Information</a></td>
+                                                    <td><a href="{{ route('event.statistics', $event->id) }}">View
+                                                            Information</a></td>
                                                 </tr>
                                             @endforeach
 
