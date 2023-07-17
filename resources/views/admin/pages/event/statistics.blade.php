@@ -155,7 +155,7 @@
                     </div>
                 </section>
             @endif
-            @push('scripts')
+            {{-- @push('scripts')
                 <script>
                     $(document).ready(function() {
                         setInterval(() => {
@@ -176,7 +176,7 @@
                         }, 2000);
                     });
                 </script>
-            @endpush
+            @endpush --}}
         @endforeach
     @else
         <h6 class="text-center" style="margin-top: 60px !important"> Bidding has not started yet </h6>
@@ -302,4 +302,11 @@
 @endsection
 
 @push('scripts')
+    <script>
+        $(document).ready(function() {
+            Echo.channel('bidderStatus').listen('BidEvent', function(data) {
+                console.log(data);
+            })
+        });
+    </script>
 @endpush

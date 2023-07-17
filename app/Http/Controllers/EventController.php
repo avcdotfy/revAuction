@@ -146,6 +146,7 @@ class EventController extends BaseController
         $bids = Bid::where('event_id', $eId)->get();
 
         $data = [];
+        $data['isTodaysBidAvailable'] = false;
         $itemsIdOnWhichBidHasStarted = [];
         if (count($bids) > 0) {
             $events = Event::find($eId);
@@ -165,6 +166,7 @@ class EventController extends BaseController
 
             // dd($data['itemsIdOnWhichBidHasStarted'][0]);
         }
+        // dd($data);
         return view('admin.pages.event.statistics', compact('data', 'event'));
     }
 
@@ -172,7 +174,6 @@ class EventController extends BaseController
     public function getLiveBiddersStatus(Request $r)
     {
         $bids = Bid::where(['event_id' => $r->eId, 'item_id' => $r->iId])->get();
-
         $bidGroupByVendorId = Bid::select('vendor_id',  DB::raw('MIN(bidding_price) as bidding_price'))->groupBy('vendor_id')->get();
         $vendors = [];
         foreach ($bids as $key => $bid) {

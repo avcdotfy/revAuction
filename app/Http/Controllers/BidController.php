@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BidEvent;
 use App\Helpers\BidHelper;
 use App\Helpers\EventHelper;
 use App\Helpers\ItemHelper;
@@ -10,6 +11,7 @@ use App\Models\Item;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BidController extends Controller
 {
@@ -26,10 +28,7 @@ class BidController extends Controller
 
         if ($req->bidding_price > $minBidAmount && $minBidAmount != null) {
             return redirect()->back()->with('error', 'Bidding price should be less than last bid price :' . $minBidAmount);
-        }
-        // if ($req->bidding_price > ItemHelper::getBasePrice($req->item_id)) {
-        // } 
-        else {
+        } else {
             try {
                 $bid = Bid::create([
                     'event_id' => $req->event_id,
@@ -41,6 +40,9 @@ class BidController extends Controller
                 ]);
 
                 Auth::user()->vendor->bids()->attach($bid->id);
+
+                event(new BidEvent($this->getStaticData($req->event_id, $req->item_id)));
+
                 return redirect()->back()->with('success', 'Bid placed successfully');
             } catch (QueryException $e) {
                 return redirect()->back()->with('error', $e->getMessage());
@@ -58,5 +60,17 @@ class BidController extends Controller
             'decrementAmount' => Item::find($r->iId)->decrement_price
         ];
         return response()->json($data);
+    }
+
+    function getStaticData($eId, $iId)
+    {
+        $bids = Bid::where(['event_id' => $eId, 'item_id' => $iId])->get();
+        $bidGroupByVendorId = Bid::select('vendor_id',  DB::raw('MIN(bidding_price) as bidding_price'))->groupBy('vendor_id')->get();
+        $vendors = [];
+        foreach ($bids as $key => $bid) {
+            $vendor = $bid->vendor;
+            $vendors[] = $vendor;
+        }
+        return  response()->json(['vendors' => $vendors, 'bidsGrupBy' => $bidGroupByVendorId]);
     }
 }

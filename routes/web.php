@@ -1,10 +1,12 @@
 <?php
 
+use App\Events\PlaygroundEvent;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PublicDataController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\VendorController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,10 +29,7 @@ Route::get('/items/{cat_id}', [ItemController::class, 'getItems'])->name('itemsO
 
 Route::get('/state', [PublicDataController::class, 'stateByCounryId'])->name('states.byCountry');
 
-
-
 Route::get('/403', [PublicDataController::class, 'unauthorized'])->name('unauthorized');
-
 
 Route::group(['middleware' => 'auth'], function () {
    Route::get('/logout', [AuthenticateController::class, 'logout'])->name('logout');

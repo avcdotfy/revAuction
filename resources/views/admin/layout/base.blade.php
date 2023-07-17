@@ -26,8 +26,8 @@
     <!-- Google Font -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css"
-        />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" />
     <link
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap"
         rel="stylesheet" />
@@ -124,6 +124,8 @@
     </style>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
 </head>
 
 <body class="sidebar-mini skin-blue" style="background: #222d32;">
@@ -174,6 +176,12 @@
             }).showToast();
         }
     </script>
+
+    <script src="{{ mix('js/app.js') }}" defer></script>
+
+
+
+
     @stack('scripts')
 </body>
 
