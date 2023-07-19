@@ -87,7 +87,6 @@ class EventController extends BaseController
         } else {
             return redirect()->back()->with('error', 'Something Went Wrong');
         }
-        dd($event);
     }
 
     /**
@@ -143,31 +142,34 @@ class EventController extends BaseController
     public function statistics($eId)
     {
         $event = Event::find($eId);
-        $bids = Bid::where('event_id', $eId)->get();
+        $bids = Bid::where('event_id', $eId)->groupBy('item_id')->get();
 
-        $data = [];
-        $data['isTodaysBidAvailable'] = false;
+        $bidStarted = false;
+
         $itemsIdOnWhichBidHasStarted = [];
+
         if (count($bids) > 0) {
-            $events = Event::find($eId);
-
+            $bidStarted = true;
             foreach ($bids as $key => $bid) {
-                if (date('Y-m-d') == date('Y-m-d', strtotime($bid->created_at))) {
-                    $data['isTodaysBidAvailable'] = true;
-                    $itemsIdOnWhichBidHasStarted[] =  $bid->item_id;
-
-                    $data['bids'] = Bid::groupBy('vendor_id')->get();
-                    // dd(Bid::groupBy('vendor_id')->first()->vendor);
-                }
+                // if (date('Y-m-d') == date('Y-m-d', strtotime($bid->created_at))) {
+                // $isTodaysBidAvailable = true;
+                $itemsIdOnWhichBidHasStarted[] =  $bid->item_id;
+                // }
             }
 
-
-            $data['itemsIdOnWhichBidHasStarted'] = $itemsIdOnWhichBidHasStarted;
-
-            // dd($data['itemsIdOnWhichBidHasStarted'][0]);
+            foreach ($event->items as $key => $item) {
+                if (in_array($item->id, $itemsIdOnWhichBidHasStarted) && $item->id == $itemsIdOnWhichBidHasStarted[$key]) {
+                    $item->availableBids = Bid::select('*',  DB::raw('MIN(bidding_price) as bidding_price'))->where('item_id', $item->id)->orderBy('bidding_price', 'asc')->groupBy('vendor_id')->get();
+                } else {
+                    $item->availableBids = null;
+                    unset($event->items[$key]);
+                }
+            }
         }
-        // dd($data);
-        return view('admin.pages.event.statistics', compact('data', 'event'));
+
+        // dd($event->items);
+
+        return view('admin.pages.event.statistics', compact('event', 'bidStarted'));
     }
 
 
