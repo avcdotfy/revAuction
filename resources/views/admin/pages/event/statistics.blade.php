@@ -26,17 +26,6 @@
                     <div class="box">
                         <div class="box-body">
 
-                            @push('scripts')
-                                <script>
-                                    $(document).ready(function() {
-                                        Echo.private('bidderStatus.' + {{ $event->id }} + '.' + {{ $item->id }}).listen('BidEvent',
-                                            function(data) {
-                                                console.log(data);
-                                            })
-                                    });
-                                </script>
-                            @endpush
-
                             {{-- iTEM DETAILS SECTION  STARTS --}}
                             <div class="col-sm-12" style="padding-left: 0px; padding-right: 0px">
                                 <table class="table table-bordered dataTable">
@@ -68,11 +57,11 @@
                                             </th>
                                             <th style="text-align: justify; border-top: 0px;">Company Name :
                                                 <span
-                                                    id="mostLeastBidCompanyName">{{ $item->availableBids->first()->vendor->company_name }}</span>
+                                                    id="mostLeastBidCompanyName{{ $item->id }}">{{ $item->availableBids->first()->vendor->company_name }}</span>
                                                 <br />
                                                 Item Rank : L1 & Price : Rs.
                                                 <span
-                                                    id="ContentPlaceHolder1_lvIl_lbl_l1_item_price_0">{{ $item->availableBids->first()->bidding_price }}</span>
+                                                    id="mostLeasBidPrice{{ $item->id }}">{{ $item->availableBids->first()->bidding_price }}</span>
                                             </th>
                                             <th style="border-top: 0px;">
 
@@ -86,7 +75,7 @@
 
                             {{-- BIDDERS LIST --}}
                             <div class="col-sm-12" style="padding-left: 0px; padding-right: 0px">
-                                <table class="table table-bordered dataTable">
+                                <table class="table table-bordered dataTable" id="vendor_table{{ $item->id }}">
                                     <thead>
                                         <tr>
                                             <th>S.No.</th>
@@ -106,17 +95,25 @@
                                             <tr style="{{ $keyBid == 0 ? 'background-color: #d5f7d5c2;' : '' }}">
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>
-                                                    <span>{{ $bid->vendor->company_name }}</span>
-                                                    ({{ $bid->vendor->user->phone }})
+                                                    <span id="vendor_company{{ $bid->id }}">
+                                                        {{ $bid->vendor->company_name }}
+                                                    </span>
+                                                    <span id="vendor_phone{{ $bid->id }}">
+                                                        ({{ $bid->vendor->user->phone }})
+                                                    </span>
                                                 </td>
                                                 <td>
-                                                    <span>{{ $bid->vendor->user->username }}</span>
+                                                    <span id="vendor_username{{ $bid->id }}">
+                                                        {{ $bid->vendor->user->username }}
+                                                    </span>
                                                 </td>
                                                 <td>
-                                                    <span>5</span>
+                                                    <span id="vendor_unit{{ $bid->id }}">5</span>
                                                 </td>
                                                 <td>
-                                                    <span>{{ $bid->bidding_price }}</span>
+                                                    <span id="vendor_bidding_price{{ $bid->id }}">
+                                                        {{ $bid->bidding_price }}
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     <span>{{ $key == 0 ? 'L1' : 'L2' }}</span>
@@ -128,6 +125,66 @@
                                                 </td>
                                             </tr>
                                         </tbody>
+
+                                        @push('scripts')
+                                            <script>
+                                                $(document).ready(function() {
+                                                    Echo.private('bidderStatus.' + {{ $event->id }} + '.' + {{ $item->id }}).listen('BidEvent',
+                                                        function(data) {
+                                                            console.log(data);
+                                                            // let vendors = data.bid_data.vendors.availableBids;
+
+                                                            $(`#vendor_table${data.item_id} tbody`).remove();
+
+                                                            data.vendors.forEach((v, k) => {
+                                                                let vendorRow = `<tbody >
+                                                                                    <tr style="${ k == 0 ? 'background-color: #d5f7d5c2;' : '' }">
+                                                                                        <td id="vendor_serial${data.item_id}">${k + 1 }</td>
+                                                                                        <td>
+                                                                                            <span id="vendor_company${data.item_id}">
+                                                                                                ${v.company}
+                                                                                            </span>
+                                                                                            <span id="vendor_phone${data.item_id}">
+                                                                                                (${v.phone})
+                                                                                            </span>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <span id="vendor_username${data.item_id}">
+                                                                                                ${v.username}
+                                                                                            </span>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <span id="vendor_unit${data.item_id}">5</span>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <span id="vendor_bidding_price${data.item_id}">
+                                                                                                ${v.bidd_price}
+                                                                                            </span>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <span>{{ $key == 0 ? 'L1' : 'L2' }}</span>
+                                                                                            <span><img src='{{ asset('images/up_icon.png') }}'
+                                                                                                    style='height:12px;float:right;' /></span>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <span>-</span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>`;
+
+                                                                $(`#mostLeasBidPrice${data.item_id}`).text(data.vendors[0].bidd_price);
+                                                                $(`#mostLeastBidCompanyName${data.item_id}`).text(data.vendors[0].company);
+
+                                                                $(`#vendor_table${data.item_id}`).append(vendorRow);
+
+
+
+                                                            });
+
+                                                        })
+                                                });
+                                            </script>
+                                        @endpush
                                     @endforeach
 
 

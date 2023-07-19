@@ -30,24 +30,27 @@ class BidController extends Controller
             return redirect()->back()->with('error', 'Bidding price should be less than last bid price :' . $minBidAmount);
         } else {
             // event(new BidEvent());
-            // try {
-            $bid = Bid::create([
-                'event_id' => $req->event_id,
-                'item_id' => $req->item_id,
-                'item_r_p_u_model_id' => $req->item_rpu_id,
-                'bidding_price' => $req->bidding_price,
-                'least_status' => '0',
-                'vendor_id' => Auth::user()->vendor->id
-            ]);
+            try {
+                $bid = Bid::create([
+                    'event_id' => $req->event_id,
+                    'item_id' => $req->item_id,
+                    'item_r_p_u_model_id' => $req->item_rpu_id,
+                    'bidding_price' => $req->bidding_price,
+                    'least_status' => '0',
+                    'vendor_id' => Auth::user()->vendor->id
+                ]);
 
-            Auth::user()->vendor->bids()->attach($bid->id);
+                Auth::user()->vendor->bids()->attach($bid->id);
 
-            event(new BidEvent(BidHelper::getBidStatistics($req->event_id), $req->item_id));
+                $data['bids'] = BidHelper::getLiveBidStatistics($req->event_id, $req->item_id);
+                $data['item_id'] = $req->item_id;
+                $data['event_id'] = $req->event_id;
+                event(new BidEvent($data));
 
-            return redirect()->back()->with('success', 'Bid placed successfully');
-            // } catch (QueryException $e) {
-            //     return redirect()->back()->with('error', $e->getMessage());
-            // }
+                return redirect()->back()->with('success', 'Bid placed successfully');
+            } catch (QueryException $e) {
+                return redirect()->back()->with('error', $e->getMessage());
+            }
         }
     }
 

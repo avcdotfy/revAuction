@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use stdClass;
 
 class BidEvent implements ShouldBroadcast
 {
@@ -17,13 +18,31 @@ class BidEvent implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $bid_data;
-    public $itemId;
 
-    public function __construct($data, $item_id)
+    public $event_id;
+    public $item_id;
+    public $vendors;
+
+    public function __construct($data)
     {
-        $this->bid_data = $data;
-        $this->itemId = $item_id;
+
+        $this->event_id = $data['event_id'];
+        $this->item_id = $data['item_id'];
+
+        $vendors = [];
+
+        foreach ($data['bids']->availableBids as $key => $bid) {
+
+            // dd($vendor);
+            $v = new stdClass;
+            $v->phone = $bid->vendor->user->phone;
+            $v->company =  $bid->vendor->company_name;
+            $v->username   =    $bid->vendor->user->username;
+            $v->bidd_price  =    $bid->bidding_price;
+            $vendors[] = $v;
+        }
+
+        $this->vendors = $vendors;
     }
 
     /**
@@ -33,6 +52,6 @@ class BidEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return  new PrivateChannel('bidderStatus.' . $this->bid_data[0]->id . '.' . $this->itemId);
+        return  new PrivateChannel('bidderStatus.' . $this->event_id . '.' . $this->item_id);
     }
 }

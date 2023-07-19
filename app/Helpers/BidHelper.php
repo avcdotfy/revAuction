@@ -6,6 +6,7 @@ use App\Models\Bid;
 use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use stdClass;
 
 class BidHelper
 {
@@ -63,5 +64,14 @@ class BidHelper
             }
         }
         return [$event, $bidStarted];
+    }
+
+    public static function getLiveBidStatistics($eId, $iId)
+    {
+        $item = new stdClass;
+
+        $item->availableBids = Bid::select('*',  DB::raw('MIN(bidding_price) as bidding_price'))->where(['item_id' => $iId, 'event_id' => $eId])->orderBy('bidding_price', 'asc')->groupBy('vendor_id')->get();
+
+        return $item;
     }
 }
