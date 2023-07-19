@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\BidHelper;
 use App\Helpers\EventInvitationHelper;
 use App\Models\Bid;
 use App\Models\Category;
@@ -141,37 +142,12 @@ class EventController extends BaseController
 
     public function statistics($eId)
     {
-        $event = Event::find($eId);
-        $bids = Bid::where('event_id', $eId)->groupBy('item_id')->get();
-
-        $bidStarted = false;
-
-        $itemsIdOnWhichBidHasStarted = [];
-
-        if (count($bids) > 0) {
-            $bidStarted = true;
-            foreach ($bids as $key => $bid) {
-                // if (date('Y-m-d') == date('Y-m-d', strtotime($bid->created_at))) {
-                // $isTodaysBidAvailable = true;
-                $itemsIdOnWhichBidHasStarted[] =  $bid->item_id;
-                // }
-            }
-
-            foreach ($event->items as $key => $item) {
-                if (in_array($item->id, $itemsIdOnWhichBidHasStarted) && $item->id == $itemsIdOnWhichBidHasStarted[$key]) {
-                    $item->availableBids = Bid::select('*',  DB::raw('MIN(bidding_price) as bidding_price'))->where('item_id', $item->id)->orderBy('bidding_price', 'asc')->groupBy('vendor_id')->get();
-                } else {
-                    $item->availableBids = null;
-                    unset($event->items[$key]);
-                }
-            }
-        }
-
-        // dd($event->items);
+        $event = BidHelper::getBidStatistics($eId)[0];
+        $bidStarted = BidHelper::getBidStatistics($eId)[1];
+        // dd($event->id);
 
         return view('admin.pages.event.statistics', compact('event', 'bidStarted'));
     }
-
 
     public function getLiveBiddersStatus(Request $r)
     {

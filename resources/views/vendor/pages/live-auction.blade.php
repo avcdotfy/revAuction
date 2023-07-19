@@ -107,7 +107,7 @@
                                                             id="statusBtn{{ $item->id }}"
                                                             style="padding:8px 9px; display:{{ !BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) ? 'none' : '' }}">
                                                             L1</a>
-
+                                                        {{-- {{ dd(BidHelper::checkIfVendorhasLowestBid($event->id, $item->id)) }} --}}
                                                         <a href="#" data-toggle="modal" class="btn btn-success"
                                                             data-target="#bidModal{{ $item->id }}"
                                                             id="btn_bid{{ $item->id }}"
@@ -241,9 +241,9 @@
                                                                                             <div class="col-sm-3">
                                                                                                 <label
                                                                                                     style="color: green;"
-                                                                                                    id="lbl_bidding_price">{{ BidHelper::getLastBidderPrice($event->id, $item->id) != null ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price - $item->decrement_price : $item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price - $item->decrement_price }}</label>
+                                                                                                    id="lbl_bidding_price{{ $item->id }}">{{ BidHelper::getLastBidderPrice($event->id, $item->id) != null ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price - $item->decrement_price : $item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price - $item->decrement_price }}</label>
                                                                                                 <input type="hidden"
-                                                                                                    id="bidding_price_hidden"
+                                                                                                    id="bidding_price_hidden{{ $item->id }}"
                                                                                                     onchange="checking_manual_bidding_price_0()"
                                                                                                     name="bidding_price"
                                                                                                     class="form-control"
@@ -304,9 +304,10 @@
                                                                         $("#btn_bid{{ $item->id }}").show();
                                                                     }
 
-
-                                                                    $("#bidding_price_hidden").val(res.lastBidderPrice - res.decrementAmount);
-                                                                    $("#lbl_bidding_price").text(res.lastBidderPrice - res.decrementAmount);
+                                                                    $("#bidding_price_hidden{{ $item->id }}").val(res.lastBidderPrice - res
+                                                                        .decrementAmount);
+                                                                    $("#lbl_bidding_price{{ $item->id }}").text(res.lastBidderPrice - res
+                                                                        .decrementAmount);
                                                                 },
                                                                 error: function(err) {
                                                                     console.log("ERR", err);
@@ -316,7 +317,6 @@
                                                     </script>
                                                 @endpush
                                             @endforeach
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -332,7 +332,6 @@
         </div>
         @include('vendor.partials.bidding-modal')
     </section>
-
 
     <form action="{{ route('vendor.filterLiveAuction') }}" method="post" id="filterForm">
         @csrf

@@ -17,11 +17,13 @@ class BidEvent implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $bidderData = [];
+    public $bid_data;
+    public $itemId;
 
-    public function __construct($data)
+    public function __construct($data, $item_id)
     {
-        $this->bidderData = $data;
+        $this->bid_data = $data;
+        $this->itemId = $item_id;
     }
 
     /**
@@ -31,10 +33,6 @@ class BidEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return  new Channel('bidderStatus');
-    }
-
-    public function broadcastAs(){
-        
+        return  new PrivateChannel('bidderStatus.' . $this->bid_data[0]->id . '.' . $this->itemId);
     }
 }

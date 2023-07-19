@@ -25,6 +25,18 @@
                 <div class="col-lg-12" style="padding-left: 0px; padding-right: 0px">
                     <div class="box">
                         <div class="box-body">
+
+                            @push('scripts')
+                                <script>
+                                    $(document).ready(function() {
+                                        Echo.private('bidderStatus.' + {{ $event->id }} + '.' + {{ $item->id }}).listen('BidEvent',
+                                            function(data) {
+                                                console.log(data);
+                                            })
+                                    });
+                                </script>
+                            @endpush
+
                             {{-- iTEM DETAILS SECTION  STARTS --}}
                             <div class="col-sm-12" style="padding-left: 0px; padding-right: 0px">
                                 <table class="table table-bordered dataTable">
@@ -89,9 +101,9 @@
                                         </tr>
                                     </thead>
 
-                                    @foreach ($item->availableBids as $key => $bid)
+                                    @foreach ($item->availableBids as $keyBid => $bid)
                                         <tbody>
-                                            <tr style="background-color:#d5f7d5c2">
+                                            <tr style="{{ $keyBid == 0 ? 'background-color: #d5f7d5c2;' : '' }}">
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>
                                                     <span>{{ $bid->vendor->company_name }}</span>
@@ -134,13 +146,3 @@
 
     @include('admin.partials.terms-condition')
 @endsection
-
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            Echo.channel('bidderStatus').listen('BidEvent', function(data) {
-                console.log(data);
-            })
-        });
-    </script>
-@endpush
