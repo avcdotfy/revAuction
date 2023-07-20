@@ -47,7 +47,7 @@
     </style>
     @yield('page_style')
     <script src="{{ asset('jquery/dist/jquery.min.js') }}"></script>
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <title>Home | Dashboard</title>
     <style type="text/css">
         label>a {
@@ -153,10 +153,14 @@
         src="https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/6/tinymce.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+
     <script>
         tinymce.init({
             selector: 'textarea#default'
         });
+
+        new DataTable('#dtable', {});
     </script>
 
     <script>

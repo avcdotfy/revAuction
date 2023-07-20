@@ -18,77 +18,59 @@
                     <div class="box-body">
                         <div id="ContentPlaceHolder1_div_list" class="row">
                             <div class="col-sm-12">
-                                <div id="dtable_wrapper" class="dataTables_wrapper no-footer">
-                                    <div class="dataTables_length col-lg-9" id="dtable_length"
-                                        style="padding-left: 0px;padding-right: 0px;margin-bottom: 10px;">
-                                        <label>Show <select name="dtable_length" aria-controls="dtable" class="">
-                                                <option value="10">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select> entries</label>
-                                    </div>
-                                    <div class="dataTables_filter col-lg-3">
-                                        <input type="text" placeholder="Search"
-                                            style="border: 1px solid #747474;font-size: 11px;padding: 5px;border-radius: 2px;width: 100%;"
-                                            name="">
-                                    </div>
-                                    <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
-                                        role="grid" aria-describedby="dtable_info">
-                                        <thead>
-                                            <tr role="row">
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 38.5104px;">S.No.</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 44.7292px;">Select</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 192.583px;">Company Name</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 85.6354px;">Vendor Type</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 76.0521px;">User Name</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 93.6562px;">Mobile No.</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 145.896px;">Email ID</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 108.917px;">Registered Date</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 46.6875px;">Profile</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <form action="" id="#form">
-                                                @foreach ($new_reqs as $key => $req)
-                                                    <tr role="row" class="odd">
-                                                        <td>{{ $key + 1 }}</td>
-                                                        <td>
-                                                            <input type="checkbox" id="checkbox" name="ids"
-                                                                value="{{ $req->id }}">
-                                                        </td>
-                                                        <td>{{ $req->vendor->company_name }}</td>
-                                                        <td>{{ $req->vendor->vendor_type }}</td>
-                                                        <td><span
-                                                                id="ContentPlaceHolder1_lvNvR_lblusername_0">{{ $req->vendor->user->username }}</span>
-                                                        </td>
-                                                        <td><span
-                                                                id="ContentPlaceHolder1_lvNvR_lblmobile_0">{{ $req->vendor->user->phone }}</span>
-                                                        </td>
-                                                        <td><span
-                                                                id="ContentPlaceHolder1_lvNvR_lblemail_0">{{ $req->vendor->user->email }}</span>
-                                                        </td>
-                                                        <td>{{ $req->vendor->created_at }}</td>
-                                                        <td><a href="p#">View</a></td>
-                                                    </tr>
-                                                @endforeach
+                                <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
+                                    role="grid" aria-describedby="dtable_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 38.5104px;">S.No.</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 44.7292px;">Select</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 192.583px;">Company Name</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 85.6354px;">Vendor Type</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 76.0521px;">User Name</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 93.6562px;">Mobile No.</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 145.896px;">Email ID</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 108.917px;">Registered Date</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 46.6875px;">Profile</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <form action="" id="#form">
+                                            @foreach ($new_reqs as $key => $req)
+                                                <tr role="row" class="odd">
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>
+                                                        <input type="checkbox" id="checkbox" name="ids"
+                                                            value="{{ $req->id }}">
+                                                    </td>
+                                                    <td>{{ $req->vendor->company_name }}</td>
+                                                    <td>{{ $req->vendor->vendor_type }}</td>
+                                                    <td><span
+                                                            id="ContentPlaceHolder1_lvNvR_lblusername_0">{{ $req->vendor->user->username }}</span>
+                                                    </td>
+                                                    <td><span
+                                                            id="ContentPlaceHolder1_lvNvR_lblmobile_0">{{ $req->vendor->user->phone }}</span>
+                                                    </td>
+                                                    <td><span
+                                                            id="ContentPlaceHolder1_lvNvR_lblemail_0">{{ $req->vendor->user->email }}</span>
+                                                    </td>
+                                                    <td>{{ $req->vendor->created_at }}</td>
+                                                    <td><a href="p#">View</a></td>
+                                                </tr>
+                                            @endforeach
 
-                                            </form>
+                                        </form>
 
-                                        </tbody>
-                                    </table>
-
-                                    {{ $new_reqs->links() }}
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

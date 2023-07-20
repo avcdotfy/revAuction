@@ -48,7 +48,7 @@
                                  class="dot-icon">.</span><span>Approved Vendor</span></a></li>
                      <li id="vendors_rejected_vendor"><a href="{{ route('vendor.rejected_requests') }}"><span
                                  class="dot-icon">.</span><span>Rejected Vendor</span></a></li>
-                     <li id="vendors_new_items_update_to_all"><a href="new-item-update.aspx"><span
+                     <li id="vendors_new_items_update_to_all"><a href="{{ route('vendor.updateToAll') }}"><span
                                  class="dot-icon">.</span><span>New Items Update To All</span></a></li>
                  </ul>
              </li>
@@ -169,7 +169,7 @@
                              </span>
                          </a>
                          <ul class="treeview-menu">
-                             <li id="mail_setting_configuration"><a href="mail-configuration.aspx"><span
+                             <li id="mail_setting_configuration"><a href="{{ route('config.mail.create') }}"><span
                                          class="dot-icon">.</span><span>Configuration</span></a></li>
                              <li id="mail_setting_template"><a href="{{ route('template.email.create') }}"><span
                                          class="dot-icon">.</span><span>Template</span></a></li>
@@ -182,9 +182,9 @@
                              </span>
                          </a>
                          <ul class="treeview-menu">
-                             <li id="sms_setting_configuration"><a href="sms-configuration.aspx"><span
+                             <li id="sms_setting_configuration"><a href="{{ route('config.sms.create') }}"><span
                                          class="dot-icon">.</span><span>SMS Configuration</span></a></li>
-                             <li id="sms_setting_template"><a href="sms-template.aspx"><span
+                             <li id="sms_setting_template"><a href="{{ route('template.sms.list') }}"><span
                                          class="dot-icon">.</span><span>SMS Template</span></a></li>
                          </ul>
                      </li>

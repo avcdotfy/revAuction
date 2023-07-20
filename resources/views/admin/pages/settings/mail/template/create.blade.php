@@ -5,7 +5,8 @@
     <section class="content-header">
         <h3 style="margin-top: 10px; margin-bottom: 20px">Home | Settings | Mail Setting | Template Create Information </h3>
         <ol class="breadcrumb">
-            <a href="mail-template.html" style="color: white; font-weight: 600" class="btn-block btn-primary btn-sm">
+            <a href="{{ route('template.email.list') }}" style="color: white; font-weight: 600"
+                class="btn-block btn-primary btn-sm">
                 Go Back To List</a>
         </ol>
     </section>

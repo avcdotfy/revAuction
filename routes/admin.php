@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ConfigurationController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
@@ -85,6 +86,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/approved-requests', [RequestController::class, 'approved'])->name('vendor.approved_requests');
             Route::get('/rejected-requests', [RequestController::class, 'rejected'])->name('vendor.rejected_requests');
             Route::get('/{id}/profile', [VendorController::class, 'profile'])->name('vendor.profile');
+            Route::get('/update-to-all', [VendorController::class, 'updateToAll'])->name('vendor.updateToAll');
         });
 
 
@@ -119,8 +121,26 @@ Route::group(['prefix' => 'admin'], function () {
 
             Route::group(['prefix' => 'mail'], function () {
                 Route::group(['prefix' => 'template'], function () {
+                    Route::get('/', [TemplateController::class, 'emailTemplateList'])->name('template.email.list');
                     Route::get('create', [TemplateController::class, 'emailTemplate'])->name('template.email.create');
                     Route::post('create', [TemplateController::class, 'emailTemplateStore'])->name('template.email.store');
+                });
+
+                Route::group(['prefix' => 'config'], function () {
+                    Route::get('', [ConfigurationController::class, 'emailConfigurationList'])->name('config.mail.list');
+                    Route::get('create', [ConfigurationController::class, 'emailConfiguration'])->name('config.mail.create');
+                    Route::post('create', [ConfigurationController::class, 'emailConfigurationStore'])->name('config.mail.store');
+                });
+            });
+            Route::group(['prefix' => 'sms'], function () {
+                Route::group(['prefix' => 'template'], function () {
+                    Route::get('/', [TemplateController::class, 'smsTemplateList'])->name('template.sms.list');
+                    Route::get('create', [TemplateController::class, 'smsTemplate'])->name('template.sms.create');
+                    Route::post('create', [TemplateController::class, 'smsTemplateStore'])->name('template.sms.store');
+                });
+                Route::group(['prefix' => 'config'], function () {
+                    Route::get('create', [ConfigurationController::class, 'smsConfiguration'])->name('config.sms.create');
+                    Route::post('create', [ConfigurationController::class, 'smsConfigurationStore'])->name('config.sms.store');
                 });
             });
         });

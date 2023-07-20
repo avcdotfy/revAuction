@@ -21,54 +21,52 @@
 
                         <div id="ContentPlaceHolder1_div_list" class="row">
                             <div class="col-sm-12">
-                                <div id="dtable_wrapper" class="dataTables_wrapper no-footer">
-                                    <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
-                                        role="grid">
-                                        <thead>
-                                            <tr role="row">
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 43.3333px;">S.No.</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width:100.812px;">Region Name</th>
+                                <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
+                                    role="grid">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 43.3333px;">S.No.</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width:100.812px;">Region Name</th>
 
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 190.156px;">Region Message </th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 80.156px;">Is Alert ?</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 190.156px;">Region Message </th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 80.156px;">Is Alert ?</th>
 
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 90.156px;">Updated on</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 90.156px;">Updated on</th>
 
 
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 90.3125px;">Status</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 90.3125px;">Status</th>
 
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 56.375px;">Action</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 56.375px;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach ($regions as $key => $region)
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">{{ $key + 1 }}</td>
+                                                <td class="sorting_1">{{ $region->name }}</td>
+                                                <td class="sorting_1">{{ $region->description }}</td>
+                                                <td class="sorting_1">{{ $region->is_alert ? 'Yes' : 'No' }}</td>
+                                                <td class="sorting_1">{{ $region->updated_at }}</td>
+                                                <td class="sorting_1">
+                                                    <label
+                                                        class="label  {{ $region->is_active ? 'label-success' : 'label-danger' }} "
+                                                        style="font-size: 11px; font-weight: 600;text-transform:capitalize;">
+                                                        {{ $region->is_active ? 'Active' : 'Deative' }}
+                                                </td>
+                                                <td class="sorting_1"><a href="#"><i class="fa fa-edit"></i>
+                                                        Edit</a></td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            @foreach ($regions as $key => $region)
-                                                <tr role="row" class="odd">
-                                                    <td class="sorting_1">{{ $key + 1 }}</td>
-                                                    <td class="sorting_1">{{ $region->name }}</td>
-                                                    <td class="sorting_1">{{ $region->description }}</td>
-                                                    <td class="sorting_1">{{ $region->is_alert ? 'Yes' : 'No' }}</td>
-                                                    <td class="sorting_1">{{ $region->updated_at }}</td>
-                                                    <td class="sorting_1">
-                                                        <label
-                                                            class="label  {{ $region->is_active ? 'label-success' : 'label-danger' }} "
-                                                            style="font-size: 11px; font-weight: 600;text-transform:capitalize;">
-                                                            {{ $region->is_active ? 'Active' : 'Deative' }}
-                                                    </td>
-                                                    <td class="sorting_1"><a href="#"><i class="fa fa-edit"></i>
-                                                            Edit</a></td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

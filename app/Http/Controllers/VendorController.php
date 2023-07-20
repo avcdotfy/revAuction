@@ -35,6 +35,14 @@ class VendorController extends Controller
         return view('public.pages.register.vendor-register', compact('countries', 'categories'));
     }
 
+
+    function updateToAll()
+    {
+        return view('admin.pages.vendor.update-to-all');
+    }
+
+
+
     function store(Request $req)
     {
         try {

@@ -10,7 +10,7 @@ class TemplateController extends Controller
 {
     public function smsTemplate()
     {
-        return view('');
+        return view('admin.pages.settings.sms.template.create');
     }
     public function smsTemplateStore(Request $req)
     {
@@ -20,6 +20,16 @@ class TemplateController extends Controller
     {
         $et = EmailTemplate::where('user_id', Auth::user()->id)->first();
         return view('admin.pages.settings.mail.template.create', compact('et'));
+    }
+    public function smsTemplateList()
+    {
+        $et = EmailTemplate::where('user_id', Auth::user()->id)->first();
+        return view('admin.pages.settings.sms.template.list', compact('et'));
+    }
+    public function emailTemplateList()
+    {
+        $et = EmailTemplate::where('user_id', Auth::user()->id)->first();
+        return view('admin.pages.settings.mail.template.list', compact('et'));
     }
     public function emailTemplateStore(Request $req)
     {

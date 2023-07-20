@@ -1,12 +1,11 @@
 @extends('admin.layout.base')
 
-
 @section('main_section')
     <section class="content-header">
-        <h1>Home | Notice &amp; News <small id="ContentPlaceHolder1_hTag">List</small></h1>
+        <h1>Home | Settings | SMS Setting | Template <small id="ContentPlaceHolder1_hTag">List</small></h1>
         <ol class="breadcrumb">
-            <a href="notice-news.aspx?r=new" id="ContentPlaceHolder1_aCN" style="color: white"
-                class="btn-block btn-primary btn-sm">+ Create New Notice &amp; News</a>
+            <a href="{{ route('template.sms.create') }}" id="ContentPlaceHolder1_aCN" style="color: white"
+                class="btn-block btn-primary btn-sm">+ Create New SMS Template</a>
         </ol>
     </section>
     <section class="content">
@@ -15,7 +14,6 @@
                 <div class="box">
                     <div class="box-body">
 
-
                         <div id="ContentPlaceHolder1_div_list" class="row">
                             <div class="col-sm-12" style="overflow: auto;">
                                 <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
@@ -23,31 +21,31 @@
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                style="width: 37.0417px;">S.No.</th>
+                                                style="width: 56.9062px;">S.No.</th>
                                             <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                style="width: 643px;">Notice &amp; News Title</th>
+                                                style="width: 122.208px;">Service Type</th>
                                             <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                style="width: 79.0938px;">Status</th>
+                                                style="width: 513.188px;">SMS Template</th>
                                             <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                style="width: 91.3958px;">Updated Date</th>
+                                                style="width: 134.302px;">Status</th>
                                             <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                style="width: 48.8021px;">Action</th>
+                                                style="width: 72.7292px;">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
                                         <tr role="row" class="odd">
                                             <td>1</td>
-                                            <td> Leading player in the industry for our commitment to innovation and
-                                                exceptional customer satisfaction</td>
-                                            <td><label class="label label-success" title="True"
-                                                    style="font-size:11px;font-weight:600;">Activated</label></td>
-                                            <td>09-07-2023</td>
-                                            <td><a href="notice-news.aspx?r=mELirpUhRYksFj7k8/XBcQ=="><i
+                                            <td>Login OTP</td>
+                                            <td>Dear Sir, Account Login OTP is {login_otp}. BMM ISPAT LTD</td>
+                                            <td><label class="label label-danger" title="False"
+                                                    style="font-size:11px;font-weight:600;">Deactivated</label></td>
+                                            <td><a href="sms-template.aspx?r=mELirpUhRYksFj7k8/XBcQ=="><i
                                                         class="fa fa-edit"></i> Edit</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>

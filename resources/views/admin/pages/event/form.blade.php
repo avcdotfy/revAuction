@@ -248,68 +248,34 @@
          <h4>List of Vendors</h4>
      </div>
      <div class="col-sm-12">
-         <div id="dtable_wrapper" class="dataTables_wrapper no-footer">
-             <div class="dataTables_length col-lg-9" id="dtable_length"
-                 style="padding-left: 0px;padding-right: 0px;margin-bottom: 10px;">
-                 <label>Show <select name="dtable_length" aria-controls="dtable" class="">
-                         <option value="10">10</option>
-                         <option value="25">25</option>
-                         <option value="50">50</option>
-                         <option value="100">100</option>
-                     </select> entries</label>
-             </div>
-             <div class="dataTables_filter col-lg-3">
-                 <input type="text" placeholder="Search"
-                     style="border: 1px solid #747474;font-size: 11px;padding: 5px;border-radius: 2px;width: 100%;"
-                     name="">
-             </div>
-             <table id="dtable" class="table table-bordered table-striped dataTable no-footer" role="grid"
-                 aria-describedby="dtable_info">
-                 <thead>
-                     <tr role="row">
-                         <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 38.5104px;">
-                             S.No.</th>
-                         <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 44.7292px;">
-                             Select</th>
-                         <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 170.583px;">
-                             Company Name</th>
+         <table id="dtable" class="table table-bordered table-striped dataTable no-footer" role="grid"
+             aria-describedby="dtable_info">
+             <thead>
+                 <tr role="row">
+                     <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 38.5104px;">
+                         S.No.</th>
+                     <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 44.7292px;">
+                         Select</th>
+                     <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 170.583px;">
+                         Company Name</th>
 
-                         <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 76.0521px;">
-                             User Name</th>
-                         <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 93.6562px;">
-                             Mobile No.</th>
-                         <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 145.896px;">
-                             Email ID</th>
+                     <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 76.0521px;">
+                         User Name</th>
+                     <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 93.6562px;">
+                         Mobile No.</th>
+                     <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 145.896px;">
+                         Email ID</th>
 
-                         <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.6875px;">
-                             Profile</th>
+                     <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.6875px;">
+                         Profile</th>
 
-                     </tr>
-                 </thead>
-                 <tbody id="vendorTableBody">
+                 </tr>
+             </thead>
+             <tbody id="vendorTableBody">
 
 
-                 </tbody>
-             </table>
-
-             <div class="col-lg-12 " style="padding-left: 0px; padding-right: 0px">
-                 <p class="col-lg-6" style="text-align: left;padding-left: 8px; line-height: 30px">Showing 1 to
-                     4 of 4 entries</p>
-                 <div class="col-lg-6" style="text-align: right;">
-                     <div class="pagination " style="margin: 0px 0; ">
-                         <!--  <a href="#">&laquo;</a> -->
-                         <a href="#">Previous </a>&nbsp;
-                         <a class="active" href="#">1</a>&nbsp;
-                         <a href="#">Next</a>
-                         <!-- <a href="#">4</a>
-                                                                                                                                                                                                                                                                            <a href="#">5</a>
-                                                                                                                                                                                                                                                                            <a href="#">6</a> -->
-                         <!-- <a href="#">&raquo;</a> -->
-                     </div>
-                 </div>
-             </div>
-
-         </div>
+             </tbody>
+         </table>
      </div>
  </div>
 
@@ -320,86 +286,52 @@
          <h4>List of Items, Region & Price</h4>
      </div>
      <div class="col-sm-12">
-         <div id="dtable_wrapper" class="dataTables_wrapper no-footer">
-             <div class="dataTables_length col-lg-9" id="dtable_length"
-                 style="padding-left: 0px;padding-right: 0px;margin-bottom: 10px;">
-                 <label>Show <select name="dtable_length" aria-controls="dtable" class="">
-                         <option value="10">10</option>
-                         <option value="25">25</option>
-                         <option value="50">50</option>
-                         <option value="100">100</option>
-                     </select> entries</label>
-             </div>
-             <div class="dataTables_filter col-lg-3">
-                 <input type="text" placeholder="Search"
-                     style="border: 1px solid #747474;font-size: 11px;padding: 5px;border-radius: 2px;width: 100%;"
-                     name="">
-             </div>
-             <table id="dtable" class="table table-bordered table-striped dataTable no-footer" role="grid"
-                 aria-describedby="dtable_info" style="border:1px solid #eaeaea">
-                 <thead>
-                     <tr role="row">
-                         <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 38.5104px;">
-                             S.No.</th>
-                         <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 44.7292px;">
-                             Select</th>
-                         <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 170.583px;">
-                             Item Code & Description</th>
+         <table id="dtable" class="table table-bordered table-striped dataTable no-footer" role="grid"
+             aria-describedby="dtable_info" style="border:1px solid #eaeaea">
+             <thead>
+                 <tr role="row">
+                     <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 38.5104px;">
+                         S.No.</th>
+                     <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 44.7292px;">
+                         Select</th>
+                     <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 170.583px;">
+                         Item Code & Description</th>
 
-                         <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 76.0521px;">UoM
-                         </th>
-                         <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 93.6562px;">
-                             Item Region, Price & Unit Details</th>
-                     </tr>
-                 </thead>
-                 <tbody id="itemTableBody">
-                     {{-- @foreach ($itemRpus as $key => $rpu)
-                         <tr role="row" class="odd">
-                             <td>{{ $key + 1 }}</td>
-                             <td>
-                                 <input type="checkbox" name="itemRpu[]" value="{{ $rpu->id }}">
-                             </td>
-                             <td><span>{{ $rpu->item->code }}-{{ $rpu->item->name }}</span>
-                             </td>
-                             <td><span>{{ $rpu->item->unit->name }}</span></td>
-                             <td>
-                                 <div class="col-sm-12"
-                                     style="border: 1px solid #d2d6de; border-radius: 6px; padding-top:5px;padding-bottom:5px;">
-                                     <span class="label label-success" style="white-space: unset;"> </span>
-                                     <div>
-                                         <span
-                                             id="ContentPlaceHolder1_lvIl_lvIRP_0_lbl_region_name_0">{{ $rpu->region->name }}</span>
-                                         :
-                                         <span id="ContentPlaceHolder1_lvIl_lvIRP_0_lbl_item_region_price_0"
-                                             title="151">{{ $rpu->price }}</span>
-                                     </div>
-                                 </div>
-                             </td>
-                         </tr>
-                     @endforeach --}}
+                     <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 76.0521px;">UoM
+                     </th>
+                     <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 93.6562px;">
+                         Item Region, Price & Unit Details</th>
+                 </tr>
+             </thead>
+             <tbody id="itemTableBody">
+                 {{-- @foreach ($itemRpus as $key => $rpu)
+                <tr role="row" class="odd">
+                    <td>{{ $key + 1 }}</td>
+                    <td>
+                        <input type="checkbox" name="itemRpu[]" value="{{ $rpu->id }}">
+                    </td>
+                    <td><span>{{ $rpu->item->code }}-{{ $rpu->item->name }}</span>
+                    </td>
+                    <td><span>{{ $rpu->item->unit->name }}</span></td>
+                    <td>
+                        <div class="col-sm-12"
+                            style="border: 1px solid #d2d6de; border-radius: 6px; padding-top:5px;padding-bottom:5px;">
+                            <span class="label label-success" style="white-space: unset;"> </span>
+                            <div>
+                                <span
+                                    id="ContentPlaceHolder1_lvIl_lvIRP_0_lbl_region_name_0">{{ $rpu->region->name }}</span>
+                                :
+                                <span id="ContentPlaceHolder1_lvIl_lvIRP_0_lbl_item_region_price_0"
+                                    title="151">{{ $rpu->price }}</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach --}}
 
 
-                 </tbody>
-             </table>
-
-             <div class="col-lg-12 " style="padding-left: 0px; padding-right: 0px">
-                 <p class="col-lg-6" style="text-align: left;padding-left: 8px; line-height: 30px">Showing 1 to
-                     4 of 4 entries</p>
-                 <div class="col-lg-6" style="text-align: right;">
-                     <div class="pagination " style="margin: 0px 0; ">
-                         <!--  <a href="#">&laquo;</a> -->
-                         <a href="#">Previous </a>&nbsp;
-                         <a class="active" href="#">1</a>&nbsp;
-                         <a href="#">Next</a>
-                         <!-- <a href="#">4</a>
-                                                                                                                                                                                                                                                                            <a href="#">5</a>
-                                                                                                                                                                                                                                                                            <a href="#">6</a> -->
-                         <!-- <a href="#">&raquo;</a> -->
-                     </div>
-                 </div>
-             </div>
-
-         </div>
+             </tbody>
+         </table>
      </div>
  </div>
 
@@ -422,7 +354,6 @@
          <div class="col-sm-12" style=" padding: 0px">
              <input type="text" class="form-control" value="subject line"
                  placeholder="Preparation of Event for Aluminium Pipe" name="subject_line">
-
          </div>
      </div>
 
