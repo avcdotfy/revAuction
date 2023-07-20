@@ -44,11 +44,13 @@
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
                                                     style="width: 170.583px;">Event Title</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 70.6354px;">Event Mode</th>
+                                                    style="width: 70.6354px;">Posted Event</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 70.6354px;">Closed At</th>
+                                                    style="width: 70.6354px;">Consolidate Report</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 76.0521px;">Posted Event</th>
+                                                    style="width: 76.0521px;">L1 Report</th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                    style="width: 76.0521px;">Action</th>
 
 
                                             </tr>
@@ -59,12 +61,22 @@
                                                 <tr role="row" class="odd">
                                                     <td>{{ $key + 1 }}</td>
 
-                                                    <td>{{ $event->id }}</td>
-                                                    <td>{{ $event->subject_line }}</td>
+                                                    <td> {{ 'AVCDOTFYREVAUC000' . $event->id }}</td>
+                                                    <td>{{ $event->title }}</td>
 
-                                                    <td>{{ $event->eventmode->mode }}</td>
-                                                    <td>200 INR</td>
-                                                    <td></td>
+                                                    <td><a
+                                                            href="view-posted-event-information.aspx?r=AfI07azv6nWhAj0qw/RJ5A==&amp;eT=kLkMeyff8/FYRoQs8uY1vA==">View
+                                                            Information</a></td>
+
+                                                    <td><a id="ContentPlaceHolder1_lvCe_btn_generate_report_0"
+                                                            href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvCe$ctrl0$btn_generate_report','')">Generate
+                                                            Report</a></td>
+                                                    <td><a id="ContentPlaceHolder1_lvCe_btn_l1_generate_report_2"
+                                                            href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvCe$ctrl2$btn_l1_generate_report','')">Generate
+                                                            Report</a></td>
+                                                    <td><a href="take-event-decision.aspx?r=CLIrTXTdl+a2DIaNNlvA4g=="
+                                                            target="_blank">Take Decision</a></td>
+
                                                 </tr>
                                             @endforeach
 
@@ -81,8 +93,8 @@
                                                 <a class="active" href="#">1</a>
                                                 <a href="#">Next</a>
                                                 <!-- <a href="#">4</a>
-                                                <a href="#">5</a>
-                                                <a href="#">6</a> -->
+                                                                                    <a href="#">5</a>
+                                                                                    <a href="#">6</a> -->
                                                 <!-- <a href="#">&raquo;</a> -->
                                             </div>
                                         </div>

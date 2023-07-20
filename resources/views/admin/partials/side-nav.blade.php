@@ -69,9 +69,10 @@
                                  class="dot-icon">.</span><span>Running Events</span></a></li>
                      <li id="events_closed_events"><a href="{{ route('event.closed') }}"><span
                                  class="dot-icon">.</span><span>Closed Events</span></a></li>
-                     <li id="events_decision_taken_events"><a href="decision-taken-event.aspx"><span
+                     <li id="events_decision_taken_events"><a href="{{ route('event.decisionTaken') }}"><span
                                  class="dot-icon">.</span><span>Decision Taken Events</span></a></li>
-                     <li id="events_empty_events"><a href="empty-event.aspx"><span class="dot-icon">.</span><span>Empty
+                     <li id="events_empty_events"><a href="{{ route('event.empty') }}"><span
+                                 class="dot-icon">.</span><span>Empty
                                  Events</span></a></li>
                  </ul>
              </li>
@@ -83,11 +84,11 @@
                      </span>
                  </a>
                  <ul class="treeview-menu">
-                     <li id="reports_running_event_report"><a href="running-event-report.aspx"><span
+                     <li id="reports_running_event_report"><a href="{{ route('report.runningEvent') }}"><span
                                  class="dot-icon">.</span><span>Running Event Report</span></a></li>
-                     <li id="reports_closed_event_report"><a href="closed-event-report.aspx"><span
+                     <li id="reports_closed_event_report"><a href="{{ route('report.closedEvent') }}"><span
                                  class="dot-icon">.</span><span>Closed Event Report</span></a></li>
-                     <li id="reports_decision_taken_event_report"><a href="decision-taken-event-report.aspx"><span
+                     <li id="reports_decision_taken_event_report"><a href="{{ route('report.decisionTaken') }}"><span
                                  class="dot-icon">.</span><span>Decision Taken Event Report</span></a></li>
                  </ul>
              </li>
@@ -99,9 +100,10 @@
                      </span>
                  </a>
                  <ul class="treeview-menu">
-                     <li id="login_trail_employee_login_report"><a href="employee-login-report.aspx"><span
+                     <li id="login_trail_employee_login_report"><a
+                             href="{{ route('login-trails.employeeLogin') }}"><span
                                  class="dot-icon">.</span><span>Employee Login Report</span></a></li>
-                     <li id="login_trail_vendor_login_report"><a href="vendor-login-report.aspx"><span
+                     <li id="login_trail_vendor_login_report"><a href="{{ route('login-trails.vendorLogin') }}"><span
                                  class="dot-icon">.</span><span>Vendor Login Report</span></a></li>
                  </ul>
              </li>
@@ -113,7 +115,7 @@
                      </span>
                  </a>
                  <ul class="treeview-menu">
-                     <li id="notice_and_news_notice"><a href="notice-news.aspx"><span
+                     <li id="notice_and_news_notice"><a href="{{ route('notice.list') }}"><span
                                  class="dot-icon">.</span><span>Notice & News</span></a></li>
                  </ul>
              </li>
@@ -125,7 +127,8 @@
                      </span>
                  </a>
                  <ul class="treeview-menu">
-                     <li id="Li2"><a href="help-support.aspx"><span class="dot-icon">.</span><span>Help &
+                     <li id="Li2"><a href="{{ route('help.create') }}"><span
+                                 class="dot-icon">.</span><span>Help &
                                  Support</span></a></li>
                  </ul>
              </li>

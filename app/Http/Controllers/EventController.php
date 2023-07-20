@@ -138,6 +138,16 @@ class EventController extends BaseController
         $events = Event::where(['status' => EVENT_STATUS[2], 'company_id' => $this->company_id])->get();
         return view('admin.pages.event.closed', compact('events'));
     }
+    public function decisionTaken()
+    {
+        $events = Event::where(['status' => EVENT_STATUS[2], 'company_id' => $this->company_id])->get();
+        return view('admin.pages.event.decision-taken', compact('events'));
+    }
+    public function empty()
+    {
+        $events = Event::where(['status' => EVENT_STATUS[2], 'company_id' => $this->company_id])->get();
+        return view('admin.pages.event.empty', compact('events'));
+    }
 
 
     public function statistics($eId)
