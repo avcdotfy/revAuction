@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LoginTrail;
 use Illuminate\Http\Request;
 
 class LoginTrailController extends Controller
@@ -10,7 +11,8 @@ class LoginTrailController extends Controller
 
     function employeeLogin()
     {
-        return view('admin.pages.loginTrails.employee-login');
+        $logins = LoginTrail::all();
+        return view('admin.pages.loginTrails.employee-login', compact('logins'));
     }
     function vendorLogin()
     {

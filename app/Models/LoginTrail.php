@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class LoginTrail extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
 }

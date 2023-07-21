@@ -4,9 +4,7 @@
 @section('main_section')
     <section class="content-header">
         <h1>Home | Notice &amp; News <small id="ContentPlaceHolder1_hTag">Create</small></h1>
-        <ol class="breadcrumb">
-
-        </ol>
+       
     </section>
     <section class="content">
         @include('admin.partials.alerts')
@@ -46,8 +44,6 @@
                                 </div>
                             </form>
                         </div>
-
-
                     </div>
                     <!-- /.box-body -->
                 </div>

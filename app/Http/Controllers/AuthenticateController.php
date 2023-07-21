@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\LoginTrailHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -22,6 +23,7 @@ class AuthenticateController extends Controller
                 Auth::logout();
                 return redirect()->back()->withErrors('Unautherized access denied');
             } else {
+                LoginTrailHelper::saveLoginInfo();
                 return redirect()->route('admin-dashboard');
             }
         }
