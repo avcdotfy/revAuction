@@ -7,7 +7,7 @@ define('VENDOR_SIDE', 'Vendor Side');
 define('SCHEDULED', 'SCHEDULED');
 define('RUNNING', 'RUNNING');
 define('COMPLETED', 'COMPLETED');
-
+define('EVENT_ID_PREFIX', 'AVCDOTFYREVAUC000');
 define('EVENT_STATUS', ['SCHEDULED', 'RUNNING', 'COMPLETED', 'DEACTIVE']);
 
 define('PERMISSIONS', [
