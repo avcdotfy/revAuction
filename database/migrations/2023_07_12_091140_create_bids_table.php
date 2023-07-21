@@ -22,6 +22,7 @@ return new class extends Migration
             $t->foreignIdFor(Item::class);
             $t->foreignIdFor(Vendor::class);
             $t->foreignIdFor(ItemRPUModel::class);
+            $t->foreignIdFor(Region::class)->nullable();
             $t->double('bidding_price');
             $t->string('least_status');
             $t->timestamps();

@@ -5,17 +5,16 @@
     <section class="content-header">
         <h1>Home | Notice &amp; News <small id="ContentPlaceHolder1_hTag">List</small></h1>
         <ol class="breadcrumb">
-            <a href="notice-news.aspx?r=new" id="ContentPlaceHolder1_aCN" style="color: white"
+            <a href="{{ route('notice.create') }}" id="ContentPlaceHolder1_aCN" style="color: white"
                 class="btn-block btn-primary btn-sm">+ Create New Notice &amp; News</a>
         </ol>
     </section>
     <section class="content">
+        @include('admin.partials.alerts')
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">
-
-
                         <div id="ContentPlaceHolder1_div_list" class="row">
                             <div class="col-sm-12" style="overflow: auto;">
                                 <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
@@ -35,17 +34,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($notices as $key => $n)
+                                            <tr role="row" class="odd">
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $n->title }}</td>
+                                                <td><label class="label label-success" title="True"
+                                                        style="font-size:11px;font-weight:600;">Activated</label></td>
+                                                <td>{{ $n->created_at }}</td>
+                                                <td><a href="{{ route('notice.edit', $n->id) }}"><i class="fa fa-edit"></i>
+                                                        Edit</a></td>
+                                            </tr>
+                                        @endforeach
 
-                                        <tr role="row" class="odd">
-                                            <td>1</td>
-                                            <td> Leading player in the industry for our commitment to innovation and
-                                                exceptional customer satisfaction</td>
-                                            <td><label class="label label-success" title="True"
-                                                    style="font-size:11px;font-weight:600;">Activated</label></td>
-                                            <td>09-07-2023</td>
-                                            <td><a href="notice-news.aspx?r=mELirpUhRYksFj7k8/XBcQ=="><i
-                                                        class="fa fa-edit"></i> Edit</a></td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

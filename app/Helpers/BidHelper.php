@@ -74,4 +74,9 @@ class BidHelper
 
         return $item;
     }
+
+    public static function getNumberOfBidsOf($eId, $iId)
+    {
+        return  Bid::where(['event_id' => $eId, 'item_id' => $iId])->count();
+    }
 }

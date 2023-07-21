@@ -171,4 +171,11 @@ class EventController extends BaseController
         }
         return response()->json(['vendors' => $vendors, 'bidsGrupBy' => $bidGroupByVendorId]);
     }
+
+    public function postedEventInformation($eId)
+    {
+        $event = Event::find($eId);
+
+        return view('admin.pages.event.post-event-info', compact('event'));
+    }
 }

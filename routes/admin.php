@@ -154,13 +154,16 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('decision-taken', [EventController::class, 'decisionTaken'])->name('event.decisionTaken');
             Route::get('closed', [EventController::class, 'closed'])->name('event.closed');
             Route::get('empty', [EventController::class, 'empty'])->name('event.empty');
-            Route::get('view-posted-event-information', [EventController::class, 'postedEventInformation'])->name('event.postedEventInformation');
+            Route::get('view-posted-event-information/{eId}', [EventController::class, 'postedEventInformation'])->name('event.postedEventInformation');
         });
 
         Route::group(['prefix' => 'report'], function () {
             Route::get('running-event', [ReportController::class, 'runningEvent'])->name('report.runningEvent');
             Route::get('closed-event', [ReportController::class, 'closedEvent'])->name('report.closedEvent');
             Route::get('decision-taken', [ReportController::class, 'decisionTaken'])->name('report.decisionTaken');
+
+            Route::get('closed-event-consolidate-report/{eId}', [ReportController::class, 'closedEventConsolidateReport'])->name('report.closedEventConsolidateReport');
+            Route::get('closed-event-l1-report/{eId}', [ReportController::class, 'closedEvenL1Report'])->name('report.closedEvenL1Report');
         });
 
         Route::group(['prefix' => 'login-trails'], function () {
@@ -171,7 +174,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::group(['prefix' => 'notice-news'], function () {
             Route::get('', [NoticeController::class, 'index'])->name('notice.list');
             Route::get('create', [NoticeController::class, 'create'])->name('notice.create');
-            Route::post('create', [NoticeController::class, 'store'])->name('notice.store');
+            Route::post('store', [NoticeController::class, 'store'])->name('notice.store');
+            Route::get('edit/{id}', [NoticeController::class, 'edit'])->name('notice.edit');
+            Route::post('update', [NoticeController::class, 'update'])->name('notice.update');
         });
         Route::group(['prefix' => 'help-support'], function () {
             Route::get('create', [HelpsupportController::class, 'create'])->name('help.create');
