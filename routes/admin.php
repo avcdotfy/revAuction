@@ -160,6 +160,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::group(['prefix' => 'decision'], function () {
             Route::get('take-decision/{eId}', [DecisionController::class, 'index'])->name('decision.take');
+            Route::post('save-decision', [DecisionController::class, 'store'])->name('decision.store');
             // Route::get('create', [EventController::class, 'create'])->name('event.create');
         });
 

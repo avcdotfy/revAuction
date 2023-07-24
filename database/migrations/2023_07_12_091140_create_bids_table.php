@@ -25,6 +25,7 @@ return new class extends Migration
             $t->foreignIdFor(Region::class)->nullable();
             $t->double('bidding_price');
             $t->string('least_status');
+            $t->string('decision_status')->nullable();
             $t->timestamps();
         });
     }

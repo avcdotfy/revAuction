@@ -1,6 +1,6 @@
-@extends('admin.layout.base')
 
-@section('main_section')
+
+<?php $__env->startSection('main_section'); ?>
     <section class="content-header">
         <h1>Take Event Decision <small id="ContentPlaceHolder1_hTag">List</small>
         </h1>
@@ -8,7 +8,7 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-                @if ($bidders)
+                <?php if($bidders): ?>
                     <div class="box">
                         <div class="box-body">
                             <div class="row">
@@ -16,16 +16,16 @@
                                     <h5>
 
                                         <span id="ContentPlaceHolder1_lbl_event_title"
-                                            title="69">{{ $event->title }}</span>
+                                            title="69"><?php echo e($event->title); ?></span>
 
                                     </h5>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <form action="{{ route('decision.store') }}" method="post">
-                        @csrf
-                        <input type="hidden" name="event_id" value="{{ $event->id }}">
+                    <form action="<?php echo e(route('decision.store')); ?>" method="post">
+                        <?php echo csrf_field(); ?>
+                        <input type="hidden" name="event_id" value="<?php echo e($event->id); ?>">
                         <div id="ContentPlaceHolder1_div_auto_decision" class="box">
                             <div class="box-body">
                                 <div class="row">
@@ -58,9 +58,9 @@
                             </div>
                         </div>
 
-                        @foreach ($bidders as $key => $bidder)
-                            <input type="hidden" name="vendor[id][{{ $bidder->details->vendor->id }}]"
-                                value="{{ $bidder->details->vendor->id }}">
+                        <?php $__currentLoopData = $bidders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $bidder): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <input type="hidden" name="vendor[id][<?php echo e($bidder->details->vendor->id); ?>]"
+                                value="<?php echo e($bidder->details->vendor->id); ?>">
 
                             <div class="box box-default">
                                 <div class="box-header with-border" style="padding-bottom:0px;">
@@ -80,17 +80,17 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr style="background-color:ghostwhite">
-                                                        <td>{{ $key + 1 }}</td>
+                                                        <td><?php echo e($key + 1); ?></td>
                                                         <td>
                                                             <input id="ContentPlaceHolder1_lvVl_chvc_0" type="checkbox"
                                                                 name="">
                                                         </td>
                                                         <td><span
-                                                                id="ContentPlaceHolder1_lvVl_lbl_company_name_0">{{ $bidder->details->vendor->company_name }}</span>
+                                                                id="ContentPlaceHolder1_lvVl_lbl_company_name_0"><?php echo e($bidder->details->vendor->company_name); ?></span>
                                                         </td>
                                                         <td>
                                                             <span
-                                                                id="ContentPlaceHolder1_lvVl_lblusername_0">{{ $bidder->details->vendor->user->username }}</span>
+                                                                id="ContentPlaceHolder1_lvVl_lblusername_0"><?php echo e($bidder->details->vendor->user->username); ?></span>
                                                             <input type="hidden" name=""
                                                                 id="ContentPlaceHolder1_lvVl_hf_0" value="1">
                                                             <input type="hidden" name=""
@@ -98,11 +98,12 @@
                                                                 value="mithkumarsah@gmail.com">
                                                         </td>
                                                         <td><span
-                                                                id="ContentPlaceHolder1_lvVl_lblcmobile_0">{{ $bidder->details->vendor->user->phone }}</span>
+                                                                id="ContentPlaceHolder1_lvVl_lblcmobile_0"><?php echo e($bidder->details->vendor->user->phone); ?></span>
                                                         </td>
                                                         <td>
 
-                                                            {{ $bidder->details->vendor->user->email }}
+                                                            <?php echo e($bidder->details->vendor->user->email); ?>
+
                                                         </td>
                                                         <td>
                                                             <div class="box-tools">
@@ -121,7 +122,7 @@
                                     </div>
                                 </div>
                                 <!-- /.box-header -->
-                                {{-- {{ dd($bidder->items) }} --}}
+                                
 
                                 <div class="box-body" style="padding-top:0px;">
                                     <div class="row">
@@ -142,14 +143,14 @@
                                                         <th>Remarks</th>
                                                     </tr>
                                                 </thead>
-                                                @foreach ($bidder->items as $iKey => $obj)
-                                                    {{-- {{ dd($obj) }} --}}
+                                                <?php $__currentLoopData = $bidder->items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $iKey => $obj): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    
                                                     <input type="hidden"
-                                                        name="vendor[id][{{ $bidder->details->vendor->id }}][item_id]"
-                                                        value="{{ $obj->item_id }}">
+                                                        name="vendor[id][<?php echo e($bidder->details->vendor->id); ?>][item_id]"
+                                                        value="<?php echo e($obj->item_id); ?>">
                                                     <input type="hidden"
-                                                        name="vendor[id]{{ $bidder->details->vendor->id }}['bid_id']"
-                                                        value="{{ $obj->id }}">
+                                                        name="vendor[id]<?php echo e($bidder->details->vendor->id); ?>['bid_id']"
+                                                        value="<?php echo e($obj->id); ?>">
                                                     <tbody>
                                                         <tr style="background-color:ghostwhite">
                                                             <td style="display:none;">
@@ -159,31 +160,32 @@
 
                                                             </td>
                                                             <td><a id="">
-                                                                    <span>{{ $obj->item ? $obj->item->code : '' }}</span></a>
+                                                                    <span><?php echo e($obj->item ? $obj->item->code : ''); ?></span></a>
                                                             </td>
                                                             <td>
-                                                                <span>{{ $obj->item ? $obj->item->unit->name : '' }}</span>
+                                                                <span><?php echo e($obj->item ? $obj->item->unit->name : ''); ?></span>
                                                             </td>
                                                             <td>
-                                                                <span>{{ $obj->item ? $obj->item->regionPriceUnit->first()->region->name : '' }}</span>
+                                                                <span><?php echo e($obj->item ? $obj->item->regionPriceUnit->first()->region->name : ''); ?></span>
                                                             </td>
                                                             <td>
-                                                                <span>{{ $obj->item ? $obj->item->regionPriceUnit->first()->price : '' }}</span>
+                                                                <span><?php echo e($obj->item ? $obj->item->regionPriceUnit->first()->price : ''); ?></span>
                                                             </td>
                                                             <td>
-                                                                <span>{{ $obj->item ? $obj->item->regionPriceUnit->first()->item_unit : '' }}</span>
+                                                                <span><?php echo e($obj->item ? $obj->item->regionPriceUnit->first()->item_unit : ''); ?></span>
                                                             </td>
                                                             <td><span
-                                                                    class="leastStatus-{{ $obj->least_status == 'L1' ? $obj->least_status : 'L' }}">{{ $obj->least_status }}
+                                                                    class="leastStatus-<?php echo e($obj->least_status == 'L1' ? $obj->least_status : 'L'); ?>"><?php echo e($obj->least_status); ?>
+
                                                                 </span>
 
-                                                                <span>{{ $obj->bidding_price }}</span>
+                                                                <span><?php echo e($obj->bidding_price); ?></span>
                                                             </td>
                                                             <td style="width:8%;">
                                                                 <input
-                                                                    name="vendor[id][{{ $bidder->details->vendor->id }}][item_id][acceptQty]"
+                                                                    name="vendor[id][<?php echo e($bidder->details->vendor->id); ?>][item_id][acceptQty]"
                                                                     type="text"
-                                                                    value="{{ $obj->item ? $obj->item->regionPriceUnit->first()->item_unit : '' }}"
+                                                                    value="<?php echo e($obj->item ? $obj->item->regionPriceUnit->first()->item_unit : ''); ?>"
                                                                     id="ContentPlaceHolder1_lvVl_lvIl_0_txtQty_0"
                                                                     class="qty form-control"
                                                                     onkeypress="return isNumberKey(event)"
@@ -191,9 +193,9 @@
                                                             </td>
                                                             <td style="width:10%;">
                                                                 <input
-                                                                    name="vendor[id][{{ $bidder->details->vendor->id }}][item_id][acceptAmount]"
+                                                                    name="vendor[id][<?php echo e($bidder->details->vendor->id); ?>][item_id][acceptAmount]"
                                                                     type="text"
-                                                                    value="{{ $obj->item ? $obj->item->regionPriceUnit->first()->item_unit * $obj->item->regionPriceUnit->first()->price : '' }}"
+                                                                    value="<?php echo e($obj->item ? $obj->item->regionPriceUnit->first()->item_unit * $obj->item->regionPriceUnit->first()->price : ''); ?>"
                                                                     id="ContentPlaceHolder1_lvVl_lvIl_0_txtPrice_0"
                                                                     class="form-control"
                                                                     onkeypress="return isNumberKey(event)"
@@ -201,7 +203,7 @@
                                                             </td>
                                                             <td>
                                                                 <select
-                                                                    name="vendor[id][{{ $bidder->details->vendor->id }}][item_id][decision]"
+                                                                    name="vendor[id][<?php echo e($bidder->details->vendor->id); ?>][item_id][decision]"
                                                                     class="form-control">
                                                                     <option value="Pending">Select</option>
                                                                     <option value="Accepted">Accept</option>
@@ -210,11 +212,11 @@
                                                             </td>
                                                             <td>
                                                                 <input name="remark[]" type="text" maxlength="150"
-                                                                    class="remarks-{{ $obj->least_status == 'L1' ? $obj->least_status : 'L' }} form-control">
+                                                                    class="remarks-<?php echo e($obj->least_status == 'L1' ? $obj->least_status : 'L'); ?> form-control">
                                                             </td>
                                                         </tr>
                                                     </tbody>
-                                                @endforeach
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                             </table>
                                         </div>
@@ -223,7 +225,7 @@
                                 </div>
                                 <!-- /.box-body -->
                             </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                         <div id="ContentPlaceHolder1_div_btn" class="box">
                             <div class="box-body">
@@ -232,7 +234,7 @@
                                         <div class="col-sm-12" style="text-align:center;">
                                             <input type="submit" name="" value="Final Submit" id="submit_btn"
                                                 class="btn btn-sm btn-success">
-                                            <a href="{{ route('event.closed') }}" class="btn btn-sm btn-primary"
+                                            <a href="<?php echo e(route('event.closed')); ?>" class="btn btn-sm btn-primary"
                                                 style="color: White; margin-left: 4px">Back</a>
                                         </div>
                                     </div>
@@ -240,17 +242,17 @@
                             </div>
                         </div>
                     </form>
-                @else
+                <?php else: ?>
                     <span class="text-center">No Data found</span>
-                @endif
+                <?php endif; ?>
                 <!-- /.box -->
             </div>
             <!-- /.col -->
         </div>
     </section>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script>
         $(document).ready(function() {
             $('td').find(".leastStatus-L1").parent().parent().css({
@@ -271,4 +273,6 @@
 
         });
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('admin.layout.base', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\revAuction\resources\views/admin/pages/event/decision.blade.php ENDPATH**/ ?>
