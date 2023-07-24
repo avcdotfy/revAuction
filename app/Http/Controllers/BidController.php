@@ -30,15 +30,30 @@ class BidController extends Controller
             return redirect()->back()->with('error', 'Bidding price should be less than last bid price :' . $minBidAmount);
         } else {
             // event(new BidEvent());
+
+            $bids = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id])->orderBy('bidding_price', 'asc')->get();
+
+            // dd($bids);
+            if (count($bids) != 0) {
+                $leasStatusValue = 2;
+                foreach ($bids as $key => $bid) {
+                    // if ($key == 0) continue;
+                    $bid->update(['least_status' => 'L' . $leasStatusValue]);
+                    $leasStatusValue += 1;
+                }
+            }
+
             try {
                 $bid = Bid::create([
                     'event_id' => $req->event_id,
                     'item_id' => $req->item_id,
                     'item_r_p_u_model_id' => $req->item_rpu_id,
                     'bidding_price' => $req->bidding_price,
-                    'least_status' => '0',
+                    'least_status' => "L1",
                     'vendor_id' => Auth::user()->vendor->id
                 ]);
+
+
 
                 Auth::user()->vendor->bids()->attach($bid->id);
 

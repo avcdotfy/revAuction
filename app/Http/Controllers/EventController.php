@@ -84,7 +84,7 @@ class EventController extends BaseController
                 "item_ids" => $req->itemRpu
             ];
             EventInvitationHelper::inviteViaEmail($data);
-            return redirect()->route('event.list')->with('success', 'Event Created Successfully');
+            return redirect()->route('event.upcoming')->with('success', 'Event Created Successfully');
         } else {
             return redirect()->back()->with('error', 'Something Went Wrong');
         }

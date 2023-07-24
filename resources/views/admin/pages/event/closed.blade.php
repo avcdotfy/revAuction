@@ -49,18 +49,17 @@
                                                 <td> {{ 'AVCDOTFYREVAUC000' . $event->id }}</td>
                                                 <td>{{ $event->title }}</td>
 
-                                                <td><a
-                                                        href="view-posted-event-information.aspx?r=AfI07azv6nWhAj0qw/RJ5A==&amp;eT=kLkMeyff8/FYRoQs8uY1vA==">View
+                                                <td><a href="{{ route('event.postedEventInformation', $event->id) }}">View
                                                         Information</a></td>
 
                                                 <td><a id="ContentPlaceHolder1_lvCe_btn_generate_report_0"
-                                                        href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvCe$ctrl0$btn_generate_report','')">Generate
+                                                        href="{{ route('report.closedEventConsolidateReport', $event->id) }}">Generate
                                                         Report</a></td>
                                                 <td><a id="ContentPlaceHolder1_lvCe_btn_l1_generate_report_2"
-                                                        href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvCe$ctrl2$btn_l1_generate_report','')">Generate
+                                                        href="{{ route('report.closedEvenL1Report', $event->id) }}">Generate
                                                         Report</a></td>
-                                                <td><a href="take-event-decision.aspx?r=CLIrTXTdl+a2DIaNNlvA4g=="
-                                                        target="_blank">Take Decision</a></td>
+                                                <td><a href="{{ route('decision.take', $event->id) }}" target="_blank">Take
+                                                        Decision</a></td>
 
                                             </tr>
                                         @endforeach

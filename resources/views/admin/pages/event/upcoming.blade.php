@@ -9,11 +9,11 @@
     <!-- Main content -->
     <section class="content">
         <!-- Small boxes (Stat box) -->
+        @include('admin.partials.alerts')
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">
-
 
                         <div id="ContentPlaceHolder1_div_list" class="row">
                             <div class="col-sm-12">

@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ConfigurationController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\DecisionController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EventController;
@@ -156,6 +157,15 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('empty', [EventController::class, 'empty'])->name('event.empty');
             Route::get('view-posted-event-information/{eId}', [EventController::class, 'postedEventInformation'])->name('event.postedEventInformation');
         });
+
+        Route::group(['prefix' => 'decision'], function () {
+            Route::get('take-decision/{eId}', [DecisionController::class, 'index'])->name('decision.take');
+            // Route::get('create', [EventController::class, 'create'])->name('event.create');
+        });
+
+
+
+
 
         Route::group(['prefix' => 'report'], function () {
             Route::get('running-event', [ReportController::class, 'runningEvent'])->name('report.runningEvent');
