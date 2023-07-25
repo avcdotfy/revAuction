@@ -22,7 +22,7 @@
                                             style="font-size: 44px;"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Upcoming Event</span>
-                                        <span class="info-box-number">1</span>
+                                        <span class="info-box-number">{{ $upcomingEvents }}</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -34,7 +34,8 @@
                                             style="font-size: 44px;"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Running Event</span>
-                                        <span id="ContentPlaceHolder1_lbl_ReC" class="info-box-number">0</span>
+                                        <span id="ContentPlaceHolder1_lbl_ReC"
+                                            class="info-box-number">{{ $runningEvents }}</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -107,15 +108,15 @@
                         </h4>
                         <hr />
                         <!-- <div class="holder">
-            <ul id="ticker01">
-                    <li><span><img src="images/new.png" style="width: 30px"></span>
-                      <a href="#" style="color: #000">Event for [Steel] : Opening Date & Time - Thu 29-Jun-2023 09:00 AM and Closing Date & Time - Thu 29-Jun-2023 06:11 PM (Daily)</a></li>
+                        <ul id="ticker01">
+                                <li><span><img src="images/new.png" style="width: 30px"></span>
+                                  <a href="#" style="color: #000">Event for [Steel] : Opening Date & Time - Thu 29-Jun-2023 09:00 AM and Closing Date & Time - Thu 29-Jun-2023 06:11 PM (Daily)</a></li>
 
-                      <li><span><img src="images/new.png" style="width: 30px"></span>
-                      <a href="#" style="color: #000">Event for [Steel] : Opening Date & Time - Thu 29-Jun-2023 09:00 AM and Closing Date & Time - Thu 29-Jun-2023 06:11 PM (Daily)</a></li>
-                                    
-                          </ul>
-            </div> -->
+                                  <li><span><img src="images/new.png" style="width: 30px"></span>
+                                  <a href="#" style="color: #000">Event for [Steel] : Opening Date & Time - Thu 29-Jun-2023 09:00 AM and Closing Date & Time - Thu 29-Jun-2023 06:11 PM (Daily)</a></li>
+                                                
+                                      </ul>
+                        </div> -->
                         <h4 style="text-align: center;color: #5e5e5e; padding-top: 3em;">Currently No Events </h4>
 
                     </div>

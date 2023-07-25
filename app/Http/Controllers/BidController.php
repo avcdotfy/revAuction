@@ -38,7 +38,7 @@ class BidController extends Controller
                 $leasStatusValue = 2;
                 foreach ($bids as $key => $bid) {
                     // if ($key == 0) continue;
-                    $bid->update(['least_status' => 'L' . $leasStatusValue]);
+                    $bid->update(['least_status' =>  $leasStatusValue]);
                     $leasStatusValue += 1;
                 }
             }
@@ -49,7 +49,7 @@ class BidController extends Controller
                     'item_id' => $req->item_id,
                     'item_r_p_u_model_id' => $req->item_rpu_id,
                     'bidding_price' => $req->bidding_price,
-                    'least_status' => "L1",
+                    'least_status' => 1,
                     'vendor_id' => Auth::user()->vendor->id
                 ]);
 

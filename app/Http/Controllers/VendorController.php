@@ -41,8 +41,6 @@ class VendorController extends Controller
         return view('admin.pages.vendor.update-to-all');
     }
 
-
-
     function store(Request $req)
     {
         try {
@@ -100,7 +98,11 @@ class VendorController extends Controller
 
     function dashboard()
     {
-        return view('vendor.pages.dashboard');
+        $upcomingEvents = Event::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => EVENT_STATUS[0]])->get()->count();
+
+        $runningEvents = Event::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => EVENT_STATUS[1]])->get()->count();
+        
+        return view('vendor.pages.dashboard',  ['upcomingEvents' => $upcomingEvents,   'runningEvents' => $runningEvents,]);
     }
 
     function profile($id)

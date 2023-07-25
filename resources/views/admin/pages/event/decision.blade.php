@@ -155,7 +155,6 @@
                                                                 <input type="hidden" name=""
                                                                     id="ContentPlaceHolder1_lvVl_lvIl_0_hfId_0"
                                                                     value="242">
-
                                                             </td>
                                                             <td><a id="">
                                                                     <span>{{ $obj->item ? $obj->item->code : '' }}</span></a>

@@ -21,7 +21,7 @@ class DecisionController extends Controller
         foreach ($bidGroupByVendorId as $key => $value) {
             $bidder = new stdClass;
             $bidder->details = $value;
-            $bidder->items =  Bid::select("*", DB::raw('MAX(id) as id'), DB::raw('MIN(least_status) as least_status'), DB::raw('MIN(bidding_price) as bidding_price'))->orderBy('bidding_price', 'asc')->groupBy('item_id')->where(['event_id' => $eId,  'vendor_id' => $value->vendor_id, 'decision_status' => null])->get();
+            $bidder->items =  Bid::select("*", DB::raw('MAX(id) as id'), DB::raw('MIN(least_status) as least_status'), DB::raw('MIN(bidding_price) as bidding_price'))->orderBy('bidding_price', 'ASC')->groupBy('item_id')->where(['event_id' => $eId,  'vendor_id' => $value->vendor_id, 'decision_status' => null])->get();
             $bidders[] =  $bidder;
         }
         // dd($bidders);

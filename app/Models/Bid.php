@@ -25,4 +25,8 @@ class Bid extends Model
     {
         return $this->belongsTo(Item::class);
     }
+    public function getLeastStatusAttribute($value)
+    {
+        return "L" . $value;
+    }
 }

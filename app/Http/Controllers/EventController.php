@@ -146,7 +146,15 @@ class EventController extends BaseController
     public function empty()
     {
         $events = Event::where(['status' => EVENT_STATUS[2], 'company_id' => $this->company_id])->get();
-        return view('admin.pages.event.empty', compact('events'));
+
+        $eventsEmpty = [];
+        foreach ($events as $key => $ev) {
+            if (!Bid::where(['event_id' => $ev->id])->first()) {
+                $eventsEmpty[] = $ev;
+            }
+        }
+        // dd($eventsEmpty);
+        return view('admin.pages.event.empty', compact('eventsEmpty'));
     }
 
 
