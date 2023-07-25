@@ -11,6 +11,7 @@ use App\Models\Company;
 use App\Models\Country;
 use App\Models\Event;
 use App\Models\ItemRPUModel;
+use App\Models\Notice;
 use App\Models\Request as ModelsRequest;
 use App\Models\State;
 use App\Models\User;
@@ -101,7 +102,7 @@ class VendorController extends Controller
         $upcomingEvents = Event::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => EVENT_STATUS[0]])->get()->count();
 
         $runningEvents = Event::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => EVENT_STATUS[1]])->get()->count();
-        
+
         return view('vendor.pages.dashboard',  ['upcomingEvents' => $upcomingEvents,   'runningEvents' => $runningEvents,]);
     }
 
@@ -169,11 +170,13 @@ class VendorController extends Controller
 
     public function noticeNews()
     {
-        return view('vendor.pages.notice-news');
+        $notices = Notice::all();
+        return view('vendor.pages.notice-news', compact('notices'));
     }
-    public function detailNews()
+    public function detailNews($id)
     {
-        return view('vendor.pages.news-details');
+        $notice = Notice::find($id);
+        return view('vendor.pages.news-details', compact('notice'));
     }
 
     public function helpSupport()

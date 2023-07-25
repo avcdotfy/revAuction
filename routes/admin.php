@@ -165,9 +165,6 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
 
-
-
-
         Route::group(['prefix' => 'report'], function () {
             Route::get('running-event', [ReportController::class, 'runningEvent'])->name('report.runningEvent');
             Route::get('closed-event', [ReportController::class, 'closedEvent'])->name('report.closedEvent');
@@ -175,6 +172,9 @@ Route::group(['prefix' => 'admin'], function () {
 
             Route::get('closed-event-consolidate-report/{eId}', [ReportController::class, 'closedEventConsolidateReport'])->name('report.closedEventConsolidateReport');
             Route::get('closed-event-l1-report/{eId}', [ReportController::class, 'closedEvenL1Report'])->name('report.closedEvenL1Report');
+
+
+            Route::get('decision-taken-event-consolidate-report/{eId}', [ReportController::class, 'decisionTakenEventConsolidateReport'])->name('report.decisionTakenEventConsolidateReport');
         });
 
         Route::group(['prefix' => 'login-trails'], function () {

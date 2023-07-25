@@ -6,6 +6,7 @@ use App\Helpers\BidHelper;
 use App\Helpers\EventInvitationHelper;
 use App\Models\Bid;
 use App\Models\Category;
+use App\Models\Decision;
 use App\Models\Event;
 use App\Models\Eventmode;
 use App\Models\ItemRPUModel;
@@ -140,9 +141,11 @@ class EventController extends BaseController
     }
     public function decisionTaken()
     {
-        $events = Event::where(['status' => EVENT_STATUS[2], 'company_id' => $this->company_id])->get();
-        return view('admin.pages.event.decision-taken', compact('events'));
+        $bids = Bid::groupBy('event_id')->where('decision_status', 'Accepted')->get();
+        // dd($bids);
+        return view('admin.pages.event.decision-taken', compact('bids'));
     }
+
     public function empty()
     {
         $events = Event::where(['status' => EVENT_STATUS[2], 'company_id' => $this->company_id])->get();

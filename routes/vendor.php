@@ -28,7 +28,6 @@ Route::get(
 );
 Route::group(['middleware' => ['auth', CheckForVendor::class]], function () {
     Route::group(['prefix' => 'vendor'], function () {
-
         Route::get('dashboard', [VendorController::class, 'dashboard'])->name('vendor.dashboard');
         Route::get('upcomming-events', [VendorController::class, 'upCommingEvents'])->name('vendor.upcoming-events');
         Route::get('running-events', [VendorController::class, 'runningEvents'])->name('vendor.running-events');
@@ -43,7 +42,7 @@ Route::group(['middleware' => ['auth', CheckForVendor::class]], function () {
 
 
         Route::get('notice-news', [VendorController::class, 'noticeNews'])->name('vendor.notice-news');
-        Route::get('view-notice-news', [VendorController::class, 'detailNews'])->name('vendor.details-News');
+        Route::get('view-notice-news/{id}', [VendorController::class, 'detailNews'])->name('vendor.details-News');
 
         Route::get('help-support', [VendorController::class, 'helpSupport'])->name('vendor.help-support');
 
@@ -51,7 +50,6 @@ Route::group(['middleware' => ['auth', CheckForVendor::class]], function () {
         Route::group(['prefix' => 'auction'], function () {
             Route::get('live/{eventId}', [VendorController::class, 'liveAuction'])->name('vendor.liveAuction');
             Route::post('live-filter', [VendorController::class, 'liveAuctionFilterByRegion'])->name('vendor.filterLiveAuction');
-
             Route::post('submit-bid', [BidController::class, 'store'])->name('vendor.submit-bid');
             Route::post('live', [BidController::class, 'getLiveDataVendorSite'])->name('vendor.live-data');
         });

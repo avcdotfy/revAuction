@@ -39,4 +39,9 @@ class Event extends Model
     {
         return $this->belongsToMany(Region::class);
     }
+
+    public function decisions()
+    {
+        return $this->hasMany(Decision::class);
+    }
 }

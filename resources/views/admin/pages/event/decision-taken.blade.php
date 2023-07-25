@@ -126,136 +126,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($bids as $key => $bid)
+                                            <tr role="row" class="odd">
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>
+                                                    <a data-toggle="modal"
+                                                        href="#model_edit_1">{{ EVENT_ID_PREFIX . $bid->event->id }}</a>
+                                                </td>
+                                                <td> {{ $bid->event->title }} </td>
+                                                <td>
+                                                    <a href="{{ route('event.postedEventInformation', $bid->event->id) }}">View
+                                                        Information</a>
+                                                </td>
+                                                <td>
+                                                    <a
+                                                        href="{{ route('report.decisionTakenEventConsolidateReport', $bid->event->id) }} ">Download
+                                                        Report</a>
+                                                </td>
+                                                <td>
+                                                    <a href=" ">Download Report</a>
+                                                </td>
+                                                <td><a href="" target="_blank">View Status</a></td>
+                                            </tr>
+                                        @endforeach
 
-                                        <tr role="row" class="odd">
-                                            <td>1</td>
-                                            <td><a data-toggle="modal" href="#model_edit_1">ST021507202371</a>
-                                            </td>
-                                            <td>Event for [Steel] : Opening Date &amp; Time - Sat 15-Jul-2023 10:15
-                                                AM and Closing Date &amp; Time - Sat 15-Jul-2023 10:34 AM (Daily)
-                                            </td>
-                                            <td><a
-                                                    href="view-posted-event-information.aspx?r=AfI07azv6nWhAj0qw/RJ5A==&amp;eT=Xu+SLs7u54ea5dayzg7tGQ==">View
-                                                    Information</a></td>
-                                            <td><a id="ContentPlaceHolder1_lvDTe_btn_generate_report_0"
-                                                    href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvDTe$ctrl0$btn_generate_report','')">Download
-                                                    Report</a></td>
-                                            <td><a id="ContentPlaceHolder1_lvDTe_btn_l1_generate_report_0"
-                                                    href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvDTe$ctrl0$btn_l1_generate_report','')">Download
-                                                    Report</a></td>
-                                            <td><a href="view-decision-taken-event.aspx?r=AfI07azv6nWhAj0qw/RJ5A=="
-                                                    target="_blank">View Status</a></td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td>2</td>
-                                            <td><a data-toggle="modal" href="#model_edit_2">ST021407202368</a>
-                                            </td>
-                                            <td>Event for [Steel] : Opening Date &amp; Time - Fri 14-Jul-2023 11:36
-                                                AM and Closing Date &amp; Time - Mon 17-Jul-2023 06:12 PM (Daily)
-                                            </td>
-                                            <td><a
-                                                    href="view-posted-event-information.aspx?r=zkmnXSPZczYoUeu52uotXg==&amp;eT=Xu+SLs7u54ea5dayzg7tGQ==">View
-                                                    Information</a></td>
-                                            <td><a id="ContentPlaceHolder1_lvDTe_btn_generate_report_1"
-                                                    href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvDTe$ctrl1$btn_generate_report','')">Download
-                                                    Report</a></td>
-                                            <td><a id="ContentPlaceHolder1_lvDTe_btn_l1_generate_report_1"
-                                                    href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvDTe$ctrl1$btn_l1_generate_report','')">Download
-                                                    Report</a></td>
-                                            <td><a href="view-decision-taken-event.aspx?r=zkmnXSPZczYoUeu52uotXg=="
-                                                    target="_blank">View Status</a></td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td>3</td>
-                                            <td><a data-toggle="modal" href="#model_edit_3">ST021107202365</a>
-                                            </td>
-                                            <td>Event for [Steel] : Opening Date &amp; Time - Tue 11-Jul-2023 04:24
-                                                PM and Closing Date &amp; Time - Tue 11-Jul-2023 04:42 PM (Daily)
-                                            </td>
-                                            <td><a
-                                                    href="view-posted-event-information.aspx?r=0MswJ7K3Fk9sU9jfq22ecg==&amp;eT=Xu+SLs7u54ea5dayzg7tGQ==">View
-                                                    Information</a></td>
-                                            <td><a id="ContentPlaceHolder1_lvDTe_btn_generate_report_2"
-                                                    href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvDTe$ctrl2$btn_generate_report','')">Download
-                                                    Report</a></td>
-                                            <td><a id="ContentPlaceHolder1_lvDTe_btn_l1_generate_report_2"
-                                                    href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvDTe$ctrl2$btn_l1_generate_report','')">Download
-                                                    Report</a></td>
-                                            <td><a href="view-decision-taken-event.aspx?r=0MswJ7K3Fk9sU9jfq22ecg=="
-                                                    target="_blank">View Status</a></td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td>4</td>
-                                            <td><a data-toggle="modal" href="#model_edit_4">ST021105202316</a>
-                                            </td>
-                                            <td>Event for Steel : Opening Date &amp; Time 11-05-2023 10:30 AM (IST)
-                                                and Closing Date &amp; Time 11-05-2023 10:45 AM (IST)</td>
-                                            <td><a
-                                                    href="view-posted-event-information.aspx?r=WHYf4alVgNJY/X917pnZ3w==&amp;eT=Xu+SLs7u54ea5dayzg7tGQ==">View
-                                                    Information</a></td>
-                                            <td><a id="ContentPlaceHolder1_lvDTe_btn_generate_report_3"
-                                                    href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvDTe$ctrl3$btn_generate_report','')">Download
-                                                    Report</a></td>
-                                            <td><a id="ContentPlaceHolder1_lvDTe_btn_l1_generate_report_3"
-                                                    href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvDTe$ctrl3$btn_l1_generate_report','')">Download
-                                                    Report</a></td>
-                                            <td><a href="view-decision-taken-event.aspx?r=WHYf4alVgNJY/X917pnZ3w=="
-                                                    target="_blank">View Status</a></td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td>5</td>
-                                            <td><a data-toggle="modal" href="#model_edit_5">ST021105202315</a>
-                                            </td>
-                                            <td>Event for Steel : Opening Date &amp; Time 11-05-2023 08:08 AM (IST)
-                                                and Closing Date &amp; Time 11-05-2023 08:20 AM (IST)</td>
-                                            <td><a
-                                                    href="view-posted-event-information.aspx?r=EvsdnH+UlJpTVhFYh+i13g==&amp;eT=Xu+SLs7u54ea5dayzg7tGQ==">View
-                                                    Information</a></td>
-                                            <td><a id="ContentPlaceHolder1_lvDTe_btn_generate_report_4"
-                                                    href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvDTe$ctrl4$btn_generate_report','')">Download
-                                                    Report</a></td>
-                                            <td><a id="ContentPlaceHolder1_lvDTe_btn_l1_generate_report_4"
-                                                    href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvDTe$ctrl4$btn_l1_generate_report','')">Download
-                                                    Report</a></td>
-                                            <td><a href="view-decision-taken-event.aspx?r=EvsdnH+UlJpTVhFYh+i13g=="
-                                                    target="_blank">View Status</a></td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td>6</td>
-                                            <td><a data-toggle="modal" href="#model_edit_6">ST021005202312</a>
-                                            </td>
-                                            <td>Event for Steel : Opening Date &amp; Time 10-05-2023 05:24 PM (IST)
-                                                and Closing Date &amp; Time 10-05-2023 05:42 PM (IST)</td>
-                                            <td><a
-                                                    href="view-posted-event-information.aspx?r=5iI8NvAvmYV/ZdipUw3e0Q==&amp;eT=Xu+SLs7u54ea5dayzg7tGQ==">View
-                                                    Information</a></td>
-                                            <td><a id="ContentPlaceHolder1_lvDTe_btn_generate_report_5"
-                                                    href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvDTe$ctrl5$btn_generate_report','')">Download
-                                                    Report</a></td>
-                                            <td><a id="ContentPlaceHolder1_lvDTe_btn_l1_generate_report_5"
-                                                    href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvDTe$ctrl5$btn_l1_generate_report','')">Download
-                                                    Report</a></td>
-                                            <td><a href="view-decision-taken-event.aspx?r=5iI8NvAvmYV/ZdipUw3e0Q=="
-                                                    target="_blank">View Status</a></td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td>7</td>
-                                            <td><a data-toggle="modal" href="#model_edit_7">ST021005202311</a>
-                                            </td>
-                                            <td>Event for Steel : Opening Date &amp; Time 10-05-2023 04:48 PM (IST)
-                                                and Closing Date &amp; Time 11-05-2023 05:00 PM (IST)</td>
-                                            <td><a
-                                                    href="view-posted-event-information.aspx?r=mEzZBKPOkXLjMUDj1TaO/Q==&amp;eT=Xu+SLs7u54ea5dayzg7tGQ==">View
-                                                    Information</a></td>
-                                            <td><a id="ContentPlaceHolder1_lvDTe_btn_generate_report_6"
-                                                    href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvDTe$ctrl6$btn_generate_report','')">Download
-                                                    Report</a></td>
-                                            <td><a id="ContentPlaceHolder1_lvDTe_btn_l1_generate_report_6"
-                                                    href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lvDTe$ctrl6$btn_l1_generate_report','')">Download
-                                                    Report</a></td>
-                                            <td><a href="view-decision-taken-event.aspx?r=mEzZBKPOkXLjMUDj1TaO/Q=="
-                                                    target="_blank">View Status</a></td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

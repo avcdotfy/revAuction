@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\BidHelper;
+use App\Helpers\DecisionHelper;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -187,6 +188,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'BidHelper' => BidHelper::class,
+        'DHelper' => DecisionHelper::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 

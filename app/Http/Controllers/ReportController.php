@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ClosedEventConsolidateReport;
 use App\Exports\ClosedEventL1Report;
+use App\Exports\DecisionTakenEventConsolidateReport;
 use App\Models\Category;
 use App\Models\Event;
 use Illuminate\Http\Request;
@@ -44,8 +45,6 @@ class ReportController extends BaseController
     }
 
 
-
-
     //////////////////////////////////////////// Report Making ///////////////////////////////////////////////
 
     function closedEvenL1Report($eId)
@@ -56,5 +55,10 @@ class ReportController extends BaseController
     function closedEventConsolidateReport($eId)
     {
         return Excel::download(new ClosedEventConsolidateReport($eId), EVENT_ID_PREFIX . $eId . '_EVENT_REPORT_WD_.xlsx');
+    }
+
+    function decisionTakenEventConsolidateReport($eId)
+    {
+        return Excel::download(new DecisionTakenEventConsolidateReport($eId), EVENT_ID_PREFIX . $eId . '_DECISION_TAKEN_EVENT_REPORT_WD_.xlsx');
     }
 }
