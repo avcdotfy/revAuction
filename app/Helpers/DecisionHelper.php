@@ -11,4 +11,10 @@ class DecisionHelper
         $d = Decision::where(['item_id' => $item_id, 'vendor_id' => $vendor_id, 'event_id' => $event_id])->first();
         return $d;
     }
+
+    public static function getDecisionRowsFromVendorId($vendor_id, $event_id)
+    {
+        $d = Decision::where(['vendor_id' => $vendor_id, 'event_id' => $event_id])->get();
+        return $d;
+    }
 }

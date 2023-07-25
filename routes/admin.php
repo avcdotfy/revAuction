@@ -156,6 +156,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('closed', [EventController::class, 'closed'])->name('event.closed');
             Route::get('empty', [EventController::class, 'empty'])->name('event.empty');
             Route::get('view-posted-event-information/{eId}', [EventController::class, 'postedEventInformation'])->name('event.postedEventInformation');
+            Route::get('view-decision-taken-status/{eId}', [EventController::class, 'decisionTakenEventStatus'])->name('event.decisionTakenEventStatus');
         });
 
         Route::group(['prefix' => 'decision'], function () {
@@ -175,6 +176,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 
             Route::get('decision-taken-event-consolidate-report/{eId}', [ReportController::class, 'decisionTakenEventConsolidateReport'])->name('report.decisionTakenEventConsolidateReport');
+            Route::get('decision-taken-event-l1-report/{eId}', [ReportController::class, 'decisionTakenEvenL1Report'])->name('report.decisionTakenEvenL1Report');
         });
 
         Route::group(['prefix' => 'login-trails'], function () {

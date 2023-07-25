@@ -31,7 +31,7 @@
                 <td>{{ $bid->vendor->company_name }}</td>
                 <td>{{ $bid->vendor->user->username }}</td>
                 <td>{{ $bid->item->code }}</td>
-                <td>{{ $bid->item->unit }}</td>
+                <td>{{ $bid->item->unit->code }}</td>
                 <td>{{ $bid->item->regionPriceUnit->first()->region->name }}</td>
                 <td>{{ $bid->item->regionPriceUnit->first()->price }}</td>
                 <td>{{ $bid->item->regionPriceUnit->first()->item_unit }}</td>

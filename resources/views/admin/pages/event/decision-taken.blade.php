@@ -10,7 +10,6 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">
-
                         <div id="ContentPlaceHolder1_div_list" class="row">
                             <div class="col-sm-12" style="overflow: auto;">
                                 <div class="modal fade" id="model_edit_7">
@@ -131,7 +130,7 @@
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>
                                                     <a data-toggle="modal"
-                                                        href="#model_edit_1">{{ EVENT_ID_PREFIX . $bid->event->id }}</a>
+                                                        href="#model_edit_{{ $key }}">{{ EVENT_ID_PREFIX . $bid->event->id }}</a>
                                                 </td>
                                                 <td> {{ $bid->event->title }} </td>
                                                 <td>
@@ -144,10 +143,115 @@
                                                         Report</a>
                                                 </td>
                                                 <td>
-                                                    <a href=" ">Download Report</a>
+                                                    <a
+                                                        href="{{ route('report.decisionTakenEvenL1Report', $bid->event->id) }}">Download
+                                                        Report</a>
                                                 </td>
-                                                <td><a href="" target="_blank">View Status</a></td>
+                                                <td><a href="{{ route('event.decisionTakenEventStatus', $bid->event->id) }}"
+                                                        target="_blank">View Status</a></td>
                                             </tr>
+
+                                            <div class="modal fade" id="model_edit_{{ $key }}">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content" style="border-radius: 4px;">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">×</span></button>
+                                                            <h4 class="modal-title"
+                                                                style="font-weight: 600;text-align:center">Event Basic
+                                                                Information</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-xs-12">
+                                                                    <div class="box">
+                                                                        <div class="box-body">
+                                                                            <div class="col-sm-12">
+                                                                                <label for="inputEmail3"
+                                                                                    class="col-sm-4 control-label">Open
+                                                                                    Date &amp; Time : </label>
+                                                                                <div class="col-sm-8">
+                                                                                    <label>{{ $bid->event->opening_date }} -
+                                                                                        {{ $bid->event->opening_time }}</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-12">
+                                                                                <hr
+                                                                                    style="margin-top: 5px; margin-bottom: 5px;">
+                                                                            </div>
+                                                                            <div class="col-sm-12">
+                                                                                <label for="inputEmail3"
+                                                                                    class="col-sm-4 control-label">Close
+                                                                                    Date &amp; Time : </label>
+                                                                                <div class="col-sm-8">
+                                                                                    <label>{{ $bid->event->closing_date }}
+                                                                                        -
+                                                                                        {{ $bid->event->closing_time }}</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-12">
+                                                                                <hr
+                                                                                    style="margin-top: 5px; margin-bottom: 5px;">
+                                                                            </div>
+                                                                            <div class="col-sm-12">
+                                                                                <label for="inputEmail3"
+                                                                                    class="col-sm-4 control-label">Created
+                                                                                    By : </label>
+                                                                                <div class="col-sm-8">
+                                                                                    <label>{{ $bid->event->user->name }}</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-12">
+                                                                                <hr
+                                                                                    style="margin-top: 5px; margin-bottom: 5px;">
+                                                                            </div>
+                                                                            <div class="col-sm-12">
+                                                                                <label for="inputEmail3"
+                                                                                    class="col-sm-4 control-label">Created
+                                                                                    Date : </label>
+                                                                                <div class="col-sm-8">
+                                                                                    <label>{{ $bid->event->created_at }}</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-12" style="display:none">
+                                                                                <hr
+                                                                                    style="margin-top: 5px; margin-bottom: 5px;">
+                                                                            </div>
+                                                                            <div class="col-sm-12" style="display:none">
+                                                                                <label for="inputEmail3"
+                                                                                    class="col-sm-4 control-label">Updated
+                                                                                    By : </label>
+                                                                                <div class="col-sm-8">
+                                                                                    <label></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-12" style="display:none">
+                                                                                <hr
+                                                                                    style="margin-top: 5px; margin-bottom: 5px;">
+                                                                            </div>
+                                                                            <div class="col-sm-12" style="display:none">
+                                                                                <label for="inputEmail3"
+                                                                                    class="col-sm-4 control-label">Updated
+                                                                                    Date : </label>
+                                                                                <div class="col-sm-8">
+                                                                                    <label>14-07-2023 11:35:41 AM</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <div class="col-sm-12">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.modal-content -->
+                                                </div>
+                                                <!-- /.modal-dialog -->
+                                            </div>
                                         @endforeach
 
                                     </tbody>

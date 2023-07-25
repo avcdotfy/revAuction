@@ -15,4 +15,19 @@ class Decision extends Model
     {
         return $this->belongsTo(Event::class);
     }
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
+
+    public function bid()
+    {
+        return $this->belongsTo(Bid::class);
+    }
 }

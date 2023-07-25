@@ -160,7 +160,6 @@ class EventController extends BaseController
         return view('admin.pages.event.empty', compact('eventsEmpty'));
     }
 
-
     public function statistics($eId)
     {
         $event = BidHelper::getBidStatistics($eId)[0];
@@ -188,5 +187,14 @@ class EventController extends BaseController
         $event = Event::find($eId);
 
         return view('admin.pages.event.post-event-info', compact('event'));
+    }
+
+
+    public function decisionTakenEventStatus($eId)
+    {
+        $decisions = Decision::groupBy('vendor_id')->where('event_id', $eId)->orderBy('bid_id', 'desc')->get();
+        // echo json_encode($decisions);
+        // dd('');
+        return view('admin.pages.event.view-decision-taken-event', compact('decisions'));
     }
 }
