@@ -14,7 +14,6 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h5>
-
                                         <span id="ContentPlaceHolder1_lbl_event_title"
                                             title="69">{{ $event->title }}</span>
 
@@ -59,7 +58,7 @@
                         </div>
 
                         @foreach ($bidders as $key => $bidder)
-                            <input type="hidden" name="vendor[id][{{ $bidder->details->vendor->id }}]"
+                            <input type="hidden" name="vendor[{{ $key }}][id]{{ $bidder->details->vendor->id }}"
                                 value="{{ $bidder->details->vendor->id }}">
 
                             <div class="box box-default">
@@ -145,10 +144,10 @@
                                                 @foreach ($bidder->items as $iKey => $obj)
                                                     {{-- {{ dd($obj) }} --}}
                                                     <input type="hidden"
-                                                        name="vendor[id][{{ $bidder->details->vendor->id }}][item_id]"
+                                                        name="vendor[{{ $key }}][item][{{ $iKey }}][id]"
                                                         value="{{ $obj->item_id }}">
-                                                    <input type="hidden"
-                                                        name="vendor[id]{{ $bidder->details->vendor->id }}['bid_id']"
+                                                    <input type="text"
+                                                        name="vendor[{{ $key }}][item][{{ $iKey }}][bid_id]"
                                                         value="{{ $obj->id }}">
                                                     <tbody>
                                                         <tr style="background-color:ghostwhite">
@@ -181,7 +180,7 @@
                                                             </td>
                                                             <td style="width:8%;">
                                                                 <input
-                                                                    name="vendor[id][{{ $bidder->details->vendor->id }}][item_id][acceptQty]"
+                                                                    name="vendor[{{ $key }}][item][{{ $iKey }}][acceptQty]"
                                                                     type="text"
                                                                     value="{{ $obj->item ? $obj->item->regionPriceUnit->first()->item_unit : '' }}"
                                                                     id="ContentPlaceHolder1_lvVl_lvIl_0_txtQty_0"
@@ -191,7 +190,7 @@
                                                             </td>
                                                             <td style="width:10%;">
                                                                 <input
-                                                                    name="vendor[id][{{ $bidder->details->vendor->id }}][item_id][acceptAmount]"
+                                                                    name="vendor[{{ $key }}][item][{{ $iKey }}][acceptAmount]"
                                                                     type="text"
                                                                     value="{{ $obj->item ? $obj->item->regionPriceUnit->first()->item_unit * $obj->item->regionPriceUnit->first()->price : '' }}"
                                                                     id="ContentPlaceHolder1_lvVl_lvIl_0_txtPrice_0"
@@ -201,7 +200,7 @@
                                                             </td>
                                                             <td>
                                                                 <select
-                                                                    name="vendor[id][{{ $bidder->details->vendor->id }}][item_id][decision]"
+                                                                    name="vendor[{{ $key }}][item][{{ $iKey }}][decision]"
                                                                     class="form-control">
                                                                     <option value="Pending">Select</option>
                                                                     <option value="Accepted">Accept</option>
@@ -209,7 +208,9 @@
                                                                 </select>
                                                             </td>
                                                             <td>
-                                                                <input name="remark[]" type="text" maxlength="150"
+                                                                <input
+                                                                    name="vendor[{{ $key }}][item][{{ $iKey }}][remark]"
+                                                                    type="text" maxlength="150"
                                                                     class="remarks-{{ $obj->least_status == 'L1' ? $obj->least_status : 'L' }} form-control">
                                                             </td>
                                                         </tr>

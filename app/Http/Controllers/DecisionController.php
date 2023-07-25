@@ -21,36 +21,42 @@ class DecisionController extends Controller
         foreach ($bidGroupByVendorId as $key => $value) {
             $bidder = new stdClass;
             $bidder->details = $value;
-
-            // $bidder->items =  Bid::select('*', DB::raw('MIN(bidding_price) as bidding_price'))->groupBy('item_id')->where(['event_id' => $eId,  'vendor_id' => $value->vendor_id])->orderBy('bidding_price' , 'asc')->get();
-
-            $bidder->items =  Bid::select("*", DB::raw('MIN(least_status) as least_status'), DB::raw('MIN(bidding_price) as bidding_price'))->orderBy('bidding_price', 'asc')->groupBy('item_id')->where(['event_id' => $eId,  'vendor_id' => $value->vendor_id])->get();
-
-            // dd($bidder->items[0]->item);
+            $bidder->items =  Bid::select("*", DB::raw('MAX(id) as id'), DB::raw('MIN(least_status) as least_status'), DB::raw('MIN(bidding_price) as bidding_price'))->orderBy('bidding_price', 'asc')->groupBy('item_id')->where(['event_id' => $eId,  'vendor_id' => $value->vendor_id, 'decision_status' => null])->get();
             $bidders[] =  $bidder;
         }
         // dd($bidders);
+        // dd($bidders[1]->items[0]);
         return view('admin.pages.event.decision', compact('bidders', 'event'));
     }
 
     function store(Request $r)
     {
-        dd($r->all());
+        foreach ($r->vendor as $ukey => $v) {
+            // dd($v['item']);
+            foreach ($v['item'] as $lkey => $itm) {
+                if ($itm['decision'] == 'Accepted') {
+                    $d = Decision::create([
+                        'event_id' => $r->event_id,
+                        'vendor_id' => $v['id'],
+                        'item_id' => $itm['id'],
+                        'bid_id' => $itm['bid_id'],
+                        'remarks' => $itm['remark'],
+                        'accepted_qty' => $itm['acceptQty'],
+                        'accepted_amount' => $itm['acceptAmount'],
+                        'decision_status' => $itm['decision'],
+                    ]);
 
-       
+                    if ($d instanceof Decision) {
+                        $bid = Bid::find($itm['bid_id'])->update([
+                            'decision_status' => $itm['decision'],
+                        ]);
 
-         
-                // $d = Decision::create([
-                //     'event_id'=> $r->event_id  ,
-                //     'vendor_id'=> $vid  ,
-                //     'item_id'=>$iId  ,
-                //     'bid_id'=>$r->   ,
-                //     'remarks'=>$r->   ,
-                //     'accepted_qty'=>$r->   ,
-                //     'accepted_amount'=>$r->   ,
-                //     'decision_status'=>$r->   ,
-                // ])
-            
-       
+                        if ($bid) {
+                            return redirect()->route('event.closed')->with('success', 'decision has been stored successfully');
+                        }
+                    }
+                }
+            }
+        }
     }
 }

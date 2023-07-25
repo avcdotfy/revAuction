@@ -9,6 +9,7 @@
     </section>
     <!-- Main content -->
     <section class="content">
+        @include('admin.partials.alerts')
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-xs-12">

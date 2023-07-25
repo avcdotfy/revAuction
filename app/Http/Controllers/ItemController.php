@@ -73,7 +73,6 @@ class ItemController extends BaseController
                 'company_id' => $this->company_id
             ]);
         }
-
         return redirect()->route('item.list')->with('success', 'item has been created');
     }
 
