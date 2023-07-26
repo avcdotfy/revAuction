@@ -39,13 +39,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @php
-                                                $i = 1;
-                                            @endphp
+
                                             @foreach ($events as $key => $event)
                                                 @if ($event->status == 'RUNNING')
                                                     <tr>
-                                                        <td>{{ $i }}</td>
+                                                        <td>{{ $key + 1 }}</td>
                                                         <td> <a href="">{{ $event->id }} </a></td>
 
                                                         <td>
@@ -56,9 +54,6 @@
                                                                 now</a>
                                                         </td>
                                                     </tr>
-                                                    @php
-                                                        $i = $i + 1;
-                                                    @endphp
                                                 @endif
                                             @endforeach
 

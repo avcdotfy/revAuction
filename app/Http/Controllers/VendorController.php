@@ -140,32 +140,10 @@ class VendorController extends Controller
         $events =  Auth::user()->vendor->events;
         return view('vendor.pages.running-events', compact('events'));
     }
-    public function participatedEvents()
-    {
-        return view('vendor.pages.participated-events');
-    }
-    public function participatedEventsStatus()
-    {
-        return view('vendor.pages.participated-event-status');
-    }
-
-    public function participatedEventItemList()
-    {
-        return view('vendor.pages.participate-events-item-list');
-    }
 
     public function postedEventInfo()
     {
         return view('vendor.pages.post-event-info');
-    }
-
-    public function participatedEventReports()
-    {
-        return view('vendor.pages.participated-events-reports');
-    }
-    public function participatedEventStatusReports()
-    {
-        return view('vendor.pages.participated-events-status-report');
     }
 
     public function noticeNews()

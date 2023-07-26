@@ -32,6 +32,7 @@ return new class extends Migration
             $t->foreignIdFor(User::class)->comment('creator id');
             $t->foreignIdFor(Company::class)->comment('company creator id');
             $t->enum('status', EVENT_STATUS)->default(EVENT_STATUS[0]);
+            $t->enum('decision_status', ['PENDING', 'TAKEN'])->default('PENDING');
             $t->timestamps();
         });
     }

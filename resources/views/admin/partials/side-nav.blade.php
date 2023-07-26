@@ -48,8 +48,8 @@
                                  class="dot-icon">.</span><span>Approved Vendor</span></a></li>
                      <li id="vendors_rejected_vendor"><a href="{{ route('vendor.rejected_requests') }}"><span
                                  class="dot-icon">.</span><span>Rejected Vendor</span></a></li>
-                     <li id="vendors_new_items_update_to_all"><a href="{{ route('vendor.updateToAll') }}"><span
-                                 class="dot-icon">.</span><span>New Items Update To All</span></a></li>
+                     {{-- <li id="vendors_new_items_update_to_all"><a href="{{ route('vendor.updateToAll') }}"><span
+                                 class="dot-icon">.</span><span>New Items Update To All</span></a></li> --}}
                  </ul>
              </li>
              <li id="li_events" class="treeview">

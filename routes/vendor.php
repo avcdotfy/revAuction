@@ -4,6 +4,7 @@ use App\Helpers\BidHelper;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\VendorController;
 use App\Http\Middleware\CheckForVendor;
 use Illuminate\Http\Request;
@@ -31,14 +32,16 @@ Route::group(['middleware' => ['auth', CheckForVendor::class]], function () {
         Route::get('dashboard', [VendorController::class, 'dashboard'])->name('vendor.dashboard');
         Route::get('upcomming-events', [VendorController::class, 'upCommingEvents'])->name('vendor.upcoming-events');
         Route::get('running-events', [VendorController::class, 'runningEvents'])->name('vendor.running-events');
-        Route::get('participated-events', [VendorController::class, 'participatedEvents'])->name('vendor.participated-events');
-        Route::get('participated-events-status', [VendorController::class, 'participatedEventsStatus'])->name('vendor.participated-events-status');
 
-        Route::get('participated-event-item-list', [VendorController::class, 'participatedEventItemList'])->name('vendor.participated-event-item-list');
+        Route::get('participated-events', [ParticipantController::class, 'getParticipatedEvents'])->name('vendor.participated-events');
+        Route::get('participated-events-status', [ParticipantController::class, 'getParticipatedEventsStatus'])->name('vendor.participated-events-status');
+        Route::get('participated-event-item-list/{eid}', [ParticipantController::class, 'getParticipatedEventItemList'])->name('vendor.participated-event-item-list');
+        Route::get('participated-event-item-status-list/{eid}', [ParticipantController::class, 'getParticipatedEventItemStatusList'])->name('vendor.participated-event-item-status-list');
+
         Route::get('posted-event-info', [VendorController::class, 'postedEventInfo'])->name('vendor.posted-event-info');
 
-        Route::get('participated-event-reports', [VendorController::class, 'participatedEventReports'])->name('vendor.participated-event-reports');
-        Route::get('participated-event-status-reports', [VendorController::class, 'participatedEventStatusReports'])->name('vendor.participated-event-status-reports');
+        Route::get('participated-event-reports', [ParticipantController::class, 'participatedEventReports'])->name('vendor.participated-event-reports');
+        Route::get('participated-event-status-reports', [ParticipantController::class, 'participatedEventStatusReports'])->name('vendor.participated-event-status-reports');
 
 
         Route::get('notice-news', [VendorController::class, 'noticeNews'])->name('vendor.notice-news');

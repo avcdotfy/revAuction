@@ -6,6 +6,7 @@ use App\Exports\ClosedEventConsolidateReport;
 use App\Exports\ClosedEventL1Report;
 use App\Exports\DecisionTakenEventConsolidateReport;
 use App\Exports\DecisionTakenEventL1Report;
+use App\Models\Bid;
 use App\Models\Category;
 use App\Models\Event;
 use Illuminate\Http\Request;
@@ -42,7 +43,8 @@ class ReportController extends BaseController
     }
     function decisionTaken()
     {
-        return view('admin.pages.report.decision-taken');
+        $bids = Bid::groupBy('event_id')->where('decision_status', 'Accepted')->get();
+        return view('admin.pages.report.decision-taken', compact('bids'));
     }
 
 

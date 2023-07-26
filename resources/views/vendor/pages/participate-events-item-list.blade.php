@@ -15,10 +15,8 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h5><span id="ContentPlaceHolder1_lbltitle" title="58">Event for [Steel] : Opening Date
-                                        &amp; Time - Sun 09-Jul-2023 08:18 PM and Closing Date &amp; Time - Sun 09-Jul-2023
-                                        09:01 PM (Daily)</span>
-
+                                <h5><span id="ContentPlaceHolder1_lbltitle"
+                                        title="58">{{ $participates->first()->event->title }}</span>
                                 </h5>
                                 <hr>
                                 <div class="col-sm-6" style="padding:0px;">
@@ -28,91 +26,47 @@
                                     <select name="ctl00$ContentPlaceHolder1$ddl_region_list"
                                         id="ContentPlaceHolder1_ddl_region_list">
                                         <option selected="selected" value="PAN India">PAN India</option>
-
                                     </select></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12" style="overflow: auto;">
                                 <hr style="margin-top:5px;margin-bottom:5px;">
-                                <div id="dtable_wrapper" class="dataTables_wrapper no-footer">
-                                    <div class="dataTables_length col-lg-9" id="dtable_length"
-                                        style="padding-left: 0px;padding-right: 0px;margin-bottom: 10px;">
-                                        <label>Show <select name="dtable_length" aria-controls="dtable" class="">
-                                                <option value="10">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select> entries</label>
-                                    </div>
-                                    <div class="dataTables_filter col-lg-3">
-                                        <input type="text" placeholder="Search"
-                                            style="border: 1px solid #747474;font-size: 11px;padding: 5px;border-radius: 2px;width: 100%;"
-                                            name="">
-                                    </div>
-
-
-                                    <table class="table table-bordered table-striped dataTable no-footer" role="grid"
-                                        aria-describedby="dtable_info">
-                                        <thead>
-                                            <tr role="row">
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 29.6771px;">S.No.</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 170.083px;">Item Code & Description</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 60.969px;">UoM</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 121.271px;">Quantity</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 60.969px;">Base Price </th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 121.271px;">Item Status & Last Bidding Price</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 80.271px;">Capping Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-
-
+                                <table class="table table-bordered table-striped dataTable no-footer" role="grid"
+                                    aria-describedby="dtable_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 29.6771px;">S.No.</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 170.083px;">Item Code & Description</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 60.969px;">UoM</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 121.271px;">Quantity</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 60.969px;">Base Price </th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 121.271px;">Item Status & Last Bidding Price</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 80.271px;">Capping Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($participates as $key => $p)
                                             <tr role="row" class="odd">
-                                                <td>1</td>
-
-                                                <td>Stainless steel 125M (S01)</td>
-                                                <td>Ton</td>
-                                                <td>5 Unit | 1 Unit = 1 Ton</td>
-                                                <td>25000.00</td>
-
-                                                <td>L2 & 24900.00</td>
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $p->item->code . ' | ' . $p->item->description }}</td>
+                                                <td>{{ $p->item->unit->code }}</td>
+                                                <td>{{ $p->item->regionPriceUnit->first()->item_unit }}</td>
+                                                <td>{{ $p->item->regionPriceUnit->first()->price }}</td>
+                                                <td>{{ BidHelper::getLastBidderPrice($p->event_id, $p->item_id)->least_status . ' & ' . BidHelper::getLastBidderPrice($p->event_id, $p->item_id)->bidding_price }}
+                                                </td>
                                                 <td></td>
                                             </tr>
-
-
-
-
-                                        </tbody>
-                                    </table>
-
-                                    <div class="col-lg-12 " style="padding-left: 0px; padding-right: 0px">
-                                        <p class="col-lg-6" style="text-align: left;padding-left: 8px; line-height: 30px">
-                                            Showing 1 to 4 of 4 entries</p>
-                                        <div class="col-lg-6" style="text-align: right;">
-                                            <div class="pagination " style="margin: 0px 0; ">
-                                                <!--  <a href="#">&laquo;</a> -->
-                                                <a href="#">Prev</a>
-                                                <a class="active" href="#">1</a>
-                                                <a href="#">Next</a>
-                                                <!-- <a href="#">4</a>
-                  <a href="#">5</a>
-                  <a href="#">6</a> -->
-                                                <!-- <a href="#">&raquo;</a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                </div>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <div class="row">
@@ -142,8 +96,8 @@
                                                 working days of the bid acceptance which will be adjusted against your last
                                                 lifting of the respective lot</span><span style="font-size: 10pt;"></span>
                                         </li>
-                                        <li class="MsoNormal" style=" line-height: normal;"><span
-                                                style="color: red;">Stock quantity material payment to be deposited
+                                        <li class="MsoNormal" style=" line-height: normal;"><span style="color: red;">Stock
+                                                quantity material payment to be deposited
                                                 within&nbsp;2 working days of acceptance of your bid</span><span
                                                 style="font-size: 10pt;"></span></li>
                                         <li class="MsoNormal" style=" line-height: normal;"><span

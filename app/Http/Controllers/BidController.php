@@ -8,6 +8,7 @@ use App\Helpers\EventHelper;
 use App\Helpers\ItemHelper;
 use App\Models\Bid;
 use App\Models\Item;
+use App\Models\Participant;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -52,8 +53,6 @@ class BidController extends Controller
                     'least_status' => 1,
                     'vendor_id' => Auth::user()->vendor->id
                 ]);
-
-
 
                 Auth::user()->vendor->bids()->attach($bid->id);
 
