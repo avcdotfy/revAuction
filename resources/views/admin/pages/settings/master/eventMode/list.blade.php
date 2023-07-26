@@ -50,7 +50,8 @@
                                                         class="label {{ $ev->is_active ? 'label-success' : 'label-danger' }}"
                                                         style="font-size: 11px; font-weight: 600;text-transform:capitalize;">{{ $ev->is_active ? 'Active' : 'Deactive' }}</label>
                                                 </td>
-                                                <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
+                                                <td><a href="{{ route('eventmode.edit', $ev->id) }}"><i
+                                                            class="fa fa-edit"></i> Edit</a></td>
                                             </tr>
                                         @endforeach
                                     </tbody>

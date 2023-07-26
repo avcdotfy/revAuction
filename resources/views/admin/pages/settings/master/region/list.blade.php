@@ -61,7 +61,8 @@
                                                         style="font-size: 11px; font-weight: 600;text-transform:capitalize;">
                                                         {{ $region->is_active ? 'Active' : 'Deative' }}
                                                 </td>
-                                                <td class="sorting_1"><a href="#"><i class="fa fa-edit"></i>
+                                                <td class="sorting_1"><a href="{{ route('region.edit', $region->id) }}"><i
+                                                            class="fa fa-edit"></i>
                                                         Edit</a></td>
                                             </tr>
                                         @endforeach

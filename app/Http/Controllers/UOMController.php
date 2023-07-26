@@ -15,15 +15,32 @@ class UOMController extends Controller
     }
     function create()
     {
-        return view('admin.pages.settings.master.uom.create');
+        $uom = null;
+        return view('admin.pages.settings.master.uom.create', compact('uom'));
     }
     function store(Request $req)
     {
-        $reg = UnitOfMeasure::create(array_merge($req->all(), ['user_id' => Auth::user()->id]));
-        if ($reg instanceof UnitOfMeasure) {
+        $uom = UnitOfMeasure::create(array_merge($req->all(), ['user_id' => Auth::user()->id]));
+        if ($uom instanceof UnitOfMeasure) {
             return redirect()->route('uom.list')->with('success', 'UOM Created Successfully');
         } else {
             return redirect()->back()->with('error', 'UOM Creation failed')->withInput();
+        }
+    }
+
+    function edit($id)
+    {
+        $uom = UnitOfMeasure::find($id);
+        return view('admin.pages.settings.master.uom.edit', compact('uom'));
+    }
+
+    function update(Request $req)
+    {
+        $uom = UnitOfMeasure::find($req->id)->update(array_merge($req->all(), ['user_id' => Auth::user()->id]));
+        if ($uom) {
+            return redirect()->route('uom.list')->with('success', 'UOM updated Successfully');
+        } else {
+            return redirect()->back()->with('error', 'UOM update failed')->withInput();
         }
     }
 }

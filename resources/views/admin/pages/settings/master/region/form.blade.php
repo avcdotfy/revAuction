@@ -6,8 +6,9 @@
             <span id="ContentPlaceHolder1_RequiredFieldValidator3"
                 style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter
                 Region Name</span>
-            <input name="name" type="text" value="{{ old('name') }}" class="form-control"
-                placeholder="Enter Region Name">
+            <input type="hidden" name="id" value="{{ $region ? $region->id : '' }}">
+            <input name="name" type="text" value="{{ $region ? $region->name : old('name') }}"
+                class="form-control" placeholder="Enter Region Name">
         </div>
     </div>
 </div>
@@ -19,7 +20,7 @@
             <span id="ContentPlaceHolder1_RequiredFieldValidator1"
                 style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter
                 Region Message</span>
-            <textarea rows="2" cols="20" name="description" class="form-control" placeholder="Enter Region Message">{{ old('description') }}</textarea>
+            <textarea rows="2" cols="20" name="description" class="form-control" placeholder="Enter Region Message">{{ $region ? $region->description : old('description') }}</textarea>
         </div>
     </div>
 </div>
@@ -29,8 +30,8 @@
                 style="color: red; font-size: 13px;">*</span></label>
         <div class="col-sm-12">
             <select class="form-control" name="is_alert">
-                <option value=0>No</option>
-                <option value=1>Yes</option>
+                <option value=0 {{ $region ? ($region->is_alert == 0 ? 'selected' : '') : '' }}>No</option>
+                <option value=1 {{ $region ? ($region->is_alert == 1 ? 'selected' : '') : '' }}>Yes</option>
 
             </select>
         </div>
@@ -40,8 +41,8 @@
                 style="color: red; font-size: 13px;">*</span></label>
         <div class="col-sm-12">
             <select class="form-control" name="is_active">
-                <option value="1">Activate</option>
-                <option value="0">Deactivate</option>
+                <option value=1 {{ $region ? ($region->is_active == 0 ? 'selected' : '') : '' }}>Activate</option>
+                <option value=0 {{ $region ? ($region->is_active == 0 ? 'selected' : '') : '' }}>Deactivate</option>
 
             </select>
         </div>

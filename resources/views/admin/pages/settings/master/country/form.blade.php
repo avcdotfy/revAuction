@@ -2,10 +2,13 @@
     <label for="inputPassword3" class="col-sm-12 control-label">Country name <span
             style="color: red; font-size: 13px">*</span></label>
     <div class="col-sm-12">
+        <input type="hidden" name="id" value="{{ $country ? $country->id : '' }}">
+
         <span id="ContentPlaceHolder1_RequiredFieldValidator1"
             style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter
             Country name *</span>
-        <input type="text" name="name" class="form-control" placeholder="Enter Country Name">
+        <input type="text" name="name" class="form-control" placeholder="Enter Country Name"
+            value="{{ $country ? $country->name : '' }}">
     </div>
 </div>
 <div class="col-sm-12" style="padding:5px;">
@@ -15,7 +18,8 @@
         <span id="ContentPlaceHolder1_RequiredFieldValidator1"
             style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter
             Country Code *</span>
-        <input type="text" name="code" class="form-control" placeholder="Enter Country Code">
+        <input type="text" name="code" class="form-control" placeholder="Enter Country Code"
+            value=" {{ $country ? $country->code : '' }}">
     </div>
 </div>
 <div class="col-sm-12" style="padding:5px;">
@@ -24,7 +28,8 @@
     <div class="col-sm-12">
         <span id="ContentPlaceHolder1_RequiredFieldValidator1"
             style="font-size:12px;color:red;font-weight:600;display:none;">please enter some description *</span>
-        <input type="text" name="description" class="form-control" placeholder="Enter description ">
+        <input type="text" name="description" class="form-control" placeholder="Enter description "
+            value="{{ $country ? $country->description : '' }}">
     </div>
 </div>
 
@@ -33,8 +38,8 @@
             style="color: red; font-size: 13px;">*</span></label>
     <div class="col-sm-12">
         <select class="form-control" name="is_active">
-            <option value=1>Activate</option>
-            <option value=0>Deactive</option>
+            <option value=1 {{ $country ? ($country->is_active == 1 ? 'selected' : '') : '' }}>Activate</option>
+            <option value=0 {{ $country ? ($country->is_active == 0 ? 'selected' : '') : '' }}>Deactive</option>
         </select>
 
     </div>

@@ -53,7 +53,7 @@
                                                         class="label {{ $c->is_active == 1 ? 'label-success' : 'label-danger' }}"
                                                         style="font-size: 11px; font-weight: 600;text-transform:capitalize;">{{ $c->is_active == 1 ? 'Active' : 'Deactive' }}</label>
                                                 </td>
-                                                <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
+                                                <td><a href="{{route('country.edit' , $c->id)}}"><i class="fa fa-edit"></i> Edit</a></td>
                                             </tr>
                                         @endforeach
 

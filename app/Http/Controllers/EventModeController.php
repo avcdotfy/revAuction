@@ -20,7 +20,8 @@ class EventmodeController extends BaseController
     }
     function create()
     {
-        return view('admin.pages.settings.master.eventMode.create');
+        $eventmode = null;
+        return view('admin.pages.settings.master.eventMode.create', compact('eventmode'));
     }
     function store(Request $req)
     {
@@ -29,6 +30,22 @@ class EventmodeController extends BaseController
             return redirect()->route('eventmode.list')->with('success', 'event mode Created Successfully');
         } else {
             return redirect()->back()->with('error', 'event mode Creation failed')->withInput();
+        }
+    }
+
+    function edit($id)
+    {
+        $eventmode = Eventmode::find($id);
+        return view('admin.pages.settings.master.eventmode.edit', compact('eventmode'));
+    }
+
+    function update(Request $req)
+    {
+        $em = Eventmode::find($req->id)->update(array_merge($req->all(), ['user_id' => $this->user_id, 'company_id' => $this->company_id]));
+        if ($em) {
+            return redirect()->route('eventmode.list')->with('success', 'Event Mode update Successfully');
+        } else {
+            return redirect()->back()->with('error', 'Event Mode update failed')->withInput();
         }
     }
 }

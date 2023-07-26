@@ -50,10 +50,11 @@
                                                 <td>{{ $uom->code }}</td>
                                                 <td>{{ $uom->name }}</td>
                                                 <td>{{ $uom->updated_at }}</td>
-                                                <td><label class="label label-success"
-                                                        style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
+                                                <td><label class="label label-{{ $uom->is_active ? 'success' : 'danger' }}"
+                                                        style="font-size: 11px; font-weight: 600;text-transform:capitalize;">{{ $uom->is_active ? 'Active' : 'Deactive' }}</label>
                                                 </td>
-                                                <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
+                                                <td><a href="{{ route('uom.edit', $uom->id) }}"><i class="fa fa-edit"></i>
+                                                        Edit</a></td>
                                         @endforeach
 
                                     </tbody>

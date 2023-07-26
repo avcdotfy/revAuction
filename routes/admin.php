@@ -97,26 +97,36 @@ Route::group(['prefix' => 'admin'], function () {
                     Route::get('/', [CountryController::class, 'index'])->name('country.list');
                     Route::get('/create', [CountryController::class, 'create'])->name('country.create');
                     Route::post('/create', [CountryController::class, 'store'])->name('country.store');
+                    Route::get('/edit/{id}', [CountryController::class, 'edit'])->name('country.edit');
+                    Route::post('/update', [CountryController::class, 'update'])->name('country.update');
                 });
                 Route::group(['prefix' => 'state'], function () {
                     Route::get('/', [StateController::class, 'index'])->name('state.list');
                     Route::get('/create', [StateController::class, 'create'])->name('state.create');
                     Route::post('/create', [StateController::class, 'store'])->name('state.store');
+                    Route::get('/edit/{id}', [StateController::class, 'edit'])->name('state.edit');
+                    Route::post('/update', [StateController::class, 'update'])->name('state.update');
                 });
                 Route::group(['prefix' => 'region'], function () {
                     Route::get('/', [RegionController::class, 'index'])->name('region.list');
                     Route::get('/create', [RegionController::class, 'create'])->name('region.create');
                     Route::post('/create', [RegionController::class, 'store'])->name('region.store');
+                    Route::get('/edit/{id}', [RegionController::class, 'edit'])->name('region.edit');
+                    Route::post('/update', [RegionController::class, 'update'])->name('region.update');
                 });
                 Route::group(['prefix' => 'eventmode'], function () {
                     Route::get('/', [EventModeController::class, 'index'])->name('eventmode.list');
                     Route::get('/create', [EventModeController::class, 'create'])->name('eventmode.create');
                     Route::post('/create', [EventModeController::class, 'store'])->name('eventmode.store');
+                    Route::get('/edit/{id}', [EventModeController::class, 'edit'])->name('eventmode.edit');
+                    Route::post('/update', [EventModeController::class, 'update'])->name('eventmode.update');
                 });
                 Route::group(['prefix' => 'uom'], function () {
                     Route::get('/', [UOMController::class, 'index'])->name('uom.list');
                     Route::get('/create', [UOMController::class, 'create'])->name('uom.create');
                     Route::post('/create', [UOMController::class, 'store'])->name('uom.store');
+                    Route::get('/edit/{id}', [UOMController::class, 'edit'])->name('uom.edit');
+                    Route::post('/update', [UOMController::class, 'update'])->name('uom.update');
                 });
             });
 
