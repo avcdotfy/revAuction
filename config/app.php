@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\BidHelper;
+use App\Helpers\CategoryHelper;
 use App\Helpers\DecisionHelper;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
@@ -189,6 +190,7 @@ return [
         // 'Example' => App\Facades\Example::class,
         'BidHelper' => BidHelper::class,
         'DHelper' => DecisionHelper::class,
+        'CategoryHelper' => CategoryHelper::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 

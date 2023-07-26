@@ -5,10 +5,14 @@
         <span id="ContentPlaceHolder1_RequiredFieldValidator1"
             style="font-size:12px;color:red;font-weight:600;display:none;">Please Select
             Employee Role</span>
+        <input type="hidden" name="id" value="{{ $employee ? $employee->id : '' }}">
+        <input type="hidden" name="emp_user_id" value="{{ $employee ? $employee->user->id : '' }}">
         <select class="form-control" name="role_id">
             <option value="">Select Employee Role</option>
             @foreach ($roles as $role)
-                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                <option value="{{ $role->id }}"
+                    {{ $employee ? ($employee->role_id == $role->id ? 'selected' : '') : '' }}>{{ $role->name }}
+                </option>
             @endforeach
 
         </select>
@@ -24,7 +28,9 @@
         <select class="form-control" name="department_id">
             <option value="">Select Employee Department</option>
             @foreach ($departments as $d)
-                <option value="{{ $d->id }}">{{ $d->code . ' | ' . $d->name }}</option>
+                <option value="{{ $d->id }}"
+                    {{ $employee ? ($employee->department_id == $d->id ? 'selected' : '') : '' }}>
+                    {{ $d->code . ' | ' . $d->name }}</option>
             @endforeach
         </select>
     </div>
@@ -37,7 +43,7 @@
             style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter Employee
             Designation</span>
         <input class="form-control" name="designation" placeholder="Employee Designation"
-            value="{{ old('designation') }}">
+            value="{{ $employee ? $employee->designation : old('designation') }}">
     </div>
 </div>
 <div class="col-sm-12" style="padding:0px;">
@@ -47,7 +53,8 @@
         <span id="ContentPlaceHolder1_RequiredFieldValidator2"
             style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter Employee
             ID</span>
-        <input class="form-control" name="employee_id" placeholder="Employee ID" value="{{ old('employee_id') }}">
+        <input class="form-control" name="employee_id" placeholder="Employee ID"
+            value="{{ $employee ? $employee->employee_id : old('employee_id') }}">
     </div>
 </div>
 <div class="col-sm-12" style="padding:0px;">
@@ -57,7 +64,8 @@
         <span id="ContentPlaceHolder1_RequiredFieldValidator4"
             style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter Employee
             Name</span>
-        <input class="form-control" name="name" placeholder="Employee Name" value="{{ old('name') }}">
+        <input class="form-control" name="name" placeholder="Employee Name"
+            value="{{ $employee ? $employee->user->name : old('name') }}">
     </div>
 </div>
 <div class="col-sm-12" style="padding:0px;">
@@ -67,7 +75,8 @@
         <span id="ContentPlaceHolder1_RequiredFieldValidator7"
             style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter Mobile
             No.</span>
-        <input class="form-control" name="phone" placeholder="Mobile No." value="{{ old('phone') }}">
+        <input class="form-control" name="phone" placeholder="Mobile No."
+            value="{{ $employee ? $employee->user->phone : old('phone') }}">
     </div>
 </div>
 <div class="col-sm-12" style="padding:0px;">
@@ -77,7 +86,7 @@
         <span id="ContentPlaceHolder1_RequiredFieldValidator8"
             style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter Username</span>
         <input name="username" type="text" id="ContentPlaceHolder1_txt_email_id" class="form-control"
-            placeholder="Username" value="{{ old('username') }}">
+            placeholder="Username" value="{{ $employee ? $employee->user->username : old('username') }}">
     </div>
 </div>
 <div class="col-sm-12" style="padding:0px;">
@@ -88,7 +97,7 @@
             style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter Email
             ID</span>
         <input name="email" type="email" id="ContentPlaceHolder1_txt_email_id" class="form-control"
-            placeholder="Email ID" value="{{ old('email') }}">
+            placeholder="Email ID" value="{{ $employee ? $employee->user->email : old('email') }}">
     </div>
 </div>
 <div class="col-sm-12" style="padding:0px;">
@@ -107,41 +116,14 @@
     <label for="inputPassword3" class="col-sm-12 control-label">Assigning Category <span
             style="color: red; font-size: 13px;">*</span></label>
     <div class="col-sm-12">
-        <span id="ContentPlaceHolder1_RequiredFieldValidator10"
-            style="font-size:12px;color:red;font-weight:600;display:none;">Please Select
-            Category</span>
-        <span class="multiselect-native-select">
-            <select name="cat_ids[]" multiple="multiple" id="ContentPlaceHolder1_lb_product_category" required>
-                <option value="1">Aluminium Pipe</option>
-                <option value="5">Cotton</option>
-                <option value="3">Iron</option>
-                <option value="6">Plastic</option>
-                <option value="4">Stainless Steel</option>
-                <option value="2">Steel</option>
-            </select>
-            {{-- <div class="btn-group"><button type="button" class="multiselect dropdown-toggle btn btn-default"
-                    data-toggle="dropdown" title="Select Category"><span class="multiselect-selected-text">Select
-                        Category</span> <b class="caret"></b></button>
-                <ul class="multiselect-container dropdown-menu">
-                    <li class="multiselect-item multiselect-all"><a tabindex="0" class="multiselect-all"><label
-                                class="checkbox"><input type="checkbox" value="multiselect-all"> Select
-                                all</label></a></li>
-                    <li><a tabindex="0"><label class="checkbox" title="Aluminium Pipe"><input type="checkbox"
-                                    value="1">
-                                Aluminium Pipe</label></a></li>
-                    <li><a tabindex="0"><label class="checkbox" title="Cotton"><input type="checkbox"
-                                    value="5"> Cotton</label></a></li>
-                    <li><a tabindex="0"><label class="checkbox" title="Iron"><input type="checkbox"
-                                    value="3"> Iron</label></a></li>
-                    <li><a tabindex="0"><label class="checkbox" title="Plastic"><input type="checkbox"
-                                    value="6"> Plastic</label></a></li>
-                    <li><a tabindex="0"><label class="checkbox" title="Stainless Steel"><input type="checkbox"
-                                    value="4"> Stainless Steel</label></a></li>
-                    <li><a tabindex="0"><label class="checkbox" title="Steel"><input type="checkbox"
-                                    value="2"> Steel</label></a></li>
-                </ul>
-            </div> --}}
-        </span>
+        <select name="cat_ids[]"  style="width: 100% ; important" multiple class="select2" required>
+            <option value="">Select Category</option>
+            @foreach (CategoryHelper::getCategories() as $cat)
+                <option value="{{ $cat->id }}"
+                    @if ($employee) @foreach ($employee->categories as $key => $empCat) {{ $empCat->id == $cat->id ? 'selected' : '' }} @endforeach @endif>
+                    {{ $cat->name }}</option>
+            @endforeach
+        </select>
     </div>
 </div>
 

@@ -43,9 +43,10 @@ class EmployeeController extends Controller
         $roles = Role::where('user_id', Auth::user()->id)->get();
         $departments = Department::where('company_id', CompanyHelper::getCompanyFromHost()->id)->get();
         // dd($departments);
+        $employee = null;
         return view(
             'admin.pages.settings.organization.employee.create',
-            compact('roles', 'departments')
+            compact('roles', 'departments', 'employee')
         );
     }
 
@@ -76,7 +77,7 @@ class EmployeeController extends Controller
         try {
             $user = User::create(['name' => $name, 'email' => $email, 'username' => $username, 'password' => Hash::make($password), 'phone' => $phone, 'role_id' => $role_id, 'user_type' => USER_TYPES[2]]);
         } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'email or username is already  in use , please try another'.$e)->withInput();
+            return redirect()->back()->with('error', 'email or username is already  in use , please try another' . $e)->withInput();
         }
         $emp = Employee::create([
             'role_id' => $role_id,
@@ -111,15 +112,53 @@ class EmployeeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $employee = Employee::find($id);
+        $roles = Role::where('user_id', Auth::user()->id)->get();
+        $departments = Department::where('company_id', CompanyHelper::getCompanyFromHost()->id)->get();
+        return view(
+            'admin.pages.settings.organization.employee.edit',
+            compact('roles', 'departments', 'employee')
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $req)
     {
-        //
+        $name = $req->name;
+        $email = $req->email;
+        $username = $req->username;
+        $password = $req->password;
+        $phone = $req->phone;
+        $role_id = $req->role_id;
+        $department_id = $req->department_id;
+        $designation = $req->designation;
+        $emp_id = $req->employee_id;
+        $cat_ids = $req->cat_ids;
+
+        try {
+            User::find($req->emp_user_id)->update(['name' => $name, 'email' => $email, 'username' => $username, 'password' => Hash::make($password), 'phone' => $phone, 'role_id' => $role_id]);
+        } catch (QueryException $e) {
+            return redirect()->back()->with('error', 'email or username is already  in use , please try another' . $e)->withInput();
+        }
+        $emp = Employee::find($req->id);
+        $emp->update([
+            'role_id' => $role_id,
+            'department_id' => $department_id,
+            'designation' => $designation,
+            'employee_id' => $emp_id,
+        ]);
+        $emp->categories()->detach();
+
+        foreach ($cat_ids  as $cat) {
+            EmployeeCategory::create([
+                'category_id' => $cat,
+                'employee_id' => $emp->id,
+                'company_id' => CompanyHelper::getCompany()->id,
+            ]);
+        }
+        return redirect()->route('employee.list')->with('success', 'Employee has been updated');
     }
 
     /**

@@ -36,78 +36,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr role="row" class="odd">
-                                            <td>1</td>
-                                            <td>New Event Invitation</td>
-                                            <td>Admin Side</td>
-                                            <td>New Event Invitation</td>
-                                            <td>
-                                                <label class="label label-success" title="True"
-                                                    style="font-size: 11px; font-weight: 600;">Activated</label>
-                                            </td>
-                                            <td><a href="mail-template.aspx?r=4B1QmJBAsAaLln5kYbI+JA=="><i
-                                                        class="fa fa-edit"></i> Edit</a></td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td>2</td>
-                                            <td>New Event Invitation</td>
-                                            <td>Vendor Side</td>
-                                            <td>New Event Invitation</td>
-                                            <td>
-                                                <label class="label label-success" title="True"
-                                                    style="font-size: 11px; font-weight: 600;">Activated</label>
-                                            </td>
-                                            <td><a href="mail-template.aspx?r=Y7Ubn6c7hvLjihiwyLyQ/w=="><i
-                                                        class="fa fa-edit"></i> Edit</a></td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td>3</td>
-                                            <td>Request Rejected</td>
-                                            <td>Vendor Side</td>
-                                            <td>Vendor Registration Request Rejected </td>
-                                            <td>
-                                                <label class="label label-success" title="True"
-                                                    style="font-size: 11px; font-weight: 600;">Activated</label>
-                                            </td>
-                                            <td><a href="mail-template.aspx?r=Tg3R3dzL5d8qh2W0SyphdQ=="><i
-                                                        class="fa fa-edit"></i> Edit</a></td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td>4</td>
-                                            <td>Request Accepted</td>
-                                            <td>Vendor Side</td>
-                                            <td>Vendor Regsitration Request Accepted</td>
-                                            <td>
-                                                <label class="label label-success" title="True"
-                                                    style="font-size: 11px; font-weight: 600;">Activated</label>
-                                            </td>
-                                            <td><a href="mail-template.aspx?r=ydRRTTxkdt6Trx91pX1+cA=="><i
-                                                        class="fa fa-edit"></i> Edit</a></td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td>5</td>
-                                            <td>Forgot Password</td>
-                                            <td>Vendor Side</td>
-                                            <td>Forgot Password</td>
-                                            <td>
-                                                <label class="label label-success" title="True"
-                                                    style="font-size: 11px; font-weight: 600;">Activated</label>
-                                            </td>
-                                            <td><a href="mail-template.aspx?r=BOII5FUynjpl5RZJJ8nW1g=="><i
-                                                        class="fa fa-edit"></i> Edit</a></td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td>6</td>
-                                            <td>New Registration</td>
-                                            <td>Vendor Side</td>
-                                            <td>Vendor Registration Request Submitted</td>
-                                            <td>
-                                                <label class="label label-success" title="True"
-                                                    style="font-size: 11px; font-weight: 600;">Activated</label>
-                                            </td>
-                                            <td><a href="mail-template.aspx?r=mELirpUhRYksFj7k8/XBcQ=="><i
-                                                        class="fa fa-edit"></i> Edit</a></td>
-                                        </tr>
+
+                                        @foreach ($templates as $key => $t)
+                                            <tr role="row" class="even">
+
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $t->service_type }}</td>
+                                                <td>{{ $t->template_for }}</td>
+                                                <td>{{ $t->subject }}</td>
+                                                <td>
+                                                    <label class="label label-{{ $t->is_active ? 'success' : 'danger' }}"
+                                                        title="True"
+                                                        style="font-size: 11px; font-weight: 600;">{{ $t->is_active ? 'Active' : 'Deactive' }}</label>
+                                                </td>
+                                                <td><a href="{{ route('template.email.edit', $t->id) }}"><i
+                                                            class="fa fa-edit"></i>
+                                                        Edit</a></td>
+                                            </tr>
+                                        @endforeach
+
                                     </tbody>
                                 </table>
 

@@ -71,7 +71,8 @@
                                                         style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
                                                 </td>
 
-                                                <td><a href="#"><i class="fa fa-edit"></i> Edit</a></td>
+                                                <td><a href="{{ route('employee.edit', $emp->id) }}"><i
+                                                            class="fa fa-edit"></i> Edit</a></td>
                                             </tr>
                                         @endforeach
 

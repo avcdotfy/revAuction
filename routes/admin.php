@@ -56,6 +56,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/', [DepartmentController::class, 'index'])->name('department.list');
             Route::get('/create', [DepartmentController::class, 'create'])->name('department.create');
             Route::post('/create', [DepartmentController::class, 'store'])->name('department.store');
+            Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('department.edit');
+            Route::post('/update', [DepartmentController::class, 'update'])->name('department.update');
         });
         Route::group(['prefix' => 'permission'], function () {
             Route::get('/', [RolePermissionController::class, 'index'])->name('permission_role.list');
@@ -66,6 +68,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/', [EmployeeController::class, 'index'])->name('employee.list');
             Route::get('/create', [EmployeeController::class, 'create'])->name('employee.create');
             Route::post('/create', [EmployeeController::class, 'store'])->name('employee.store');
+            Route::get('/edit/{id}', [EmployeeController::class, 'edit'])->name('employee.edit');
+            Route::post('/update', [EmployeeController::class, 'update'])->name('employee.update');
         });
 
 
@@ -74,11 +78,15 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::get('/', [CategoryController::class, 'index'])->name('category.list');
                 Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
                 Route::post('/create', [CategoryController::class, 'store'])->name('category.store');
+                Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+                Route::post('/update', [CategoryController::class, 'update'])->name('category.update');
             });
             Route::group(['prefix' => 'item'], function () {
                 Route::get('/', [ItemController::class, 'index'])->name('item.list');
                 Route::get('/create', [ItemController::class, 'create'])->name('item.create');
                 Route::post('/create', [ItemController::class, 'store'])->name('item.store');
+                Route::get('/edit/{id}', [ItemController::class, 'edit'])->name('item.edit');
+                Route::post('/update', [ItemController::class, 'update'])->name('item.update');
             });
         });
 
@@ -135,12 +143,16 @@ Route::group(['prefix' => 'admin'], function () {
                     Route::get('/', [TemplateController::class, 'emailTemplateList'])->name('template.email.list');
                     Route::get('create', [TemplateController::class, 'emailTemplate'])->name('template.email.create');
                     Route::post('create', [TemplateController::class, 'emailTemplateStore'])->name('template.email.store');
+                    Route::get('/edit/{id}', [TemplateController::class, 'emailTemplateEdit'])->name('template.email.edit');
+                    Route::post('/update', [TemplateController::class, 'emailTemplateUpdate'])->name('template.email.update');
                 });
 
                 Route::group(['prefix' => 'config'], function () {
                     Route::get('', [ConfigurationController::class, 'emailConfigurationList'])->name('config.mail.list');
                     Route::get('create', [ConfigurationController::class, 'emailConfiguration'])->name('config.mail.create');
                     Route::post('create', [ConfigurationController::class, 'emailConfigurationStore'])->name('config.mail.store');
+                    Route::get('/edit/{id}', [ConfigurationController::class, 'emailConfigurationEdit'])->name('config.mail.edit');
+                    Route::post('/update', [ConfigurationController::class, 'emailConfigurationUpdate'])->name('config.mail.update');
                 });
             });
             Route::group(['prefix' => 'sms'], function () {

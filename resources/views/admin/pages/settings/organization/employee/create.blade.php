@@ -11,22 +11,17 @@
         @include('admin.partials.alerts')
         <div class="row">
             <div class="col-xs-12">
-
                 <div class="box">
                     <div class="box-body">
                         <div id="ContentPlaceHolder1_div_nr" class="row">
-                            <form action="" method="post">
+                            <form action="{{ route('employee.store') }}" method="post">
                                 @csrf
                                 @include('admin.partials.employee-form')
                             </form>
                         </div>
-
-
                     </div>
                     <!-- /.box-body -->
                 </div>
-
-
             </div>
         </div>
     </section>

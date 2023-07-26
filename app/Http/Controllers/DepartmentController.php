@@ -23,7 +23,8 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.settings.organization.department.create');
+        $department = null;
+        return view('admin.pages.settings.organization.department.create', compact('department'));
     }
 
     /**
@@ -62,15 +63,21 @@ class DepartmentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $department = Department::find($id);
+        return view('admin.pages.settings.organization.department.edit', compact('department'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $req)
     {
-        //
+        $dep = Department::find($req->id)->update(array_merge($req->all()));
+        if ($dep) {
+            return redirect()->route('department.list')->with('success', 'Department updated successfully');
+        } else {
+            return redirect()->back()->with('error', 'Department update failed');
+        }
     }
 
     /**

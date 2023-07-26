@@ -126,6 +126,14 @@
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <style>
+        .select2-selection__choice__display {
+            color: #08085c
+        }
+    </style>
+
 </head>
 
 <body class="sidebar-mini skin-blue" style="background: #222d32;">
@@ -154,13 +162,17 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         tinymce.init({
             selector: 'textarea#default'
         });
 
         new DataTable('#dtable', {});
+
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
     </script>
 
     <script>
