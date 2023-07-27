@@ -16,7 +16,7 @@ class CompanySeeder extends Seeder
         Company::create([
             'name' => 'CompanyName',
             'app_name' => 'Company App Name',
-            'web_url' =>  request()->ip(),
+            'web_url' =>  request()->getHost(),
             'user_id' => 1,
         ]);
     }
