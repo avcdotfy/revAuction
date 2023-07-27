@@ -3,7 +3,7 @@
         <label for="inputPassword3" class="col-sm-12 control-label">Company Type <span
                 style="color: red; font-size: 13px;">*</span></label>
         <div class="col-sm-12">
-            <select name="vendor_type" id="company_type" class="form-control">
+            <select name="vendor_type" id="company_type" class="form-control" required>
                 <option value="">Select Company Type</option>
                 <option value="Sole Proprietorship">Sole Proprietorship</option>
                 <option value="Partnership Firm">Partnership Firm</option>
@@ -25,21 +25,19 @@
 </div>
 <div class="col-sm-12" style="margin-bottom: 5px;">
     <div class="col-sm-6" style="padding: 0px;">
-        <label for="inputPassword3" class="col-sm-12 control-label">Contact Person <span
+        <label for="contact_person" class="col-sm-12 control-label">Contact Person <span
                 style="color: red; font-size: 13px;">*</span></label>
         <div class="col-sm-12">
-
-            <input name="contact_person" value="{{ old('contact_person') }}" type="text" id="contact_person"
+            <input name="contact_person" value="{{ old('contact_person') }}" type="text" id="contact_person" required
                 class="form-control" placeholder="Enter Contact Person">
         </div>
     </div>
     <div class="col-sm-6" style="padding: 0px;">
-        <label for="inputPassword3" class="col-sm-12 control-label">GSTIN <span
+        <label for="gst_number" class="col-sm-12 control-label">GSTIN <span
                 style="color: red; font-size: 13px;">*</span></label>
         <div class="col-sm-12">
-
             <input name="GSTIN" type="text" value="{{ old('GSTIN') }}" id="gst_number" class="form-control"
-                placeholder="Enter GSTIN">
+                required placeholder="Enter GSTIN">
         </div>
     </div>
 </div>
@@ -50,7 +48,7 @@
         <div class="col-sm-12">
 
             <input name="pan_tan" type="text" value="{{ old('pan_tan') }}" id="pan_number" class="form-control"
-                placeholder="Enter PAN / TAN Number">
+                required placeholder="Enter PAN / TAN Number">
         </div>
     </div>
     <div class="col-sm-6" style="padding: 0px;">
@@ -58,7 +56,7 @@
             Year</label>
         <div class="col-sm-12">
             <input name="establish_year" type="text" value="{{ old('establish_year') }}" id="establishment_year"
-                class="form-control" placeholder="Enter Establishment Year">
+                required class="form-control" placeholder="Enter Establishment Year">
         </div>
     </div>
 </div>
@@ -162,7 +160,8 @@
                     style="color: red; font-size: 13px;">*</span></label>
             <div class="col-sm-12">
 
-                <select name="country_id" id="countrySelect" class="form-control" style="padding: 2px 2px;">
+                <select name="country_id" id="countrySelect" class="form-control" style="padding: 2px 2px;"
+                    required>
                     <option value="">Select Country</option>
                     @foreach ($countries as $c)
                         <option value="{{ $c->id }}">I{{ $c->name }}</option>
@@ -176,7 +175,7 @@
                     style="color: red; font-size: 13px;">*</span></label>
             <div class="col-sm-12">
 
-                <select name="state_id" id="stateSelect" class="form-control" style="padding: 2px 2px;">
+                <select name="state_id" id="stateSelect" class="form-control" style="padding: 2px 2px;" required>
                     <option selected="selected" value="">Select State</option>
                 </select>
             </div>
@@ -204,13 +203,12 @@
 <div class="col-sm-12" style="margin-bottom: 5px;">
     <script src="assets/js/bootstrap.min.js"></script>
     <link href="assets/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css">
-
     <div class="col-sm-6" style="padding: 0px;">
         <label for="inputPassword3" class="col-sm-12 control-label">Preference
             Category <span style="color: red; font-size: 13px;">*</span></label>
         <div class="col-sm-12">
-
-            <select name="preference_category" class="form-control" id="category_id">
+            <select name="preference_category" class="form-control" id="category_id" required>
+                <option value="">Select Category</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
@@ -222,7 +220,7 @@
             <span style="color: red; font-size: 13px;">*</span></label>
         <div class="col-sm-12">
 
-            <select class="form-control" name="preference_region" id="region_id">
+            <select class="form-control" name="preference_region" id="region_id" required>
                 <option value="">Select Region</option>
                 @foreach ($regions as $reg)
                     <option value="{{ $reg->id }}">{{ $reg->name }}</option>

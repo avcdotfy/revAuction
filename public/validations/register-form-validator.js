@@ -9,7 +9,6 @@ $(document).ready(function () {
             pan_number: "required",
             establishment_year: "required",
             username: "required",
-            password: "required",
             phone: "required",
             landline_number: "required",
             fax_number: "required",
