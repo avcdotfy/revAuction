@@ -24,6 +24,7 @@ class CompanyHelper
     static public function getCompanyFromHost()
     {
         $company = Company::where('web_url',  request()->ip())->first();
+        // dd($company);
         return $company;
     }
 }
