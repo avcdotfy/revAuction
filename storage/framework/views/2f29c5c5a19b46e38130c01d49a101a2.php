@@ -36,8 +36,8 @@
         <label for="gst_number" class="col-sm-12 control-label">GSTIN <span
                 style="color: red; font-size: 13px;">*</span></label>
         <div class="col-sm-12">
-            <input name="GSTIN" type="text" value="<?php echo e(old('GSTIN')); ?>" id="gst_number" class="form-control" required
-                placeholder="Enter GSTIN">
+            <input name="GSTIN" type="text" value="<?php echo e(old('GSTIN')); ?>" id="gst_number" class="form-control"
+                required placeholder="Enter GSTIN">
         </div>
     </div>
 </div>
@@ -47,16 +47,16 @@
             <span style="color: red; font-size: 13px;">*</span></label>
         <div class="col-sm-12">
 
-            <input name="pan_tan" type="text" value="<?php echo e(old('pan_tan')); ?>" id="pan_number" class="form-control" required
-                placeholder="Enter PAN / TAN Number">
+            <input name="pan_tan" type="text" value="<?php echo e(old('pan_tan')); ?>" id="pan_number" class="form-control"
+                required placeholder="Enter PAN / TAN Number">
         </div>
     </div>
     <div class="col-sm-6" style="padding: 0px;">
         <label for="inputPassword3" class="col-sm-12 control-label">Establishment
             Year</label>
         <div class="col-sm-12">
-            <input name="establish_year" type="text" value="<?php echo e(old('establish_year')); ?>" id="establishment_year" required
-                class="form-control" placeholder="Enter Establishment Year">
+            <input name="establish_year" type="text" value="<?php echo e(old('establish_year')); ?>" id="establishment_year"
+                required class="form-control" placeholder="Enter Establishment Year">
         </div>
     </div>
 </div>

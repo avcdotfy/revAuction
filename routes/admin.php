@@ -72,7 +72,6 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/update', [EmployeeController::class, 'update'])->name('employee.update');
         });
 
-
         Route::group(['prefix' => 'catalog'], function () {
             Route::group(['prefix' => 'category'], function () {
                 Route::get('/', [CategoryController::class, 'index'])->name('category.list');
