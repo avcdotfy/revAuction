@@ -39,7 +39,8 @@ class ItemController extends BaseController
         $categories = Category::where('user_id', Auth::user()->id)->get();
         $uOm = UnitOfMeasure::where('user_id', Auth::user()->id)->get();
         $regions = Region::where('user_id', Auth::user()->id)->get();
-        return view('admin.pages.catalog.item.create', compact('categories', 'uOm', 'regions'));
+        $item = null;
+        return view('admin.pages.catalog.item.create', compact('categories', 'uOm', 'regions', 'item'));
     }
 
     /**
@@ -120,7 +121,46 @@ class ItemController extends BaseController
             $rpu->unit_details = $itemRpu->item_unit_details;
             $rpus[] = $rpu;
         }
-
         return response()->json(['item' => $item, 'itemRpu' => $rpus, 'category' => $item->category]);
+    }
+
+    function edit($id)
+    {
+        $item = Item::find($id);
+        $categories = Category::where('user_id', Auth::user()->id)->get();
+        $uOm = UnitOfMeasure::where('user_id', Auth::user()->id)->get();
+        $regions = Region::where('user_id', Auth::user()->id)->get();
+        return view('admin.pages.catalog.item.edit', compact('categories', 'uOm', 'regions', 'item'));
+    }
+
+    function update(Request $req)
+    {
+        // dd($req->all());
+        $item = Item::find($req->id)->update([
+            'code' => $req->code,
+            'category_id' => $req->category_id,
+            'unit_of_measure_id' => $req->unit_of_measure_id,
+            'description' => $req->description,
+            'decrement_price' => $req->decrement_price,
+            'is_manually_change_bidding_price' => $req->is_manually_change_bidding_price,
+            'is_active' => $req->is_active,
+        ]);
+
+        ItemRPUModel::where('item_id', $req->id)->delete();
+
+        for ($i = 0; $i < count($req->region); $i++) {
+            if (!$req->region[$i]) continue;
+            ItemRPUModel::create([
+                'region_id' => $req->region[$i],
+                'price' => $req->price[$i],
+                'item_unit' => $req->unit[$i],
+                'item_unit_details' => $req->unit_details[$i],
+                'category_id' => $req->category_id,
+                'item_id' => $req->id,
+                'user_id' => $this->user_id,
+                'company_id' => $this->company_id
+            ]);
+        }
+        return redirect()->route('item.list')->with('success', 'item has been updated successfully');
     }
 }

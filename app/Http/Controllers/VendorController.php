@@ -12,6 +12,7 @@ use App\Models\Country;
 use App\Models\Event;
 use App\Models\ItemRPUModel;
 use App\Models\Notice;
+use App\Models\Region;
 use App\Models\Request as ModelsRequest;
 use App\Models\State;
 use App\Models\User;
@@ -33,7 +34,8 @@ class VendorController extends Controller
     {
         $countries = Country::where(['company_id' => CompanyHelper::getCompanyFromHost()->id])->get();
         $categories = CategoryHelper::getCategories();
-        return view('public.pages.register.vendor-register', compact('countries', 'categories'));
+        $regions = Region::all();
+        return view('public.pages.register.vendor-register', compact('countries', 'categories', 'regions'));
     }
 
 

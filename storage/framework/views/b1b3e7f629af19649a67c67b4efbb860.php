@@ -7,20 +7,20 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>
-        {{ env('APP_NAME') }} | Admin | Forgot Password
+        <?php echo e(env('APP_NAME')); ?> | Admin | Forgot Password
     </title>
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/logo/favicon.ico') }}" />
+    <link rel="icon" type="image/png" href="<?php echo e(asset('images/logo/favicon.ico')); ?>" />
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="<?php echo e(asset('bootstrap/dist/css/bootstrap.min.css')); ?>" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="<?php echo e(asset('font-awesome/css/font-awesome.min.css')); ?>" />
     <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ asset('Ionicons/css/ionicons.min.css') }}" />
+    <link rel="stylesheet" href="<?php echo e(asset('Ionicons/css/ionicons.min.css')); ?>" />
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('login/css/AdminLTE.min.css') }}" />
+    <link rel="stylesheet" href="<?php echo e(asset('login/css/AdminLTE.min.css')); ?>" />
     <!-- Google Font -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
@@ -64,11 +64,11 @@
 
     <section class="content-header" style="padding:0px; background: #fff">
         <h1 style="text-align: center;text-transform:uppercase;border-bottom: 1px solid #dedede;">
-            <span><img src="{{ asset('images/logo.png') }}" style="height:66px;"> </span>
+            <span><img src="<?php echo e(asset('images/logo.png')); ?>" style="height:66px;"> </span>
         </h1>
     </section>
 
-    @include('admin.partials.alerts')
+    <?php echo $__env->make('admin.partials.alerts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <section class="content"
         style="min-height: 250px;
@@ -86,14 +86,14 @@
                                 <div class="col-sm-12">
                                     <a href=" " id="aTag_Banner_Image" target="_blank" title=" "><img
                                             id="img_banner_image" class="img-responsive"
-                                            src="{{ asset('images/LK.jpg') }}"></a>
+                                            src="<?php echo e(asset('images/LK.jpg')); ?>"></a>
                                 </div>
                             </div>
                             <div class="col-sm-7" style="border-left: 1px solid #d2d6de;padding:0px;">
-                                <form action="{{ route('vendor.store') }}" method="post" enctype="multipart/form-data"
+                                <form action="<?php echo e(route('vendor.store')); ?>" method="post" enctype="multipart/form-data"
                                     id="registerForm">
-                                    @csrf
-                                    @include('public.pages.register.form')
+                                    <?php echo csrf_field(); ?>
+                                    <?php echo $__env->make('public.pages.register.form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                 </form>
                             </div>
                         </div>
@@ -107,14 +107,14 @@
     </section>
 
     <!-- Bootstrap 3.3.7 -->
-    <script src="{{ asset('jquery/dist/jquery.min.js') }}"></script>
+    <script src="<?php echo e(asset('jquery/dist/jquery.min.js')); ?>"></script>
 
-    <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="<?php echo e(asset('bootstrap/dist/js/bootstrap.min.js')); ?>"></script>
     <!-- DataTables -->
 
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-    <script type="text/javascript" src="{{ asset('dist/js/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('validations/register-form-validator.js') }}"></script>
+    <script type="text/javascript" src="<?php echo e(asset('dist/js/jquery.dataTables.min.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('validations/register-form-validator.js')); ?>"></script>
 
     <script>
         $(document).ready(function() {
@@ -126,7 +126,7 @@
             function fetchStates(country_id) {
                 $.ajax({
                     type: "get",
-                    url: `{{ route('states.byCountry') }}`,
+                    url: `<?php echo e(route('states.byCountry')); ?>`,
                     data: {
                         'country_id': country_id
                     },
@@ -157,3 +157,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\xampp\htdocs\revAuction\resources\views/public/pages/register/vendor-register.blade.php ENDPATH**/ ?>

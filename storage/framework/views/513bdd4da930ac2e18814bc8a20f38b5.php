@@ -6,9 +6,9 @@
             <span id="ContentPlaceHolder1_RequiredFieldValidator2"
                 style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter
                 Category Code</span>
-            <input type="hidden" name="id" value="{{ $category ? $category->id : '' }}">
+            <input type="hidden" name="id" value="<?php echo e($category ? $category->id : ''); ?>">
             <input name="code" type="text" class="form-control" placeholder="Enter Category Code"
-                value="{{ $category ? $category->code : '' }}">
+                value="<?php echo e($category ? $category->code : ''); ?>">
         </div>
     </div>
     <div class="col-sm-6" style="padding: 0px;">
@@ -19,7 +19,7 @@
                 style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter
                 Category Name</span>
             <input name="name" type="text" class="form-control" placeholder="Enter Category Name"
-                value="{{ $category ? $category->name : '' }}">
+                value="<?php echo e($category ? $category->name : ''); ?>">
         </div>
     </div>
 </div>
@@ -28,7 +28,7 @@
         <label for="inputPassword3" class="col-sm-12 control-label">Terms &amp; Conditions
         </label>
         <div class="col-sm-12" style="margin-bottom: 5px;">
-            <textarea id="default" name="terms_condition" style="height: 80px">{{ $category ? $category->terms_condition : '' }}</textarea>
+            <textarea id="default" name="terms_condition" style="height: 80px"><?php echo e($category ? $category->terms_condition : ''); ?></textarea>
 
         </div>
     </div>
@@ -38,9 +38,9 @@
                 Trigger? <span style="color: red; font-size: 13px;">*</span></label>
             <div class="col-sm-12">
                 <select name="item_time_trigger" class="form-control">
-                    <option value=0 {{ $category ? ($category->item_time_trigger == 0 ? 'selected' : '') : '' }}>No
+                    <option value=0 <?php echo e($category ? ($category->item_time_trigger == 0 ? 'selected' : '') : ''); ?>>No
                     </option>
-                    <option value=1 {{ $category ? ($category->item_time_trigger == 1 ? 'selected' : '') : '' }}>
+                    <option value=1 <?php echo e($category ? ($category->item_time_trigger == 1 ? 'selected' : '') : ''); ?>>
                         Yes</option>
 
                 </select>
@@ -54,7 +54,7 @@
                     style="font-size:12px;color:red;font-weight:600;display:none;">Please
                     Enter Time Gap Between Each Item (In Minutes)</span>
                 <input name="time_gap_between_each_item" type="number"
-                    value="{{ $category ? $category->time_gap_between_each_item : '' }}" class="form-control"
+                    value="<?php echo e($category ? $category->time_gap_between_each_item : ''); ?>" class="form-control"
                     placeholder="Enter Time Gap Between Each Item (In Minutes)">
             </div>
         </div>
@@ -68,7 +68,7 @@
                     style="font-size:12px;color:red;font-weight:600;display:none;">Please
                     Enter In Which Last Minutes Time Will be Increment?</span>
                 <input type="number" name="last_minute_closing_time_increment"
-                    value="{{ $category ? $category->last_minute_closing_time_increment : '' }}" class="form-control"
+                    value="<?php echo e($category ? $category->last_minute_closing_time_increment : ''); ?>" class="form-control"
                     placeholder="Enter In Which Last Minutes Time Will be Increment?">
             </div>
         </div>
@@ -77,9 +77,9 @@
                 <span style="color: red; font-size: 13px;">*</span></label>
             <div class="col-sm-12">
                 <select class="form-control" name="is_active">
-                    <option value=1 {{ $category ? ($category->is_active == 1 ? 'selected' : '') : '' }}>
+                    <option value=1 <?php echo e($category ? ($category->is_active == 1 ? 'selected' : '') : ''); ?>>
                         Activate</option>
-                    <option value=0 {{ $category ? ($category->is_active == 0 ? 'selected' : '') : '' }}>
+                    <option value=0 <?php echo e($category ? ($category->is_active == 0 ? 'selected' : '') : ''); ?>>
                         Deactivate</option>
                 </select>
             </div>
@@ -92,3 +92,4 @@
         </div>
     </div>
 </div>
+<?php /**PATH C:\xampp\htdocs\revAuction\resources\views/admin/partials/category-form.blade.php ENDPATH**/ ?>

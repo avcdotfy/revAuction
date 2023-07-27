@@ -28,7 +28,8 @@ class CategoryController extends BaseController
      */
     public function create()
     {
-        return view('admin.pages.catalog.category.create');
+        $category = null;
+        return view('admin.pages.catalog.category.create', compact('category'));
     }
 
     /**
@@ -52,5 +53,30 @@ class CategoryController extends BaseController
 
         if ($category instanceof Category)
             return redirect()->route('category.list')->with('success', 'Category has been created');
+    }
+
+
+    public function edit($id)
+    {
+        $category = Category::find($id);
+        return view('admin.pages.catalog.category.edit', compact('category'));
+    }
+
+    function update(Request $req)
+    {
+        // dd($req->all());
+        $category = Category::find($req->id)->update([
+            'code' => $req->code,
+            'name' => $req->name,
+            'terms_condition' => $req->terms_condition,
+            'item_time_trigger' => $req->item_time_trigger,
+            'time_gap_between_each_item' => $req->time_gap_between_each_item,
+            'last_minute_closing_time_increment' => $req->last_minute_closing_time_increment,
+            'last_minute_closing_time_increment' => $req->last_minute_closing_time_increment,
+            'is_active' => $req->is_active,
+        ]);
+
+        if ($category)
+            return redirect()->route('category.list')->with('success', 'Category has been updated');
     }
 }

@@ -7,22 +7,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/logo/favicon.ico') }}" />
+    <link rel="icon" type="image/png" href="<?php echo e(asset('images/logo/favicon.ico')); ?>" />
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="<?php echo e(asset('bootstrap/dist/css/bootstrap.min.css')); ?>" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="<?php echo e(asset('font-awesome/css/font-awesome.min.css')); ?>" />
     <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ asset('Ionicons/css/ionicons.min.css') }}" />
-    <link href="{{ asset('simple-line-icons/simple-line-icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="<?php echo e(asset('Ionicons/css/ionicons.min.css')); ?>" />
+    <link href="<?php echo e(asset('simple-line-icons/simple-line-icons.min.css')); ?>" rel="stylesheet" type="text/css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('datatables/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" href="{{ asset('dist/css/jquery.dataTables.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('dist/css/buttons.dataTables.min.css') }}" />
+    <link rel="stylesheet" href="<?php echo e(asset('datatables/dataTables.bootstrap.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('dist/css/jquery.dataTables.min.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('dist/css/buttons.dataTables.min.css')); ?>" />
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('dist/css/skins/all-skins.min.css') }}" />
+    <link rel="stylesheet" href="<?php echo e(asset('dist/css/AdminLTE.min.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('dist/css/skins/all-skins.min.css')); ?>" />
     <!-- Google Font -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
@@ -45,8 +45,8 @@
             font-size: 18px;
         }
     </style>
-    @yield('page_style')
-    <script src="{{ asset('jquery/dist/jquery.min.js') }}"></script>
+    <?php echo $__env->yieldContent('page_style'); ?>
+    <script src="<?php echo e(asset('jquery/dist/jquery.min.js')); ?>"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <title>Home | Dashboard</title>
     <style type="text/css">
@@ -124,7 +124,7 @@
     </style>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="stylesheet" href="<?php echo e(mix('css/app.css')); ?>">
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -138,23 +138,23 @@
 
 <body class="sidebar-mini skin-blue" style="background: #222d32;">
 
-    @include('admin.partials.top-nav')
+    <?php echo $__env->make('admin.partials.top-nav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-    @include('admin.partials.side-nav')
+    <?php echo $__env->make('admin.partials.side-nav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="min-height: 926px;">
 
-        @yield('main_section')
+        <?php echo $__env->yieldContent('main_section'); ?>
 
     </div>
     <!-- /.content-wrapper -->
 
-    @include('admin.partials.logout-modal')
+    <?php echo $__env->make('admin.partials.logout-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-    @include('admin.partials.footer')
+    <?php echo $__env->make('admin.partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-    @include('admin.partials.scripts')
+    <?php echo $__env->make('admin.partials.scripts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="text/javascript"
@@ -194,9 +194,10 @@
         }
     </script>
 
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="<?php echo e(mix('js/app.js')); ?>" defer></script>
 
-    @stack('scripts')
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 
 </html>
+<?php /**PATH C:\xampp\htdocs\revAuction\resources\views/admin/layout/base.blade.php ENDPATH**/ ?>

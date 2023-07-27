@@ -13,7 +13,8 @@ class TemplateController extends Controller
     public function emailTemplate()
     {
         $et = null;
-        return view('admin.pages.settings.mail.template.create', compact('et'));
+        $template = null;
+        return view('admin.pages.settings.mail.template.create', compact('et' , 'template'));
     }
 
     public function emailTemplateList()

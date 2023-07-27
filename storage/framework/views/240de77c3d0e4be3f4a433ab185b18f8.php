@@ -1,18 +1,18 @@
-@extends('admin.layout.base')
 
-@section('main_section')
+
+<?php $__env->startSection('main_section'); ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h3 style="margin-top: 10px; margin-bottom: 20px">Catalog | Items List </h3>
         <ol class="breadcrumb">
-            <a href="{{ route('item.create') }}" style="color: white; font-weight: 600" class="btn-block btn-primary btn-sm">
+            <a href="<?php echo e(route('item.create')); ?>" style="color: white; font-weight: 600" class="btn-block btn-primary btn-sm">
                 + Create New Item</a>
         </ol>
     </section>
     <!-- Main content -->
     <section class="content">
         <!-- Small boxes (Stat box) -->
-        @include('admin.partials.alerts')
+        <?php echo $__env->make('admin.partials.alerts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
@@ -46,38 +46,38 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($items as $key => $i)
+                                        <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr role="row" class="odd">
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $i->cat_name }}</td>
-                                                <td>{{ $i->item_code }}/{{ $i->description }}</td>
-                                                <td>{{ $i->unit }}</td>
+                                                <td><?php echo e($key + 1); ?></td>
+                                                <td><?php echo e($i->cat_name); ?></td>
+                                                <td><?php echo e($i->item_code); ?>/<?php echo e($i->description); ?></td>
+                                                <td><?php echo e($i->unit); ?></td>
 
                                                 <td>
                                                     <button type="button" class="btn btn-primary"
-                                                        onclick="getDetails({{ $i->id }})">
+                                                        onclick="getDetails(<?php echo e($i->id); ?>)">
                                                         View
                                                     </button>
 
-                                                    {{-- <a data-toggle="modal" data-target="#exampleModalLong">View</a> --}}
+                                                    
                                                 </td>
 
-                                                @if ($i->is_active)
+                                                <?php if($i->is_active): ?>
                                                     <td>
                                                         <label class="label label-success"
                                                             style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
                                                     </td>
-                                                @else
+                                                <?php else: ?>
                                                     <td>
                                                         <label class="label label-danger"
                                                             style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Deactivated</label>
                                                     </td>
-                                                @endif
-                                                <td>{{ $i->updated_at }}</td>
-                                                <td><a href="{{ route('item.edit', $i->id) }}"><i class="fa fa-edit"></i>
+                                                <?php endif; ?>
+                                                <td><?php echo e($i->updated_at); ?></td>
+                                                <td><a href="<?php echo e(route('item.edit', $i->id)); ?>"><i class="fa fa-edit"></i>
                                                         Edit</a></td>
                                             </tr>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
                                 </table>
 
@@ -87,19 +87,19 @@
                 </div>
             </div>
 
-            @include('admin.partials.item-details-modal')
+            <?php echo $__env->make('admin.partials.item-details-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     </section>
     <!-- /.content -->
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script>
         function getDetails(iId) {
             $.ajax({
                 type: "get",
-                url: "{{ route('item.rpu-details') }}",
+                url: "<?php echo e(route('item.rpu-details')); ?>",
                 data: {
                     "item_id": iId
                 },
@@ -144,4 +144,6 @@
             });
         }
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('admin.layout.base', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\revAuction\resources\views/admin/pages/catalog/item/list.blade.php ENDPATH**/ ?>

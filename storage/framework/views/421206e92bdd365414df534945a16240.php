@@ -1,11 +1,11 @@
-@extends('admin.layout.base')
 
-@section('main_section')
+
+<?php $__env->startSection('main_section'); ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h4>Home | Catalog | Category <small id="ContentPlaceHolder1_hTag">List</small></h4>
         <ol class="breadcrumb">
-            <a href="{{ route('category.create') }}" style="color: white; font-weight: 600"
+            <a href="<?php echo e(route('category.create')); ?>" style="color: white; font-weight: 600"
                 class="btn-block btn-primary btn-sm">+ Create New
                 Category</a>
         </ol>
@@ -13,7 +13,7 @@
     <!-- Main content -->
     <section class="content">
         <!-- Small boxes (Stat box) -->
-        @include('admin.partials.alerts')
+        <?php echo $__env->make('admin.partials.alerts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
@@ -41,33 +41,33 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($categories as $key => $cat)
+                                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr role="row" class="odd">
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $cat->code }}</td>
-                                                <td>{{ $cat->name }}</td>
-                                                <td><b>{{ $cat->item_time_trigger == 0 ? 'No' : 'yes' }}</b> | TG <i
+                                                <td><?php echo e($key + 1); ?></td>
+                                                <td><?php echo e($cat->code); ?></td>
+                                                <td><?php echo e($cat->name); ?></td>
+                                                <td><b><?php echo e($cat->item_time_trigger == 0 ? 'No' : 'yes'); ?></b> | TG <i
                                                         class="fa fa-arrows-h"></i> Each Item is
-                                                    <b>{{ $cat->time_gap_between_each_item }}</b>
+                                                    <b><?php echo e($cat->time_gap_between_each_item); ?></b>
                                                     Min
                                                     | CT <i class="fa fa-arrow-up"></i> in Last <b>
-                                                        {{ $cat->last_minute_closing_time_increment }}</b> Min
+                                                        <?php echo e($cat->last_minute_closing_time_increment); ?></b> Min
                                                 </td>
-                                                @if ($cat->is_active)
+                                                <?php if($cat->is_active): ?>
                                                     <td><label class="label label-success"
                                                             style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
                                                     </td>
-                                                @else
+                                                <?php else: ?>
                                                     <td><label class="label label-danger"
                                                             style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Deactivated</label>
                                                     </td>
-                                                @endif
+                                                <?php endif; ?>
 
-                                                <td>{{ $cat->updated_at }}</td>
-                                                <td><a href="{{ route('category.edit', $cat->id) }}"><i
+                                                <td><?php echo e($cat->updated_at); ?></td>
+                                                <td><a href="<?php echo e(route('category.edit', $cat->id)); ?>"><i
                                                             class="fa fa-edit"></i> Edit</a></td>
                                             </tr>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -80,4 +80,6 @@
             <!-- /.row -->
     </section>
     <!-- /.content -->
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layout.base', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\revAuction\resources\views/admin/pages/catalog/category/list.blade.php ENDPATH**/ ?>
