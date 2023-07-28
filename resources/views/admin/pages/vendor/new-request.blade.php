@@ -63,7 +63,8 @@
                                                             id="ContentPlaceHolder1_lvNvR_lblemail_0">{{ $req->vendor->user->email }}</span>
                                                     </td>
                                                     <td>{{ $req->vendor->created_at }}</td>
-                                                    <td><a href="p#">View</a></td>
+                                                    <td><a href="{{ route('vendor.profile', [$req->vendor->id]) }}">View</a>
+                                                    </td>
                                                 </tr>
                                             @endforeach
 

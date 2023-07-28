@@ -138,7 +138,7 @@
                                     </td>
                                     <td><span>${vendor.email }</span>
                                     </td>
-                                    <td><a href="profile-view.html">View</a></td>
+                                    <td><a href="{{ route('vendor.profile', vendor->id) }}">View</a></td>
                                 </tr>`
                             );
 
@@ -224,7 +224,6 @@
 
     <script>
         function setTitle() {
-
 
             let title = "Event for " + $("#categorySelect :selected").text() + " " + "Opening date " + $(
                 "#opening_date").val() + " " + $(
