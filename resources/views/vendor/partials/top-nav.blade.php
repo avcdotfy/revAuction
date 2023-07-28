@@ -87,7 +87,7 @@
                     <ul class="dropdown-menu">
                         <!-- Menu Footer-->
                         <li>
-                            <a href="change-password.aspx" style="padding:7px 8px;"><i class="bx bx-lock"
+                            <a href="#" style="padding:7px 8px;"><i class="bx bx-lock"
                                     style="vertical-align:bottom;font-size:22px;color:#7fd0ff"></i> <span
                                     style="margin-left:9px;">Change Password</span></a>
                         </li>

@@ -13,7 +13,7 @@ class ParticipantController extends Controller
 
     public function getParticipatedEvents()
     {
-        $participates = Participant::where(['vendor_id' => Auth::user()->vendor->id])->get();
+        $participates = Participant::where(['vendor_id' => Auth::user()->vendor->id])->groupBy('event_id')->get();
         // dd($participates);
         return view('vendor.pages.participated-events', compact('participates'));
     }
@@ -27,7 +27,7 @@ class ParticipantController extends Controller
 
     public function getParticipatedEventsStatus()
     {
-        $participates = $participates = Participant::where(['vendor_id' => Auth::user()->vendor->id])->get();
+        $participates = $participates = Participant::where(['vendor_id' => Auth::user()->vendor->id])->groupBy('event_id')->get();
         return view('vendor.pages.participated-event-status', compact('participates'));
     }
 
