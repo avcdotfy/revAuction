@@ -30,7 +30,13 @@ Route::get('/items/{cat_id}', [ItemController::class, 'getItems'])->name('itemsO
 Route::get('/state', [PublicDataController::class, 'stateByCounryId'])->name('states.byCountry');
 
 Route::get('/403', [PublicDataController::class, 'unauthorized'])->name('unauthorized');
+Route::get('/404', [PublicDataController::class, 'notFound'])->name('404');
 
 Route::group(['middleware' => 'auth'], function () {
    Route::get('/logout', [AuthenticateController::class, 'logout'])->name('logout');
+});
+
+
+Route::fallback(function () {
+   return redirect()->route('404');
 });

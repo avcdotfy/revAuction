@@ -22,13 +22,14 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                         style="color: #333;text-transform: uppercase;font-weight: 600; font-family: 'IBM Plex Sans', sans-serif;">
                         <span id="spn_username" class="hidden-xs"
-                            style="text-transform: capitalize; padding-top: 20px">Welcome Hi, {{Auth()->user()->username}} &nbsp;</span>
+                            style="text-transform: capitalize; padding-top: 20px">Welcome Hi,
+                            {{ Auth()->user()->username }} &nbsp;</span>
                         <img src="{{ asset('images/user.jpg') }}" style="width: 30px">
                     </a>
                     <ul class="dropdown-menu">
                         <!-- Menu Footer-->
                         <li>
-                            <a href="change-password.aspx" style="padding:7px 8px;"><i class="bx bx-lock"
+                            <a href="#" style="padding:7px 8px;"><i class="bx bx-lock"
                                     style="vertical-align:bottom;font-size:22px;color:#7fd0ff"></i> <span
                                     style="margin-left:9px;">Change Password</span></a>
                         </li>

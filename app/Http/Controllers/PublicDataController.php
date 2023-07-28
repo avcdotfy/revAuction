@@ -29,4 +29,10 @@ class PublicDataController extends Controller
     {
         return view('errors.403');
     }
+
+
+    function notFound()
+    {
+        return view('errors.404');
+    }
 }
