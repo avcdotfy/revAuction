@@ -51,6 +51,7 @@
 <div class="col-sm-12" style="text-align: right;">
     <div class="col-sm-offset-2 col-sm-10">
         <input type="submit" value="Submit" class="btn btn-sm btn-primary">
-        <a href="#" class="btn btn-sm btn-sm btn-primary" style="color: White; margin-left: 4px">Back</a>
+        <a href="{{ route('region.list') }}" class="btn btn-sm btn-sm btn-primary"
+            style="color: White; margin-left: 4px">Back</a>
     </div>
 </div>

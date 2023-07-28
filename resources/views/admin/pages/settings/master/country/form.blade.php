@@ -48,6 +48,7 @@
 <div class="col-sm-12" style="text-align: center; padding: 0px; margin-top: 10px;">
     <div class="col-sm-12">
         <input type="submit" value="Submit" class="btn btn-sm btn-primary">
-        <a href="#" class="btn btn-sm btn-primary" style="color: White; margin-left: 4px">Back</a>
+        <a href="{{ route('country.list') }}" class="btn btn-sm btn-primary"
+            style="color: White; margin-left: 4px">Back</a>
     </div>
 </div>

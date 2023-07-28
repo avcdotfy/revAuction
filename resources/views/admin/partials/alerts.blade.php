@@ -10,3 +10,9 @@
         {{ Session::get('error') }}<br />
     </div>
 @endif
+@if (Session::has('warning'))
+    <div class="alert alert-warning alert-dismissible fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{ Session::get('warning') }}<br />
+    </div>
+@endif

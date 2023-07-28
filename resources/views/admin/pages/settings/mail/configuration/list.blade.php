@@ -9,6 +9,7 @@
         </ol>
     </section>
     <section class="content">
+        @include('admin.partials.alerts')
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">

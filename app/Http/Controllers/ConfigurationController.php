@@ -28,7 +28,8 @@ class ConfigurationController extends Controller
     }
     public function emailConfigurationStore(Request $req)
     {
-        dd($req->all());
+        return redirect()->route('config.mail.list')->with('warning', 'This seciton is under development , please come back after some time');
+        // dd($req->all());
     }
 
     function emailConfigurationEdit($id)

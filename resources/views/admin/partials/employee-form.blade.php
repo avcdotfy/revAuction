@@ -116,7 +116,7 @@
     <label for="inputPassword3" class="col-sm-12 control-label">Assigning Category <span
             style="color: red; font-size: 13px;">*</span></label>
     <div class="col-sm-12">
-        <select name="cat_ids[]"  style="width: 100% ; important" multiple class="select2" required>
+        <select name="cat_ids[]" style="width: 100% ; important" multiple class="select2" required>
             <option value="">Select Category</option>
             @foreach (CategoryHelper::getCategories() as $cat)
                 <option value="{{ $cat->id }}"
@@ -132,6 +132,7 @@
         <input type="submit" value="Submit"
             onclick="if(Page_ClientValidate('IU')){this.disabled=true;this.value='Please wait ...';};__doPostBack('ctl00$ContentPlaceHolder1$btn_submit','')"
             id="ContentPlaceHolder1_btn_submit" class="btn btn-sm btn-primary">
-        <a href="employee.aspx" class="btn btn-sm btn-primary" style="color: White; margin-left: 4px">Back</a>
+        <a href="{{ route('employee.list') }}" class="btn btn-sm btn-primary"
+            style="color: White; margin-left: 4px">Back</a>
     </div>
 </div>

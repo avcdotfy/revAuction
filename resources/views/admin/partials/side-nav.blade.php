@@ -169,13 +169,13 @@
                              </span>
                          </a>
                          <ul class="treeview-menu">
-                             <li id="mail_setting_configuration"><a href="{{ route('config.mail.create') }}"><span
-                                         class="dot-icon">.</span><span>Configuration</span></a></li>
+                             {{-- <li id="mail_setting_configuration"><a href="{{ route('config.mail.create') }}"><span
+                                         class="dot-icon">.</span><span>Configuration</span></a></li> --}}
                              <li id="mail_setting_template"><a href="{{ route('template.email.create') }}"><span
                                          class="dot-icon">.</span><span>Template</span></a></li>
                          </ul>
                      </li>
-                     <li id="li_sms_setting" class="treeview"><a href="#"><span
+                     {{-- <li id="li_sms_setting" class="treeview"><a href="#"><span
                                  class="dot-icon">.</span><span>SMS Setting</span>
                              <span class="pull-right-container">
                                  <i class="fa fa-angle-left pull-right"></i>
@@ -187,7 +187,7 @@
                              <li id="sms_setting_template"><a href="{{ route('template.sms.list') }}"><span
                                          class="dot-icon">.</span><span>SMS Template</span></a></li>
                          </ul>
-                     </li>
+                     </li> --}}
                      <li id="li_master_setting" class="treeview"><a href="#"><span
                                  class="dot-icon">.</span><span>Master Setting</span>
                              <span class="pull-right-container">

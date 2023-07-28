@@ -13,7 +13,7 @@ class RolePermissionController extends Controller
 {
     function index()
     {
-        $rolePermissions = Role::where('company_id', CompanyHelper::getCompanyFromHost()->id)->get();
+        $rolePermissions = Role::where('company_id', CompanyHelper::getCompanyFromHost()->id)->orderBy('created_at', 'desc')->get();
         return view('admin.pages.settings.organization.permissions.list', compact('rolePermissions'));
     }
 
@@ -50,7 +50,7 @@ class RolePermissionController extends Controller
                     'company_id' => CompanyHelper::getCompanyFromHost()->id
                 ]);
             }
-            return redirect()->back()->with('success', 'Role added successfully');
+            return redirect()->route('permission_role.list')->with('success', 'Role added successfully');
         } else {
             return redirect()->back()->with('error', 'Role creation failed');
         }
