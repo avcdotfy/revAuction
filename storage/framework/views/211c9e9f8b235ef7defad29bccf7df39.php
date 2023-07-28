@@ -1,13 +1,13 @@
-@extends('vendor.layout.base')
 
-@section('main_section')
+
+<?php $__env->startSection('main_section'); ?>
     <section class="content-header">
         <h1>Home | Events | Running Events | Live Auction Items <small id="ContentPlaceHolder1_hTag">List</small>
         </h1>
     </section>
     <section class="content">
 
-        @include('vendor.partials.alerts')
+        <?php echo $__env->make('vendor.partials.alerts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
         <div class="row">
             <div class="col-xs-12">
@@ -16,7 +16,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <h5>
-                                    <span id="ContentPlaceHolder1_lbltitle">{{ $event->title }}</span>
+                                    <span id="ContentPlaceHolder1_lbltitle"><?php echo e($event->title); ?></span>
                                 </h5>
                                 <hr style="margin-bottom:5px;">
                             </div>
@@ -42,13 +42,14 @@
                                                                 class="col-sm-9 control-label">Region</label>
                                                             <div class="col-sm-3">
                                                                 <select name="region" id="region_select">
-                                                                    @foreach ($event->items as $item)
-                                                                        @foreach ($item->regionPriceUnit as $rpu)
-                                                                            <option value="{{ $rpu->region->id }}">
-                                                                                {{ $rpu->region->name }}
+                                                                    <?php $__currentLoopData = $event->items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                        <?php $__currentLoopData = $item->regionPriceUnit; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rpu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                            <option value="<?php echo e($rpu->region->id); ?>">
+                                                                                <?php echo e($rpu->region->name); ?>
+
                                                                             </option>
-                                                                        @endforeach
-                                                                    @endforeach
+                                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
                                                                 </select>
@@ -77,61 +78,61 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($event->items as $key => $item)
+                                            <?php $__currentLoopData = $event->items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <tr style="font-weight: 600;" role="row" class="odd">
-                                                    <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $item->code }} (<span id="lblitem0"
-                                                            title="18">{{ $item->description }}</span>)
+                                                    <td><?php echo e($key + 1); ?></td>
+                                                    <td><?php echo e($item->code); ?> (<span id="lblitem0"
+                                                            title="18"><?php echo e($item->description); ?></span>)
                                                     </td>
                                                     <td><span id="lbl_uom_type0"
-                                                            title="65">{{ $item->unit->name }}</span></td>
+                                                            title="65"><?php echo e($item->unit->name); ?></span></td>
                                                     <td style="text-align: center"><span id="lbl_item_qty0"
-                                                            title="1 Unit = Rs. 25000">{{ $item->regionPriceUnit[0]->item_unit }}</span>
+                                                            title="1 Unit = Rs. 25000"><?php echo e($item->regionPriceUnit[0]->item_unit); ?></span>
                                                         Unit | <span id="lbl_lot_number0">1 Unit = Rs.
-                                                            {{ $item->regionPriceUnit[0]->price }}</span>
+                                                            <?php echo e($item->regionPriceUnit[0]->price); ?></span>
 
                                                     </td>
                                                     <td style="text-align: center; width: 82px">
                                                         <span id="lbl_fob_price0"
-                                                            title="0.00">{{ $item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price }}</span>
+                                                            title="0.00"><?php echo e($item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price); ?></span>
                                                     </td>
                                                     <td style="text-align: center">
-                                                        <span class="clsbidPrice{{ $item->id }}"
-                                                            id="bidPrice{{ $item->id }}">{{ BidHelper::getLowestPrice($event->id, $item->id) ?? 00 }}</span>
+                                                        <span class="clsbidPrice<?php echo e($item->id); ?>"
+                                                            id="bidPrice<?php echo e($item->id); ?>"><?php echo e(BidHelper::getLowestPrice($event->id, $item->id) ?? 00); ?></span>
                                                     </td>
                                                     <td style="text-align: center">
                                                         <span class="countDown" title=""></span>
                                                     </td>
                                                     <td>
                                                         <a href="#" class="btn btn-primary "
-                                                            id="statusBtn{{ $item->id }}"
-                                                            style="padding:8px 9px; display:{{ !BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) || $event->status == COMPLETED ? 'none' : '' }}">
+                                                            id="statusBtn<?php echo e($item->id); ?>"
+                                                            style="padding:8px 9px; display:<?php echo e(!BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) || $event->status == COMPLETED ? 'none' : ''); ?>">
                                                             L1</a>
-                                                        {{-- {{ dd(BidHelper::checkIfVendorhasLowestBid($event->id, $item->id)) }} --}}
-                                                        {{-- {{ $event->status }} --}}
+                                                        
+                                                        
                                                         <a href="#" data-toggle="modal" class="btn btn-success"
-                                                            data-target="#bidModal{{ $item->id }}"
-                                                            id="btn_bid{{ $item->id }}"
-                                                            style="padding:8px 9px; display:{{ $event->status == COMPLETED || BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) ? 'none' : '' }}">
+                                                            data-target="#bidModal<?php echo e($item->id); ?>"
+                                                            id="btn_bid<?php echo e($item->id); ?>"
+                                                            style="padding:8px 9px; display:<?php echo e($event->status == COMPLETED || BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) ? 'none' : ''); ?>">
                                                             Bid Now </a>
 
                                                         <a href="#" class="btn btn-danger"
-                                                            id="btn_closed{{ $item->id }}"
-                                                            style="padding:8px 9px; display:{{ $event->status == RUNNING ? 'none' : '' }}">
+                                                            id="btn_closed<?php echo e($item->id); ?>"
+                                                            style="padding:8px 9px; display:<?php echo e($event->status == RUNNING ? 'none' : ''); ?>">
                                                             Closed </a>
 
 
                                                     </td>
                                                 </tr>
 
-                                                {{-- Bidding Modal Starts --}}
-                                                <div id="bidModal{{ $item->id }}" class="modal fade" role="dialog">
-                                                    <form action="{{ route('vendor.submit-bid') }}" method="post">
-                                                        @csrf
+                                                
+                                                <div id="bidModal<?php echo e($item->id); ?>" class="modal fade" role="dialog">
+                                                    <form action="<?php echo e(route('vendor.submit-bid')); ?>" method="post">
+                                                        <?php echo csrf_field(); ?>
                                                         <input type="hidden" name="event_id"
-                                                            value="{{ $event->id }}">
+                                                            value="<?php echo e($event->id); ?>">
                                                         <input type="hidden" name="item_id"
-                                                            value="{{ $item->id }}">
+                                                            value="<?php echo e($item->id); ?>">
                                                         <input type="hidden" name="item_rpu_id" value="1">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content" style="border-radius: 4px;">
@@ -142,9 +143,10 @@
                                                                     <h4 class="modal-title"
                                                                         style="font-weight: 600; text-align: center; text-decoration-line: underline;">
                                                                         Material Information</h4>
-                                                                    <h5 style="text-align: center">{{ $item->code }}
+                                                                    <h5 style="text-align: center"><?php echo e($item->code); ?>
+
                                                                         (<span id="lblitem0"
-                                                                            title="18">{{ $item->description }}</span>)
+                                                                            title="18"><?php echo e($item->description); ?></span>)
                                                                     </h5>
                                                                     <div class="col-sm-12" style="padding: 0px;">
                                                                         <div class="col-sm-6">
@@ -153,12 +155,13 @@
                                                                             </span>
                                                                             <span>
                                                                                 <label>
-                                                                                    {{ $item->regionPriceUnit[0]->item_unit }}
+                                                                                    <?php echo e($item->regionPriceUnit[0]->item_unit); ?>
+
                                                                                     Unit
                                                                                 </label>
                                                                                 |
                                                                                 <label>1 Unit = 1
-                                                                                    {{ $item->unit->name }}</label>
+                                                                                    <?php echo e($item->unit->name); ?></label>
                                                                             </span>
                                                                         </div>
                                                                         <div class="col-sm-6" style="text-align: right;">
@@ -190,7 +193,7 @@
                                                                                         </label>
 
                                                                                         <div class="col-sm-3">
-                                                                                            <label>{{ $item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price }}</label>
+                                                                                            <label><?php echo e($item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price); ?></label>
                                                                                         </div>
                                                                                         <label for="inputPassword3"
                                                                                             class="col-sm-3">Last Bidder
@@ -199,7 +202,7 @@
 
                                                                                         <div class="col-sm-3">
                                                                                             <label
-                                                                                                id="lastBidderPrice{{ $item->id }}">{{ BidHelper::getLastBidderPrice($event->id, $item->id) ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price : '00' }}</label>
+                                                                                                id="lastBidderPrice<?php echo e($item->id); ?>"><?php echo e(BidHelper::getLastBidderPrice($event->id, $item->id) ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price : '00'); ?></label>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-sm-12">
@@ -225,7 +228,7 @@
                                                                                             Price
                                                                                         </label>
 
-                                                                                        @if ($item->is_manually_change_bidding_price)
+                                                                                        <?php if($item->is_manually_change_bidding_price): ?>
                                                                                             <div class="col-sm-3"
                                                                                                 style="display:block">
                                                                                                 <input type="number"
@@ -238,21 +241,21 @@
                                                                                                     placeholder="Bidding Price"
                                                                                                     title="24500.00">
                                                                                             </div>
-                                                                                        @else
+                                                                                        <?php else: ?>
                                                                                             <div class="col-sm-3">
                                                                                                 <label
                                                                                                     style="color: green;"
-                                                                                                    id="lbl_bidding_price{{ $item->id }}">{{ BidHelper::getLastBidderPrice($event->id, $item->id) != null ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price - $item->decrement_price : $item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price - $item->decrement_price }}</label>
+                                                                                                    id="lbl_bidding_price<?php echo e($item->id); ?>"><?php echo e(BidHelper::getLastBidderPrice($event->id, $item->id) != null ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price - $item->decrement_price : $item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price - $item->decrement_price); ?></label>
                                                                                                 <input type="hidden"
-                                                                                                    id="bidding_price_hidden{{ $item->id }}"
+                                                                                                    id="bidding_price_hidden<?php echo e($item->id); ?>"
                                                                                                     onchange="checking_manual_bidding_price_0()"
                                                                                                     name="bidding_price"
                                                                                                     class="form-control"
                                                                                                     style="height: 25px; color: green"
                                                                                                     placeholder="Bidding Price"
-                                                                                                    value="{{ BidHelper::getLastBidderPrice($event->id, $item->id) != null ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price - $item->decrement_price : $item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price - $item->decrement_price }}">
+                                                                                                    value="<?php echo e(BidHelper::getLastBidderPrice($event->id, $item->id) != null ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price - $item->decrement_price : $item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price - $item->decrement_price); ?>">
                                                                                             </div>
-                                                                                        @endif
+                                                                                        <?php endif; ?>
 
 
                                                                                     </div>
@@ -275,44 +278,44 @@
                                                     </form>
 
                                                 </div>
-                                                {{-- Bidding Modal Ends --}}
+                                                
 
-                                                @push('scripts')
+                                                <?php $__env->startPush('scripts'); ?>
                                                     <script>
                                                         setInterval(() => {
 
                                                             $.ajax({
                                                                 type: "post",
-                                                                url: "{{ route('vendor.live-data') }}",
+                                                                url: "<?php echo e(route('vendor.live-data')); ?>",
                                                                 data: {
-                                                                    '_token': "{{ csrf_token() }}",
-                                                                    'eId': '{{ $event->id }}',
-                                                                    'iId': '{{ $item->id }}',
+                                                                    '_token': "<?php echo e(csrf_token()); ?>",
+                                                                    'eId': '<?php echo e($event->id); ?>',
+                                                                    'iId': '<?php echo e($item->id); ?>',
                                                                 },
 
                                                                 success: function(res) {
-                                                                    $("#bidPrice{{ $item->id }}").text(res.lowestBid);
-                                                                    $("#lastBidderPrice{{ $item->id }}").text(res.lastBidderPrice);
+                                                                    $("#bidPrice<?php echo e($item->id); ?>").text(res.lowestBid);
+                                                                    $("#lastBidderPrice<?php echo e($item->id); ?>").text(res.lastBidderPrice);
 
                                                                     if (res.event_status != "COMPLETED") {
                                                                         if (res.isMyBidIsLowest) {
-                                                                            $("#statusBtn{{ $item->id }}").show();
+                                                                            $("#statusBtn<?php echo e($item->id); ?>").show();
 
-                                                                            $("#btn_bid{{ $item->id }}").hide();
+                                                                            $("#btn_bid<?php echo e($item->id); ?>").hide();
                                                                         } else {
-                                                                            $("#statusBtn{{ $item->id }}").hide();
+                                                                            $("#statusBtn<?php echo e($item->id); ?>").hide();
 
-                                                                            $("#btn_bid{{ $item->id }}").show();
+                                                                            $("#btn_bid<?php echo e($item->id); ?>").show();
                                                                         }
 
-                                                                        $("#bidding_price_hidden{{ $item->id }}").val(res.lastBidderPrice - res
+                                                                        $("#bidding_price_hidden<?php echo e($item->id); ?>").val(res.lastBidderPrice - res
                                                                             .decrementAmount);
-                                                                        $("#lbl_bidding_price{{ $item->id }}").text(res.lastBidderPrice - res
+                                                                        $("#lbl_bidding_price<?php echo e($item->id); ?>").text(res.lastBidderPrice - res
                                                                             .decrementAmount);
                                                                     } else {
-                                                                        $("#btn_bid{{ $item->id }}").hide();
-                                                                        $("#btn_closed{{ $item->id }}").show();
-                                                                        $("#statusBtn{{ $item->id }}").hide();
+                                                                        $("#btn_bid<?php echo e($item->id); ?>").hide();
+                                                                        $("#btn_closed<?php echo e($item->id); ?>").show();
+                                                                        $("#statusBtn<?php echo e($item->id); ?>").hide();
 
                                                                     }
 
@@ -323,14 +326,14 @@
                                                             });
                                                         }, 1500);
                                                     </script>
-                                                @endpush
-                                            @endforeach
+                                                <?php $__env->stopPush(); ?>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                        @include('vendor.partials.terms-condition')
+                        <?php echo $__env->make('vendor.partials.terms-condition', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -338,17 +341,17 @@
             </div>
             <!-- /.col -->
         </div>
-        @include('vendor.partials.bidding-modal')
+        <?php echo $__env->make('vendor.partials.bidding-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </section>
 
-    <form action="{{ route('vendor.filterLiveAuction') }}" method="post" id="filterForm">
-        @csrf
-        <input type="hidden" name="event_id" value="{{ $event->id }}">
+    <form action="<?php echo e(route('vendor.filterLiveAuction')); ?>" method="post" id="filterForm">
+        <?php echo csrf_field(); ?>
+        <input type="hidden" name="event_id" value="<?php echo e($event->id); ?>">
         <input type="hidden" name="region_id" value="" id="reg_id">
     </form>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script>
         function convertMillisecondsToHMS(milliseconds) {
             //Get hours from milliseconds
@@ -371,7 +374,7 @@
         }
 
         $(document).ready(function() {
-            var duration = {{ $event->closing_date_time_millis }}; // Duration in milliseconds				
+            var duration = <?php echo e($event->closing_date_time_millis); ?>; // Duration in milliseconds				
 
             function updateTimer() {
                 let remaing_time = duration - Date.now();
@@ -401,4 +404,6 @@
             $("#filterForm").submit();
         });
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('vendor.layout.base', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\revAuction\resources\views/vendor/pages/live-auction.blade.php ENDPATH**/ ?>
