@@ -46,7 +46,7 @@
                                                 <td>{{ $event->eventmode->mode }}</td>
                                                 <td><a href="{{ route('event.statistics', $event->id) }}">View
                                                         Statistics</a></td>
-                                                <td><a href="{{ route('event.statistics', $event->id) }}">View
+                                                <td><a href="{{ route('event.postedEventInformation', $event->id) }}">View
                                                         Information</a></td>
                                             </tr>
                                         @endforeach
@@ -61,4 +61,3 @@
     </section>
     <!-- /.content -->
 @endsection
-

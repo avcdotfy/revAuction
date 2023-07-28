@@ -70,7 +70,8 @@
                                                 <td>{{ $event->title }}</td>
                                                 <td><a href="{{ route('event.statistics', $event->id) }}">View Event
                                                         Statistics</a></td>
-                                                <td><a href="">View Information</a></td>
+                                                <td><a href="{{ route('event.postedEventInformation', $event->id) }}">View
+                                                        Information</a></td>
                                             </tr>
 
                                             {{-- Modal Starts --}}
