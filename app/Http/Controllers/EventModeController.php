@@ -15,7 +15,7 @@ class EventmodeController extends BaseController
 
     function index()
     {
-        $eventModes = Eventmode::all();
+        $eventModes = Eventmode::orderBy('created_at', 'desc')->get();
         return view('admin.pages.settings.master.eventMode.list', compact('eventModes'));
     }
     function create()

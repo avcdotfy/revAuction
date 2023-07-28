@@ -10,7 +10,7 @@ class StateController extends BaseController
 {
     function index()
     {
-        $states = State::where(['company_id' => $this->company_id])->get();
+        $states = State::where(['company_id' => $this->company_id])->orderBy('created_at', 'desc')->get();
         return view('admin.pages.settings.master.state.list', compact('states'));
     }
     function create()

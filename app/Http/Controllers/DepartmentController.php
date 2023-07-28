@@ -14,7 +14,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::where('user_id', Auth::user()->id)->get();
+        $departments = Department::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         return view('admin.pages.settings.organization.department.list', ['departments' => $departments]);
     }
 

@@ -10,7 +10,7 @@ class RegionController extends Controller
 {
     function index()
     {
-        $regions = Region::all();
+        $regions = Region::orderBy('created_at', 'desc')->get();
         return view('admin.pages.settings.master.region.list', compact('regions'));
     }
     function create()

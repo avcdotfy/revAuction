@@ -10,7 +10,7 @@ class UOMController extends Controller
 {
     function index()
     {
-        $uoms = UnitOfMeasure::all();
+        $uoms = UnitOfMeasure::orderBy('created_at', 'desc')->get();
         return view('admin.pages.settings.master.uom.list', compact('uoms'));
     }
     function create()

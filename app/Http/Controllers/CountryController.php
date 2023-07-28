@@ -10,7 +10,7 @@ class CountryController extends BaseController
     //
     function index()
     {
-        $countries = Country::where('company_id', '=', $this->company_id)->get();
+        $countries = Country::where('company_id', '=', $this->company_id)->orderBy('created_at', 'desc')->get();
         return view('admin.pages.settings.master.country.list', compact('countries'));
     }
     function create()
