@@ -64,7 +64,7 @@ class ItemController extends BaseController
         ]);
 
         for ($i = 0; $i < count($req->region); $i++) {
-
+            if (!$req->region[$i]) continue;
             ItemRPUModel::create([
                 'region_id' => $req->region[$i],
                 'price' => $req->price[$i],
