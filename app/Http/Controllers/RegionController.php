@@ -15,7 +15,8 @@ class RegionController extends Controller
     }
     function create()
     {
-        return view('admin.pages.settings.master.region.create');
+        $region = null;
+        return view('admin.pages.settings.master.region.create', compact('region'));
     }
     function store(Request $req)
     {
