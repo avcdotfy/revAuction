@@ -116,7 +116,7 @@
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <span>{{ $key == 0 ? 'L1' : 'L2' }}</span>
+                                                    <span>{{ $keyBid == 0 ? 'L1' : 'L2' }}</span>
                                                     <span><img src='{{ asset('images/up_icon.png') }}'
                                                             style='height:12px;float:right;' /></span>
                                                 </td>
@@ -162,7 +162,7 @@
                                                                                             </span>
                                                                                         </td>
                                                                                         <td>
-                                                                                            <span>{{ $key == 0 ? 'L1' : 'L2' }}</span>
+                                                                                            <span>${ k == 0 ? 'L1' : 'L2' } </span>
                                                                                             <span><img src='{{ asset('images/up_icon.png') }}'
                                                                                                     style='height:12px;float:right;' /></span>
                                                                                         </td>

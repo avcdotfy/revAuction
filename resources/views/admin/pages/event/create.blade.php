@@ -138,7 +138,7 @@
                                     </td>
                                     <td><span>${vendor.email }</span>
                                     </td>
-                                    <td><a href="${vendor.profileUrl}">View</a></td>
+                                    <td><a href="${vendor.profileUrl}" target="blank">View</a></td>
                                 </tr>`
                             );
 
