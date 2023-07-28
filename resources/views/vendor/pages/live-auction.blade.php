@@ -105,10 +105,10 @@
                                                     <td>
                                                         <a href="#" class="btn btn-primary "
                                                             id="statusBtn{{ $item->id }}"
-                                                            style="padding:8px 9px; display:{{ !BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) ? 'none' : '' }}">
+                                                            style="padding:8px 9px; display:{{ !BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) || $event->status == COMPLETED ? 'none' : '' }}">
                                                             L1</a>
-                                                        {{ dd(BidHelper::checkIfVendorhasLowestBid($event->id, $item->id)) }}
-                                                        {{ $event->status }}
+                                                        {{-- {{ dd(BidHelper::checkIfVendorhasLowestBid($event->id, $item->id)) }} --}}
+                                                        {{-- {{ $event->status }} --}}
                                                         <a href="#" data-toggle="modal" class="btn btn-success"
                                                             data-target="#bidModal{{ $item->id }}"
                                                             id="btn_bid{{ $item->id }}"
@@ -280,7 +280,6 @@
                                                 @push('scripts')
                                                     <script>
                                                         setInterval(() => {
-                                                            console.log("RES");
 
                                                             $.ajax({
                                                                 type: "post",
@@ -295,20 +294,27 @@
                                                                     $("#bidPrice{{ $item->id }}").text(res.lowestBid);
                                                                     $("#lastBidderPrice{{ $item->id }}").text(res.lastBidderPrice);
 
-                                                                    if (res.isMyBidIsLowest) {
-                                                                        $("#statusBtn{{ $item->id }}").show();
+                                                                    if (res.event_status != "COMPLETED") {
+                                                                        if (res.isMyBidIsLowest) {
+                                                                            $("#statusBtn{{ $item->id }}").show();
 
-                                                                        $("#btn_bid{{ $item->id }}").hide();
+                                                                            $("#btn_bid{{ $item->id }}").hide();
+                                                                        } else {
+                                                                            $("#statusBtn{{ $item->id }}").hide();
+
+                                                                            $("#btn_bid{{ $item->id }}").show();
+                                                                        }
+
+                                                                        $("#bidding_price_hidden{{ $item->id }}").val(res.lastBidderPrice - res
+                                                                            .decrementAmount);
+                                                                        $("#lbl_bidding_price{{ $item->id }}").text(res.lastBidderPrice - res
+                                                                            .decrementAmount);
                                                                     } else {
+                                                                        $("#btn_bid{{ $item->id }}").hide();
                                                                         $("#statusBtn{{ $item->id }}").hide();
 
-                                                                        $("#btn_bid{{ $item->id }}").show();
                                                                     }
 
-                                                                    $("#bidding_price_hidden{{ $item->id }}").val(res.lastBidderPrice - res
-                                                                        .decrementAmount);
-                                                                    $("#lbl_bidding_price{{ $item->id }}").text(res.lastBidderPrice - res
-                                                                        .decrementAmount);
                                                                 },
                                                                 error: function(err) {
                                                                     console.log("ERR", err);

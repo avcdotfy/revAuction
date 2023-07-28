@@ -7,6 +7,7 @@ use App\Helpers\BidHelper;
 use App\Helpers\EventHelper;
 use App\Helpers\ItemHelper;
 use App\Models\Bid;
+use App\Models\Event;
 use App\Models\Item;
 use App\Models\Participant;
 use Illuminate\Database\QueryException;
@@ -71,6 +72,7 @@ class BidController extends Controller
     function getLiveDataVendorSite(Request $r)
     {
         $data = [
+            'event_status' => Event::find($r->eId)->status,
             'lowestBid' => BidHelper::getLowestPrice($r->eId, $r->iId),
             'isMyBidIsLowest' => BidHelper::checkIfVendorhasLowestBid($r->eId, $r->iId),
             'lastBidderPrice' => BidHelper::getLastBidderPrice($r->eId, $r->iId)->bidding_price,
