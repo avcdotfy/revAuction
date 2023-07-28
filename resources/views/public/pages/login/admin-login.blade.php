@@ -69,7 +69,7 @@
         </div>
         <div class="login-box" style="border-radius:6px;background-color:#fff;border:1px solid #d2d6de;">
             <div class="login-logo" style="margin-bottom:0px;padding-top:20px;">
-                <a href="login.html"><img src="{{ asset('images/logo.png') }}" style="height:76px;" /></a>
+                <a href="login.html"><img src="{{ asset('media/logo/logo.png') }}" style="height:76px;" /></a>
             </div>
             <div class="login-logo" style="margin-bottom:0px;font-size:28px;padding-top:20px;">
                 <a href="#" style="border-bottom:1px solid #000"><b id="company_name"
