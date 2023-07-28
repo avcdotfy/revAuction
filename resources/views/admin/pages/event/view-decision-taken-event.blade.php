@@ -134,7 +134,7 @@
                             <div class="col-sm-12">
                                 <hr>
                                 <div class="col-sm-12" style="text-align:center;">
-                                    <a href="decision-taken-event.aspx" class="btn btn-sm btn-primary"
+                                    <a href="{{ route('event.decisionTaken') }}" class="btn btn-sm btn-primary"
                                         style="color: White; margin-left: 4px">Back</a>
                                 </div>
                             </div>

@@ -146,7 +146,7 @@
                                                     <input type="hidden"
                                                         name="vendor[{{ $key }}][item][{{ $iKey }}][id]"
                                                         value="{{ $obj->item_id }}">
-                                                    <input type="text"
+                                                    <input type="hidden"
                                                         name="vendor[{{ $key }}][item][{{ $iKey }}][bid_id]"
                                                         value="{{ $obj->id }}">
                                                     <tbody>

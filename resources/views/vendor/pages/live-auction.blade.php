@@ -295,6 +295,7 @@
                                                                     $("#lastBidderPrice{{ $item->id }}").text(res.lastBidderPrice);
 
                                                                     if (res.event_status != "COMPLETED") {
+                                                                        $("#btn_closed{{ $item->id }}").hide();
                                                                         if (res.isMyBidIsLowest) {
                                                                             $("#statusBtn{{ $item->id }}").show();
 
@@ -377,8 +378,8 @@
                 let remaing_time = duration - Date.now();
                 if (remaing_time < 0) {
                     var formattedTime = 00;
-                    $('#btn_closed').show();
-                    $('#btn_bid').hide();
+                    // $('#btn_closed').show();
+                    // $('#btn_bid').hide();
                 } else {
                     var formattedTime = convertMillisecondsToHMS(remaing_time);
                 }
