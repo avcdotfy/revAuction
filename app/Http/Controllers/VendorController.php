@@ -127,7 +127,7 @@ class VendorController extends Controller
             $vendorObj->username =  $req->vendor->user->username;
             $vendorObj->phone =  $req->vendor->user->phone;
             $vendorObj->email =  $req->vendor->user->email;
-            $vendorObj->profileUrl = route('user.profile', $req->vendor->id);
+            $vendorObj->profileUrl = route('vendor.profile', $req->vendor->id);
             array_push($vendors, $vendorObj);
         }
         return response()->json(['vendors' => $vendors, 'status' => true]);
