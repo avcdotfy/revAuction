@@ -107,7 +107,8 @@
                                                             id="statusBtn{{ $item->id }}"
                                                             style="padding:8px 9px; display:{{ !BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) ? 'none' : '' }}">
                                                             L1</a>
-                                                        {{-- {{ dd(BidHelper::checkIfVendorhasLowestBid($event->id, $item->id)) }} --}}
+                                                        {{ dd(BidHelper::checkIfVendorhasLowestBid($event->id, $item->id)) }}
+                                                        {{ $event->status }}
                                                         <a href="#" data-toggle="modal" class="btn btn-success"
                                                             data-target="#bidModal{{ $item->id }}"
                                                             id="btn_bid{{ $item->id }}"

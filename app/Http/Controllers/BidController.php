@@ -21,7 +21,6 @@ class BidController extends Controller
     function store(Request $req)
     {
         // dd($req->all());
-
         if (EventHelper::isEventFinished($req->event_id)) {
             return redirect()->back()->with('error', 'event is no longer running');
         }
