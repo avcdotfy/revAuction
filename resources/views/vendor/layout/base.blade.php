@@ -14,12 +14,9 @@
     <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}" />
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('Ionicons/css/ionicons.min.css') }}" />
-    <link href="{{ asset('simple-line-icons/simple-line-icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
     <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('datatables/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" href="{{ asset('dist/css/jquery.dataTables.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('dist/css/buttons.dataTables.min.css') }}" />
+
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('dist/css/skins/all-skins.min.css') }}" />
