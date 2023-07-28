@@ -61,14 +61,11 @@
 </head>
 
 <body class="hold-transition login-page" style="background: #eaeaea">
-
     <section class="content-header" style="padding:0px; background: #fff">
         <h1 style="text-align: center;text-transform:uppercase;border-bottom: 1px solid #dedede;">
             <span><img src="{{ asset('media/logo/logo.png') }}" style="height:66px;"> </span>
         </h1>
     </section>
-
-    @include('admin.partials.alerts')
 
     <section class="content"
         style="min-height: 250px;
@@ -77,6 +74,7 @@
     margin-left: auto;
     padding-left: 1px;
     padding-right: 0px;">
+        @include('admin.partials.alerts')
         <div class="row">
             <div class="col-sm-12">
                 <div class="box">
@@ -87,6 +85,9 @@
                                     <a href=" " id="aTag_Banner_Image" target="_blank" title=" "><img
                                             id="img_banner_image" class="img-responsive"
                                             src="{{ asset('media/logo/banner_image.jpg') }}"></a>
+                                    <a href="{{ route('vendor.login') }}" id="aTag_Banner_Image" target="_blank"
+                                        title=" " class="btn btn-primary">Vendor Login </a>
+
                                 </div>
                             </div>
                             <div class="col-sm-7" style="border-left: 1px solid #d2d6de;padding:0px;">

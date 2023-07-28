@@ -56,7 +56,7 @@
             Year</label>
         <div class="col-sm-12">
             <input name="establish_year" type="text" value="{{ old('establish_year') }}" id="establishment_year"
-                required class="form-control" placeholder="Enter Establishment Year">
+                class="form-control" placeholder="Enter Establishment Year">
         </div>
     </div>
 </div>

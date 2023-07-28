@@ -142,7 +142,7 @@
                                             style="color: red; font-size: 13px;">*</span></label>
                                     <div class="col-sm-12">
 
-                                        <input name="country" type="text" value="{{ $v->user->country }}"
+                                        <input name="country" type="text" value="{{ $v->user->country->name }}"
                                             class="form-control">
                                     </div>
                                 </div>
@@ -205,7 +205,8 @@
                                     <label for="inputPassword3" class="col-sm-12 control-label">Vendor Type <span
                                             style="color: red; font-size: 13px;">*</span></label>
                                     <div class="col-sm-12">
-                                        <input name="ecc" type="text" value="{{$v->vendor_type}}" class="form-control">
+                                        <input name="ecc" type="text" value="{{ $v->vendor_type }}"
+                                            class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -215,18 +216,14 @@
                                         <span style="color: red; font-size: 13px;">*</span></label>
 
                                     <div class="col-sm-4" style="padding:0px;">
-                                        <label for="inputPassword3" class="col-sm-12 control-label"><span
-                                                id="ContentPlaceHolder1_lvPrI_lbl_product_range_name_0"
-                                                title="106">Aluminium Coils</span></label>
+
+
                                         <div class="col-sm-6">
                                             <span class="multiselect-native-select">
                                                 <div class="btn-group">
-                                                    <button type="button"
-                                                        class="multiselect dropdown-toggle btn btn-default"
-                                                        data-toggle="dropdown" title="Select Item">
-                                                        <span class="multiselect-selected-text">Select Item</span> <b
-                                                            class="caret"></b></button>
-                                                    <ul class="multiselect-container dropdown-menu"></ul>
+                                                    <b>Prefered Region</b>
+                                                    <p class="multiselect-selected-text">{{ $v->region->name }}</p>
+
 
                                                 </div>
                                             </span>
@@ -234,33 +231,16 @@
                                         <div class="col-sm-6">
                                             <span class="multiselect-native-select">
                                                 <div class="btn-group">
-                                                    <button type="button"
-                                                        class="multiselect dropdown-toggle btn btn-default"
-                                                        data-toggle="dropdown" title="Select Region"><span
-                                                            class="multiselect-selected-text">Select Region</span> <b
-                                                            class="caret"></b>
-                                                    </button>
-                                                    <ul class="multiselect-container dropdown-menu"
-                                                        style="    padding: 4px 7px;">
-                                                        <li class="multiselect-item multiselect-all"><a tabindex="0"
-                                                                class="multiselect-all">
-                                                                <label class="checkbox"
-                                                                    style="    margin-top: 0px; margin-bottom: 0px;"><input
-                                                                        type="checkbox" value="multiselect-all"> Select
-                                                                    all</label></a>
-                                                        </li>
-                                                        <li><a tabindex="0"><label class="checkbox" title="PAN India"
-                                                                    style="    margin-top: 0px; margin-bottom: 0px;"><input
-                                                                        type="checkbox" value="105"> PAN India</label>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
+                                                    <b>Prefered Category</b>
+                                                    <p class="multiselect-selected-text">{{ $v->category->name }}</p>
+
+
                                                 </div>
                                             </span>
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-4" style="padding:0px;">
+                                    {{-- <div class="col-sm-4" style="padding:0px;">
                                         <label for="inputPassword3" class="col-sm-12 control-label"><span
                                                 id="ContentPlaceHolder1_lvPrI_lbl_product_range_name_1"
                                                 title="105">Aluminium Pipe</span></label>
@@ -325,16 +305,17 @@
 
                                             </span>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
                             </div>
                             <div class="col-sm-12" style="text-align: right;">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <input type="button" name="ctl00$ContentPlaceHolder1$btnsubmit" value="Update"
+                                    {{-- <input type="button" name="ctl00$ContentPlaceHolder1$btnsubmit" value="Update"
                                         onclick="if(Page_ClientValidate('IU')){this.disabled=true;this.value='Please wait ...';};__doPostBack('ctl00$ContentPlaceHolder1$btnsubmit','')"
-                                        id="ContentPlaceHolder1_btnsubmit" class="btn btn-sm btn-primary">
-                                    <a href="approved-vendor.aspx" class="btn btn-sm btn-sm btn-primary"
+                                        id="ContentPlaceHolder1_btnsubmit" class="btn btn-sm btn-primary"> --}}
+                                    <a href="{{ route('vendor.approved_requests') }}"
+                                        class="btn btn-sm btn-sm btn-primary"
                                         style="color: White; margin-left: 4px">Back</a>
                                 </div>
                             </div>

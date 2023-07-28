@@ -79,7 +79,7 @@ class VendorController extends Controller
                 // 'logo' => $req->logo->originalName,
             ]);
         } catch (QueryException $exc) {
-            return redirect()->route('vendor.create')->with('error', $exc . 'duplicate entry found for vendor')->withInput();
+            return redirect()->route('vendor.create')->with('error',   'Username or email you are submiting is already exist try another')->withInput();
         }
 
         if ($user instanceof User) {
@@ -93,7 +93,7 @@ class VendorController extends Controller
 
             if ($r instanceof ModelsRequest)
                 Mail::to($company->user->email)->send(new NewVendorMail($user));
-            return redirect()->route('vendor.create')->with('success', 'your vendor Account Created Successfully');
+            return redirect()->route('vendor.create')->with('success', 'Your vendor Account Created Successfully');
         } else {
             return redirect()->route('vendor.create')->with('error', 'Something Went Wrong');
         }

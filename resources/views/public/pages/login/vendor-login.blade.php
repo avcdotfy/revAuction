@@ -42,7 +42,7 @@
 
     <div class="login-box" style="border-radius:6px;background-color:#fff;border:1px solid #d2d6de;">
         <div class="login-logo" style="margin-bottom:0px;padding-top:20px;">
-            <a href="login.html"><img src="{{ asset('images/logo.png') }}" style="height:70px;" /></a>
+            <img src="{{ asset('media/logo/logo.png') }}" style="height:66px;">
         </div>
         @include('vendor.partials.alerts')
         <form action="{{ route('vendor.login') }}" method="post">
@@ -53,7 +53,6 @@
         <!-- /.login-box-body -->
     </div>
     <!-- /.login-box -->
-
 
     <div class="modal fade" id="modal_otp">
         <div class="modal-dialog" style="width: 350px;">

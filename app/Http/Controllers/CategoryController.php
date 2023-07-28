@@ -19,7 +19,7 @@ class CategoryController extends BaseController
      */
     public function index()
     {
-        $categories = Category::where('company_id', $this->company_id)->get();
+        $categories = Category::where('company_id', $this->company_id)->orderBy('created_at', 'desc')->get();
         return view('admin.pages.catalog.category.list', compact('categories'));
     }
 

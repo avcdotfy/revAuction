@@ -1,17 +1,17 @@
 @if (Session::has('success'))
-    <div class="alert alert-success alert-dismissible fade in">
+    <div class="alert alert-success alert-dismissible fade in" style="margin: 20px;">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         {{ Session::get('success') }}<br />
     </div>
 @endif
 @if (Session::has('error'))
-    <div class="alert alert-danger alert-dismissible fade in">
+    <div class="alert alert-danger alert-dismissible fade in" style="margin: 20px;">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         {{ Session::get('error') }}<br />
     </div>
 @endif
 @if (Session::has('warning'))
-    <div class="alert alert-warning alert-dismissible fade in">
+    <div class="alert alert-warning alert-dismissible fade in" style="margin: 20px;">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         {{ Session::get('warning') }}<br />
     </div>
