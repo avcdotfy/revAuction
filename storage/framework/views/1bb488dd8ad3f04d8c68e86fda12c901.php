@@ -1,6 +1,6 @@
-@extends('admin.layout.base')
 
-@section('main_section')
+
+<?php $__env->startSection('main_section'); ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h3 style="margin-top: 10px; margin-bottom: 20px">Home | Events | Create New Event </h3>
@@ -8,7 +8,7 @@
     </section>
     <!-- Main content -->
     <section class="content">
-        @include('admin.partials.alerts')
+        <?php echo $__env->make('admin.partials.alerts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-xs-12">
@@ -16,9 +16,9 @@
                     <div class="box-body">
                         <div id="ContentPlaceHolder1_div_nr" class="row">
 
-                            <form action="{{ route('event.store') }}" method="post" id="eventForm">
-                                @csrf
-                                @include('admin.pages.event.form')
+                            <form action="<?php echo e(route('event.store')); ?>" method="post" id="eventForm">
+                                <?php echo csrf_field(); ?>
+                                <?php echo $__env->make('admin.pages.event.form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                             </form>
                         </div>
                         <!-- /.box-body -->
@@ -29,9 +29,9 @@
                 <!-- /.row -->
     </section>
     <!-- /.content -->
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script>
         $('#opening_date').datepicker({
             minDate: 0
@@ -118,7 +118,7 @@
             function getVendors(catId) {
                 $.ajax({
                     type: "get",
-                    url: "{{ route('event.vendors') }}",
+                    url: "<?php echo e(route('event.vendors')); ?>",
                     data: {
                         'cat_id': catId
                     },
@@ -154,7 +154,7 @@
             function getItemsRpu(catId) {
                 $.ajax({
                     type: "get",
-                    url: "{{ route('event.itemsRpu') }}",
+                    url: "<?php echo e(route('event.itemsRpu')); ?>",
                     data: {
                         'cat_id': catId
                     },
@@ -234,4 +234,6 @@
 
         }
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('admin.layout.base', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\revAuction\resources\views/admin/pages/event/create.blade.php ENDPATH**/ ?>

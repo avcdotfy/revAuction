@@ -12,6 +12,8 @@ use App\Models\UnitOfMeasure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
+use PharIo\Manifest\Url as ManifestUrl;
 use RoleHelper;
 use stdClass;
 
@@ -99,7 +101,6 @@ class ItemController extends BaseController
             $rpuObj->unit_name  =  $rpu->item->unit->name;
             $rpuObj->region  =  $rpu->region->name;
             $rpuObj->price  =   $rpu->price;
-
             array_push($itemRpus, $rpuObj);
         }
 
