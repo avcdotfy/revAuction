@@ -40,4 +40,13 @@ class Vendor extends Model
     {
         return $this->belongsTo(Category::class, 'preference_category');
     }
+
+    public function regions()
+    {
+        return $this->belongsToMany(Region::class);
+    }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }

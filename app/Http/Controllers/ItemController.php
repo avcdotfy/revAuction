@@ -81,7 +81,6 @@ class ItemController extends BaseController
 
     public function getItems($cat_id)
     {
-
         $itemRpus = ItemRPUModel::where(['company_id' => $this->company_id])->get();
     }
 

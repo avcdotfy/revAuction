@@ -2,7 +2,9 @@
 
 namespace App\Helpers;
 
+use App\Events\BidEvent;
 use App\Models\Bid;
+use App\Models\Cappingprice;
 use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,14 +21,13 @@ class BidHelper
     public static function getLastBidderPrice($event_id, $item_id)
     {
         $bid = Bid::orderBy('created_at', 'desc')->where(['event_id' => $event_id, 'item_id' => $item_id])->first();
-
         return $bid;
     }
 
     public static function checkIfVendorhasLowestBid($eId, $iId)
     {
-        $lowestBid = Bid::where(['event_id' => $eId, 'item_id' => $iId])->min('bidding_price');
-        $lowestBidRow = Bid::where(['event_id' => $eId, 'item_id' => $iId, 'bidding_price' => $lowestBid])->first();
+
+        $lowestBidRow = Bid::where(['event_id' => $eId, 'item_id' => $iId, 'least_status' => '1'])->first();
 
         if ($lowestBidRow) {
             return $lowestBidRow->vendor_id == Auth::user()->vendor->id;
@@ -34,7 +35,18 @@ class BidHelper
             return false;
         }
     }
+    public static function checkIfVendorhasLowestCappingPrice($eId, $iId)
+    {
+        $lowestCappingPrice = Bid::where(['event_id' => $eId, 'item_id' => $iId])->where('capping_price', '!=', 0)->min('capping_price');
+        $lowestCappingPriceRow = Bid::where(['event_id' => $eId, 'item_id' => $iId, 'capping_price' => $lowestCappingPrice])->first();
 
+        if ($lowestCappingPriceRow) {
+            if ($lowestCappingPrice > 0)
+                return $lowestCappingPriceRow->vendor_id == Auth::user()->vendor->id;
+        } else {
+            return false;
+        }
+    }
 
     public static function getBidStatistics($eId)
     {
@@ -78,5 +90,65 @@ class BidHelper
     public static function getNumberOfBidsOf($eId, $iId)
     {
         return  Bid::where(['event_id' => $eId, 'item_id' => $iId])->count();
+    }
+
+    public static function placeBid($req)
+    {
+
+        $data['event_id'] = $req->event_id;
+        $data['item_id'] = $req->item_id;
+        $data['capping_price'] = $req->capping_price;
+        $data['vendor_id'] = Auth::user()->vendor->id;
+
+        if ($req->capping_price) {
+            $cap_price = Cappingprice::where(['event_id' => $req->event_id, 'item_id' => $req->item_id])->min('capping_price');
+            // dd($cap_price);
+            if ($req->capping_price > $cap_price) {
+                CappingPriceHelper::saveCappingPrice($data);
+            } else {
+                CappingPriceHelper::saveCappingPrice($data);
+                $data['rank'] = 1;
+                LeastStatusHelper::saveNewStatus($data);
+            }
+        } else {
+        }
+        $bid = Bid::create([
+            'event_id' => $req->event_id,
+            'item_id' => $req->item_id,
+            'item_r_p_u_model_id' => $req->item_rpu_id,
+            'bidding_price' => $req->bidding_price,
+            'least_status' => 1,
+            'vendor_id' => Auth::user()->vendor->id
+        ]);
+
+        // Auth::user()->vendor->bids()->attach($bid->id);
+
+        // $data['bids'] = BidHelper::getLiveBidStatistics($req->event_id, $req->item_id);
+        // $data['item_id'] = $req->item_id;
+        // $data['event_id'] = $req->event_id;
+        // event(new BidEvent($data));
+    }
+
+
+    public static function updateLeastStatus($req)
+    {
+        $bids = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id])->orderBy('bidding_price', 'asc')->get();
+
+        // dd($bids);
+        if (count($bids) != 0) {
+            $leasStatusValue = 2;
+            foreach ($bids as $key => $bid) {
+                // if ($key == 0) continue;
+                $bid->update(['least_status' =>  $leasStatusValue]);
+                $leasStatusValue += 1;
+            }
+        }
+    }
+
+
+    public static function getVendorsLeastStatus($eId, $iId)
+    {
+        $bid = Bid::where(['event_id' => $eId, 'item_id' => $iId, 'vendor_id' => Auth::user()->vendor->id])->orderBy('bidding_price', 'asc')->first();
+        return $bid->least_status;
     }
 }

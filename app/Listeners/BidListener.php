@@ -26,5 +26,7 @@ class BidListener
         if (!Participant::where(['event_id' => $event->event_id, 'item_id' => $event->item_id, 'vendor_id' => Auth::user()->vendor->id])->first()) {
             Participant::create(['event_id' => $event->event_id, 'item_id' => $event->item_id, 'vendor_id' => Auth::user()->vendor->id]);
         }
+
+        
     }
 }

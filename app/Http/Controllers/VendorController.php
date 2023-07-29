@@ -73,11 +73,14 @@ class VendorController extends Controller
                 'mse_registration_number' => $req->mse_registration_number,
                 'pan_tan' => $req->pan_tan,
                 'user_id' => $user->id,
-                'preference_category' => $req->preference_category,
-                'preference_region' => $req->preference_region,
+                'preference_category' => $req->preference_category[0],
+                'preference_region' => $req->preference_region[0],
                 'vendor_type' => $req->vendor_type,
                 // 'logo' => $req->logo->originalName,
             ]);
+
+            $user->vendor->categories()->attach($req->preference_category);
+            $user->vendor->regions()->attach($req->preference_region);
         } catch (QueryException $exc) {
             return redirect()->route('vendor.create')->with('error',   'Username or email you are submiting is already exist try another')->withInput();
         }
@@ -88,7 +91,7 @@ class VendorController extends Controller
             $r = ModelsRequest::create([
                 'vendor_id' => $user->vendor->id,
                 'company_id' => $company->id,
-                'category_id' => $req->preference_category
+                'category_id' => $req->preference_category[0],
             ]);
 
             if ($r instanceof ModelsRequest)

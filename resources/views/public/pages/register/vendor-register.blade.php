@@ -58,6 +58,8 @@
             .inner-wrap padding: 5px 10px max-height: 140px overflow: auto
         }
     </style>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body class="hold-transition login-page" style="background: #eaeaea">
@@ -116,7 +118,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
     <script type="text/javascript" src="{{ asset('dist/js/jquery.dataTables.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('validations/register-form-validator.js') }}"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
 
@@ -151,10 +153,12 @@
                     }
                 });
             }
+
+            $(document).ready(function() {
+                $('.select2').select2();
+            });
         });
     </script>
-
-
 </body>
 
 </html>

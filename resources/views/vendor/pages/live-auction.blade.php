@@ -105,14 +105,15 @@
                                                     <td>
                                                         <a href="#" class="btn btn-primary "
                                                             id="statusBtn{{ $item->id }}"
-                                                            style="padding:8px 9px; display:{{ !BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) || $event->status == COMPLETED ? 'none' : '' }}">
-                                                            L1</a>
+                                                            style="padding:8px 9px; display:{{ !BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) || !BidHelper::checkIfVendorhasLowestCappingPrice($event->id, $item->id) || $event->status == COMPLETED ? 'none' : '' }}">
+                                                            {{ BidHelper::getVendorsLeastStatus($event->id, $item->id) ? 'L1' : '' }}</a>
                                                         {{-- {{ dd(BidHelper::checkIfVendorhasLowestBid($event->id, $item->id)) }} --}}
                                                         {{-- {{ $event->status }} --}}
+                                                        {{-- {{ BidHelper::checkIfVendorhasLowestCappingPrice($event->id, $item->id) }} --}}
                                                         <a href="#" data-toggle="modal" class="btn btn-success"
                                                             data-target="#bidModal{{ $item->id }}"
                                                             id="btn_bid{{ $item->id }}"
-                                                            style="padding:8px 9px; display:{{ $event->status == COMPLETED || BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) ? 'none' : '' }}">
+                                                            style="padding:8px 9px; display:{{ $event->status == COMPLETED || BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) || BidHelper::checkIfVendorhasLowestCappingPrice($event->id, $item->id) ? 'none' : '' }}">
                                                             Bid Now </a>
 
                                                         <a href="#" class="btn btn-danger"
