@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}" />
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('Ionicons/css/ionicons.min.css') }}" />
-   
+
     <!-- DataTables -->
-   
+
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('dist/css/skins/all-skins.min.css') }}" />
@@ -128,6 +128,10 @@
     <style>
         .select2-selection__choice__display {
             color: #08085c
+        }
+
+        .error {
+            color: red;
         }
     </style>
 

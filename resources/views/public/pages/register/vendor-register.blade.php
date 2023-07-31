@@ -89,10 +89,10 @@
                                             src="{{ asset('media/logo/banner_image.jpg') }}"></a>
                                     <a href="{{ route('vendor.login') }}" id="aTag_Banner_Image" target="_blank"
                                         title=" " class="btn btn-primary">Vendor Login </a>
-
                                 </div>
                             </div>
                             <div class="col-sm-7" style="border-left: 1px solid #d2d6de;padding:0px;">
+
                                 <form action="{{ route('vendor.store') }}" method="post" enctype="multipart/form-data"
                                     id="registerForm">
                                     @csrf

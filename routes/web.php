@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
+
 Route::fallback(function () {
    return redirect()->route('404');
 });

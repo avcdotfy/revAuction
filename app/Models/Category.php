@@ -15,4 +15,10 @@ class Category extends Model
     {
         return $this->hasMany(Item::class);
     }
+
+
+    public function vendors()
+    {
+        return $this->belongsToMany(Vendor::class);
+    }
 }

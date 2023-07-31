@@ -6,19 +6,21 @@ use App\Helpers\BidHelper;
 use App\Helpers\CategoryHelper;
 use App\Helpers\CompanyHelper;
 use App\Helpers\EventHelper;
+use App\Helpers\UploadHelper;
 use App\Mail\NewVendorMail;
+use App\Models\Category;
 use App\Models\Company;
 use App\Models\Country;
 use App\Models\Event;
 use App\Models\ItemRPUModel;
 use App\Models\Notice;
 use App\Models\Region;
-use App\Models\Request as ModelsRequest;
+use App\Models\Request as VendorRequest;
 use App\Models\State;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\VendorCompany;
-use App\Models\VendorRequest;
+
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -84,17 +86,19 @@ class VendorController extends Controller
         } catch (QueryException $exc) {
             return redirect()->route('vendor.create')->with('error',   'Username or email you are submiting is already exist try another')->withInput();
         }
+        UploadHelper::uploadFile($req, $user->vendor->id);
 
         if ($user instanceof User) {
             $domain = request()->getHost();
             $company = Company::where('web_url', $domain)->first();
-            $r = ModelsRequest::create([
+            $r = VendorRequest::create([
                 'vendor_id' => $user->vendor->id,
                 'company_id' => $company->id,
                 'category_id' => $req->preference_category[0],
             ]);
 
-            if ($r instanceof ModelsRequest)
+
+            if ($r instanceof VendorRequest)
                 Mail::to($company->user->email)->send(new NewVendorMail($user));
             return redirect()->route('vendor.create')->with('success', 'Your vendor Account Created Successfully');
         } else {
@@ -121,19 +125,22 @@ class VendorController extends Controller
     public function getVendorsFromCategoryId(Request $req)
     {
         $cat_id = $req->cat_id;
-        $requests = ModelsRequest::where(['category_id' => $cat_id, 'status' => REQUEST_STATUS[0]])->get();
-        $vendors = [];
-        foreach ($requests  as $key => $req) {
+        $vendors = Category::find($cat_id)->vendors;
+        // $requests = VendorRequest::where(['category_id' => $cat_id, 'status' => REQUEST_STATUS[0]])->get();
+        $vendorArray = [];
+        foreach ($vendors  as $key => $vendor) {
+            // dd($vendor->user);
             $vendorObj = new stdClass;
-            $vendorObj->id = $req->vendor->id;
-            $vendorObj->company_name = $req->vendor->company_name;
-            $vendorObj->username =  $req->vendor->user->username;
-            $vendorObj->phone =  $req->vendor->user->phone;
-            $vendorObj->email =  $req->vendor->user->email;
-            $vendorObj->profileUrl = route('vendor.profile', $req->vendor->id);
-            array_push($vendors, $vendorObj);
+            $vendorObj->id = $vendor->id;
+            $vendorObj->company_name = $vendor->company_name;
+            $vendorObj->username =  $vendor->user->username;
+            $vendorObj->phone =  $vendor->user->phone;
+            $vendorObj->email =  $vendor->user->email;
+            $vendorObj->profileUrl = route('vendor.profile', $vendor->id);
+
+            array_push($vendorArray, $vendorObj);
         }
-        return response()->json(['vendors' => $vendors, 'status' => true]);
+        return response()->json(['vendors' => $vendorArray, 'status' => true]);
     }
 
     public function upCommingEvents()

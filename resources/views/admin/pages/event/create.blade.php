@@ -125,7 +125,7 @@
                     success: function(res) {
                         console.log(res.vendors)
                         $("#vendorTableBody").empty();
-
+                        console.log(res.vendors);
                         res.vendors.forEach((vendor, key) => {
                             $('#vendorTableBody').append(
                                 `<tr role="row" class="odd">

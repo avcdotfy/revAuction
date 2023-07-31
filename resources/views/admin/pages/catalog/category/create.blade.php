@@ -13,7 +13,7 @@
                 <div class="box">
                     <div class="box-body">
                         <div id="ContentPlaceHolder1_div_nr" class="row">
-                            <form action="{{ route('category.store') }}" method="post">
+                            <form action="{{ route('category.store') }}" method="post" id="categoryForm">
                                 @csrf
                                 @include('admin.partials.category-form')
                             </form>
@@ -25,3 +25,7 @@
     </section>
     <!-- /.content -->
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('validations/category-validator.js') }}"></script>
+@endpush

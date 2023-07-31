@@ -17,9 +17,9 @@ return new class extends Migration
             $t->id();
             $t->string('code');
             $t->string('name');
-            $t->text('terms_condition');
+            $t->text('terms_condition')->nullable();
             $t->boolean('item_time_trigger');
-            $t->integer('time_gap_between_each_item');
+            // $t->integer('time_gap_between_each_item');
             $t->integer('last_minute_closing_time_increment');
             $t->boolean('is_active');
             $t->foreignIdFor(User::class)->comment("Creator ID");

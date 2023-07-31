@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\BidHelper;
+use App\Helpers\UploadHelper;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\ItemController;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
+use Symfony\Contracts\Service\Attribute\Required;
 
 Route::group(['middleware' => 'guest'], function () {
     Route::group(['prefix' => 'vendor'], function () {

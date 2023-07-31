@@ -239,6 +239,26 @@
                                             </span>
                                         </div>
                                     </div>
+                                    <div class="col-sm-12" style="padding:0px;">
+
+                                        <div class="col-sm-12">
+                                            <span class="multiselect-native-select">
+                                                <div class="btn-group">
+                                                    <b>Documents</b>
+                                                    @foreach (UploadHelper::listDocs($v->id) as $doc)
+                                                        <div>
+                                                            <a href="{{ Storage::url('document/' . $doc->path) }}"
+                                                                download __target="blank"
+                                                                class="multiselect-selected-text">{{ $doc->path }}</a>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
 
                                     {{-- <div class="col-sm-4" style="padding:0px;">
                                         <label for="inputPassword3" class="col-sm-12 control-label"><span
@@ -314,8 +334,7 @@
                                     {{-- <input type="button" name="ctl00$ContentPlaceHolder1$btnsubmit" value="Update"
                                         onclick="if(Page_ClientValidate('IU')){this.disabled=true;this.value='Please wait ...';};__doPostBack('ctl00$ContentPlaceHolder1$btnsubmit','')"
                                         id="ContentPlaceHolder1_btnsubmit" class="btn btn-sm btn-primary"> --}}
-                                    <a href="{{ route('vendor.approved_requests') }}"
-                                        class="btn btn-sm btn-sm btn-primary"
+                                    <a href="{{ route('vendor.new_requests') }}" class="btn btn-sm btn-sm btn-primary"
                                         style="color: White; margin-left: 4px">Back</a>
                                 </div>
                             </div>
@@ -323,7 +342,6 @@
                     </div>
                     <!-- /.box-body -->
                 </div>
-
 
                 <!-- /.row -->
     </section>

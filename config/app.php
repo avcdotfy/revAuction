@@ -4,6 +4,7 @@ use App\Helpers\BidHelper;
 use App\Helpers\CappingHelper;
 use App\Helpers\CategoryHelper;
 use App\Helpers\DecisionHelper;
+use App\Helpers\UploadHelper;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -193,6 +194,7 @@ return [
         'DHelper' => DecisionHelper::class,
         'CategoryHelper' => CategoryHelper::class,
         'CappingHelper' => CappingHelper::class,
+        'UploadHelper' => UploadHelper::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 

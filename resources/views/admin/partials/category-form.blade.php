@@ -29,7 +29,6 @@
         </label>
         <div class="col-sm-12" style="margin-bottom: 5px;">
             <textarea id="default" name="terms_condition" style="height: 80px">{{ $category ? $category->terms_condition : '' }}</textarea>
-
         </div>
     </div>
     <div class="col-sm-12" style="margin-bottom: 5px;">
@@ -46,7 +45,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-sm-6" style="padding: 0px;">
+        {{-- <div class="col-sm-6" style="padding: 0px;">
             <label for="inputPassword3" class="col-sm-12 control-label">Time Gap Between
                 Each Item (In Minutes) <span style="color: red; font-size: 13px;">*</span></label>
             <div class="col-sm-12">
@@ -57,7 +56,7 @@
                     value="{{ $category ? $category->time_gap_between_each_item : '' }}" class="form-control"
                     placeholder="Enter Time Gap Between Each Item (In Minutes)">
             </div>
-        </div>
+        </div> --}}
     </div>
     <div class="col-sm-12" style="margin-bottom:20px;">
         <div class="col-sm-6" style="padding: 0px;">
