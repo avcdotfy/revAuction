@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\BidHelper;
+use App\Helpers\CappingHelper;
 use App\Helpers\CategoryHelper;
 use App\Helpers\DecisionHelper;
 use Illuminate\Support\Facades\Facade;
@@ -191,6 +192,7 @@ return [
         'BidHelper' => BidHelper::class,
         'DHelper' => DecisionHelper::class,
         'CategoryHelper' => CategoryHelper::class,
+        'CappingHelper' => CappingHelper::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 

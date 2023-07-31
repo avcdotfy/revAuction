@@ -164,7 +164,7 @@ class EventController extends BaseController
     {
         $event = BidHelper::getBidStatistics($eId)[0];
         $bidStarted = BidHelper::getBidStatistics($eId)[1];
-        // dd($event->id);
+        // dd($event);
 
         return view('admin.pages.event.statistics', compact('event', 'bidStarted'));
     }

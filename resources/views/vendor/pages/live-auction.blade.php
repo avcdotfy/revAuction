@@ -106,7 +106,7 @@
                                                         <a href="#" class="btn btn-primary "
                                                             id="statusBtn{{ $item->id }}"
                                                             style="padding:8px 9px; display:{{ !BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) || !BidHelper::checkIfVendorhasLowestCappingPrice($event->id, $item->id) || $event->status == COMPLETED ? 'none' : '' }}">
-                                                            {{ BidHelper::getVendorsLeastStatus($event->id, $item->id) ? 'L1' : '' }}</a>
+                                                            {{ BidHelper::getVendorsLeastStatus($event->id, $item->id, Auth::user()->vendor->id) ? 'L1' : '' }}</a>
                                                         {{-- {{ dd(BidHelper::checkIfVendorhasLowestBid($event->id, $item->id)) }} --}}
                                                         {{-- {{ $event->status }} --}}
                                                         {{-- {{ BidHelper::checkIfVendorhasLowestCappingPrice($event->id, $item->id) }} --}}
@@ -120,8 +120,6 @@
                                                             id="btn_closed{{ $item->id }}"
                                                             style="padding:8px 9px; display:{{ $event->status == RUNNING ? 'none' : '' }}">
                                                             Closed </a>
-
-
                                                     </td>
                                                 </tr>
 

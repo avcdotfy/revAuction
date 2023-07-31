@@ -2,6 +2,9 @@
 
 namespace App\Events;
 
+use App\Helpers\BidHelper;
+use App\Helpers\CappingHelper;
+use App\Models\Bid;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -39,6 +42,9 @@ class BidEvent implements ShouldBroadcast
             $v->company =  $bid->vendor->company_name;
             $v->username   =    $bid->vendor->user->username;
             $v->bidd_price  =    $bid->bidding_price;
+            $v->least_status  =    BidHelper::getVendorsLeastStatus($this->event_id, $this->item_id, $bid->vendor->id);
+            $v->capping_price  =   CappingHelper::getCappingPrice($this->event_id, $this->item_id, $bid->vendor->id);
+            $v->vendor_id  =  $bid->vendor->id;
             $vendors[] = $v;
         }
 

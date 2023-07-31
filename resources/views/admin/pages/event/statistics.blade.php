@@ -21,7 +21,7 @@
 
     @if ($bidStarted > 0)
         @foreach ($event->items as $key => $item)
-            <section class="content" style="min-height: auto">
+            <section class="content itemsBox" style="min-height: auto">
                 <div class="col-lg-12" style="padding-left: 0px; padding-right: 0px">
                     <div class="box">
                         <div class="box-body">
@@ -56,12 +56,24 @@
                                                     id="ContentPlaceHolder1_lvIl_lbl_item_unit_details_0">{{ $item->regionPriceUnit->first()->item_unit_details }}</span>
                                             </th>
                                             <th style="text-align: justify; border-top: 0px;">Company Name :
-                                                <span
-                                                    id="mostLeastBidCompanyName{{ $item->id }}">{{ $item->availableBids->first()->vendor->company_name }}</span>
+                                                <span id="mostLeastBidCompanyName{{ $item->id }}">
+                                                    @foreach ($item->availableBids as $key => $value)
+                                                        @if ($value->least_status == 'L1')
+                                                            {{ $value->vendor->company_name }}
+                                                        @endif
+                                                    @endforeach
+                                                </span>
                                                 <br />
                                                 Item Rank : L1 & Price : Rs.
-                                                <span
-                                                    id="mostLeasBidPrice{{ $item->id }}">{{ $item->availableBids->first()->bidding_price }}</span>
+                                                <span id="mostLeasBidPrice{{ $item->id }}">
+                                                    <span id="mostLeastBidCompanyName{{ $item->id }}">
+                                                        @foreach ($item->availableBids as $key => $value)
+                                                            @if ($value->least_status == 'L1')
+                                                                {{ $value->bidding_price }}
+                                                            @endif
+                                                        @endforeach
+                                                    </span>
+                                                </span>
                                             </th>
                                             <th style="border-top: 0px;">
 
@@ -92,8 +104,9 @@
 
                                     @foreach ($item->availableBids as $keyBid => $bid)
                                         <tbody>
-                                            <tr style="{{ $keyBid == 0 ? 'background-color: #d5f7d5c2;' : '' }}">
-                                                <td>{{ $key + 1 }}</td>
+                                            <tr
+                                                style="{{ $bid->least_status == 'L1' ? 'background-color: #d5f7d5c2;' : '' }}">
+                                                <td>{{ $keyBid + 1 }}</td>
                                                 <td>
                                                     <span id="vendor_company{{ $bid->id }}">
                                                         {{ $bid->vendor->company_name }}
@@ -116,12 +129,15 @@
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <span>{{ $keyBid == 0 ? 'L1' : 'L2' }}</span>
-                                                    <span><img src='{{ asset('images/up_icon.png') }}'
+                                                    <span>{{ $bid->least_status }}</span>
+                                                    @php
+                                                        $image = $bid->least_status == 'L1' ? 'up.png' : 'down.png';
+                                                    @endphp
+                                                    <span><img src="{{ asset('media/logo/' . $image) }}"
                                                             style='height:12px;float:right;' /></span>
                                                 </td>
                                                 <td>
-                                                    <span>-</span>
+                                                    <span>{{ CappingHelper::getCappingPrice($event->id, $item->id, $bid->vendor->id) ? CappingHelper::getCappingPrice($event->id, $item->id, $bid->vendor->id) : '-' }}</span>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -137,8 +153,10 @@
                                                             $(`#vendor_table${data.item_id} tbody`).remove();
 
                                                             data.vendors.forEach((v, k) => {
+                                                                $image = v.least_status == 'L1' ? 'up.png' : 'down.png';
+                                                                // console.log($image);
                                                                 let vendorRow = `<tbody >
-                                                                                    <tr style="${ k == 0 ? 'background-color: #d5f7d5c2;' : '' }">
+                                                                                    <tr style="${ v.least_status == "L1" ? 'background-color: #d5f7d5c2;' : '' }">
                                                                                         <td id="vendor_serial${data.item_id}">${k + 1 }</td>
                                                                                         <td>
                                                                                             <span id="vendor_company${data.item_id}">
@@ -162,22 +180,24 @@
                                                                                             </span>
                                                                                         </td>
                                                                                         <td>
-                                                                                            <span>${ k == 0 ? 'L1' : 'L2' } </span>
-                                                                                            <span><img src='{{ asset('images/up_icon.png') }}'
+                                                                                            <span>${ v.least_status } </span>
+                                                                                                                    
+                                                                                            <span><img src="{{ asset('media/logo') }}/${$image}"
                                                                                                     style='height:12px;float:right;' /></span>
                                                                                         </td>
                                                                                         <td>
-                                                                                            <span>-</span>
+                                                                                            <span>${v.capping_price ? v.capping_price : ''}</span>
                                                                                         </td>
                                                                                     </tr>
                                                                                 </tbody>`;
+                                                                // console.log(v.capping_price)
+                                                                if (v.least_status == "L1") {
+                                                                    $(`#mostLeasBidPrice${data.item_id}`).text(v.bidd_price);
+                                                                    $(`#mostLeastBidCompanyName${data.item_id}`).text(v.company);
+                                                                }
 
-                                                                $(`#mostLeasBidPrice${data.item_id}`).text(data.vendors[0].bidd_price);
-                                                                $(`#mostLeastBidCompanyName${data.item_id}`).text(data.vendors[0].company);
 
                                                                 $(`#vendor_table${data.item_id}`).append(vendorRow);
-
-
 
                                                             });
 

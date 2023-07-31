@@ -8,6 +8,7 @@ use App\Models\Cappingprice;
 use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\TextUI\Configuration\Merger;
 use stdClass;
 
 class BidHelper
@@ -68,13 +69,15 @@ class BidHelper
 
             foreach ($event->items as $key => $item) {
                 if (in_array($item->id, $itemsIdOnWhichBidHasStarted) && $item->id == $itemsIdOnWhichBidHasStarted[$key]) {
-                    $item->availableBids = Bid::select('*',  DB::raw('MIN(bidding_price) as bidding_price'))->where('item_id', $item->id)->orderBy('bidding_price', 'asc')->groupBy('vendor_id')->get();
+                    $item->availableBids = Bid::select('*', DB::raw('MIN(least_status) as least_status'), DB::raw('MIN(bidding_price) as bidding_price'))->where('item_id', $item->id)->orderBy('bidding_price', 'asc')->groupBy('vendor_id')->get();
                 } else {
                     $item->availableBids = null;
                     unset($event->items[$key]);
                 }
             }
         }
+
+        // dd($item->availableBids);
         return [$event, $bidStarted];
     }
 
@@ -82,7 +85,7 @@ class BidHelper
     {
         $item = new stdClass;
 
-        $item->availableBids = Bid::select('*',  DB::raw('MIN(bidding_price) as bidding_price'))->where(['item_id' => $iId, 'event_id' => $eId])->orderBy('bidding_price', 'asc')->groupBy('vendor_id')->get();
+        $item->availableBids = Bid::select('*', DB::raw('MIN(least_status) as least_status'),  DB::raw('MIN(capping_price)  as capping_price'),  DB::raw('MIN(bidding_price) as bidding_price'))->where(['item_id' => $iId, 'event_id' => $eId])->orderBy('bidding_price', 'asc')->orderBy('capping_price', 'asc')->groupBy('vendor_id')->get();
 
         return $item;
     }
@@ -92,63 +95,17 @@ class BidHelper
         return  Bid::where(['event_id' => $eId, 'item_id' => $iId])->count();
     }
 
-    public static function placeBid($req)
+    public static function getVendorsLeastStatus($eId, $iId, $vId)
     {
-
-        $data['event_id'] = $req->event_id;
-        $data['item_id'] = $req->item_id;
-        $data['capping_price'] = $req->capping_price;
-        $data['vendor_id'] = Auth::user()->vendor->id;
-
-        if ($req->capping_price) {
-            $cap_price = Cappingprice::where(['event_id' => $req->event_id, 'item_id' => $req->item_id])->min('capping_price');
-            // dd($cap_price);
-            if ($req->capping_price > $cap_price) {
-                CappingPriceHelper::saveCappingPrice($data);
-            } else {
-                CappingPriceHelper::saveCappingPrice($data);
-                $data['rank'] = 1;
-                LeastStatusHelper::saveNewStatus($data);
-            }
-        } else {
-        }
-        $bid = Bid::create([
-            'event_id' => $req->event_id,
-            'item_id' => $req->item_id,
-            'item_r_p_u_model_id' => $req->item_rpu_id,
-            'bidding_price' => $req->bidding_price,
-            'least_status' => 1,
-            'vendor_id' => Auth::user()->vendor->id
-        ]);
-
-        // Auth::user()->vendor->bids()->attach($bid->id);
-
-        // $data['bids'] = BidHelper::getLiveBidStatistics($req->event_id, $req->item_id);
-        // $data['item_id'] = $req->item_id;
-        // $data['event_id'] = $req->event_id;
-        // event(new BidEvent($data));
+        // dd($vId);
+        $bid = Bid::select('*', DB::raw('MIN(least_status) as least_status'))->where(['event_id' => $eId, 'item_id' => $iId, 'vendor_id' => $vId])->orderBy('least_status', 'asc')->first();
+        // dd($bid);
+        return $bid ? $bid->least_status : null;
     }
 
 
-    public static function updateLeastStatus($req)
+    public static function getLeastStatusOfVendr($eId, $iId, $vId)
     {
-        $bids = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id])->orderBy('bidding_price', 'asc')->get();
-
-        // dd($bids);
-        if (count($bids) != 0) {
-            $leasStatusValue = 2;
-            foreach ($bids as $key => $bid) {
-                // if ($key == 0) continue;
-                $bid->update(['least_status' =>  $leasStatusValue]);
-                $leasStatusValue += 1;
-            }
-        }
-    }
-
-
-    public static function getVendorsLeastStatus($eId, $iId)
-    {
-        $bid = Bid::where(['event_id' => $eId, 'item_id' => $iId, 'vendor_id' => Auth::user()->vendor->id])->orderBy('bidding_price', 'asc')->first();
-        return $bid->least_status;
+        return Bid::where(['event_id' => $eId, 'item_id' => $iId, 'vendor_id' => $vId])->orderBy('least_status', 'asc')->first();
     }
 }

@@ -23,7 +23,7 @@ class BidController extends Controller
 
     function store(Request $req)
     {
-        // dd($req->all());
+        // dd(Auth::user()->vendor->id);
         if (EventHelper::isEventFinished($req->event_id)) {
             return redirect()->back()->with('error', 'event is no longer running');
         }
@@ -77,22 +77,11 @@ class BidController extends Controller
                     }
                 }
 
-
-
-
-                // $data['event_id'] = $req->event_id;
-                // $data['item_id'] = $req->item_id;
-                // $data['capping_price'] = $req->capping_price;
-                // $data['vendor_id'] = Auth::user()->vendor->id;
-                // CappingPriceHelper::saveCappingPrice($data);
-
-
                 $data['bids'] = BidHelper::getLiveBidStatistics($req->event_id, $req->item_id);
                 $data['item_id'] = $req->item_id;
                 $data['event_id'] = $req->event_id;
                 event(new BidEvent($data));
 
-                // BidHelper::placeBid($req);
                 return redirect()->route('vendor.liveAuction', $req->event_id)->with('success', 'Bid placed successfully');
             } catch (QueryException $e) {
                 return redirect()->route('vendor.liveAuction',  $req->event_id)->with('error', $e->getMessage());
@@ -109,7 +98,7 @@ class BidController extends Controller
             'isMyBidIsLowest' => BidHelper::checkIfVendorhasLowestBid($r->eId, $r->iId),
             'lastBidderPrice' => BidHelper::getLastBidderPrice($r->eId, $r->iId)->bidding_price,
             'decrementAmount' => Item::find($r->iId)->decrement_price,
-            'least_status' => BidHelper::getVendorsLeastStatus($r->eId, $r->iId)
+            'least_status' => BidHelper::getVendorsLeastStatus($r->eId, $r->iId, Auth::user()->vendor->id)
         ];
         return response()->json($data);
     }
