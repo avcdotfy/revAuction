@@ -145,22 +145,61 @@ class ItemController extends BaseController
             'is_manually_change_bidding_price' => $req->is_manually_change_bidding_price,
             'is_active' => $req->is_active,
         ]);
+        // dd($req->all());
+        $rpus =  ItemRPUModel::where('item_id', $req->id)->get();
 
-        ItemRPUModel::where('item_id', $req->id)->delete();
+        $outerIndex = null;
+        foreach ($rpus  as $i => $rpu) {
+            // if (!$req->region[$i]) continue;
 
-        for ($i = 0; $i < count($req->region); $i++) {
+            if (in_array($rpu->id, $req->rpuIds)) {
+                ItemRPUModel::where('id', $rpu->id)->update([
+                    'region_id' => $req->region[$i],
+                    'price' => $req->price[$i],
+                    'item_unit' => $req->unit[$i],
+                    'item_unit_details' => $req->unit_details[$i],
+                    'category_id' => $req->category_id,
+                    'item_id' => $req->id,
+                    'user_id' => $this->user_id,
+                    'company_id' => $this->company_id
+                ]);
+                $outerIndex = $i;
+            }
+        }
+
+        if (count($req->region) > 1) {
+            $outerIndex  = $outerIndex + 1;
+        }
+
+        foreach ($req->region as $i => $reg) {
             if (!$req->region[$i]) continue;
-            ItemRPUModel::create([
-                'region_id' => $req->region[$i],
-                'price' => $req->price[$i],
-                'item_unit' => $req->unit[$i],
-                'item_unit_details' => $req->unit_details[$i],
-                'category_id' => $req->category_id,
-                'item_id' => $req->id,
-                'user_id' => $this->user_id,
-                'company_id' => $this->company_id
-            ]);
+            if ($i == $outerIndex) {
+                ItemRPUModel::create([
+                    'region_id' => $req->region[$i],
+                    'price' => $req->price[$i],
+                    'item_unit' => $req->unit[$i],
+                    'item_unit_details' => $req->unit_details[$i],
+                    'category_id' => $req->category_id,
+                    'item_id' => $req->id,
+                    'user_id' => $this->user_id,
+                    'company_id' => $this->company_id
+                ]);
+
+                $outerIndex += 1;
+            }
         }
         return redirect()->route('item.list')->with('success', 'item has been updated successfully');
+    }
+
+
+    function deleteRpu($rpuId, $iId, $regId)
+    {
+        $rpu = ItemRPUModel::where(['id' => $rpuId, 'item_id' => $iId, 'region_id' => $regId])->first();
+        if ($rpu) {
+            ItemRPUModel::where(['id' => $rpuId, 'item_id' => $iId, 'region_id' => $regId])->delete();
+            return redirect()->back()->with('success', 'Rpu deleted successfully');
+        } else {
+            return redirect()->back()->with('error', 'item rpu not found created');
+        }
     }
 }

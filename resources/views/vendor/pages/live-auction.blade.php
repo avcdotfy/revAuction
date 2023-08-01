@@ -20,13 +20,10 @@
                                 </h5>
                                 <hr style="margin-bottom:5px;">
                             </div>
-
                         </div>
                         <div class="row" style="overflow: auto;">
                             <div class="col-sm-12">
-
                                 <div id="dtable_Il_wrapper" class="dataTables_wrapper no-footer">
-
                                     <table id="dtable_Il" class="table table-bordered table-striped dataTable no-footer"
                                         role="grid">
                                         <thead>
@@ -42,15 +39,13 @@
                                                                 class="col-sm-9 control-label">Region</label>
                                                             <div class="col-sm-3">
                                                                 <select name="region" id="region_select">
-                                                                    @foreach ($event->items as $item)
-                                                                        @foreach ($item->regionPriceUnit as $rpu)
-                                                                            <option value="{{ $rpu->region->id }}">
-                                                                                {{ $rpu->region->name }}
-                                                                            </option>
-                                                                        @endforeach
+                                                                    {{-- @foreach ($event->items as $item) --}}
+                                                                    @foreach ($event->items as $rpu)
+                                                                        <option value="{{ $rpu->region->id }}">
+                                                                            {{ $rpu->region->name }}
+                                                                        </option>
                                                                     @endforeach
-
-
+                                                                    {{-- @endforeach --}}
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -80,24 +75,25 @@
                                             @foreach ($event->items as $key => $item)
                                                 <tr style="font-weight: 600;" role="row" class="odd">
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $item->code }} (<span id="lblitem0"
-                                                            title="18">{{ $item->description }}</span>)
+                                                    <td>{{ $item->item->code }} (<span id="lblitem0"
+                                                            title="18">{{ $item->item->description }}</span>)
                                                     </td>
+                                                    {{-- {{dd($item->item)}} --}}
                                                     <td><span id="lbl_uom_type0"
-                                                            title="65">{{ $item->unit->name }}</span></td>
+                                                            title="65">{{ $item->item->unit->name }}</span></td>
                                                     <td style="text-align: center"><span id="lbl_item_qty0"
-                                                            title="1 Unit = Rs. 25000">{{ $item->regionPriceUnit[0]->item_unit }}</span>
+                                                            title="1 Unit = Rs. 25000">{{ $item->item_unit }}</span>
                                                         Unit | <span id="lbl_lot_number0">1 Unit = Rs.
-                                                            {{ $item->regionPriceUnit[0]->price }}</span>
+                                                            {{ $item->price }}</span>
 
                                                     </td>
                                                     <td style="text-align: center; width: 82px">
-                                                        <span id="lbl_fob_price0"
-                                                            title="0.00">{{ $item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price }}</span>
+                                                        <span id="lbl_fob_price0" title="0.00">{{ $item->price }}</span>
                                                     </td>
+                                                    {{-- {{ $item->id }} --}}
                                                     <td style="text-align: center">
                                                         <span class="clsbidPrice{{ $item->id }}"
-                                                            id="bidPrice{{ $item->id }}">{{ BidHelper::getLowestPrice($event->id, $item->id) ?? 00 }}</span>
+                                                            id="bidPrice{{ $item->id }}">{{ BidHelper::getLowestPrice($event->id, $item->item->id, $item->id) ?? 0 }}</span>
                                                     </td>
                                                     <td style="text-align: center">
                                                         <span class="countDown" title=""></span>
@@ -105,15 +101,15 @@
                                                     <td>
                                                         <a href="#" class="btn btn-primary "
                                                             id="statusBtn{{ $item->id }}"
-                                                            style="padding:8px 9px; display:{{ !BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) || !BidHelper::checkIfVendorhasLowestCappingPrice($event->id, $item->id) || $event->status == COMPLETED ? 'none' : '' }}">
-                                                            {{ BidHelper::getVendorsLeastStatus($event->id, $item->id, Auth::user()->vendor->id) ? 'L1' : '' }}</a>
-                                                        {{-- {{ dd(BidHelper::checkIfVendorhasLowestBid($event->id, $item->id)) }} --}}
+                                                            style="padding:8px 9px; display:{{ !BidHelper::checkIfVendorhasLowestBid($event->id, $item->item->id, $item->id) || !BidHelper::checkIfVendorhasLowestCappingPrice($event->id, $item->id) || $event->status == COMPLETED ? 'none' : '' }}">
+                                                            {{ BidHelper::getVendorsLeastStatus($event->id, $item->id, Auth::user()->vendor->id, $item->id) ? 'L1' : '' }}</a>
+
                                                         {{-- {{ $event->status }} --}}
                                                         {{-- {{ BidHelper::checkIfVendorhasLowestCappingPrice($event->id, $item->id) }} --}}
                                                         <a href="#" data-toggle="modal" class="btn btn-success"
                                                             data-target="#bidModal{{ $item->id }}"
                                                             id="btn_bid{{ $item->id }}"
-                                                            style="padding:8px 9px; display:{{ $event->status == COMPLETED || BidHelper::checkIfVendorhasLowestBid($event->id, $item->id) || BidHelper::checkIfVendorhasLowestCappingPrice($event->id, $item->id) ? 'none' : '' }}">
+                                                            style="padding:8px 9px; display:{{ $event->status == COMPLETED || BidHelper::checkIfVendorhasLowestBid($event->id, $item->item->id, $item->id) || BidHelper::checkIfVendorhasLowestCappingPrice($event->id, $item->item->id, $item->id) ? 'none' : '' }}">
                                                             Bid Now </a>
 
                                                         <a href="#" class="btn btn-danger"
@@ -130,8 +126,12 @@
                                                         <input type="hidden" name="event_id"
                                                             value="{{ $event->id }}">
                                                         <input type="hidden" name="item_id"
-                                                            value="{{ $item->id }}">
-                                                        <input type="hidden" name="item_rpu_id" value="1">
+                                                            value="{{ $item->item->id }}">
+                                                        <input type="hidden" name="item_rpu_id"
+                                                            value={{ $item->id }}>
+                                                        <input type="hidden" name="region_id"
+                                                            value={{ $item->region->id }}>
+
                                                         <div class="modal-dialog">
                                                             <div class="modal-content" style="border-radius: 4px;">
                                                                 <div class="modal-header" style="padding-bottom: 0px;">
@@ -141,9 +141,9 @@
                                                                     <h4 class="modal-title"
                                                                         style="font-weight: 600; text-align: center; text-decoration-line: underline;">
                                                                         Material Information</h4>
-                                                                    <h5 style="text-align: center">{{ $item->code }}
+                                                                    <h5 style="text-align: center">{{ $item->item->code }}
                                                                         (<span id="lblitem0"
-                                                                            title="18">{{ $item->description }}</span>)
+                                                                            title="18">{{ $item->item->description }}</span>)
                                                                     </h5>
                                                                     <div class="col-sm-12" style="padding: 0px;">
                                                                         <div class="col-sm-6">
@@ -152,12 +152,12 @@
                                                                             </span>
                                                                             <span>
                                                                                 <label>
-                                                                                    {{ $item->regionPriceUnit[0]->item_unit }}
+                                                                                    {{ $item->item_unit }}
                                                                                     Unit
                                                                                 </label>
                                                                                 |
                                                                                 <label>1 Unit = 1
-                                                                                    {{ $item->unit->name }}</label>
+                                                                                    {{ $item->item->unit->name }}</label>
                                                                             </span>
                                                                         </div>
                                                                         <div class="col-sm-6" style="text-align: right;">
@@ -189,7 +189,7 @@
                                                                                         </label>
 
                                                                                         <div class="col-sm-3">
-                                                                                            <label>{{ $item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price }}</label>
+                                                                                            <label>{{ $item->price }}</label>
                                                                                         </div>
                                                                                         <label for="inputPassword3"
                                                                                             class="col-sm-3">Last Bidder
@@ -198,7 +198,7 @@
 
                                                                                         <div class="col-sm-3">
                                                                                             <label
-                                                                                                id="lastBidderPrice{{ $item->id }}">{{ BidHelper::getLastBidderPrice($event->id, $item->id) ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price : '00' }}</label>
+                                                                                                id="lastBidderPrice{{ $item->id }}">{{ BidHelper::getLastBidderPrice($event->id, $item->item->id, $item->id) ? BidHelper::getLastBidderPrice($event->id, $item->item->id, $item->id)->bidding_price : '00' }}</label>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-sm-12">
@@ -224,12 +224,11 @@
                                                                                             Price
                                                                                         </label>
 
-                                                                                        @if ($item->is_manually_change_bidding_price)
+                                                                                        @if ($item->item->is_manually_change_bidding_price)
                                                                                             <div class="col-sm-3"
                                                                                                 style="display:block">
                                                                                                 <input type="number"
                                                                                                     id="txt_bidding_price0"
-                                                                                                    onchange="checking_manual_bidding_price_0()"
                                                                                                     maxlength="10"
                                                                                                     name="bidding_price"
                                                                                                     class="form-control"
@@ -238,18 +237,18 @@
                                                                                                     title="24500.00">
                                                                                             </div>
                                                                                         @else
+                                                                                            {{-- {{ BidHelper::getLastBidderPrice($event->id, $item->item->id, $item->id) }} --}}
                                                                                             <div class="col-sm-3">
                                                                                                 <label
                                                                                                     style="color: green;"
-                                                                                                    id="lbl_bidding_price{{ $item->id }}">{{ BidHelper::getLastBidderPrice($event->id, $item->id) != null ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price - $item->decrement_price : $item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price - $item->decrement_price }}</label>
+                                                                                                    id="lbl_bidding_price{{ $item->id }}">{{ BidHelper::getLastBidderPrice($event->id, $item->item->id, $item->id) != null ? BidHelper::getLastBidderPrice($event->id, $item->item->id, $item->id)->bidding_price - $item->item->decrement_price :  $item->price - $item->item->decrement_price }}</label>
                                                                                                 <input type="hidden"
                                                                                                     id="bidding_price_hidden{{ $item->id }}"
-                                                                                                    onchange="checking_manual_bidding_price_0()"
                                                                                                     name="bidding_price"
                                                                                                     class="form-control"
                                                                                                     style="height: 25px; color: green"
                                                                                                     placeholder="Bidding Price"
-                                                                                                    value="{{ BidHelper::getLastBidderPrice($event->id, $item->id) != null ? BidHelper::getLastBidderPrice($event->id, $item->id)->bidding_price - $item->decrement_price : $item->regionPriceUnit[0]->item_unit * $item->regionPriceUnit[0]->price - $item->decrement_price }}">
+                                                                                                    value="{{ BidHelper::getLastBidderPrice($event->id, $item->item->id, $item->id) != null ? BidHelper::getLastBidderPrice($event->id, $item->item->id, $item->id)->bidding_price - $item->item->decrement_price : $item->price - $item->item->decrement_price }}">
                                                                                             </div>
                                                                                         @endif
 
@@ -286,10 +285,12 @@
                                                                 data: {
                                                                     '_token': "{{ csrf_token() }}",
                                                                     'eId': '{{ $event->id }}',
-                                                                    'iId': '{{ $item->id }}',
+                                                                    'iId': '{{ $item->item->id }}',
+                                                                    'iRpuId': '{{ $item->id }}',
                                                                 },
 
                                                                 success: function(res) {
+                                                                    // console.log(res.lowestBid)
                                                                     $("#bidPrice{{ $item->id }}").text(res.lowestBid);
                                                                     $("#lastBidderPrice{{ $item->id }}").text(res.lastBidderPrice);
 
@@ -305,17 +306,19 @@
                                                                             $("#btn_bid{{ $item->id }}").show();
                                                                         }
 
-                                                                        $("#bidding_price_hidden{{ $item->id }}").val(res.lastBidderPrice - res
-                                                                            .decrementAmount);
-                                                                        $("#lbl_bidding_price{{ $item->id }}").text(res.lastBidderPrice - res
-                                                                            .decrementAmount);
+                                                                        if (res.lastBidderPrice != 0 && res.lastBidderPrice != null) {
+                                                                            $("#bidding_price_hidden{{ $item->id }}").val(res.lastBidderPrice - res
+                                                                                .decrementAmount);
+                                                                            $("#lbl_bidding_price{{ $item->id }}").text(res.lastBidderPrice - res
+                                                                                .decrementAmount);
+                                                                        }
+
                                                                     } else {
                                                                         $("#btn_bid{{ $item->id }}").hide();
                                                                         $("#btn_closed{{ $item->id }}").show();
                                                                         $("#statusBtn{{ $item->id }}").hide();
 
                                                                     }
-
                                                                 },
                                                                 error: function(err) {
                                                                     console.log("ERR", err);

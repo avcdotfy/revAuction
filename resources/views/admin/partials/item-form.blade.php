@@ -81,10 +81,12 @@
                 @if ($item)
                     @foreach ($item->regionPriceUnit as $key => $rpu)
                         <tr>
+
                             <td>{{ $key + 1 }}</td>
                             <td>
                                 <span style="font-size:11px;color:red;font-weight:600;display:none;">Please
                                     Select Item Region</span>
+                                <input type="hidden" name="rpuIds[]" value="{{ $rpu->id }}">
                                 <select class="form-control" name="region[]">
                                     <option value="">Select Region</option>
                                     @foreach ($regions as $reg)
@@ -115,9 +117,12 @@
                                     value="{{ $rpu->item_unit_details }}">
                             </td>
                             <td>
-                                <button id="remove_btn" onClick="$(this).parent().parent().remove();" type="button"
-                                    class="btn btn-sm btn-danger"><span class="plus-icon"> - </span> Remove</button>
+                                <a type="button" class="btn btn-sm btn-danger prePopulatedFieldremove_btn"
+                                    data-toggle="modal" data-target="#myModal{{ $rpu->id }}"><span
+                                        class="plus-icon"> - </span>
+                                    Remove</a>
                             </td>
+                            @include('admin.partials.item-rpu-delete-modal')
                         </tr>
                     @endforeach
                 @endif

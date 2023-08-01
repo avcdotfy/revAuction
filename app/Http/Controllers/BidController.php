@@ -23,12 +23,14 @@ class BidController extends Controller
 
     function store(Request $req)
     {
-        // dd(Auth::user()->vendor->id);
+        // dd($req->item_id);
         if (EventHelper::isEventFinished($req->event_id)) {
             return redirect()->back()->with('error', 'event is no longer running');
         }
-        $minBidAmount = BidHelper::getLowestPrice($req->event_id, $req->item_id);
+        // dd($req->all());
+        $minBidAmount = BidHelper::getLowestPrice($req->event_id, $req->item_id, $req->item_rpu_id);
 
+        // dd($minBidAmount);
         if ($req->capping_price) {
             if ($req->capping_price > $minBidAmount && $minBidAmount != null) {
                 return redirect()->route('vendor.liveAuction', $req->event_id)->with('error', 'Capping price should be less than last bid price :' . $minBidAmount);
@@ -50,13 +52,14 @@ class BidController extends Controller
                     'item_r_p_u_model_id' => $req->item_rpu_id,
                     'bidding_price' => $req->bidding_price,
                     'capping_price' => $req->capping_price ?? 0,
+                    'region_id' => $req->region_id ?? 0,
                     'vendor_id' => Auth::user()->vendor->id
                 ]);
                 Auth::user()->vendor->bids()->attach($bid->id);
 
-                $totalBids = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id])->orderBy('bidding_price', 'asc')->get();
-                $bidsWithCappingPrice = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id])->orderBy('bidding_price', 'asc')->orderBy('capping_price', 'asc')->where('capping_price', '!=', '0')->get();
-                $bidsWithoutCappingPrice = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id])->orderBy('bidding_price', 'asc')->orderBy('capping_price', 'asc')->where('capping_price', '=', '0')->get();
+                $totalBids = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id, 'item_r_p_u_model_id' => $req->item_rpu_id])->orderBy('bidding_price', 'asc')->get();
+                $bidsWithCappingPrice = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id, 'item_r_p_u_model_id' => $req->item_rpu_id])->orderBy('bidding_price', 'asc')->orderBy('capping_price', 'asc')->where('capping_price', '!=', '0')->get();
+                $bidsWithoutCappingPrice = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id, 'item_r_p_u_model_id' => $req->item_rpu_id])->orderBy('bidding_price', 'asc')->orderBy('capping_price', 'asc')->where('capping_price', '=', '0')->get();
 
                 $bidsWithCappingPriceCount = count($bidsWithCappingPrice);
                 $bidsWithoutCappingPriceCount = count($bidsWithoutCappingPrice);
@@ -77,9 +80,10 @@ class BidController extends Controller
                     }
                 }
 
-                $data['bids'] = BidHelper::getLiveBidStatistics($req->event_id, $req->item_id);
+                $data['bids'] = BidHelper::getLiveBidStatistics($req->event_id, $req->item_id, $req->item_rpu_id);
                 $data['item_id'] = $req->item_id;
                 $data['event_id'] = $req->event_id;
+                $data['rpu_id'] = $req->item_rpu_id;
                 event(new BidEvent($data));
 
                 return redirect()->route('vendor.liveAuction', $req->event_id)->with('success', 'Bid placed successfully');
@@ -92,11 +96,12 @@ class BidController extends Controller
 
     function getLiveDataVendorSite(Request $r)
     {
+        // dd($r->all());
         $data = [
             'event_status' => Event::find($r->eId)->status,
-            'lowestBid' => BidHelper::getLowestPrice($r->eId, $r->iId),
-            'isMyBidIsLowest' => BidHelper::checkIfVendorhasLowestBid($r->eId, $r->iId),
-            'lastBidderPrice' => BidHelper::getLastBidderPrice($r->eId, $r->iId)->bidding_price,
+            'lowestBid' => BidHelper::getLowestPrice($r->eId, $r->iId, $r->iRpuId) ? BidHelper::getLowestPrice($r->eId, $r->iId, $r->iRpuId) : 0,
+            'isMyBidIsLowest' => BidHelper::checkIfVendorhasLowestBid($r->eId, $r->iId, $r->iRpuId) ? BidHelper::checkIfVendorhasLowestBid($r->eId, $r->iId, $r->iRpuId) : 0,
+            'lastBidderPrice' => BidHelper::getLastBidderPrice($r->eId, $r->iId, $r->iRpuId) ? BidHelper::getLastBidderPrice($r->eId, $r->iId, $r->iRpuId)->bidding_price : 0,
             'decrementAmount' => Item::find($r->iId)->decrement_price,
             'least_status' => BidHelper::getVendorsLeastStatus($r->eId, $r->iId, Auth::user()->vendor->id)
         ];

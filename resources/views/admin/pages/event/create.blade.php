@@ -35,6 +35,7 @@
     <script>
         $('#opening_date').datepicker({
             minDate: 0
+
         });
         $('#closing_date').datepicker({
             minDate: 0
@@ -45,17 +46,17 @@
             let openingMinutes = '';
             let openingAmPM = '';
 
-
-
             $('#opening_hrs').on('change', function(ev) {
                 console.log(ev.target.value);
                 openingHrs = ev.target.value
-                $('#full_opening_time').val(openingHrs + " : ");
+                $('#full_opening_time').val(openingHrs + ":" + openingMinutes + " " + openingAmPM);
+                setTitle()
             })
             $('#opening_minutes').on('change', function(ev) {
                 console.log(ev.target.value);
                 openingMinutes = ev.target.value;
-                $('#full_opening_time').val(openingHrs + ":" + openingMinutes);
+                $('#full_opening_time').val(openingHrs + ":" + openingMinutes + " " + openingAmPM);
+                setTitle()
             })
             $('#opening_ampm').on('change', function(ev) {
                 openingAmPM = ev.target.value;
@@ -71,6 +72,7 @@
                 // var dateTimeString = '07/10/2023 01:01 AM';
                 // var millis = convertDateTimeToMillis(dateTimeString);
                 // console.log("TEST" ,millis);
+                setTitle()
 
             })
 
@@ -83,12 +85,14 @@
             $('#closing_hrs').on('change', function(ev) {
                 console.log(ev.target.value);
                 closingHrs = ev.target.value
-                $('#full_closing_time').val(closingHrs + " : ");
+                $('#full_closing_time').val(closingHrs + ":" + closingMinutes + " " + closingAmPM);
+                setTitle()
             })
             $('#closing_minutes').on('change', function(ev) {
                 console.log(ev.target.value);
                 closingMinutes = ev.target.value;
-                $('#full_closing_time').val(closingHrs + ":" + closingMinutes);
+                $('#full_closing_time').val(closingHrs + ":" + closingMinutes + " " + closingAmPM);
+                setTitle()
             })
             $('#closing_ampm').on('change', function(ev) {
                 closingAmPM = ev.target.value;
@@ -96,7 +100,7 @@
 
                 $('#closing_date_time_millis').val(convertDateTimeToMillis($('#closing_date').val() + " " +
                     $('#full_closing_time').val()))
-
+                setTitle()
                 // console.log($('#closing_date').val() + " " + $('#full_closing_time').val())
                 // console.log(convertDateTimeToMillis($('#closing_date').val() + " " +
                 //     $('#full_closing_time').val()))
@@ -223,6 +227,17 @@
     </script>
 
     <script>
+        $('#opening_date').on('change', function() {
+            setTitle()
+        })
+        $('#closing_date').on('change', function() {
+            setTitle()
+        })
+        $('#eventMode').on('change', function() {
+            setTitle()
+        })
+
+
         function setTitle() {
 
             let title = "Event for " + $("#categorySelect :selected").text() + " " + "Opening date " + $(

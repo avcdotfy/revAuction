@@ -86,6 +86,8 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::post('/create', [ItemController::class, 'store'])->name('item.store');
                 Route::get('/edit/{id}', [ItemController::class, 'edit'])->name('item.edit');
                 Route::post('/update', [ItemController::class, 'update'])->name('item.update');
+
+                Route::get('/delete/{rpuId}/{iId}/{regId}', [ItemController::class, 'deleteRpu'])->name('item.rpuDelete');
             });
         });
 

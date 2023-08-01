@@ -208,7 +208,7 @@
               Category <span style="color: red; font-size: 13px;">*</span></label>
           <div class="col-sm-12">
               <select name="preference_category[]" class="form-control select2" multiple id="category_id" required>
-                  <option value="">Select Category</option>
+
                   @foreach ($categories as $category)
                       <option value="{{ $category->id }}">{{ $category->name }}</option>
                   @endforeach
@@ -221,7 +221,7 @@
           <div class="col-sm-12">
 
               <select class="form-control select2" multiple name="preference_region[]" id="region_id" required>
-                  <option value="">Select Region</option>
+
                   @foreach ($regions as $reg)
                       <option value="{{ $reg->id }}">{{ $reg->name }}</option>
                   @endforeach

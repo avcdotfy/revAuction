@@ -18,7 +18,7 @@ class Event extends Model
 
     public function items()
     {
-        return $this->belongsToMany(Item::class);
+        return $this->belongsToMany(ItemRPUModel::class, 'event_item');
     }
 
     public function user()

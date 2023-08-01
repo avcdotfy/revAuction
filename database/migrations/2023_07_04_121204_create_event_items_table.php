@@ -2,6 +2,7 @@
 
 use App\Models\Event;
 use App\Models\Item;
+use App\Models\ItemRPUModel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,7 @@ return new class extends Migration
         Schema::create('event_item', function (Blueprint $t) {
             $t->id();
             $t->foreignIdFor(Event::class)->comment('event id');
-            $t->foreignIdFor(Item::class);
+            $t->foreignIdFor(ItemRPUModel::class);
             $t->timestamps();
         });
     }

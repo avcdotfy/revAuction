@@ -178,6 +178,7 @@ class VendorController extends Controller
     public function liveAuction($eventId)
     {
         $event = Event::where('id', $eventId)->first();
+        // dd($event->items);
         return view('vendor.pages.live-auction', compact('event'));
     }
     public function liveAuctionFilterByRegion(Request $r)

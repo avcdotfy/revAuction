@@ -7,7 +7,6 @@
                  @foreach ($eventModes as $em)
                      <option value="{{ $em->id }}">{{ $em->mode }}</option>
                  @endforeach
-
              </select>
          </div>
      </div>
@@ -19,7 +18,7 @@
                  class="form-control" placeholder="Enter Opening Date" required>
          </div>
          <div class="col-sm-1">
-             <select id="opening_hrs" class="form-control" required onchange="setTitle()">
+             <select id="opening_hrs" class="form-control" required>
                  <option selected="selected" value="">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
@@ -102,7 +101,7 @@
              </select>
          </div>
          <div class="col-sm-1">
-             <select name="opening_ampm" id="opening_ampm" class="form-control" required onchange="setTitle()">
+             <select name="opening_ampm" id="opening_ampm" class="form-control" required>
                  <option selected="selected" value="">select</option>
                  <option value="AM">AM</option>
                  <option value="PM">PM</option>
@@ -139,7 +138,6 @@
                  <option value="10">10</option>
                  <option value="11">11</option>
                  <option value="12">12</option>
-
              </select>
          </div>
          <div class="col-sm-1">
@@ -248,7 +246,7 @@
          <h4>List of Vendors</h4>
      </div>
      <div class="col-sm-12">
-         <table id="dtable" class="table table-bordered table-striped dataTable no-footer" role="grid"
+         <table class="table table-bordered table-striped dataTable no-footer" role="grid"
              aria-describedby="dtable_info">
              <thead>
                  <tr role="row">
@@ -279,14 +277,12 @@
      </div>
  </div>
 
-
-
  <div class="col-sm-12" style="margin-bottom: 5px;">
      <div class="col-lg-12">
          <h4>List of Items, Region & Price</h4>
      </div>
      <div class="col-sm-12">
-         <table id="dtable" class="table table-bordered table-striped dataTable no-footer" role="grid"
+         <table class="  table table-bordered table-striped dataTable no-footer" role="grid"
              aria-describedby="dtable_info" style="border:1px solid #eaeaea">
              <thead>
                  <tr role="row">

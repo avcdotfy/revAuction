@@ -25,12 +25,14 @@ class BidEvent implements ShouldBroadcast
     public $event_id;
     public $item_id;
     public $vendors;
+    public $rpu_id;
 
     public function __construct($data)
     {
 
         $this->event_id = $data['event_id'];
         $this->item_id = $data['item_id'];
+        $this->rpu_id = $data['rpu_id'];
 
         $vendors = [];
 
@@ -42,13 +44,15 @@ class BidEvent implements ShouldBroadcast
             $v->company =  $bid->vendor->company_name;
             $v->username   =    $bid->vendor->user->username;
             $v->bidd_price  =    $bid->bidding_price;
-            $v->least_status  =    BidHelper::getVendorsLeastStatus($this->event_id, $this->item_id, $bid->vendor->id);
-            $v->capping_price  =   CappingHelper::getCappingPrice($this->event_id, $this->item_id, $bid->vendor->id);
+            $v->least_status  =    BidHelper::getVendorsLeastStatus($this->event_id, $this->item_id, $bid->vendor->id, $this->rpu_id);
+            $v->capping_price  =   CappingHelper::getCappingPrice($this->event_id, $this->rpu_id, $this->item_id, $bid->vendor->id);
             $v->vendor_id  =  $bid->vendor->id;
             $vendors[] = $v;
         }
 
         $this->vendors = $vendors;
+
+        // dd($this->rpu_id);
     }
 
     /**
@@ -58,6 +62,6 @@ class BidEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return  new PrivateChannel('bidderStatus.' . $this->event_id . '.' . $this->item_id);
+        return  new PrivateChannel('bidderStatus.' . $this->event_id . '.' . $this->rpu_id . '.' . $this->item_id);
     }
 }
