@@ -17,7 +17,6 @@
                         <div id="ContentPlaceHolder1_div_nr" class="row">
                             <form action="{{ route('notice.store') }}" method="post">
                                 @csrf
-
                                 <div class="col-sm-12" style="padding:0px;">
                                     <label for="inputPassword3" class="col-sm-12 control-label">Notice &amp; News Title
                                         <span style="color: red; font-size: 13px">*</span></label>
@@ -26,7 +25,7 @@
                                             style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter
                                             Notice &amp; News Title</span>
                                         <input name="title" type="text" id="ContentPlaceHolder1_txt_notice_news_title"
-                                            class="form-control" placeholder="Enter Notice &amp; News Title">
+                                            class="form-control" placeholder="Enter Notice &amp; News Title" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-12" style="padding:0px;">

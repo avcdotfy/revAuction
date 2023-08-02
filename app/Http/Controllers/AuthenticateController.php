@@ -33,6 +33,7 @@ class AuthenticateController extends Controller
 
     function logout()
     {
+        LoginTrailHelper::saveLogoutInfo();
         Auth::logout();
         return redirect()->route('vendor.login');
     }
@@ -54,6 +55,7 @@ class AuthenticateController extends Controller
             }
 
             if (Auth::user()->vendor->is_approved) {
+                LoginTrailHelper::saveLoginInfo();
                 return redirect()->route('vendor.dashboard');
             } else {
                 Auth::logout();

@@ -15,9 +15,8 @@ return new class extends Migration
     {
         Schema::create('login_trails', function (Blueprint $t) {
             $t->id();
-            $t->string('login_id');
             $t->string('login_date_time');
-            $t->string('logout_date_time');
+            $t->string('logout_date_time')->nullable();
             $t->string('public_ip');
             $t->foreignIdFor(User::class)->comment('login details belong to this user');
             $t->foreignIdFor(Company::class)->comment('login details belong to this company');

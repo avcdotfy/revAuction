@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 
 class LoginTrailController extends Controller
 {
-    //
-
     function employeeLogin()
     {
         $logins = LoginTrail::all();
@@ -16,6 +14,7 @@ class LoginTrailController extends Controller
     }
     function vendorLogin()
     {
-        return view('admin.pages.loginTrails.vendor-login');
+        $logins = LoginTrail::all();
+        return view('admin.pages.loginTrails.vendor-login',  compact('logins'));
     }
 }
