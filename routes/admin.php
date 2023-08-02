@@ -38,7 +38,6 @@ Route::group(['prefix' => 'admin'], function () {
         Route::group(['prefix' => 'request'], function () {
             Route::get('/accept', [RequestController::class, 'accept'])->name('request.accept');
             Route::get('/reject', [RequestController::class, 'reject'])->name('request.reject');
-          
         });
 
         Route::get('vendors', [VendorController::class, 'getVendorsFromCategoryId'])->name('event.vendors');

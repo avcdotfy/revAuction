@@ -23,12 +23,6 @@ Route::group(['middleware' => 'guest'], function () {
     });
 });
 
-Route::get(
-    '/vendor',
-    function () {
-        dd(Auth::user()->vendor->events);
-    }
-);
 Route::group(['middleware' => ['auth', CheckForVendor::class]], function () {
     Route::group(['prefix' => 'vendor'], function () {
         Route::get('dashboard', [VendorController::class, 'dashboard'])->name('vendor.dashboard');
