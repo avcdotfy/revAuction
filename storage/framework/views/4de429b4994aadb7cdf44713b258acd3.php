@@ -26,8 +26,9 @@
         <div class="col-xs-6" style="text-align:left;"><a href="forgot-password.html" style="font-size:12px;">Forgot
                 Password ?</a> </div>
 
-        <div class="col-xs-6" style="text-align:right;"> <a href="{{ route('vendor.create') }}"
+        <div class="col-xs-6" style="text-align:right;"> <a href="<?php echo e(route('vendor.create')); ?>"
                 style="font-size:12px; text-align: right;">New Registration</a></div>
     </div>
     <!-- /.social-auth-links -->
 </div>
+<?php /**PATH C:\xampp\htdocs\revAuction\resources\views/public/partials/login-form.blade.php ENDPATH**/ ?>
