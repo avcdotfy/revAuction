@@ -34,6 +34,8 @@ Route::get('/404', [PublicDataController::class, 'notFound'])->name('404');
 
 Route::group(['middleware' => 'auth'], function () {
    Route::get('/logout', [AuthenticateController::class, 'logout'])->name('logout');
+   Route::get('/change-password', [AuthenticateController::class, 'changePassword'])->name('change.password');
+   Route::post('/change-password', [AuthenticateController::class, 'doChangePassword'])->name('doChangePassword');
 });
 
 
