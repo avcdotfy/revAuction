@@ -7,8 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ env('APP_NAME') }}</title>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 
     <style>
         body {
@@ -46,8 +45,7 @@
                     <div class="error-actions">
                         <a href="{{ route('vendor.login') }}" class="btn btn-primary btn-lg"><span
                                 class="glyphicon glyphicon-home"></span>
-                            Take Me Home </a><a href="http://www.jquery2dotnet.com" class="btn btn-default btn-lg"><span
-                                class="glyphicon glyphicon-envelope"></span> Contact Support </a>
+                            Take Me Home </a>
                     </div>
                 </div>
             </div>
