@@ -38,8 +38,6 @@ class ParticipantController extends Controller
         return view('vendor.pages.participated-event-item-status-list', compact('decisions'));
     }
 
-
-
     public function participatedEventReports()
     {
         return view('vendor.pages.participated-events-reports');

@@ -25,7 +25,7 @@ class DecisionTakenEventConsolidateReport implements FromView
     public function view(): View
     {
         // dd($this->id);
-        $bids = Bid::select('*')->groupBy('vendor_id')->where(['event_id' => $this->eId, 'decision_status' => 'Accepted'])->orderby('bidding_price', 'asc')->get();
+        $bids = Bid::select('*')->groupBy('item_r_p_u_model_id')->where(['event_id' => $this->eId, 'decision_status' => 'Accepted'])->orderby('bidding_price', 'asc')->get();
         $bidGroupByVendorId = Bid::select('*',  DB::raw('MIN(bidding_price) as bidding_price'))->groupBy('vendor_id')->get();
         // echo json_encode($bids);
         // dd('');

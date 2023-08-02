@@ -30,4 +30,9 @@ class Decision extends Model
     {
         return $this->belongsTo(Bid::class);
     }
+
+    public function rpu()
+    {
+        return $this->belongsTo(ItemRPUModel::class, 'item_r_p_u_model_id');
+    }
 }

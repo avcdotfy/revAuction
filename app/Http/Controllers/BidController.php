@@ -30,10 +30,18 @@ class BidController extends Controller
         // dd($req->all());
         $minBidAmount = BidHelper::getLowestPrice($req->event_id, $req->item_id, $req->item_rpu_id);
 
+        if ($req->bidding_price <= 0) {
+            return redirect()->route('vendor.liveAuction', $req->event_id)->with('error', 'bidding price should not be less than or equals to zero');
+        }
+
         // dd($minBidAmount);
         if ($req->capping_price) {
             if ($req->capping_price > $minBidAmount && $minBidAmount != null) {
                 return redirect()->route('vendor.liveAuction', $req->event_id)->with('error', 'Capping price should be less than last bid price :' . $minBidAmount);
+            }
+
+            if ($req->capping_price <= 0) {
+                return redirect()->route('vendor.liveAuction', $req->event_id)->with('error', 'Capping price  should not be less than or equal to zero');
             }
         }
 

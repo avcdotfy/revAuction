@@ -24,7 +24,7 @@ class DecisionTakenEventL1Report implements FromView
 
     public function view(): View
     {
-        $bids = Bid::select('*')->groupBy('item_id')->where(['event_id' => $this->eId, 'decision_status' => 'Accepted', 'least_status' => '1'])->orderby('bidding_price', 'asc')->get();
+        $bids = Bid::select('*')->groupBy('item_r_p_u_model_id')->where(['event_id' => $this->eId, 'decision_status' => 'Accepted', 'least_status' => '1'])->orderby('bidding_price', 'asc')->get();
         return view('exports.decision-taken-event-l1', compact('bids'));
     }
 }

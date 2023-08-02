@@ -1,5 +1,7 @@
 @extends('vendor.layout.base')
 
+
+
 @section('main_section')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -58,11 +60,11 @@
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $p->item->code . ' | ' . $p->item->description }}</td>
                                                 <td>{{ $p->item->unit->code }}</td>
-                                                <td>{{ $p->item->regionPriceUnit->first()->item_unit }}</td>
-                                                <td>{{ $p->item->regionPriceUnit->first()->price }}</td>
-                                                <td>{{ BidHelper::getLastBidderPrice($p->event_id, $p->item_id)->least_status . ' & ' . BidHelper::getLastBidderPrice($p->event_id, $p->item_id)->bidding_price }}
+                                                <td>{{ $p->rpu->item_unit }}</td>
+                                                <td>{{ $p->rpu->price }}</td>
+                                                <td>{{ BidHelper::getLastBidderPrice($p->event_id, $p->item_id, $p->rpu->id)->least_status . ' & ' . BidHelper::getLastBidderPrice($p->event_id, $p->item_id, $p->rpu->id)->bidding_price }}
                                                 </td>
-                                                <td></td>
+                                                <td>{{ CappingHelper::getCappingPrice($p->event_id, $p->rpu->id, $p->item_id) }}
                                             </tr>
                                         @endforeach
                                     </tbody>

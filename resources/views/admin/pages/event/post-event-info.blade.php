@@ -13,7 +13,6 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">
-
                         <div class="row">
                             <div class="col-lg-12">
                                 <h5 style=" margin-top: 10px; padding-bottom: 0px;"> {{ $event->title }}</h5>
@@ -36,23 +35,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($event->items as $key => $item)
+                                        @foreach ($event->items as $key => $rpuItem)
                                             <tr role="row" class="odd">
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $item->code }}</td>
-                                                <td>{{ $item->unit->code }}</td>
+                                                <td>{{ $rpuItem->item->code }}</td>
+                                                <td>{{ $rpuItem->item->unit->code }}</td>
                                                 <td>
-                                                    @foreach ($item->regionPriceUnit as $rpu)
-                                                        <div class="col-sm-12"
-                                                            style="border: 1px solid #d2d6de; border-radius: 6px; padding-top: 5px; padding-bottom: 5px;">
-                                                            <div><span class="label label-success"
-                                                                    style="white-space: unset;">{{ $rpu->item_unit_details }}</span>
-                                                                |
-                                                                <span>{{$rpu->region->name}}</span> :
-                                                                <span title="23">{{$rpu->price}}</span>
-                                                            </div>
+                                                    <div class="col-sm-12"
+                                                        style="border: 1px solid #d2d6de; border-radius: 6px; padding-top: 5px; padding-bottom: 5px;">
+                                                        <div><span class="label label-success"
+                                                                style="white-space: unset;">{{ $rpuItem->item_unit_details }}</span>
+                                                            |
+                                                            <span>{{ $rpuItem->region->name }}</span> :
+                                                            <span title="23">{{ $rpuItem->price }}</span>
                                                         </div>
-                                                    @endforeach
+                                                    </div>
+
                                                 </td>
                                             </tr>
                                         @endforeach

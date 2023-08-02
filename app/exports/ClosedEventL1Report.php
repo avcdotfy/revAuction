@@ -25,7 +25,8 @@ class ClosedEventL1Report implements FromView
     public function view(): View
     {
         // dd($this->id);
-        $bids = Bid::select('*')->groupBy('item_id')->where(['event_id' => $this->eId])->get();
+        $bids = Bid::select('*', DB::raw('MIN(least_status) as least_status'), DB::raw('MIN(bidding_price) as bidding_price'))->groupBy('item_r_p_u_model_id')->where(['event_id' => $this->eId])->get();
+
         $bidGroupByVendorId = Bid::select('*',  DB::raw('MIN(bidding_price) as bidding_price'))->groupBy('vendor_id')->get();
 
         // dd($bids);

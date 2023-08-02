@@ -35,7 +35,7 @@
                                             <tr role="row" class="odd">
                                                 <td>{{ $key + 1 }}</td>
                                                 <td><a
-                                                        href="{{ route('vendor.posted-event-info') }}">{{ EVENT_ID_PREFIX . $p->event->id }}</a>
+                                                        href="{{ route('vendor.posted-event-info', $p->event->id) }}">{{ EVENT_ID_PREFIX . $p->event->id }}</a>
                                                 </td>
                                                 <td>{{ $p->event->title }}</td>
                                                 <td><a href="{{ route('vendor.participated-event-item-status-list', $p->event->id) }}"

@@ -231,6 +231,7 @@
                                                                                                     id="txt_bidding_price0"
                                                                                                     maxlength="10"
                                                                                                     name="bidding_price"
+                                                                                                    required
                                                                                                     class="form-control"
                                                                                                     style="height: 25px; color: green"
                                                                                                     placeholder="Bidding Price"
@@ -241,13 +242,14 @@
                                                                                             <div class="col-sm-3">
                                                                                                 <label
                                                                                                     style="color: green;"
-                                                                                                    id="lbl_bidding_price{{ $item->id }}">{{ BidHelper::getLastBidderPrice($event->id, $item->item->id, $item->id) != null ? BidHelper::getLastBidderPrice($event->id, $item->item->id, $item->id)->bidding_price - $item->item->decrement_price :  $item->price - $item->item->decrement_price }}</label>
+                                                                                                    id="lbl_bidding_price{{ $item->id }}">{{ BidHelper::getLastBidderPrice($event->id, $item->item->id, $item->id) != null ? BidHelper::getLastBidderPrice($event->id, $item->item->id, $item->id)->bidding_price - $item->item->decrement_price : $item->price - $item->item->decrement_price }}</label>
                                                                                                 <input type="hidden"
                                                                                                     id="bidding_price_hidden{{ $item->id }}"
                                                                                                     name="bidding_price"
                                                                                                     class="form-control"
                                                                                                     style="height: 25px; color: green"
                                                                                                     placeholder="Bidding Price"
+                                                                                                    required
                                                                                                     value="{{ BidHelper::getLastBidderPrice($event->id, $item->item->id, $item->id) != null ? BidHelper::getLastBidderPrice($event->id, $item->item->id, $item->id)->bidding_price - $item->item->decrement_price : $item->price - $item->item->decrement_price }}">
                                                                                             </div>
                                                                                         @endif

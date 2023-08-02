@@ -17,20 +17,22 @@
     </thead>
 
     <tbody>
+        {{-- {{ dd($bids) }} --}}
         @foreach ($bids as $bid)
             <tr>
                 <td>{{ $bid->vendor->user->username }}</td>
                 <td>{{ $bid->item->code }}</td>
                 <td>{{ $bid->item->unit->code }}</td>
-                <td>{{ $bid->item->regionPriceUnit->first()->region->name }}</td>
-                <td>{{ $bid->item->regionPriceUnit->first()->price }}</td>
-                <td>{{ $bid->item->regionPriceUnit->first()->item_unit }}</td>
-                <td>{{ $bid->item->regionPriceUnit->first()->item_unit_details }}</td>
+                <td>{{ $bid->rpu->region->name }}</td>
+                <td>{{ $bid->rpu->price }}</td>
+                <td>{{ $bid->rpu->item_unit }}</td>
+                <td>{{ $bid->rpu->item_unit_details }}</td>
                 <td>{{ $bid->least_status }}</td>
                 <td>{{ $bid->item->total_unit }}</td>
                 <td>{{ $bid->bidding_price }}</td>
-                <td>{{ $bid->capping_price }}</td>
-                <td>{{ BidHelper::getNumberOfBidsOf($event_id, $bid->item_id) }}</td>
+                <td>{{ CappingHelper::getCappingPrice($bid->event_id, $bid->item_r_p_u_model_id, $bid->item_id) }}
+                </td>
+                <td>{{ BidHelper::getNumberOfBidsOf($event_id, $bid->item_id, $bid->rpu->id) }}</td>
             </tr>
         @endforeach
     </tbody>

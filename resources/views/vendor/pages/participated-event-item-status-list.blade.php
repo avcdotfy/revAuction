@@ -1,5 +1,21 @@
 @extends('vendor.layout.base')
+@section('page_style')
+    <style>
+        .accepted {
+            background-color: green;
+            padding: 3px;
+            color: white;
+            font-weight: ;
+        }
 
+        .rejected {
+            background-color: red;
+            padding: 3px;
+            color: white;
+            font-weight: ;
+        }
+    </style>
+@endsection
 @section('main_section')
     <section class="content-header">
         <h1>Home | Events | View Participated Event Items Status <small id="ContentPlaceHolder1_hTag">List</small>
@@ -47,21 +63,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr style="background-color:ghostwhite" role="row" class="odd">
-                                            @foreach ($decisions as $key => $d)
+                                        @foreach ($decisions as $key => $d)
+                                            <tr style="background-color:ghostwhite" role="row" class="odd">
+
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $d->item->code }}</td>
                                                 <td>{{ $d->item->unit->name }}</td>
-                                                <td>{{ $d->item->regionPriceUnit->first()->region->name }}</td>
-                                                <td>{{ $d->item->regionPriceUnit->first()->item_unit }}</td>
+                                                <td>{{ $d->rpu->region->name }}</td>
+                                                <td>{{ $d->rpu->item_unit }}</td>
                                                 <td>{{ $d->bid->least_status . ' & ' . $d->bid->bidding_price }}</td>
                                                 <td><span>{{ $d->accepted_qty }}</span> </td>
                                                 <td><span id=" ">{{ $d->accepted_amount }}</span> </td>
-                                                <td><span>{{ $d->decision_status }}</span> </td>
+                                                <td><span
+                                                        class="{{ $d->decision_status == 'Accepted' ? 'accepted' : 'rejected' }}">{{ $d->decision_status }}</span>
+                                                </td>
                                                 <td><span>{{ $d->remarks }}</span> </td>
-                                            @endforeach
 
-                                        </tr>
+
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

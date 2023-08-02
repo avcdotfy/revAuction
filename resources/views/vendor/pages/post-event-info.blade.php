@@ -3,7 +3,7 @@
 @section('main_section')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h3 style="margin-top: 10px; margin-bottom: 20px">Home | View Posted Event Informationt </h3>
+        <h3 style="margin-top: 10px; margin-bottom: 20px">Home | View Posted Event Information </h3>
 
     </section>
     <!-- Main content -->
@@ -16,104 +16,52 @@
 
                         <div class="row">
                             <div class="col-lg-12">
-                                <h5 style=" margin-top: 10px; padding-bottom: 0px;"> Event for [Steel] : Opening Date &amp;
-                                    Time - Wed 28-Jun-2023 03:49 PM and Closing Date &amp; Time - Wed 28-Jun-2023 04:11 PM
-                                    (Daily)</h5>
+                                <h5 style=" margin-top: 10px; padding-bottom: 0px;">{{ $event->title }}</h5>
                             </div>
 
                             <div class="col-sm-12" style="overflow: auto;">
                                 <hr style="margin-top:5px;margin-bottom:5px;">
-                                <div id="dtable_wrapper" class="dataTables_wrapper no-footer">
-                                    <div class="dataTables_length col-lg-9" id="dtable_length"
-                                        style="padding-left: 0px;padding-right: 0px;margin-bottom: 40px; ">
-
-                                    </div>
-                                    <div class="dataTables_filter col-lg-3">
-                                        <input type="text" placeholder="Search"
-                                            style="margin-top: 5px;  border: 1px solid #747474;font-size: 11px;padding: 5px;border-radius: 2px;width: 100%;"
-                                            name="">
-                                    </div>
-
-
-                                    <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
-                                        role="grid" aria-describedby="dtable_info">
-                                        <thead>
-                                            <tr role="row">
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 38.5104px;">S.No.</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 30.7292px;">Item Code & Description</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width: 30.583px;">UoM</th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                    style="width:300px;">Item Region, Price & Unit Details </th>
-
-
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-
+                                <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
+                                    role="grid" aria-describedby="dtable_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 38.5104px;">S.No.</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 30.7292px;">Item Code & Description</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                style="width: 30.583px;">UoM</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width:300px;">
+                                                Item Region, Price & Unit Details </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($participates as $key => $p)
                                             <tr role="row" class="odd">
-                                                <td>1</td>
-                                                <td>Stainless steel (S02)</td>
-                                                <td>Ton</td>
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $p->item->code . ' & ' . $p->item->description }}</td>
+                                                <td>{{ $p->item->unit->code }}</td>
                                                 <td>
                                                     <div class="col-sm-12"
                                                         style="border: 1px solid #d2d6de; border-radius: 6px; padding-top: 5px; padding-bottom: 5px;">
-                                                        <div><span class="label label-success" style="white-space: unset;">5
-                                                                Unit | 200</span> |
-                                                            <span>PAN India</span> :
-                                                            <span title="23">5000.00</span>
+                                                        <div><span class="label label-success"
+                                                                style="white-space: unset;">{{ $p->rpu->item_unit_details }}</span>
+                                                            |
+                                                            <span>{{ $p->rpu->region->name }}</span> :
+                                                            <span title="23">{{$p->rpu->price}}</span>
                                                         </div>
                                                     </div>
                                                 </td>
                                             </tr>
+                                        @endforeach
 
-
-                                            <tr role="row" class="even">
-                                                <td>2</td>
-                                                <td>Stainless steel (S02)</td>
-                                                <td>Ton</td>
-                                                <td>
-                                                    <div class="col-sm-12"
-                                                        style="border: 1px solid #d2d6de; border-radius: 6px; padding-top: 5px; padding-bottom: 5px;">
-                                                        <div><span class="label label-success" style="white-space: unset;">5
-                                                                Unit | 200</span> |
-                                                            <span>PAN India</span> :
-                                                            <span title="23">5000.00</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-
-
-
-                                        </tbody>
-                                    </table>
-
-                                    <div class="col-lg-12 " style="padding-left: 0px; padding-right: 0px">
-                                        <p class="col-lg-6" style="text-align: left;padding-left: 8px; line-height: 30px">
-                                            Showing 1 to 4 of 4 entries</p>
-                                        <div class="col-lg-6" style="text-align: right;">
-                                            <div class="pagination " style="margin: 0px 0; ">
-                                                <!--  <a href="#">&laquo;</a> -->
-                                                <a href="#">Prev</a>
-                                                <a class="active" href="#">1</a>
-                                                <a href="#">Next</a>
-                                                <!-- <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">6</a> -->
-                                                <!-- <a href="#">&raquo;</a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+
+
+
                         <div class="row">
                             <div class="col-sm-12">
                                 <strong id="ContentPlaceHolder1_terms">Terms &amp; Conditions</strong><br><br><span
@@ -140,8 +88,8 @@
                                                 style="font-weight: bold;">&nbsp;</span><span style="color: red;">2 working
                                                 days of the bid acceptance which will be adjusted against your last lifting
                                                 of the respective lot</span><span style="font-size: 10pt;"></span></li>
-                                        <li class="MsoNormal" style=" line-height: normal;"><span
-                                                style="color: red;">Stock quantity material payment to be deposited
+                                        <li class="MsoNormal" style=" line-height: normal;"><span style="color: red;">Stock
+                                                quantity material payment to be deposited
                                                 within&nbsp;2 working days of acceptance of your bid</span><span
                                                 style="font-size: 10pt;"></span></li>
                                         <li class="MsoNormal" style=" line-height: normal;"><span
@@ -212,6 +160,8 @@
                                 </span>
                             </div>
                         </div>
+
+
                     </div>
                     <!-- /.box-body -->
                 </div>

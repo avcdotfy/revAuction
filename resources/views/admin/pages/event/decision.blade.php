@@ -135,85 +135,100 @@
                                                         <th>Item Price</th>
                                                         <th>Quantity</th>
                                                         <th>Item Status &amp; Bidder Amount</th>
+                                                        <th>Capping Price</th>
                                                         <th>Accept Qty.</th>
                                                         <th>Accept Amount</th>
                                                         <th>Decision</th>
                                                         <th>Remarks</th>
                                                     </tr>
                                                 </thead>
-                                                @foreach ($bidder->items as $iKey => $obj)
+                                                {{-- {{ dd($bidder->bids[0]->rpu) }} --}}
+                                                @foreach ($bidder->bids as $iKey => $obj)
                                                     {{-- {{ dd($obj) }} --}}
-                                                    <input type="hidden"
-                                                        name="vendor[{{ $key }}][item][{{ $iKey }}][id]"
-                                                        value="{{ $obj->item_id }}">
-                                                    <input type="hidden"
-                                                        name="vendor[{{ $key }}][item][{{ $iKey }}][bid_id]"
-                                                        value="{{ $obj->id }}">
-                                                    <tbody>
-                                                        <tr style="background-color:ghostwhite">
-                                                            <td style="display:none;">
-                                                                <input type="hidden" name=""
-                                                                    id="ContentPlaceHolder1_lvVl_lvIl_0_hfId_0"
-                                                                    value="242">
-                                                            </td>
-                                                            <td><a id="">
-                                                                    <span>{{ $obj->item ? $obj->item->code : '' }}</span></a>
-                                                            </td>
-                                                            <td>
-                                                                <span>{{ $obj->item ? $obj->item->unit->name : '' }}</span>
-                                                            </td>
-                                                            <td>
-                                                                <span>{{ $obj->item ? $obj->item->regionPriceUnit->first()->region->name : '' }}</span>
-                                                            </td>
-                                                            <td>
-                                                                <span>{{ $obj->item ? $obj->item->regionPriceUnit->first()->price : '' }}</span>
-                                                            </td>
-                                                            <td>
-                                                                <span>{{ $obj->item ? $obj->item->regionPriceUnit->first()->item_unit : '' }}</span>
-                                                            </td>
-                                                            <td><span
-                                                                    class="leastStatus-{{ $obj->least_status == 'L1' ? $obj->least_status : 'L' }}">{{ $obj->least_status }}
-                                                                </span>
+                                                    @if (
+                                                        !DHelper::checkIfDecisionTakenForEventVendor(
+                                                            $event->id,
+                                                            $obj->item_id,
+                                                            $obj->item_r_p_u_model_id,
+                                                            $bidder->details->vendor->id))
+                                                        <input type="hidden"
+                                                            name="vendor[{{ $key }}][item][{{ $iKey }}][id]"
+                                                            value="{{ $obj->item_id }}">
+                                                        <input type="hidden"
+                                                            name="vendor[{{ $key }}][item][{{ $iKey }}][rpuId]"
+                                                            value="{{ $obj->item_r_p_u_model_id }}">
+                                                        <input type="hidden"
+                                                            name="vendor[{{ $key }}][item][{{ $iKey }}][bid_id]"
+                                                            value="{{ $obj->id }}">
+                                                        <tbody>
+                                                            <tr style="background-color:ghostwhite">
+                                                                <td style="display:none;">
+                                                                    <input type="hidden" name=""
+                                                                        id="ContentPlaceHolder1_lvVl_lvIl_0_hfId_0"
+                                                                        value="242">
+                                                                </td>
+                                                                <td><a id="">
+                                                                        <span>{{ $obj->item ? $obj->item->code : '' }}</span></a>
+                                                                </td>
+                                                                <td>
+                                                                    <span>{{ $obj->item ? $obj->item->unit->name : '' }}</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span>{{ $obj->item ? $obj->rpu->region->name : '' }}</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span>{{ $obj->item ? $obj->rpu->price : '' }}</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span>{{ $obj->item ? $obj->rpu->item_unit : '' }}</span>
+                                                                </td>
+                                                                <td><span
+                                                                        class="leastStatus-{{ $obj->least_status == 'L1' ? $obj->least_status : 'L' }}">{{ $obj->least_status }}
+                                                                    </span>
 
-                                                                <span>{{ $obj->bidding_price }}</span>
-                                                            </td>
-                                                            <td style="width:8%;">
-                                                                <input
-                                                                    name="vendor[{{ $key }}][item][{{ $iKey }}][acceptQty]"
-                                                                    type="text"
-                                                                    value="{{ $obj->item ? $obj->item->regionPriceUnit->first()->item_unit : '' }}"
-                                                                    id="ContentPlaceHolder1_lvVl_lvIl_0_txtQty_0"
-                                                                    class="qty form-control"
-                                                                    onkeypress="return isNumberKey(event)"
-                                                                    style="text-align:center;">
-                                                            </td>
-                                                            <td style="width:10%;">
-                                                                <input
-                                                                    name="vendor[{{ $key }}][item][{{ $iKey }}][acceptAmount]"
-                                                                    type="text"
-                                                                    value="{{ $obj->item ? $obj->item->regionPriceUnit->first()->item_unit * $obj->item->regionPriceUnit->first()->price : '' }}"
-                                                                    id="ContentPlaceHolder1_lvVl_lvIl_0_txtPrice_0"
-                                                                    class="form-control"
-                                                                    onkeypress="return isNumberKey(event)"
-                                                                    style="text-align:center;">
-                                                            </td>
-                                                            <td>
-                                                                <select
-                                                                    name="vendor[{{ $key }}][item][{{ $iKey }}][decision]"
-                                                                    class="form-control">
-                                                                    <option value="Pending">Select</option>
-                                                                    <option value="Accepted">Accept</option>
-                                                                    <option value="Rejected">Reject</option>
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <input
-                                                                    name="vendor[{{ $key }}][item][{{ $iKey }}][remark]"
-                                                                    type="text" maxlength="150"
-                                                                    class="remarks-{{ $obj->least_status == 'L1' ? $obj->least_status : 'L' }} form-control">
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
+                                                                    <span>{{ $obj->bidding_price }}</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span>{{ CappingHelper::getCappingPrice($event->id, $obj->rpu->id, $obj->item_id, $bidder->details->vendor->id) ? CappingHelper::getCappingPrice($event->id, $obj->rpu->id, $obj->item_id, $bidder->details->vendor->id) : 'N/A' }}</span>
+                                                                </td>
+                                                                <td style="width:8%;">
+                                                                    <input
+                                                                        name="vendor[{{ $key }}][item][{{ $iKey }}][acceptQty]"
+                                                                        type="text"
+                                                                        value="{{ $obj->item ? $obj->rpu->item_unit : '' }}"
+                                                                        id="ContentPlaceHolder1_lvVl_lvIl_0_txtQty_0"
+                                                                        class="qty form-control"
+                                                                        onkeypress="return isNumberKey(event)" required
+                                                                        style="text-align:center;">
+                                                                </td>
+                                                                <td style="width:10%;">
+                                                                    <input
+                                                                        name="vendor[{{ $key }}][item][{{ $iKey }}][acceptAmount]"
+                                                                        type="text"
+                                                                        value="{{ $obj->item ? $obj->rpu->price : '' }}"
+                                                                        id="ContentPlaceHolder1_lvVl_lvIl_0_txtPrice_0"
+                                                                        class="form-control" required
+                                                                        onkeypress="return isNumberKey(event)"
+                                                                        style="text-align:center;">
+                                                                </td>
+                                                                <td>
+                                                                    <select
+                                                                        name="vendor[{{ $key }}][item][{{ $iKey }}][decision]"
+                                                                        class="form-control" required>
+                                                                        <option value="">Select</option>
+                                                                        <option value="Accepted">Accept</option>
+                                                                        <option value="Rejected">Reject</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <input
+                                                                        name="vendor[{{ $key }}][item][{{ $iKey }}][remark]"
+                                                                        type="text" maxlength="150" required
+                                                                        class="remarks-{{ $obj->least_status == 'L1' ? $obj->least_status : 'L' }} form-control">
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    @endif
                                                 @endforeach
 
                                             </table>

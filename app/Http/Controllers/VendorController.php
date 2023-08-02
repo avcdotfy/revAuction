@@ -14,6 +14,7 @@ use App\Models\Country;
 use App\Models\Event;
 use App\Models\ItemRPUModel;
 use App\Models\Notice;
+use App\Models\Participant;
 use App\Models\Region;
 use App\Models\Request as VendorRequest;
 use App\Models\State;
@@ -154,9 +155,11 @@ class VendorController extends Controller
         return view('vendor.pages.running-events', compact('events'));
     }
 
-    public function postedEventInfo()
+    public function postedEventInfo($eId)
     {
-        return view('vendor.pages.post-event-info');
+        $event = Event::find($eId);
+        $participates = Participant::where(['event_id' => $eId, 'vendor_id' => Auth::user()->vendor->id])->get();
+        return view('vendor.pages.post-event-info', compact('participates', 'event'));
     }
 
     public function noticeNews()

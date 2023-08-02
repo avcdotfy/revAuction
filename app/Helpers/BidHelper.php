@@ -90,9 +90,9 @@ class BidHelper
         return $item;
     }
 
-    public static function getNumberOfBidsOf($eId, $iId)
+    public static function getNumberOfBidsOf($eId, $iId, $rpuId = null)
     {
-        return  Bid::where(['event_id' => $eId, 'item_id' => $iId])->count();
+        return  Bid::where(['event_id' => $eId, 'item_id' => $iId, 'item_r_p_u_model_id' => $rpuId])->count();
     }
 
     public static function getVendorsLeastStatus($eId, $iId, $vId,  $iRpuId = null)

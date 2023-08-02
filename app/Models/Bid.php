@@ -29,4 +29,9 @@ class Bid extends Model
     {
         return "L" . $value;
     }
+
+    public function rpu()
+    {
+        return $this->belongsTo(ItemRPUModel::class, 'item_r_p_u_model_id');
+    }
 }

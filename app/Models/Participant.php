@@ -23,4 +23,9 @@ class Participant extends Model
     {
         return $this->belongsTo(Event::class);
     }
+
+    public function rpu()
+    {
+        return $this->belongsTo(ItemRPUModel::class, 'item_r_p_u_model_id');
+    }
 }

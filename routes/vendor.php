@@ -40,7 +40,7 @@ Route::group(['middleware' => ['auth', CheckForVendor::class]], function () {
         Route::get('participated-event-item-list/{eid}', [ParticipantController::class, 'getParticipatedEventItemList'])->name('vendor.participated-event-item-list');
         Route::get('participated-event-item-status-list/{eid}', [ParticipantController::class, 'getParticipatedEventItemStatusList'])->name('vendor.participated-event-item-status-list');
 
-        Route::get('posted-event-info', [VendorController::class, 'postedEventInfo'])->name('vendor.posted-event-info');
+        Route::get('posted-event-info/{eId}', [VendorController::class, 'postedEventInfo'])->name('vendor.posted-event-info');
 
         Route::get('participated-event-reports', [ParticipantController::class, 'participatedEventReports'])->name('vendor.participated-event-reports');
         Route::get('participated-event-status-reports', [ParticipantController::class, 'participatedEventStatusReports'])->name('vendor.participated-event-status-reports');
