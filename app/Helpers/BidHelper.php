@@ -92,9 +92,9 @@ class BidHelper
         return $item;
     }
 
-    public static function getNumberOfBidsOf($eId, $iId, $rpuId = null)
+    public static function getNumberOfBidsOf($eId, $iId, $rpuId = null, $vId = null)
     {
-        return  Bid::where(['event_id' => $eId, 'item_id' => $iId, 'item_r_p_u_model_id' => $rpuId])->count();
+        return  Bid::where(['event_id' => $eId, 'item_id' => $iId, 'item_r_p_u_model_id' => $rpuId, 'vendor_id' => $vId])->count();
     }
 
     public static function getVendorsLeastStatus($eId, $iId, $vId,  $iRpuId = null)
@@ -105,9 +105,14 @@ class BidHelper
         return $bid ? $bid->least_status : null;
     }
 
-
     public static function getLeastStatusOfVendr($eId, $iId, $vId)
     {
         return Bid::where(['event_id' => $eId, 'item_id' => $iId, 'vendor_id' => $vId])->orderBy('least_status', 'asc')->first();
+    }
+
+
+    public static function getBidAmount($eId, $iId, $vId, $rpuId)
+    {
+        return Bid::where(['event_id' => $eId, 'item_id' => $iId, 'item_r_p_u_model_id' => $rpuId, 'vendor_id' => $vId])->orderBy('bidding_price', 'asc')->first();
     }
 }

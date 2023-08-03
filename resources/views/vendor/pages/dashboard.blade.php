@@ -22,7 +22,7 @@
                                             style="font-size: 44px;"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Upcoming Event</span>
-                                        <span class="info-box-number">{{ $upcomingEvents }}</span>
+                                        <span class="info-box-number">{{ count($upcomingEvents) }}</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -35,7 +35,7 @@
                                     <div class="info-box-content">
                                         <span class="info-box-text">Running Event</span>
                                         <span id="ContentPlaceHolder1_lbl_ReC"
-                                            class="info-box-number">{{ $runningEvents }}</span>
+                                            class="info-box-number">{{ count($runningEvents) }}</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -48,14 +48,15 @@
                                             style="font-size: 44px;"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">PARTICIPATED EVENTS</span>
-                                        <span id="ContentPlaceHolder1_lbl_CeC" class="info-box-number">13</span>
+                                        <span id="ContentPlaceHolder1_lbl_CeC"
+                                            class="info-box-number">{{ count($participatedEvents) }}</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
                             </div>
                             <!-- ./col -->
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
+                            {{-- <div class="col-lg-3 col-6">
+                                 
                                 <div class="info-box bg-green">
                                     <span class="info-box-icon"><i class="bx bx-calendar"
                                             style="font-size: 44px;"></i></span>
@@ -63,9 +64,9 @@
                                         <span class="info-box-text">PARTICIPATED EVENTS Status</span>
                                         <span id="ContentPlaceHolder1_lbl_DTeC" class="info-box-number">4</span>
                                     </div>
-                                    <!-- /.info-box-content -->
+                                   
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- ./col -->
                         </div>
                     </div>
@@ -80,21 +81,21 @@
                             style="text-align: center; text-decoration-line: underline;text-transform:uppercase;font-weight:700;">
                             <a href="upcoming-event.aspx" style="color: #000;">Upcoming Events</a>
                         </h4>
-                        <hr / style="margin-bottom: 14px;
-">
+                        <hr style="margin-bottom: 14px;" />
+
                         <div class="holder">
-                            <ul id="ticker01">
-                                <li><span><img src="images/new.png" style="width: 30px"></span>
-                                    <a href="#" style="color: #000">Event for [Steel] : Opening Date & Time - Thu
-                                        29-Jun-2023 09:00 AM and Closing Date & Time - Thu 29-Jun-2023 06:11 PM (Daily)</a>
-                                </li>
-
-                                <li><span><img src="images/new.png" style="width: 30px"></span>
-                                    <a href="#" style="color: #000">Event for [Steel] : Opening Date & Time - Thu
-                                        29-Jun-2023 09:00 AM and Closing Date & Time - Thu 29-Jun-2023 06:11 PM (Daily)</a>
-                                </li>
-
-                            </ul>
+                            @if (count($upcomingEvents))
+                                <ul id="ticker01">
+                                    @foreach ($upcomingEvents as $e)
+                                        <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
+                                            <a href="#" style="color: #000"> {{ $e->title }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <h4 style="text-align: center;color: #5e5e5e; padding-top: 3em;">Currently No Events
+                                </h4>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -106,18 +107,21 @@
                             style="text-align: center; text-decoration-line: underline;text-transform:uppercase;font-weight:700;">
                             <a href="running-event.aspx" style="color: #000;">Running Events</a>
                         </h4>
-                        <hr />
-                        <!-- <div class="holder">
-                        <ul id="ticker01">
-                                <li><span><img src="images/new.png" style="width: 30px"></span>
-                                  <a href="#" style="color: #000">Event for [Steel] : Opening Date & Time - Thu 29-Jun-2023 09:00 AM and Closing Date & Time - Thu 29-Jun-2023 06:11 PM (Daily)</a></li>
-
-                                  <li><span><img src="images/new.png" style="width: 30px"></span>
-                                  <a href="#" style="color: #000">Event for [Steel] : Opening Date & Time - Thu 29-Jun-2023 09:00 AM and Closing Date & Time - Thu 29-Jun-2023 06:11 PM (Daily)</a></li>
-                                                
-                                      </ul>
-                        </div> -->
-                        <h4 style="text-align: center;color: #5e5e5e; padding-top: 3em;">Currently No Events </h4>
+                        <hr style="margin-bottom: 14px;" />
+                        <div class="holder">
+                            @if (count($runningEvents))
+                                <ul id="ticker01">
+                                    @foreach ($runningEvents as $e)
+                                        <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
+                                            <a href="#" style="color: #000"> {{ $e->title }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <h4 style="text-align: center;color: #5e5e5e; padding-top: 3em;">Currently No Events
+                                </h4>
+                            @endif
+                        </div>
 
                     </div>
                 </div>
@@ -129,42 +133,21 @@
                             style="text-align: center; text-decoration-line: underline;text-transform:uppercase;font-weight:700;">
                             <a href="closed-event.aspx" style="color: #000;">Closed Events</a>
                         </h4>
-                        <hr />
-
+                        <hr style="margin-bottom: 14px;" />
                         <div class="holder">
-                            <ul id="ticker01">
-                                <li><a href="#" style="color: #000"> Event for [Steel] : Opening Date & Time - Wed
-                                        28-Jun-2023 03:49 PM and Closing Date & Time - Wed 28-Jun-2023 04:11 PM (Daily)</a>
-                                </li>
-
-                                <li><a href="#" style="color: #000"> Event for [Steel] : Opening Date & Time - Mon
-                                        19-Jun-2023 12:40 AM and Closing Date & Time - Mon 19-Jun-2023 01:01 AM (Daily)</a>
-                                </li>
-
-
-                                <li><a href="#" style="color: #000"> Event for [Steel] : Opening Date & Time - Thu
-                                        08-Jun-2023 07:10 PM and Closing Date & Time - Thu 08-Jun-2023 07:25 PM (Daily)</a>
-                                </li>
-
-
-                                <li><a href="#" style="color: #000"> Event for [Steel] : Opening Date & Time - Tue
-                                        30-May-2023 02:57 PM and Closing Date & Time - Tue 30-May-2023 06:03 PM (Daily)</a>
-                                </li>
-
-                                <li><a href="#" style="color: #000"> Event for [Steel] : Opening Date & Time - Thu
-                                        25-May-2023 02:10 PM and Closing Date & Time - Thu 25-May-2023 05:11 PM (Daily)</a>
-                                </li>
-
-                                <li><a href="#" style="color: #000"> Event for Steel : Opening Date & Time
-                                        10-05-2023 10:40 PM (IST) and Closing Date & Time 10-05-2023 11:00 PM (IST)</a></li>
-
-
-
-                            </ul>
+                            @if (count($closedEvents))
+                                <ul id="ticker01">
+                                    @foreach ($closedEvents as $e)
+                                        <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
+                                            <a href="#" style="color: #000"> {{ $e->title }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <h4 style="text-align: center;color: #5e5e5e; padding-top: 3em;">Currently No Events
+                                </h4>
+                            @endif
                         </div>
-
-
-
                     </div>
                 </div>
             </div>

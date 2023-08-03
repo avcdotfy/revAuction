@@ -61,9 +61,9 @@
     <!-- Logo -->
     <a href="dashboard.aspx" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini">R.Sys</span>
+        <span class="logo-mini">{{ env('APP_NAME') }}</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg">Reverse.Sysaler</span>
+        <span class="logo-lg">{{ env('APP_NAME') }}</span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->

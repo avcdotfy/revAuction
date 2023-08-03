@@ -201,7 +201,7 @@
                             @if (count($closedEvents))
                                 <ul id="ticker01">
                                     @foreach ($closedEvents as $e)
-                                        <li><span><img src="images/new.png" style="width: 30px"></span>
+                                        <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
                                             <a href="#" style="color: #000"> {{ $e->title }}</a>
                                         </li>
                                     @endforeach

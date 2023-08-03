@@ -48,7 +48,7 @@
         }
     </style>
     @yield('page_style')
-    <script src="{{ asset('jquery/dist/jquery.min.js') }}"></script>
+
 
     <title>Home | Dashboard</title>
     <style type="text/css">
@@ -148,9 +148,9 @@
 
     @include('vendor.partials.scripts')
 
+    <script src="{{ asset('jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script type="text/javascript"
-        src="https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/6/tinymce.min.js"></script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <script>
@@ -176,8 +176,8 @@
             }).showToast();
         }
     </script>
-    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.11.2/dist/echo.iife.js"></script>
+    {{-- <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.11.2/dist/echo.iife.js"></script> --}}
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>

@@ -27,8 +27,6 @@ class ClosedEventL1Report implements FromView
         // dd($this->id);
         $bids = Bid::select('*', DB::raw('MIN(least_status) as least_status'), DB::raw('MIN(bidding_price) as bidding_price'))->groupBy('item_r_p_u_model_id')->where(['event_id' => $this->eId])->get();
 
-        $bidGroupByVendorId = Bid::select('*',  DB::raw('MIN(bidding_price) as bidding_price'))->groupBy('vendor_id')->get();
-
         // dd($bids);
         // foreach ($bids as $key => $bid) {
         //     echo '<pre>';
@@ -51,6 +49,6 @@ class ClosedEventL1Report implements FromView
 
         $event_id = $this->eId;
 
-        return view('exports.closed-event-report', compact('bids', 'event_id'));
+        return view('exports.closed-event-l1-report', compact('bids', 'event_id'));
     }
 }

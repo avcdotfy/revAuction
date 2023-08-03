@@ -110,11 +110,13 @@ class VendorController extends Controller
 
     function dashboard()
     {
-        $upcomingEvents = Event::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => EVENT_STATUS[0]])->get()->count();
+        $upcomingEvents = Event::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => EVENT_STATUS[0]])->get();
+        $runningEvents = Event::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => EVENT_STATUS[1]])->get();
+        $closedEvents = Event::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => EVENT_STATUS[2]])->get();
 
-        $runningEvents = Event::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => EVENT_STATUS[1]])->get()->count();
+        $participatedEvents = Participant::where('vendor_id', Auth::user()->vendor->id)->groupBy('event_id')->get();
 
-        return view('vendor.pages.dashboard',  ['upcomingEvents' => $upcomingEvents,   'runningEvents' => $runningEvents,]);
+        return view('vendor.pages.dashboard',  ['upcomingEvents' => $upcomingEvents, 'closedEvents' => $closedEvents, 'runningEvents' => $runningEvents, 'participatedEvents' => $participatedEvents]);
     }
 
     function profile($id)
