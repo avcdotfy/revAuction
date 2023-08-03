@@ -7,14 +7,14 @@
             Department Code</span>
         <input type="hidden" name="id" value="{{ $department ? $department->id : '' }}">
 
-        <input type="text" name="code" class="form-control" placeholder="Enter Department Code"
+        <input type="text" name="code" class="form-control" placeholder="Enter Department Code" required
             value="{{ $department ? $department->code : '' }}">
     </div>
 </div>
 <div class="col-sm-12" style="padding:0px;">
     <label for="inputPassword3" class="col-sm-12 control-label">Department Name *</label>
     <div class="col-sm-12">
-        <input type="text" class="form-control" name="name" placeholder="Enter Department Name"
+        <input type="text" class="form-control" name="name" placeholder="Enter Department Name" required
             value="{{ $department ? $department->name : '' }}">
     </div>
 </div>
@@ -23,7 +23,7 @@
     <label for="inputPassword3" class="col-sm-12 control-label"> Status <span
             style="color: red; font-size: 13px;">*</span></label>
     <div class="col-sm-12">
-        <select class="form-control" name="is_active">
+        <select class="form-control" name="is_active" required>
             <option value=1 {{ $department ? ($department->is_active == 1 ? 'selected' : '') : '' }}>Activate</option>
             <option value=0 {{ $department ? ($department->is_active == 0 ? 'selected' : '') : '' }}>Deactive</option>
         </select>

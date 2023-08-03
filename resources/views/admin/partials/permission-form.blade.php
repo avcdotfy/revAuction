@@ -5,13 +5,13 @@
         <span id="ContentPlaceHolder1_RequiredFieldValidator1"
             style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter Role
             Name</span>
-        <input type="text" name="name" class="form-control" placeholder="Enter Role Name">
+        <input type="text" name="name" class="form-control" placeholder="Enter Role Name" required>
     </div>
 </div>
 <div class="col-sm-12" style="padding:0px;">
     <label for="inputPassword3" class="col-sm-12 control-label">Role Description *</label>
     <div class="col-sm-12">
-        <input type="text" class="form-control" name="description" placeholder="Enter Role Description">
+        <input type="text" class="form-control" name="description" placeholder="Enter Role Description" required>
     </div>
 </div>
 

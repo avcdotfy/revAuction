@@ -3,7 +3,6 @@
     @if ($company)
         <input type="hidden" name="company_id" value="{{ $company->id }}">
     @endif
-
     <div class="col-sm-12" style="padding:0px;">
         <label for="inputPassword3" class="col-sm-12 control-label">Company Name <span
                 style="color: red; font-size: 13px">*</span></label>
@@ -11,14 +10,14 @@
             <span id="ContentPlaceHolder1_RequiredFieldValidator1"
                 style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter Company
                 Name</span>
-            <input type="text" class="form-control" name="name" placeholder="Enter Company Name"
+            <input type="text" class="form-control" name="name" placeholder="Enter Company Name" required
                 value="{{ $company ? $company->name : '' }}">
         </div>
     </div>
     <div class="col-sm-12" style="padding:0px;">
         <label for="inputPassword3" class="col-sm-12 control-label">App Name</label>
         <div class="col-sm-12">
-            <input type="text" class="form-control" name="app_name" placeholder="Enter App Name"
+            <input type="text" class="form-control" name="app_name" placeholder="Enter App Name" required
                 value="{{ $company ? $company->app_name : '' }}">
         </div>
     </div>
@@ -39,7 +38,7 @@
     <div class="col-sm-12" style="padding:0px;">
         <label for="inputPassword3" class="col-sm-12 control-label">Company Website Url </label>
         <div class="col-sm-12">
-            <input type="text" name="web_url" class="form-control" placeholder="Enter Company Website Url"
+            <input type="text" name="web_url" class="form-control" placeholder="Enter Company Website Url" required
                 value="{{ $company ? $company->web_url : '' }}">
         </div>
     </div>

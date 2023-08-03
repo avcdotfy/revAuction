@@ -6,14 +6,14 @@
             style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter UoM Code
             *</span>
         <input type="hidden" name="id" value="{{ $uom ? $uom->id : '' }}">
-        <input type="text" value="{{ $uom ? $uom->code : old('code') }} " class="form-control" name="code"
+        <input type="text" value="{{ $uom ? $uom->code : old('code') }}" class="form-control" name="code" required
             placeholder="Enter UOM code">
     </div>
 </div>
 <div class="col-sm-12" style="padding:5px;">
     <label for="inputPassword3" class="col-sm-12 control-label">UoM Name *</label>
     <div class="col-sm-12">
-        <input type="text" class="form-control" value="{{ $uom ? $uom->name : old('name') }}" name="name"
+        <input type="text" class="form-control" value="{{ $uom ? $uom->name : old('name') }}" name="name" required
             placeholder="Enter UoM Name *">
     </div>
 </div>
@@ -22,7 +22,7 @@
     <label for="inputPassword3" class="col-sm-12 control-label">UoM Status <span
             style="color: red; font-size: 13px;">*</span></label>
     <div class="col-sm-12">
-        <select class="form-control" name="is_active">
+        <select class="form-control" name="is_active" required>
             <option value=1 {{ $uom ? ($uom->is_active == 1 ? 'selected' : '') : '' }}>Activate</option>
             <option value=0 {{ $uom ? ($uom->is_active == 0 ? 'selected' : '') : '' }}>Deactive</option>
         </select>

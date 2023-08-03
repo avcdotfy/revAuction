@@ -69,8 +69,6 @@ class BidHelper
                 // }
             }
 
-
-
             foreach ($event->items as $key => $itemRpu) {
 
                 if (in_array($itemRpu->id, $rpuOnWhichBidStarted)) {
