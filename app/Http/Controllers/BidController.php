@@ -95,6 +95,7 @@ class BidController extends Controller
                 $data['rpu_id'] = $req->item_rpu_id;
                 event(new BidEvent($data));
                 event(new BidStartedEvent($data));
+                // BidHelper::increaseClosingTime($req->event_id, $req->item_id);
                 return redirect()->route('vendor.liveAuction', $req->event_id)->with('success', 'Bid placed successfully');
             } catch (QueryException $e) {
                 return redirect()->route('vendor.liveAuction',  $req->event_id)->with('error', $e->getMessage());

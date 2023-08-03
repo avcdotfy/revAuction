@@ -6,6 +6,8 @@ use App\Events\BidEvent;
 use App\Models\Bid;
 use App\Models\Cappingprice;
 use App\Models\Event;
+use App\Models\Item;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\TextUI\Configuration\Merger;
@@ -114,5 +116,26 @@ class BidHelper
     public static function getBidAmount($eId, $iId, $vId, $rpuId)
     {
         return Bid::where(['event_id' => $eId, 'item_id' => $iId, 'item_r_p_u_model_id' => $rpuId, 'vendor_id' => $vId])->orderBy('bidding_price', 'asc')->first();
+    }
+
+
+    public static function increaseClosingTime($eId, $iId)
+    {
+        $event = Event::find($eId);
+
+        $minToIncrease = (int)Item::find($iId)->category->last_minute_closing_time_increment;
+
+        $eventCurrentClosingTime = Carbon::createFromTimestampMs($event->closing_date_time_millis);
+
+        $givenMinuteBeforeEventCurrentClosingTime = $eventCurrentClosingTime->subMinutes($minToIncrease);
+
+        $currentMillis = Carbon::now()->timestamp * 1000;
+        $isLessThanGiveMinutes = $currentMillis < $givenMinuteBeforeEventCurrentClosingTime->timestamp * 1000;
+
+        if ($isLessThanGiveMinutes) {
+            $updatedMillis = Carbon::createFromTimestampMs($event->closing_date_time_millis)->addMinute($minToIncrease);
+            $event->closing_date_time_millis = $updatedMillis;
+            $event->save();
+        }
     }
 }
