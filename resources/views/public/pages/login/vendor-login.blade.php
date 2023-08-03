@@ -11,8 +11,8 @@
         Dotfy | Admin | Login
     </title>
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="images/logo/favicon.ico" />
-    <!-- Tell the browser to be responsive to screen width -->
+    {{-- <link rel="icon" type="image/png" href="images/logo/favicon.ico" /> --}}
+
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}" />

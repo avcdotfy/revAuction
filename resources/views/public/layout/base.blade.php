@@ -11,7 +11,7 @@
         Reverse.Sysaler | Admin | Login
     </title>
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="images/logo/favicon.ico" />
+    {{-- <link rel="icon" type="image/png" href="images/logo/favicon.ico" /> --}}
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <!-- Bootstrap 3.3.7 -->
@@ -46,7 +46,7 @@
 
     @yield('login-form')
 
-    
+
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>

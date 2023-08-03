@@ -19,3 +19,6 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('bidderStatus.{eventId}.{rpuId}.{itemId}', function ($user, $eventId, $rpuId, $itemId) {
     return true;
 });
+Broadcast::channel('bidStarted.{eventId}.{rpuId}.{itemId}', function ($user, $eventId, $rpuId, $itemId) {
+    return true;
+});

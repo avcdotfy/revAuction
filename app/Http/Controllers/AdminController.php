@@ -13,7 +13,6 @@ class AdminController extends BaseController
 {
     function index()
     {
-        
 
         $newRequest = ModelsRequest::where(['company_id' => $this->company_id, 'status' => REQUEST_STATUS[2]])->get()->count();
 
@@ -21,11 +20,11 @@ class AdminController extends BaseController
 
         $rejectRequest = ModelsRequest::where(['company_id' => $this->company_id, 'status' => REQUEST_STATUS[1]])->get()->count();
 
-        $upcomingEvents = Event::where(['company_id' => $this->company_id, 'status' => EVENT_STATUS[0]])->get()->count();
+        $upcomingEvents = Event::where(['company_id' => $this->company_id, 'status' => EVENT_STATUS[0]])->get();
 
-        $runningEvents = Event::where(['company_id' => $this->company_id, 'status' => EVENT_STATUS[1]])->get()->count();
+        $runningEvents = Event::where(['company_id' => $this->company_id, 'status' => EVENT_STATUS[1]])->get();
 
-        $closedEvents = Event::where(['company_id' => $this->company_id, 'status' => EVENT_STATUS[2]])->get()->count();
+        $closedEvents = Event::where(['company_id' => $this->company_id, 'status' => EVENT_STATUS[2]])->get();
 
         return view(
             'admin.pages.dashboard.dashboard',

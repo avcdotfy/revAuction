@@ -209,8 +209,6 @@
                                         @endpush
                                     @endforeach
 
-
-
                                 </table>
                             </div>
                             {{-- bIDDER LIST ENDS --}}
@@ -223,5 +221,29 @@
         <h6 class="text-center" style="margin-top: 60px !important"> Bidding has not started yet </h6>
     @endif
 
-    @include('admin.partials.terms-condition')
+    @foreach ($eventWithAllRPus->items as $rpu)
+        {{-- {{ dd($event->items) }} --}}
+        @push('scripts')
+            <script>
+                $(document).ready(function() {
+                    Echo.private('bidStarted.' + {{ $event->id }} + '.' + {{ $rpu->id }} + '.' +
+                        {{ $rpu->item->id }}).listen('BidStartedEvent',
+                        function(data) {
+                            console.log(data.count);
+                            if (data.count == 1) {
+                                location.reload();
+                            }
+                        })
+                });
+            </script>
+        @endpush
+    @endforeach
+
+    <div class="row" style="margin: 20px">
+        {!! $event->terms_condition !!}
+    </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ mix('js/app.js') }}" defer></script>
+@endpush

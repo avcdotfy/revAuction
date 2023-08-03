@@ -6,7 +6,7 @@
         <h3 style="margin-top: 10px; margin-bottom: 20px">New Vendor Request List </h3>
         <ol class="breadcrumb">
             <button id="myBtn" style="color: white; font-weight: 600" class="btn-block btn-primary btn-sm"
-                data-toggle="modal" data-target="#exampleModalLong"> Accept / Reject Request (popup) </button>
+                data-toggle="modal" data-target="#exampleModalLong"> Accept / Reject Request</button>
         </ol>
     </section>
     <!-- Main content -->

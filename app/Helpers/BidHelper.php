@@ -53,7 +53,9 @@ class BidHelper
 
     public static function getBidStatistics($eId)
     {
+
         $event = Event::find($eId);
+
         $bids = Bid::where('event_id', $eId)->groupBy('item_r_p_u_model_id')->get();
         $bidStarted = false;
         $rpuOnWhichBidStarted = [];
@@ -66,7 +68,7 @@ class BidHelper
                 $rpuOnWhichBidStarted[] =  $bid->item_r_p_u_model_id;
                 // }
             }
-            $availableBids = [];
+
 
 
             foreach ($event->items as $key => $itemRpu) {
@@ -78,7 +80,9 @@ class BidHelper
                 }
             }
         }
-        return [$event, $bidStarted];
+
+        $eventWithAllRPus = Event::find($eId);
+        return [$event, $bidStarted, $eventWithAllRPus];
     }
 
     public static function getLiveBidStatistics($eId, $iId, $rpuId)

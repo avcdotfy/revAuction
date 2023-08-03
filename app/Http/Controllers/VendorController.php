@@ -38,6 +38,7 @@ class VendorController extends Controller
         $countries = Country::where(['company_id' => CompanyHelper::getCompanyFromHost()->id])->get();
         $categories = CategoryHelper::getCategories();
         $regions = Region::all();
+        // return view('public.pages.register.vendor-register', compact('countries', 'categories', 'regions'));
         return view('public.pages.register.vendor-register', compact('countries', 'categories', 'regions'));
     }
 

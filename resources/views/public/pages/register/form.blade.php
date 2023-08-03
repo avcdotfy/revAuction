@@ -82,8 +82,7 @@
       </div>
   </div>
   <div class="col-sm-12" style="margin-bottom: 5px">
-      <script src="assets/jquery/dist/jquery.min.js"></script>
-      <script src="assets/js/ajax-1.8.3.jquery.min.js"></script>
+
       <div class="col-sm-6" style="padding: 0px;">
           <label for="inputPassword3" class="col-sm-12 control-label">Login ID /
               Username <span style="color: red; font-size: 13px;">*</span></label>
@@ -201,8 +200,7 @@
       </div>
   </div>
   <div class="col-sm-12" style="margin-bottom: 5px;">
-      <script src="assets/js/bootstrap.min.js"></script>
-      <link href="assets/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css">
+
       <div class="col-sm-6" style="padding: 0px;">
           <label for="inputPassword3" class="col-sm-12 control-label">Preference
               Category <span style="color: red; font-size: 13px;">*</span></label>

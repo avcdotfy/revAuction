@@ -40,7 +40,7 @@
                                             <tr role="row" class="odd">
                                                 <td>{{ $key + 1 }}</td>
 
-                                                <td>{{ $event->id }}</td>
+                                                <td>{{ EVENT_ID_PREFIX . $event->id }}</td>
                                                 <td>{{ $event->title }}</td>
 
                                                 <td>{{ $event->eventmode->mode }}</td>

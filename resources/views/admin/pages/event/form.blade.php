@@ -339,7 +339,6 @@
          </div>
          <div class="col-sm-12" style="margin-bottom: 5px;">
              <textarea id="default" name="terms_condition" style="height: 80px">{{ TERMS_AND_CONDITIONS }}</textarea>
-
          </div>
      </div>
      <div class="col-sm-12" style="margin-bottom: 5px;">

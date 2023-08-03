@@ -335,7 +335,9 @@
                                 </div>
                             </div>
                         </div>
-                        @include('vendor.partials.terms-condition')
+                        <div style="margin:20px">
+                            {!! $event->terms_condition !!}
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>

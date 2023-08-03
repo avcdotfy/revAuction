@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\BidEvent;
+use App\Events\BidStartedEvent;
 use App\Helpers\BidHelper;
 use App\Helpers\CappingPriceHelper;
 use App\Helpers\EventHelper;
@@ -93,7 +94,7 @@ class BidController extends Controller
                 $data['event_id'] = $req->event_id;
                 $data['rpu_id'] = $req->item_rpu_id;
                 event(new BidEvent($data));
-
+                event(new BidStartedEvent($data));
                 return redirect()->route('vendor.liveAuction', $req->event_id)->with('success', 'Bid placed successfully');
             } catch (QueryException $e) {
                 return redirect()->route('vendor.liveAuction',  $req->event_id)->with('error', $e->getMessage());

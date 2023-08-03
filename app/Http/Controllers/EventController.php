@@ -45,7 +45,6 @@ class EventController extends BaseController
     public function store(Request $req)
     {
         // dd($req->all());
-
         if (empty($req->vendor_id)) {
             return redirect()->back()->with('error', 'please select vendor');
         }
@@ -164,9 +163,10 @@ class EventController extends BaseController
     {
         $event = BidHelper::getBidStatistics($eId)[0];
         $bidStarted = BidHelper::getBidStatistics($eId)[1];
+        $eventWithAllRPus = BidHelper::getBidStatistics($eId)[2];
         // dd($event);
 
-        return view('admin.pages.event.statistics', compact('event', 'bidStarted'));
+        return view('admin.pages.event.statistics', compact('event', 'bidStarted', 'eventWithAllRPus'));
     }
 
     public function getLiveBiddersStatus(Request $r)

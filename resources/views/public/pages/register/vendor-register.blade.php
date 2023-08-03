@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
 <head>
@@ -109,14 +108,13 @@
         </div>
     </section>
 
-    <!-- Bootstrap 3.3.7 -->
+
     <script src="{{ asset('jquery/dist/jquery.min.js') }}"></script>
 
     <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <!-- DataTables -->
+
 
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-    <script type="text/javascript" src="{{ asset('dist/js/jquery.dataTables.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('validations/register-form-validator.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
