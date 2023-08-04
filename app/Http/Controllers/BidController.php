@@ -8,6 +8,7 @@ use App\Helpers\BidHelper;
 use App\Helpers\CappingPriceHelper;
 use App\Helpers\EventHelper;
 use App\Helpers\ItemHelper;
+use App\Jobs\SubmitBidJob;
 use App\Models\Bid;
 use App\Models\Cappingprice;
 use App\Models\Event;
@@ -24,18 +25,17 @@ class BidController extends Controller
 
     function store(Request $req)
     {
-        // dd($req->item_id);
+
         if (EventHelper::isEventFinished($req->event_id)) {
             return redirect()->back()->with('error', 'event is no longer running');
         }
-        // dd($req->all());
+
         $minBidAmount = BidHelper::getLowestPrice($req->event_id, $req->item_id, $req->item_rpu_id);
 
         if ($req->bidding_price <= 0) {
             return redirect()->route('vendor.liveAuction', $req->event_id)->with('error', 'bidding price should not be less than or equals to zero');
         }
 
-        // dd($minBidAmount);
         if ($req->capping_price) {
             if ($req->capping_price > $minBidAmount && $minBidAmount != null) {
                 return redirect()->route('vendor.liveAuction', $req->event_id)->with('error', 'Capping price should be less than last bid price :' . $minBidAmount);
@@ -70,12 +70,18 @@ class BidController extends Controller
                 ]);
                 Auth::user()->vendor->bids()->attach($bid->id);
 
-                $totalBids = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id, 'item_r_p_u_model_id' => $req->item_rpu_id])->orderBy('bidding_price', 'asc')->get();
+                // $tbOrderByBidPrice = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id, 'item_r_p_u_model_id' => $req->item_rpu_id])->orderBy('bidding_price', 'asc')->get();
+                // $tbOrderByCapPrice = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id, 'item_r_p_u_model_id' => $req->item_rpu_id])->orderBy('capping_price', 'asc')->get();
+
                 $bidsWithCappingPrice = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id, 'item_r_p_u_model_id' => $req->item_rpu_id])->orderBy('bidding_price', 'asc')->orderBy('capping_price', 'asc')->where('capping_price', '!=', '0')->get();
                 $bidsWithoutCappingPrice = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id, 'item_r_p_u_model_id' => $req->item_rpu_id])->orderBy('bidding_price', 'asc')->orderBy('capping_price', 'asc')->where('capping_price', '=', '0')->get();
 
                 $bidsWithCappingPriceCount = count($bidsWithCappingPrice);
                 $bidsWithoutCappingPriceCount = count($bidsWithoutCappingPrice);
+
+                // dd($tbOrderByBidPrice->mapWithKeys(function ($bid) {
+                //     return [$bid->id => $bid->bidding_price .  ' Capping_price -> ' . $bid->capping_price . ' least rank -> ' . $bid->least_status];
+                // }));
 
                 $leasStatusValue = 1;
                 if ($bidsWithCappingPriceCount > 0) {
