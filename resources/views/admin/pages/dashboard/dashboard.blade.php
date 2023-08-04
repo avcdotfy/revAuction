@@ -140,7 +140,7 @@
                     <div class="col-sm-12">
                         <h4
                             style="text-align: center; text-decoration-line: underline;text-transform:uppercase;font-weight:700;">
-                            <a href="upcoming-event.aspx" style="color: #000;">Upcoming Events</a>
+                            <a href="{{ route('event.upcoming') }}" style="color: #000;">Upcoming Events</a>
                         </h4>
                         <hr style="margin-bottom: 14px;">
                         <div class="holder">
@@ -166,7 +166,7 @@
                     <div class="col-sm-12">
                         <h4
                             style="text-align: center; text-decoration-line: underline;text-transform:uppercase;font-weight:700;">
-                            <a href="running-event.aspx" style="color: #000;">Running Events</a>
+                            <a href="{{ route('event.running') }}" style="color: #000;">Running Events</a>
                         </h4>
                         <hr />
 
@@ -192,7 +192,7 @@
                     <div class="col-sm-12">
                         <h4
                             style="text-align: center; text-decoration-line: underline;text-transform:uppercase;font-weight:700;">
-                            <a href="closed-event.aspx" style="color: #000;">Closed Events</a>
+                            <a href="{{ route('event.closed') }}" style="color: #000;">Closed Events</a>
                         </h4>
                         <hr />
                         <div class="holder">
