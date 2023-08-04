@@ -148,7 +148,7 @@
                             @if (count($upcomingEvents))
                                 <ul id="ticker01">
                                     @foreach ($upcomingEvents as $e)
-                                        <li><span><img src="images/new.png" style="width: 30px"></span>
+                                        <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
                                             <a href="#" style="color: #000"> {{ $e->title }}</a>
                                         </li>
                                     @endforeach
@@ -157,8 +157,6 @@
                                 <h4 style="text-align: center;color: #5e5e5e; padding-top: 3em;">Currently No Events
                                 </h4>
                             @endif
-
-
                         </div>
                     </div>
                 </div>
@@ -176,7 +174,7 @@
                             @if (count($runningEvents))
                                 <ul id="ticker01">
                                     @foreach ($runningEvents as $e)
-                                        <li><span><img src="images/new.png" style="width: 30px"></span>
+                                        <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
                                             <a href="#" style="color: #000"> {{ $e->title }}</a>
                                         </li>
                                     @endforeach

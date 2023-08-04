@@ -9,7 +9,6 @@
     <!-- Main content -->
     <section class="content">
         <!-- Small boxes (Stat box) -->
-
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">

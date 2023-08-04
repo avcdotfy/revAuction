@@ -40,6 +40,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
+Route::get('/get-routes', function (Request $r) {
+   $routes = Route::getRoutes();
+   return  json_encode($routes);
+});
+
 Route::fallback(function () {
    return redirect()->route('404');
 });

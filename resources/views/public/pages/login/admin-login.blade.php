@@ -49,10 +49,10 @@
                     </div>
                     <!-- /.col -->
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-xs-12" style="text-align:center;"><a href="forgot-password.html"
                             style="font-size:12px;">Forgot Password ?</a></div>
-                </div>
+                </div> --}}
                 <!-- /.social-auth-links -->
             </div>
 
