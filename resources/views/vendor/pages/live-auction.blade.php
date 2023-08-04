@@ -131,6 +131,7 @@
                                                             value={{ $item->id }}>
                                                         <input type="hidden" name="region_id"
                                                             value={{ $item->region->id }}>
+                                                        <input type="hidden" name="rpu_price" value={{ $item->price }}>
 
                                                         <div class="modal-dialog">
                                                             <div class="modal-content" style="border-radius: 4px;">

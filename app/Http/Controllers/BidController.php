@@ -50,6 +50,10 @@ class BidController extends Controller
             return redirect()->route('vendor.liveAuction', $req->event_id)->with('error', 'Capping price should be less than your bidding price  :' . $req->bidding_price);
         }
 
+        if ($req->bidding_price > $req->rpu_price) {
+            return redirect()->route('vendor.liveAuction', $req->event_id)->with('error', 'Bidding price should be less than base price  :' . $req->rpu_price);
+        }
+
         if ($req->bidding_price > $minBidAmount && $minBidAmount != null) {
             return redirect()->route('vendor.liveAuction', $req->event_id)->with('error', 'Bidding price should be less than last bid price :' . $minBidAmount);
         } else {

@@ -125,6 +125,8 @@ class BidHelper
 
         $minToIncrease = (int)Item::find($iId)->category->last_minute_closing_time_increment;
 
+        if (!$minToIncrease) return;
+        dd($minToIncrease);
         $eventCurrentClosingTime = Carbon::createFromTimestampMs($event->closing_date_time_millis);
 
         $givenMinuteBeforeEventCurrentClosingTime = $eventCurrentClosingTime->subMinutes($minToIncrease);
