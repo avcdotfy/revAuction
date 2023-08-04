@@ -33,8 +33,11 @@
                                     <tbody>
                                         @foreach ($logins as $key => $l)
                                             @if ($l->user->user_type == USER_TYPES[1])
+                                                @php
+                                                    $i = 1;
+                                                @endphp
                                                 <tr role="row" class="odd">
-                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $i }}</td>
                                                     <td>{{ $l->user->user_type }}</td>
                                                     <td>{{ $l->user->username }}</td>
                                                     <td><span>{{ $l->login_date_time }}</span>
@@ -43,6 +46,9 @@
                                                     </td>
                                                     <td>{{ $l->public_ip }}</td>
                                                 </tr>
+                                                @php
+                                                    $i = $i + 1;
+                                                @endphp
                                             @endif
                                         @endforeach
                                     </tbody>

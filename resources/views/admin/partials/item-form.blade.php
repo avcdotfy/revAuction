@@ -100,13 +100,13 @@
                             <td>
                                 <span style="font-size:11px;color:red;font-weight:600;display:none;">Please
                                     Enter Item Price</span>
-                                <input type="number" name='price[]' class="form-control" required
+                                <input type="number" min="1" name='price[]' class="form-control" required
                                     value="{{ $rpu->price }}">
                             </td>
                             <td>
                                 <span style="font-size:11px;color:red;font-weight:600;display:none;">Please
                                     Enter Item Unit</span>
-                                <input type="number" name='unit[]' class="form-control" required
+                                <input type="number" name='unit[]' min="1" class="form-control" required
                                     value="{{ $rpu->item_unit }}">
                             </td>
                             <td>
@@ -143,12 +143,14 @@
                     <td>
                         <span style="font-size:11px;color:red;font-weight:600;display:none;">Please
                             Enter Item Price</span>
-                        <input type="number" name='price[]' class="form-control"{{ $item ? '' : 'required' }}>
+                        <input type="number" name='price[]' min="1"
+                            class="form-control"{{ $item ? '' : 'required' }}>
                     </td>
                     <td>
                         <span style="font-size:11px;color:red;font-weight:600;display:none;">Please
                             Enter Item Unit</span>
-                        <input type="number" name='unit[]' class="form-control" {{ $item ? '' : 'required' }}>
+                        <input type="number" name='unit[]' min="1" class="form-control"
+                            {{ $item ? '' : 'required' }}>
                     </td>
                     <td>
                         <span id="ContentPlaceHolder1_RequiredFieldValidator8"
@@ -175,7 +177,7 @@
         <div class="col-sm-12">
             <span style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter
                 Decrement Price</span>
-            <input type="number" name="decrement_price" class="form-control"
+            <input type="number" name="decrement_price" class="form-control" min="1"
                 value="{{ $item ? $item->decrement_price : '' }}" placeholder="Enter Item Decrement Price" required>
         </div>
     </div>
