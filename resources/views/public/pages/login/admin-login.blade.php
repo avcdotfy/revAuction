@@ -13,7 +13,7 @@
             </div>
             <div class="login-box-body" style="background-color:transparent">
                 <div class="login-box-msg" style="margin-bottom:0px;font-size:16px;color:#000;">
-                    <span style="border-bottom:1px solid #000"><b>Reverse.Sysaler</b> <span
+                    <span style="border-bottom:1px solid #000"><b>{{ env('APP_NAME') }}</b> <span
                             style="font-size: 16px;font-weight:300;"> | Admin</span></span>
                 </div>
                 <p class="login-box-msg" style="font-size:16px;color:#000;font-weight:300;">

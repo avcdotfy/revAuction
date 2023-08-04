@@ -72,9 +72,8 @@ class BidHelper
             }
 
             foreach ($event->items as $key => $itemRpu) {
-
                 if (in_array($itemRpu->id, $rpuOnWhichBidStarted)) {
-                    $itemRpu->availableBids  = Bid::select('*', DB::raw('MIN(least_status) as least_status'), DB::raw('MIN(bidding_price) as bidding_price'))->where('item_r_p_u_model_id', $itemRpu->id)->orderBy('bidding_price', 'asc')->groupBy('vendor_id')->get();
+                    $itemRpu->availableBids  = Bid::select('*', DB::raw('MIN(least_status) as least_status'), DB::raw('MIN(bidding_price) as bidding_price'))->where('item_r_p_u_model_id', $itemRpu->id)->where('event_id', $event->id)->orderBy('bidding_price', 'asc')->groupBy('vendor_id')->get();
                 } else {
                     unset($event->items[$key]);
                 }
