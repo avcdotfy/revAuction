@@ -28,8 +28,8 @@
                 <td>{{ $bid->item->regionPriceUnit->first()->item_unit_details }}</td>
                 <td>{{ $bid->least_status }}</td>
                 <td>{{ $bid->item->total_unit }}</td>
-                <td>{{ $bid->bidding_price }}</td>
-                <td>{{ $bid->capping_price }}</td>
+                <td>{{ $bid ? $bid->bidding_price : 'N/A'}}</td>
+                <td>{{ $bid ? $bid->capping_price : 'N/A'}}</td>
                 <td>{{ BidHelper::getNumberOfBidsOf($event_id, $bid->item_id) }}</td>
             </tr>
         @endforeach

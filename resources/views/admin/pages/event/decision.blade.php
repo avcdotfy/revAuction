@@ -5,6 +5,7 @@
         <h1>Take Event Decision <small id="ContentPlaceHolder1_hTag">List</small>
         </h1>
     </section>
+    @include('admin.partials.alerts')
     <section class="content">
         <div class="row">
             <div class="col-xs-12">

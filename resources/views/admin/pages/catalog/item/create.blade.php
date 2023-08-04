@@ -44,17 +44,17 @@
                     <td>
                         <span style="font-size:11px;color:red;font-weight:600;display:none;">Please
                             Enter Item Price</span>
-                        <input type="number" name='price[]' class="form-control">
+                        <input type="number" name='price[]' min="1" class="form-control">
                     </td>
                     <td>
                         <span style="font-size:11px;color:red;font-weight:600;display:none;">Please
                             Enter Item Unit</span>
-                        <input type="number" name='unit[]' class="form-control">
+                        <input type="number" name='unit[]' min="1" class="form-control">
                     </td>
                     <td>
                         <span id="ContentPlaceHolder1_RequiredFieldValidator8" style="font-size:11px;color:red;font-weight:600;display:none;">Please
                             Enter Item Unit Details</span>
-                        <input type="text" name='unit_details[]' class="form-control">
+                        <input type="text" name='unit_details[]' min="1" class="form-control">
                     </td>
                     <td>
                         <button id="remove_btn" onClick="$(this).parent().parent().remove();" type="button" class="btn btn-sm btn-danger"><span

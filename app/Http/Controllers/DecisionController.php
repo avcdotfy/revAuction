@@ -34,6 +34,7 @@ class DecisionController extends Controller
         // dd($r->all());
         foreach ($r->vendor as $ukey => $v) {
             // dd($v['item']);
+            if (!$v['item'])  return redirect()->back()->with('error', 'Item not found , may be decision has alrady been taken for this event');
             foreach ($v['item'] as $lkey => $itm) {
 
                 $d = Decision::create([

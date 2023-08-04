@@ -34,13 +34,13 @@
                     <td>{{ $v->user->username }}</td>
                     <td>{{ $bid->item->code }}</td>
                     <td>{{ $bid->item->unit->code }}</td>
-                    <td>{{ $bid->rpu->region->name }}</td>
-                    <td>{{ $bid->rpu->price }}</td>
-                    <td>{{ $bid->rpu->item_unit }}</td>
-                    <td>{{ $bid->rpu->item_unit_details }}</td>
+                    <td>{{ $bid->rpu ? $bid->rpu->region->name : 'N/A' }}</td>
+                    <td>{{ $bid->rpu ? $bid->rpu->price : 'N/A' }}</td>
+                    <td>{{ $bid->rpu ? $bid->rpu->item_unit : 'N/A' }}</td>
+                    <td>{{ $bid->rpu ? $bid->rpu->item_unit_details : 'N/A' }}</td>
                     <td>{{ BidHelper::getVendorsLeastStatus($bid->event->id, $bid->item_id, $v->id, $bid->rpu->id) }}
                     </td>
-                    <td>{{ $bid->rpu->item_unit }}</td>
+                    <td>{{ $bid->rpu ? $bid->rpu->price : 'N/A' }}</td>
                     <td>{{ BidHelper::getBidAmount($bid->event->id, $bid->item_id, $v->id, $bid->rpu->id) ? BidHelper::getBidAmount($bid->event->id, $bid->item_id, $v->id, $bid->rpu->id)->bidding_price : 'N/A' }}
                     </td>
                     <td>{{ CappingHelper::getCappingPrice($bid->event_id, $bid->item_r_p_u_model_id, $bid->item_id, $v->id) }}
