@@ -30,7 +30,7 @@
                     <td>{{ $bid->rpu->item_unit_details }}</td>
                     <td>{{ BidHelper::getVendorsLeastStatus($event_id, $bid->item_id, $v->id, $bid->rpu->id) }}</td>
                     <td>{{ $bid->rpu->item_unit }}</td>
-                    <td>{{ BidHelper::getBidAmount($event_id, $bid->item_id, $v->id, $bid->rpu->id)->bidding_price }}
+                    <td>{{ BidHelper::getBidAmount($event_id, $bid->item_id, $v->id, $bid->rpu->id) ? BidHelper::getBidAmount($event_id, $bid->item_id, $v->id, $bid->rpu->id)->bidding_price : 'N/A' }}
                     </td>
                     <td>{{ CappingHelper::getCappingPrice($event_id, $bid->rpu->id, $bid->item_id, $v->id) }}
                     </td>

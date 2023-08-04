@@ -41,16 +41,16 @@
                     <td>{{ BidHelper::getVendorsLeastStatus($bid->event->id, $bid->item_id, $v->id, $bid->rpu->id) }}
                     </td>
                     <td>{{ $bid->rpu->item_unit }}</td>
-                    <td>{{ BidHelper::getBidAmount($bid->event->id, $bid->item_id, $v->id, $bid->rpu->id)->bidding_price }}
+                    <td>{{ BidHelper::getBidAmount($bid->event->id, $bid->item_id, $v->id, $bid->rpu->id) ? BidHelper::getBidAmount($bid->event->id, $bid->item_id, $v->id, $bid->rpu->id)->bidding_price : 'N/A' }}
                     </td>
                     <td>{{ CappingHelper::getCappingPrice($bid->event_id, $bid->item_r_p_u_model_id, $bid->item_id, $v->id) }}
                     <td>{{ BidHelper::getNumberOfBidsOf($bid->event_id, $bid->item_id, $bid->rpu->id, $v->id) }}</td>
-                    <td>{{ DHelper::getDecisionDetails($bid->event_id, $bid->item_id, $v->id, $bid->rpu->id)->accepted_qty }}
+                    <td>{{ DHelper::getDecisionDetails($bid->event_id, $bid->item_id, $v->id, $bid->rpu->id) ? DHelper::getDecisionDetails($bid->event_id, $bid->item_id, $v->id, $bid->rpu->id)->accepted_qty : 'N/A' }}
                     </td>
-                    <td>{{ DHelper::getDecisionDetails($bid->event_id, $bid->item_id, $v->id, $bid->rpu->id)->accepted_amount }}
+                    <td>{{ DHelper::getDecisionDetails($bid->event_id, $bid->item_id, $v->id, $bid->rpu->id) ? DHelper::getDecisionDetails($bid->event_id, $bid->item_id, $v->id, $bid->rpu->id)->accepted_amount : 'N/A' }}
                     </td>
-                    <td>{{ DHelper::getDecisionDetails($bid->event_id, $bid->item_id, $v->id, $bid->rpu->id)->decision_status }}
-                    <td>{{ DHelper::getDecisionDetails($bid->event_id, $bid->item_id, $v->id, $bid->rpu->id)->remarks }}
+                    <td>{{ DHelper::getDecisionDetails($bid->event_id, $bid->item_id, $v->id, $bid->rpu->id) ? DHelper::getDecisionDetails($bid->event_id, $bid->item_id, $v->id, $bid->rpu->id)->decision_status : 'N/A' }}
+                    <td>{{ DHelper::getDecisionDetails($bid->event_id, $bid->item_id, $v->id, $bid->rpu->id) ? DHelper::getDecisionDetails($bid->event_id, $bid->item_id, $v->id, $bid->rpu->id)->remarks : 'N/A' }}
                     </td>
                 </tr>
             @endforeach
