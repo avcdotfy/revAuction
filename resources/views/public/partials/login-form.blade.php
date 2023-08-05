@@ -16,6 +16,17 @@
         <input name="password" type="password" class="form-control" placeholder="Enter Password" required />
     </div>
 
+    <div class="form-group row">
+        <div class="col-sm-4">
+            <input name="captcha" type="text" id="txt_password" class="form-control" required />
+        </div>
+        <div class="col-sm-8">
+            <p style="text-align: center ;transform: skew(15deg, 15deg);">
+                <span> {{ $captcha_number }}</span>
+            </p>
+        </div>
+    </div>
+
     <div class="row" style="margin-bottom:20px;">
         <div class="col-xs-12">
             <input type="submit" value="Login" id="btnLogin" class="btn btn-primary btn-block btn-sm"

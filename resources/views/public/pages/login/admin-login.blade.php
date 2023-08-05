@@ -7,7 +7,7 @@
             <div class="login-logo" style="margin-bottom:0px;padding-top:20px;">
                 <a href="login.html"><img src="{{ asset('media/logo/logo.png') }}" style="height:76px;" /></a>
             </div>
-            <div class="login-logo" style="margin-bottom:0px;font-size:28px;padding-top:20px;">
+            <div class="login-logo" style="margin-bottom:0px;font-size:28px; ">
                 <a href="#" style="border-bottom:1px solid #000"><b id="company_name"
                         style="color:#000;"><b>{{ env('APP_NAME') }}</b></a>
             </div>
@@ -39,8 +39,15 @@
                     <input name="password" type="password" id="txt_password" class="form-control"
                         placeholder="Enter Password" />
                 </div>
-                <div class="form-group">
-
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                        <input name="captcha" type="text" id="txt_password" class="form-control" required />
+                    </div>
+                    <div class="col-sm-8">
+                        <p style="text-align: center ;transform: skew(15deg, 15deg);">
+                            <span> {{ $captcha_number }}</span>
+                        </p>
+                    </div>
                 </div>
                 <div class="row" style="margin-bottom:20px;">
                     <div class="col-xs-12">

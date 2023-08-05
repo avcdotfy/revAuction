@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CaptchaHelper;
 use App\Helpers\LoginTrailHelper;
 use App\Mail\ForgetPasswordMail;
 use App\Models\User;
@@ -14,13 +15,18 @@ class AuthenticateController extends Controller
 {
     function login()
     {
-        return view('public.pages.login.admin-login');
+        $captcha_number =  CaptchaHelper::generateCaptch();
+        return view('public.pages.login.admin-login', compact('captcha_number'));
     }
 
     function login_process(Request  $req)
     {
+
         $data = $req->only('username', 'password');
 
+        if (!CaptchaHelper::isCaptchaValid($req->captcha)) {
+            return redirect()->back()->withErrors('Incorrect captcha');
+        }
         if (Auth::attempt($data)) {
             if (Auth::user()->user_type == 'VENDOR') {
                 Auth::logout();
@@ -42,12 +48,17 @@ class AuthenticateController extends Controller
 
     function loginV()
     {
-        return view('public.pages.login.vendor-login');
+        $captcha_number =  CaptchaHelper::generateCaptch();
+        return view('public.pages.login.vendor-login', compact('captcha_number'));
     }
 
     function login_processV(Request $req)
     {
         $data = $req->only('username', 'password');
+
+        if (!CaptchaHelper::isCaptchaValid($req->captcha)) {
+            return redirect()->back()->with('error', 'Invalid Captcha');
+        }
 
         if (Auth::attempt($data)) {
 
@@ -90,7 +101,6 @@ class AuthenticateController extends Controller
             return redirect()->back()->with('error', 'Old password is incorrect');
         }
     }
-
 
     function getResetLinkForm()
     {
