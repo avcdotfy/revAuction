@@ -41,8 +41,7 @@
                                                 style="width: 120.156px;">Mobile No.</th>
                                             <th class="sorting_disabled" rowspan="1" colspan="1"
                                                 style="width: 120.156px;">Email ID</th>
-                                            <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                style="width: 120.156px;">Password</th>
+
 
 
                                             <th class="sorting_disabled" rowspan="1" colspan="1"
@@ -53,7 +52,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         @foreach ($employees as $key => $emp)
                                             <tr role="row" class="odd">
                                                 <td>{{ $key + 1 }}</td>
@@ -64,7 +62,7 @@
                                                 <td>{{ $emp->designation }}</td>
                                                 <td>{{ $emp->phone }}</td>
                                                 <td>{{ $emp->email }}</td>
-                                                <td>*******</td>
+
                                                 {{-- <td>{{ $emp->password }}</td> --}}
 
                                                 <td><label class="label label-success"
@@ -75,7 +73,6 @@
                                                             class="fa fa-edit"></i> Edit</a></td>
                                             </tr>
                                         @endforeach
-
                                     </tbody>
                                 </table>
                             </div>
