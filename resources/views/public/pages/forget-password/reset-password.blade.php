@@ -5,7 +5,7 @@
         @csrf
         <div class="login-box" style="border-radius:6px;background-color:#fff;border:1px solid #d2d6de;">
             <div class="login-logo" style="margin-bottom:0px;padding-top:20px;">
-                <a href="{{ route('vendor.login') }}"><img src="images/logo.png" style="height:76px;" /></a>
+                <a href="{{ route('vendor.login') }}"><img src="{{ asset('media/logo/logo.png') }}" style="height:76px;" /></a>
             </div>
             @include('admin.partials.alerts')
             <div class="login-box-body" style="background-color:transparent">
