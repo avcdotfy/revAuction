@@ -151,11 +151,21 @@
     <script src="{{ asset('jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@6.6.1/tinymce.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script>
         tinymce.init({
             selector: 'textarea#default'
+        });
+
+        new DataTable('#dtable', {});
+        new DataTable('.dtable', {});
+
+        $(document).ready(function() {
+            $('.select2').select2();
         });
     </script>
 
@@ -176,8 +186,7 @@
             }).showToast();
         }
     </script>
-    {{-- <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.11.2/dist/echo.iife.js"></script> --}}
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
@@ -186,7 +195,6 @@
     <script>
         new DataTable('#dtable', {});
     </script>
-
 
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script>

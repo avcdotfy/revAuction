@@ -195,22 +195,6 @@
         }
     </script>
 
-
-    <script>
-        $(document).ready(function() {
-            Echo.private('eventCreated.' + {{ Auth::user()->id }}).listen('BidStartedEvent',
-                function(data) {
-                    console.log(data.count);
-                    if (data.count == 1) {
-                        location.reload();
-                    }
-                })
-        });
-    </script>
-
-    <script src="{{ mix('js/app.js') }}" defer></script>
-
-
     @stack('scripts')
 
 

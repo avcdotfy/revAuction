@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\LoginTrailHelper;
+use App\Mail\ForgetPasswordMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthenticateController extends Controller
 {
@@ -87,5 +89,51 @@ class AuthenticateController extends Controller
         } else {
             return redirect()->back()->with('error', 'Old password is incorrect');
         }
+    }
+
+
+    function getResetLinkForm()
+    {
+        return view('public.pages.forget-password.send-link');
+    }
+    function sendResetLink(Request $req)
+    {
+        $email = $req->email;
+
+        if (!$email) {
+            return redirect()->back()->with('error', 'Email id required ');
+        } else {
+            $user = User::where('email', $email)->first();
+            if ($user) {
+                $data['email'] = $email;
+                $token = base64_encode(json_encode(['email' => $email, 'random_int' => random_int(11111111111111111, 99999999999999999)]));
+                $data['reset_link'] = route('reset-password-form', $token);
+                Mail::to($email)->send(new ForgetPasswordMail($data));
+                return redirect()->back()->with('success', 'Password reset link has been sent to this email id');
+            } else {
+                return redirect()->back()->with('error', 'Email id not found in system');
+            }
+        }
+    }
+
+
+    function resetPasswordForm($token)
+    {
+        // dd(json_decode(base64_decode($token)));
+
+        $decodedToken = json_decode(base64_decode($token));
+        $username = User::where('email', $decodedToken->email)->first()->username;
+        return view('public.pages.forget-password.reset-password', compact('username'));
+    }
+    function resetPassword(Request $req)
+    {
+        $user = User::where('username', $req->username)->first();
+        // dd($req->password);
+        if (!$user) {
+            return redirect()->back()->with('error', 'Username id not found in system');
+        }
+        $user->password = Hash::make($req->password);
+        $user->save();
+        return redirect()->back()->with('success', 'Password changed successfully');
     }
 }

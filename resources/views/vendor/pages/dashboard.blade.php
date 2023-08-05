@@ -84,13 +84,15 @@
 
                         <div class="holder">
                             @if (count($upcomingEvents))
-                                <ul id="ticker01">
-                                    @foreach ($upcomingEvents as $e)
-                                        <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
-                                            <a href="#" style="color: #000"> {{ $e->title }}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                <marquee direction="up" Scrollamount=4>
+                                    <ul id="ticker01">
+                                        @foreach ($upcomingEvents as $e)
+                                            <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
+                                                <a href="#" style="color: #000"> {{ $e->title }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </marquee>
                             @else
                                 <h4 style="text-align: center;color: #5e5e5e; padding-top: 3em;">Currently No Events
                                 </h4>
@@ -109,13 +111,15 @@
                         <hr style="margin-bottom: 14px;" />
                         <div class="holder">
                             @if (count($runningEvents))
-                                <ul id="ticker01">
-                                    @foreach ($runningEvents as $e)
-                                        <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
-                                            <a href="#" style="color: #000"> {{ $e->title }}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                <marquee direction="up" Scrollamount=4>
+                                    <ul id="ticker01">
+                                        @foreach ($runningEvents as $e)
+                                            <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
+                                                <a href="#" style="color: #000"> {{ $e->title }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </marquee>
                             @else
                                 <h4 style="text-align: center;color: #5e5e5e; padding-top: 3em;">Currently No Events
                                 </h4>
@@ -135,13 +139,15 @@
                         <hr style="margin-bottom: 14px;" />
                         <div class="holder">
                             @if (count($closedEvents))
-                                <ul id="ticker01">
-                                    @foreach ($closedEvents as $e)
-                                        <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
-                                            <a href="#" style="color: #000"> {{ $e->title }}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                <marquee direction="up" Scrollamount=4>
+                                    <ul id="ticker01">
+                                        @foreach ($closedEvents as $e)
+                                            <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
+                                                <a href="#" style="color: #000"> {{ $e->title }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </marquee>
                             @else
                                 <h4 style="text-align: center;color: #5e5e5e; padding-top: 3em;">Currently No Events
                                 </h4>

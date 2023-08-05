@@ -24,7 +24,8 @@
         <!-- /.col -->
     </div>
     <div class="row">
-        <div class="col-xs-6" style="text-align:left;"><a href="forgot-password.html" style="font-size:12px;">Forgot
+        <div class="col-xs-6" style="text-align:left;"><a href="{{ route('reset-link') }}"
+                style="font-size:12px;">Forgot
                 Password ?</a> </div>
 
         <div class="col-xs-6" style="text-align:right;"> <a href="{{ route('vendor.create') }}"
