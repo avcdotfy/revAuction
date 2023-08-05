@@ -163,14 +163,14 @@
         function showToast(message) {
             Toastify({
                 text: message,
-                duration: 3000,
+                duration: 12000,
                 newWindow: true,
                 close: true,
                 gravity: "bottom", // `top` or `bottom`
                 position: "right", // `left`, `center` or `right`
                 stopOnFocus: true, // Prevents dismissing of toast on hover
                 style: {
-                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                    background: "blue",
                 },
                 onClick: function() {} // Callback after click
             }).showToast();
@@ -186,7 +186,22 @@
     <script>
         new DataTable('#dtable', {});
     </script>
+
+
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script>
+        $(document).ready(function() {
+            Echo.private('eventCreated.' + {{ Auth::user()->vendor->id }}).listen('EventCreated',
+                function(data) {
+                    console.log(data);
+                    showToast("New Upcoming event available \n\n" + data.event_title);
+                })
+        });
+    </script>
+
     @stack('scripts')
+
+
 </body>
 
 </html>

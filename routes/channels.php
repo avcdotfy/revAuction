@@ -22,3 +22,6 @@ Broadcast::channel('bidderStatus.{eventId}.{rpuId}.{itemId}', function ($user, $
 Broadcast::channel('bidStarted.{eventId}.{rpuId}.{itemId}', function ($user, $eventId, $rpuId, $itemId) {
     return true;
 });
+Broadcast::channel('eventCreated.{vendor_id}', function ($user, $vendor_id) {
+    return true;
+});

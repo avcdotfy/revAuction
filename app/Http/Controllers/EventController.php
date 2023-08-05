@@ -81,7 +81,8 @@ class EventController extends BaseController
                 "closing_date" => $req->closing_date,
                 "closing_time" => $req->closing_time,
                 "vendor_ids" => $req->vendor_id,
-                "item_ids" => $req->itemRpu
+                "item_ids" => $req->itemRpu,
+                "event_title" =>  $req->title
             ];
             EventInvitationHelper::inviteViaEmail($data);
             return redirect()->route('event.upcoming')->with('success', 'Event Created Successfully');

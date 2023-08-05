@@ -158,7 +158,7 @@
     @include('admin.partials.scripts')
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-   
+
     <script src="https://cdn.jsdelivr.net/npm/tinymce@6.6.1/tinymce.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
@@ -195,7 +195,25 @@
         }
     </script>
 
+
+    <script>
+        $(document).ready(function() {
+            Echo.private('eventCreated.' + {{ Auth::user()->id }}).listen('BidStartedEvent',
+                function(data) {
+                    console.log(data.count);
+                    if (data.count == 1) {
+                        location.reload();
+                    }
+                })
+        });
+    </script>
+
+    <script src="{{ mix('js/app.js') }}" defer></script>
+
+
     @stack('scripts')
+
+
 </body>
 
 </html>
