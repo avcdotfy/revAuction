@@ -25,7 +25,7 @@ return [
         [
             'id' => env('PUSHER_APP_ID'),
             'name' => env('APP_NAME'),
-            'key' => env('PUSHER_APP_KEY' , 'my_rev_auction_app_key'),
+            'key' => env('PUSHER_APP_KEY', 'my_rev_auction_app_key'),
             'secret' => env('PUSHER_APP_SECRET'),
             'path' => env('PUSHER_APP_PATH'),
             'capacity' => null,

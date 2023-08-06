@@ -15,16 +15,15 @@ class AuthenticateController extends Controller
 {
     function login()
     {
-        $captcha_number =  CaptchaHelper::generateCaptch();
+        $captcha_number =  CaptchaHelper::generateCaptchForAdmin();
         return view('public.pages.login.admin-login', compact('captcha_number'));
     }
 
     function login_process(Request  $req)
     {
-
         $data = $req->only('username', 'password');
 
-        if (!CaptchaHelper::isCaptchaValid($req->captcha)) {
+        if (!CaptchaHelper::isAdminCaptchaValid($req->captcha)) {
             return redirect()->back()->withErrors('Incorrect captcha');
         }
         if (Auth::attempt($data)) {
