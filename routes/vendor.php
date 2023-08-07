@@ -45,14 +45,12 @@ Route::group(['middleware' => ['auth', CheckForVendor::class]], function () {
 
         Route::get('help-support', [VendorController::class, 'helpSupport'])->name('vendor.help-support');
 
-
         Route::group(['prefix' => 'auction'], function () {
             Route::get('live/{eventId}', [VendorController::class, 'liveAuction'])->name('vendor.liveAuction');
             Route::post('live-filter', [VendorController::class, 'liveAuctionFilterByRegion'])->name('vendor.filterLiveAuction');
             Route::post('submit-bid', [BidController::class, 'store'])->name('vendor.submit-bid');
             Route::post('live', [BidController::class, 'getLiveDataVendorSite'])->name('vendor.live-data');
         });
-
         Route::get('logout', [AuthenticateController::class, 'logout'])->name('vendor.logout');
     });
 });

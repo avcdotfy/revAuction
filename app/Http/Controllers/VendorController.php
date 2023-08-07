@@ -29,11 +29,12 @@ class VendorController extends Controller
 {
     function create()
     {
+        $v = null;
         $countries = Country::where(['company_id' => CompanyHelper::getCompanyFromHost()->id])->get();
         $categories = CategoryHelper::getCategories();
         $regions = Region::all();
         // return view('public.pages.register.vendor-register', compact('countries', 'categories', 'regions'));
-        return view('public.pages.register.vendor-register', compact('countries', 'categories', 'regions'));
+        return view('public.pages.register.vendor-register', compact('countries', 'categories', 'regions', 'v'));
     }
 
 
@@ -61,7 +62,8 @@ class VendorController extends Controller
             ]);
 
             $user->vendor()->create([
-                'company_type' => $req->company_type,
+                'company_type' => $req->vendor_type,
+                'vendor_type' => $req->vendor_type,
                 'company_name' => $req->company_name,
                 'contact_person' => $req->contact_person,
                 'GSTIN' => $req->GSTIN,
@@ -119,7 +121,10 @@ class VendorController extends Controller
     function profile($id)
     {
         $v = Vendor::find($id);
-        return view('admin.pages.vendor.profile', compact('v'));
+        $countries = Country::where(['company_id' => CompanyHelper::getCompanyFromHost()->id])->get();
+        $categories = CategoryHelper::getCategories();
+        $regions = Region::all();
+        return view('admin.pages.vendor.profile', compact('v', 'countries', 'regions', 'categories'));
     }
 
 
@@ -186,5 +191,26 @@ class VendorController extends Controller
     }
     public function liveAuctionFilterByRegion(Request $r)
     {
+    }
+
+
+    public function profileUpdate(Request $req)
+    {
+        // dd($req->all());
+
+        $v = Vendor::find($req->vendor_id);
+        if ($v) {
+            $v->categories()->detach();
+            $v->regions()->detach();
+            $v->vendor_type = $req->vendor_type;
+            $v->company_type = $req->vendor_type;
+            $v->save();
+
+            $v->categories()->attach($req->preference_category);
+            $v->regions()->attach($req->preference_region);
+
+            return redirect()->back()->with('success', "Vendor's details updated Successfully");
+        }
+        return redirect()->back()->with('error', 'vendor with given data  not found  ');
     }
 }

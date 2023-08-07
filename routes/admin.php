@@ -95,6 +95,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/approved-requests', [RequestController::class, 'approved'])->name('vendor.approved_requests');
             Route::get('/rejected-requests', [RequestController::class, 'rejected'])->name('vendor.rejected_requests');
             Route::get('/{id}/profile', [VendorController::class, 'profile'])->name('vendor.profile');
+            Route::post('/profile', [VendorController::class, 'profileUpdate'])->name('vendor.profile-update');
             Route::get('/update-to-all', [VendorController::class, 'updateToAll'])->name('vendor.updateToAll');
         });
 
