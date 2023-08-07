@@ -176,8 +176,8 @@
                                 <ul id="ticker01">
                                     @foreach ($runningEvents as $e)
                                         <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
-                                            <a href="{{ route('event.postedEventInformation', $e->id) }}"
-                                                style="color: #000"> {{ $e->title }}</a>
+                                            <a href="{{ route('event.statistics', $e->id) }}" style="color: #000">
+                                                {{ $e->title }}</a>
                                         </li>
                                     @endforeach
                                 </ul>
