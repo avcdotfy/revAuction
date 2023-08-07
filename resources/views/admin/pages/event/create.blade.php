@@ -49,6 +49,7 @@
             $('#opening_hrs').on('change', function(ev) {
                 console.log(ev.target.value);
                 openingHrs = ev.target.value
+                openingMinutes = $('#opening_minutes option:selected').val();
                 $('#full_opening_time').val(openingHrs + ":" + openingMinutes + " " + openingAmPM);
                 setTitle()
             })
@@ -84,7 +85,8 @@
 
             $('#closing_hrs').on('change', function(ev) {
                 console.log(ev.target.value);
-                closingHrs = ev.target.value
+                closingHrs = ev.target.value;
+                closingMinutes = $('#closing_minutes').find(":selected").val();
                 $('#full_closing_time').val(closingHrs + ":" + closingMinutes + " " + closingAmPM);
                 setTitle()
             })

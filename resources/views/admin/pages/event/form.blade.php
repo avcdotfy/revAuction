@@ -11,8 +11,7 @@
          </div>
      </div>
      <div class="col-sm-12">
-         <label for="inputPassword3" class="col-sm-2 control-label">Opening Date &amp;
-             Time</label>
+         <label for="inputPassword3" class="col-sm-2 control-label">Opening Date &amp; Time</label>
          <div class="col-sm-5">
              <input name="opening_date" autocomplete="off" id="opening_date" type="" value=""
                  class="form-control" placeholder="Enter Opening Date" required>
@@ -32,12 +31,12 @@
                  <option value="10">10</option>
                  <option value="11">11</option>
                  <option value="12">12</option>
-
              </select>
          </div>
          <div class="col-sm-1">
              <select id="opening_minutes" class="form-control" required onchange="setTitle()">
-                 <option selected="selected" value="">00</option>
+                 <option value="">select</option>
+                 <option selected value="00">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
                  <option value="03">03</option>
@@ -125,7 +124,7 @@
          </div>
          <div class="col-sm-1">
              <select id="closing_hrs" class="form-control" required onchange="setTitle()">
-                 <option selected="selected" value="">00</option>
+                 <option value="">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
                  <option value="03">03</option>
@@ -142,7 +141,8 @@
          </div>
          <div class="col-sm-1">
              <select id="closing_minutes" class="form-control" required onchange="setTitle()">
-                 <option selected="selected" value="">00</option>
+                 <option value="">select</option>
+                 <option selected value="00">00</option>
                  <option value="01">01</option>
                  <option value="02">02</option>
                  <option value="03">03</option>
