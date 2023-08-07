@@ -95,7 +95,7 @@ class AuthenticateController extends Controller
             $user->password = Hash::make($req->password);
             $user->save();
             Auth::logout();
-            return redirect()->back();
+            return redirect()->route('vendor.login');
         } else {
             return redirect()->back()->with('error', 'Old password is incorrect');
         }

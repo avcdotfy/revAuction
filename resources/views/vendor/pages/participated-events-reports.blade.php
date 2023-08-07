@@ -58,16 +58,9 @@
                                                 style="width: 300.583px;">Event Title</th>
                                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 30px;">
                                                 Action </th>
-
-
                                         </tr>
                                     </thead>
                                     <tbody>
-
-
-
-
-
 
                                     </tbody>
                                 </table>
@@ -76,8 +69,6 @@
                     </div>
                 </div>
             </div>
-
-
             <!-- /.row -->
     </section>
     <!-- /.content -->

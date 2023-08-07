@@ -13,7 +13,6 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">
-
                         <div id="ContentPlaceHolder1_div_list" class="row">
                             <div class="col-sm-12">
                                 <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
@@ -59,7 +58,6 @@
                                                 style="width: 300.583px;">Event Title</th>
                                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 30px;">
                                                 Action </th>
-
 
                                         </tr>
                                     </thead>
