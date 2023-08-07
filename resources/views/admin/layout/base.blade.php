@@ -135,6 +135,8 @@
         }
     </style>
 
+    @yield('page_style')
+
 </head>
 
 <body class="sidebar-mini skin-blue" style="background: #222d32;">

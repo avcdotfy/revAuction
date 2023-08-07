@@ -122,7 +122,7 @@ class BidController extends Controller
             'isMyBidIsLowest' => BidHelper::checkIfVendorhasLowestBid($r->eId, $r->iId, $r->iRpuId) ? BidHelper::checkIfVendorhasLowestBid($r->eId, $r->iId, $r->iRpuId) : 0,
             'lastBidderPrice' => BidHelper::getLastBidderPrice($r->eId, $r->iId, $r->iRpuId) ? BidHelper::getLastBidderPrice($r->eId, $r->iId, $r->iRpuId)->bidding_price : 0,
             'decrementAmount' => Item::find($r->iId)->decrement_price,
-            'least_status' => BidHelper::getVendorsLeastStatus($r->eId, $r->iId, Auth::user()->vendor->id)
+            'least_status' => BidHelper::getVendorsLeastStatus($r->eId, $r->iId, Auth::user()->vendor->id, $r->iRpuId)
         ];
         return response()->json($data);
     }

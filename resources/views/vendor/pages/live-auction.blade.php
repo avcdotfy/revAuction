@@ -1,5 +1,50 @@
 @extends('vendor.layout.base')
 
+@section('page_style')
+    <style>
+        .dropbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: initial;
+            background-color: #fff;
+            min-width: 60px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 100000;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+    </style>
+@endsection
+
 @section('main_section')
     <section class="content-header">
         <h1>Home | Events | Running Events | Live Auction Items <small id="ContentPlaceHolder1_hTag">List</small>
@@ -106,11 +151,17 @@
 
                                                         {{-- {{ $event->status }} --}}
                                                         {{-- {{ BidHelper::checkIfVendorhasLowestCappingPrice($event->id, $item->id) }} --}}
-                                                        <a href="#" data-toggle="modal" class="btn btn-success"
-                                                            data-target="#bidModal{{ $item->id }}"
-                                                            id="btn_bid{{ $item->id }}"
-                                                            style="padding:8px 9px; display:{{ $event->status == COMPLETED || BidHelper::checkIfVendorhasLowestBid($event->id, $item->item->id, $item->id) || BidHelper::checkIfVendorhasLowestCappingPrice($event->id, $item->item->id, $item->id) ? 'none' : '' }}">
-                                                            Bid Now </a>
+                                                        <div class="dropdown">
+                                                            <a href="#" data-toggle="modal" class="btn btn-success"
+                                                                data-target="#bidModal{{ $item->id }}"
+                                                                id="btn_bid{{ $item->id }}"
+                                                                style="padding:8px 9px; display:{{ $event->status == COMPLETED || BidHelper::checkIfVendorhasLowestBid($event->id, $item->item->id, $item->id) || BidHelper::checkIfVendorhasLowestCappingPrice($event->id, $item->item->id, $item->id) ? 'none' : '' }}">
+                                                                Bid Now </a>
+                                                            <div class="dropdown-content">
+                                                                <a href="#"
+                                                                    id="btn_vendorStatus{{ $item->id }}">N/A</a>
+                                                            </div>
+                                                        </div>
 
                                                         <a href="#" class="btn btn-danger"
                                                             id="btn_closed{{ $item->id }}"
@@ -308,7 +359,7 @@
 
                                                                             $("#btn_bid{{ $item->id }}").show();
                                                                         }
-
+                                                                        $("#btn_vendorStatus{{ $item->id }}").text(res.least_status)
                                                                         if (res.lastBidderPrice != 0 && res.lastBidderPrice != null) {
                                                                             $("#bidding_price_hidden{{ $item->id }}").val(res.lastBidderPrice - res
                                                                                 .decrementAmount);
