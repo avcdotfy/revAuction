@@ -18,7 +18,7 @@
                         <div id="ContentPlaceHolder1_div_list" class="row">
                             <div class="col-sm-12" style="padding: 20px; padding-top: 0px;  padding-bottom: 0px">
                                 <h4 style="border-bottom: 1px solid #eaeaea; padding-bottom: 15px">{{ $notice->title }}</h4>
-                                <p>{{!! $notice->msg !!}}</p>
+                                <p>{!! $notice->msg !!}</p>
                             </div>
 
                             <div class="col-sm-12" style="text-align: center;">

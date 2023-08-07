@@ -111,11 +111,7 @@ class VendorController extends Controller
         $runningEvents = $currentVendor->events()->where('status', EVENT_STATUS[1])->get();
         $closedEvents = $currentVendor->events()->where('status', EVENT_STATUS[2])->get();
 
-        // dd($closedEvents);
-
         $participatedEvents = Participant::where('vendor_id', Auth::user()->vendor->id)->groupBy('event_id')->get();
-
-        // dd(Auth::user()->vendor->events);
 
         return view('vendor.pages.dashboard',  ['upcomingEvents' => $upcomingEvents, 'closedEvents' => $closedEvents, 'runningEvents' => $runningEvents, 'participatedEvents' => $participatedEvents]);
     }

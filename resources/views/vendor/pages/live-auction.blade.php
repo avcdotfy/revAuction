@@ -339,6 +339,22 @@
                         <div style="margin:20px">
                             {!! $event->terms_condition !!}
                         </div>
+
+                        @push('scripts')
+                            <script>
+                                $(document).ready(function() {
+                                    Echo.private('event-time-increament.' + {{ $event->id }}).listen('ClosingTimeIncreamentedEvent',
+                                        function(data) {
+                                            console.log(data);
+                                            showToast("Closing time for this event has been increased by " + data.increamentTime +
+                                                " minute");
+                                            setTimeout(() => {
+                                                location.reload();
+                                            }, 4000);
+                                        })
+                                });
+                            </script>
+                        @endpush
                     </div>
                     <!-- /.box-body -->
                 </div>

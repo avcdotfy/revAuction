@@ -25,3 +25,6 @@ Broadcast::channel('bidStarted.{eventId}.{rpuId}.{itemId}', function ($user, $ev
 Broadcast::channel('eventCreated.{vendor_id}', function ($user, $vendor_id) {
     return true;
 });
+Broadcast::channel('event-time-increament.{event_id}', function ($user, $event_id) {
+    return true;
+});

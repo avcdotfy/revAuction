@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Events\BidEvent;
+use App\Events\ClosingTimeIncreamentedEvent;
 use App\Models\Bid;
 use App\Models\Cappingprice;
 use App\Models\Event;
@@ -120,23 +121,28 @@ class BidHelper
 
     public static function increaseClosingTime($eId, $iId)
     {
-        $event = Event::find($eId);
+        $event = Event::find($eId); //Get Event from Database
 
-        $minToIncrease = (int)Item::find($iId)->category->last_minute_closing_time_increment;
+        $minToIncrease = (int)Item::find($iId)->category->last_minute_closing_time_increment; //get minutes to increase fronm category model
 
-        if (!$minToIncrease) return;
-        dd($minToIncrease);
-        $eventCurrentClosingTime = Carbon::createFromTimestampMs($event->closing_date_time_millis);
+        if (!$minToIncrease) return; // if minute not available or null then return immediately
+        // dd($minToIncrease); 
+        $eventCurrentClosingTime = Carbon::createFromTimestampMs($event->closing_date_time_millis); //if minutes available create carbon object from millis 
 
-        $givenMinuteBeforeEventCurrentClosingTime = $eventCurrentClosingTime->subMinutes($minToIncrease);
+        $givenMinuteBeforeEventCurrentClosingTime = $eventCurrentClosingTime->subMinutes($minToIncrease); //subtract minutes from closing_date_time_millis 
 
-        $currentMillis = Carbon::now()->timestamp * 1000;
-        $isLessThanGiveMinutes = $currentMillis < $givenMinuteBeforeEventCurrentClosingTime->timestamp * 1000;
-
-        if ($isLessThanGiveMinutes) {
-            $updatedMillis = Carbon::createFromTimestampMs($event->closing_date_time_millis)->addMinute($minToIncrease);
-            $event->closing_date_time_millis = $updatedMillis;
-            $event->save();
+        $currentMillis = Carbon::now()->timestamp * 1000; // get current time in milliseconds
+        // dd($currentMillis);
+        $isLessThanGiveMinutes = $currentMillis >= $givenMinuteBeforeEventCurrentClosingTime->timestamp * 1000; // check if current miliis is greater or equal to above millis 
+        // dd($givenMinuteBeforeEventCurrentClosingTime->timestamp * 1000);
+        if ($isLessThanGiveMinutes) { // if true then add minutes to closing date time millis to increase closing time
+            $updatedMillis =   Carbon::createFromTimestampMs($event->closing_date_time_millis)->addMinute($minToIncrease)->timestamp * 1000;
+            // dd($updatedMillis);
+            $event->update(['closing_date_time_millis' => $updatedMillis]);
+            $data['closingTime'] =   $updatedMillis;
+            $data['increamentTime'] =  $minToIncrease;
+            $data['event_id'] =   $event->id;
+            event(new ClosingTimeIncreamentedEvent($data));
         }
     }
 }
