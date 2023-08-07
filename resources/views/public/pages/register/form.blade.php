@@ -112,7 +112,6 @@
           <label for="inputPassword3" class="col-sm-12 control-label">Email ID <span
                   style="color: red; font-size: 13px;">*</span></label>
           <div class="col-sm-12">
-
               <input name="email" type="text" value="{{ $v ? $v->user->email : old('email') }}" id="email"
                   class="form-control" placeholder="Enter Email ID">
           </div>
@@ -256,7 +255,7 @@
               <div class="col-sm-12">
 
                   <input type="file" multiple="multiple" name="docs[]" id="fu_documents" class="form-control"
-                      accept=".pdf,.doc,.docx , .xlsx" style="padding:4px 6px;" required>
+                      accept=".pdf,.doc,.docx" style="padding:4px 6px;" required>
               </div>
           </div>
       </div>
