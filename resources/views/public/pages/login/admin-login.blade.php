@@ -40,11 +40,12 @@
                         placeholder="Enter Password" />
                 </div>
                 <div class="form-group row">
+                    <div class="col-sm-2"></div>
                     <div class="col-sm-4">
                         <input name="captcha" type="text" id="txt_password" class="form-control" required />
                     </div>
-                    <div class="col-sm-8">
-                        <p style="text-align: center ;transform: skew(15deg, 15deg);">
+                    <div class="col-sm-4">
+                        <p style="text-align: left ;transform: skew(15deg, 15deg); padding-top:1em; margin-bottom:0px">
                             <span> {{ $captcha_number }}</span>
                         </p>
                     </div>

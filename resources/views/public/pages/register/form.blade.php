@@ -163,7 +163,7 @@
                       required>
                       <option value="">Select Country</option>
                       @foreach ($countries as $c)
-                          <option value="{{ $c->id }}">I{{ $c->name }}</option>
+                          <option value="{{ $c->id }}">{{ $c->name }}</option>
                       @endforeach
 
                   </select>

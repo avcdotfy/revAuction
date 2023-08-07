@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>
-        Reverse.Sysaler | Admin | Login
+        {{ env('APP_NAME') }} | Admin | Login
     </title>
     <!-- Favicon -->
     {{-- <link rel="icon" type="image/png" href="images/logo/favicon.ico" /> --}}

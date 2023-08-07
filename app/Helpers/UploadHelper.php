@@ -23,7 +23,6 @@ class UploadHelper
         }
     }
 
-
     public static function listDocs($vId)
     {
         $docs = Document::where('vendor_id', $vId)->get();
