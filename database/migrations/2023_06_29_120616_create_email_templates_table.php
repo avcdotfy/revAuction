@@ -17,7 +17,7 @@ return new class extends Migration
             $t->string('service_type')->nullable();
             $t->enum('template_for', USER_TYPES)->nullable();
             $t->string('subject')->nullable();
-            $t->string('body')->nullable();
+            $t->text('body')->nullable();
             $t->string('user_name')->nullable();
             $t->string('password')->nullable();
             $t->boolean('is_enable_ssl')->nullable();
