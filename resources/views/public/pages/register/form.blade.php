@@ -231,7 +231,8 @@
       <div class="col-sm-6" style="padding: 0px;">
           <label for="inputPassword3" class="col-sm-12 control-label">Logo</label>
           <div class="col-sm-12">
-              <input type="file" name="logo" id="fu_vlogo" class="form-control" style="padding:4px 6px;">
+              <input type="file" name="logo" id="fu_vlogo" class="form-control" style="padding:4px 6px;"
+                  accept=".png , .jpg , .jpeg">
           </div>
       </div>
       <div class="col-sm-6" style="padding: 0px;">

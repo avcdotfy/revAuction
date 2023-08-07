@@ -88,7 +88,7 @@
                                     <ul id="ticker01">
                                         @foreach ($upcomingEvents as $e)
                                             <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
-                                                <a href="{{ route('vendor.posted-event-info', $e->id) }}"
+                                                <a href="{{ route('vendor.posted-event-info', $e->id) }}" target="_blank"
                                                     style="color: #000"> {{ $e->title }}</a>
                                             </li>
                                         @endforeach
@@ -145,7 +145,7 @@
                                     <ul id="ticker01">
                                         @foreach ($closedEvents as $e)
                                             <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
-                                                <a href="{{ route('vendor.posted-event-info', $e->id) }}"
+                                                <a href="{{ route('vendor.posted-event-info', $e->id) }}" target="_blank"
                                                     style="color: #000"> {{ $e->title }}</a>
                                             </li>
                                         @endforeach

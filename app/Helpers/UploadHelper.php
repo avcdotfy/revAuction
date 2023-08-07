@@ -28,4 +28,17 @@ class UploadHelper
         $docs = Document::where('vendor_id', $vId)->get();
         return $docs;
     }
+
+    public static function uploadLogo($req)
+    {
+        $fileName = null;
+
+        if ($req->hasFile('logo')) {
+            $logo = $req->file('logo');
+            $fileName = time() . '-' . $logo->getClientOriginalName();
+            $logo->storeAs('company_logo', $fileName, 'public');
+        }
+
+        return $fileName;
+    }
 }

@@ -90,6 +90,10 @@ class VendorController extends Controller
         }
         UploadHelper::uploadFile($req, $user->vendor->id);
 
+        $user->vendor->logo = UploadHelper::uploadLogo($req);
+        $user->vendor->save();
+
+
         if ($user instanceof User) {
             $domain = request()->getHost();
             $company = Company::where('web_url', $domain)->first();
