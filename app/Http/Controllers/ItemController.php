@@ -38,9 +38,9 @@ class ItemController extends BaseController
      */
     public function create()
     {
-        $categories = Category::where('user_id', Auth::user()->id)->get();
-        $uOm = UnitOfMeasure::where('user_id', Auth::user()->id)->get();
-        $regions = Region::where('user_id', Auth::user()->id)->get();
+        $categories = Category::where(['user_id' => Auth::user()->id, 'is_active' => true])->get();
+        $uOm = UnitOfMeasure::where('user_id', Auth::user()->id)->where('is_active', true)->get();
+        $regions = Region::where('user_id', Auth::user()->id)->where('is_active', true)->get();
         $item = null;
         return view('admin.pages.catalog.item.create', compact('categories', 'uOm', 'regions', 'item'));
     }

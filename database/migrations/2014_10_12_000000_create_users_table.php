@@ -17,7 +17,7 @@ return new class extends Migration
             $t->string('name')->nullable();
             $t->string('username')->unique();
             $t->string('email')->unique();
-            $t->string('phone')->nullable();
+            $t->string('phone')->unique()->nullable();
             $t->string('landline')->nullable();
             $t->string('fax_number')->nullable();
             $t->string('registered_address')->nullable();

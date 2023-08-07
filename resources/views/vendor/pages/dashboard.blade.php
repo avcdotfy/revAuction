@@ -97,7 +97,8 @@
 
                         <div class="holder">
                             @if (count($upcomingEvents))
-                                <marquee direction="up" Scrollamount=4>
+                                <marquee direction="up" Scrollamount=4 onmouseover="this.stop();"
+                                    onmouseout="this.start();">
                                     <ul id="ticker01">
                                         @foreach ($upcomingEvents as $e)
                                             <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
@@ -125,7 +126,8 @@
                         <hr style="margin-bottom: 14px;" />
                         <div class="holder">
                             @if (count($runningEvents))
-                                <marquee direction="up" Scrollamount=4>
+                                <marquee direction="up" Scrollamount=4 onmouseover="this.stop();"
+                                    onmouseout="this.start();">
                                     <ul id="ticker01">
                                         @foreach ($runningEvents as $e)
                                             <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
@@ -154,7 +156,8 @@
                         <hr style="margin-bottom: 14px;" />
                         <div class="holder">
                             @if (count($closedEvents))
-                                <marquee direction="up" Scrollamount=4>
+                                <marquee direction="up" Scrollamount=4 onmouseover="this.stop();"
+                                    onmouseout="this.start();">
                                     <ul id="ticker01">
                                         @foreach ($closedEvents as $e)
                                             <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>

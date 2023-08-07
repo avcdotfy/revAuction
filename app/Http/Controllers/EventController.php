@@ -32,8 +32,8 @@ class EventController extends BaseController
      */
     public function create()
     {
-        $eventModes = Eventmode::where(['company_id' => $this->company_id])->get();
-        $categories = Category::where(['company_id' => $this->company_id])->get();
+        $eventModes = Eventmode::where(['company_id' => $this->company_id, 'is_active' => true])->get();
+        $categories = Category::where(['company_id' => $this->company_id, 'is_active' => true])->get();
         $requests = ModelsRequest::where(['company_id' => $this->user_id, 'status' => REQUEST_STATUS[0]])->get();
         $itemRpus = ItemRPUModel::where(['company_id' => $this->company_id])->get();
         return view('admin.pages.event.create', compact('eventModes', 'categories', 'requests', 'itemRpus'));

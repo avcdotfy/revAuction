@@ -15,7 +15,7 @@ class StateController extends BaseController
     }
     function create()
     {
-        $countries = Country::where(['company_id' => $this->company_id])->get();
+        $countries = Country::where(['company_id' => $this->company_id, 'is_active' => true])->get();
         $state = null;
         return view('admin.pages.settings.master.state.create', compact('countries', 'state'));
     }
@@ -33,7 +33,7 @@ class StateController extends BaseController
     function edit($id)
     {
         $state = State::find($id);
-        $countries = Country::where(['company_id' => $this->company_id])->get();
+        $countries = Country::where(['company_id' => $this->company_id, 'is_active' => true])->get();
         return view('admin.pages.settings.master.state.edit', compact('countries', 'state'));
     }
 

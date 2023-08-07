@@ -364,9 +364,28 @@
 
      <div class="col-sm-12" style="text-align: center;">
          <div class="col-sm-12">
-             <input type="button" value="Validate" class="btn btn-sm btn-primary">
-             <input type="submit" value="Submit" class="btn btn-sm btn-success">
+             <input type="button" value="Validate" class="btn btn-sm btn-primary" id="validate">
+             <input type="submit" value="Submit" class="btn btn-sm btn-success" disabled id="submit">
              <a href="#" class="btn btn-sm btn-primary" style="margin-left: 4px">Back</a>
          </div>
      </div>
  </div>
+
+
+ @push('scripts')
+     <script>
+         $(document).ready(function() {
+             $("#validate").click(function(e) {
+
+                 setTimeout(() => {
+                     showToast('Validation Successful')
+                     $("#validate").prop("disabled", true);
+                     $("#submit").prop("disabled", false);
+
+
+                 }, 2000);
+
+             });
+         });
+     </script>
+ @endpush
