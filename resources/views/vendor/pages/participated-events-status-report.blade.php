@@ -14,13 +14,12 @@
                 <div class="box">
                     <div class="box-body">
 
-
                         <div id="ContentPlaceHolder1_div_list" class="row">
                             <div class="col-sm-12">
                                 <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
                                     role="grid" aria-describedby="dtable_info">
                                     <thead>
-                                        <tr role="row">
+                                        {{-- <tr role="row">
                                             <td colspan="6" rowspan="1">
 
                                                 <div class="col-sm-3">
@@ -50,7 +49,7 @@
                                                         class="btn btn-sm btn-primary">
                                                 </div>
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr role="row">
                                             <th class="sorting_disabled" rowspan="1" colspan="1"
                                                 style="width: 38.5104px;">S.No.</th>
@@ -67,9 +66,6 @@
                                     <tbody>
 
 
-                                        <tr role="row" class="odd">
-
-                                        </tr>
 
                                     </tbody>
                                 </table>
