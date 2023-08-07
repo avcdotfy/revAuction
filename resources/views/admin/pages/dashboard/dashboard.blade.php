@@ -149,7 +149,8 @@
                                 <ul id="ticker01">
                                     @foreach ($upcomingEvents as $e)
                                         <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
-                                            <a href="#" style="color: #000"> {{ $e->title }}</a>
+                                            <a href="{{ route('event.postedEventInformation', $e->id) }}"
+                                                style="color: #000"> {{ $e->title }}</a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -175,7 +176,8 @@
                                 <ul id="ticker01">
                                     @foreach ($runningEvents as $e)
                                         <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
-                                            <a href="#" style="color: #000"> {{ $e->title }}</a>
+                                            <a href="{{ route('event.postedEventInformation', $e->id) }}"
+                                                style="color: #000"> {{ $e->title }}</a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -200,7 +202,8 @@
                                 <ul id="ticker01">
                                     @foreach ($closedEvents as $e)
                                         <li><span><img src="{{ asset('images/new.png') }}" style="width: 30px"></span>
-                                            <a href="#" style="color: #000"> {{ $e->title }}</a>
+                                            <a href="{{ route('event.postedEventInformation', $e->id) }}"
+                                                style="color: #000"> {{ $e->title }}</a>
                                         </li>
                                     @endforeach
                                 </ul>
