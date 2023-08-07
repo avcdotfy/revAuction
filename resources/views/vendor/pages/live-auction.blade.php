@@ -359,7 +359,10 @@
 
                                                                             $("#btn_bid{{ $item->id }}").show();
                                                                         }
-                                                                        $("#btn_vendorStatus{{ $item->id }}").text(res.least_status)
+
+                                                                        if (res.least_status != "L") {
+                                                                            $("#btn_vendorStatus{{ $item->id }}").text(res.least_status)
+                                                                        }
                                                                         if (res.lastBidderPrice != 0 && res.lastBidderPrice != null) {
                                                                             $("#bidding_price_hidden{{ $item->id }}").val(res.lastBidderPrice - res
                                                                                 .decrementAmount);
