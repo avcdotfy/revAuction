@@ -53,6 +53,19 @@
                                     <!-- /.info-box-content -->
                                 </div>
                             </div>
+                            <div class="col-lg-3 col-6">
+                                <!-- small box -->
+                                <div class="info-box bg-red">
+                                    <span class="info-box-icon"><i class="bx bx-calendar"
+                                            style="font-size: 44px;"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">CLOSED EVENTS</span>
+                                        <span id="ContentPlaceHolder1_lbl_CeC"
+                                            class="info-box-number">{{ count($closedEvents) }}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                            </div>
                             <!-- ./col -->
                             {{-- <div class="col-lg-3 col-6">
                                  

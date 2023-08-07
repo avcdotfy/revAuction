@@ -2,26 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\BidHelper;
 use App\Helpers\CategoryHelper;
 use App\Helpers\CompanyHelper;
-use App\Helpers\EventHelper;
 use App\Helpers\UploadHelper;
 use App\Mail\NewVendorMail;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Country;
 use App\Models\Event;
-use App\Models\ItemRPUModel;
 use App\Models\Notice;
 use App\Models\Participant;
 use App\Models\Region;
 use App\Models\Request as VendorRequest;
-use App\Models\State;
 use App\Models\User;
 use App\Models\Vendor;
-use App\Models\VendorCompany;
-
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,7 +58,6 @@ class VendorController extends Controller
                 'city' => $req->city,
                 'pin_code' => $req->pin_code,
                 'user_type' => USER_TYPES[1],
-
             ]);
 
             $user->vendor()->create([
@@ -93,7 +86,6 @@ class VendorController extends Controller
         $user->vendor->logo = UploadHelper::uploadLogo($req);
         $user->vendor->save();
 
-
         if ($user instanceof User) {
             $domain = request()->getHost();
             $company = Company::where('web_url', $domain)->first();
@@ -114,11 +106,16 @@ class VendorController extends Controller
 
     function dashboard()
     {
-        $upcomingEvents = Event::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => EVENT_STATUS[0]])->get();
-        $runningEvents = Event::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => EVENT_STATUS[1]])->get();
-        $closedEvents = Event::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => EVENT_STATUS[2]])->get();
+        $currentVendor = Auth::user()->vendor;
+        $upcomingEvents = $currentVendor->events()->where('status', EVENT_STATUS[0])->get();
+        $runningEvents = $currentVendor->events()->where('status', EVENT_STATUS[1])->get();
+        $closedEvents = $currentVendor->events()->where('status', EVENT_STATUS[2])->get();
+
+        // dd($closedEvents);
 
         $participatedEvents = Participant::where('vendor_id', Auth::user()->vendor->id)->groupBy('event_id')->get();
+
+        // dd(Auth::user()->vendor->events);
 
         return view('vendor.pages.dashboard',  ['upcomingEvents' => $upcomingEvents, 'closedEvents' => $closedEvents, 'runningEvents' => $runningEvents, 'participatedEvents' => $participatedEvents]);
     }

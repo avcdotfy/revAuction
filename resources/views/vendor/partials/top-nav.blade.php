@@ -64,8 +64,9 @@
         @if (Auth::user()->vendor->logo)
             <img src="{{ Storage::url('company_logo/' . Auth::user()->vendor->logo) }}" alt="" width="80"
                 height="80" srcset="">
+        @else
+            <span class="logo-mini">{{ env('APP_NAME') }}</span>
         @endif
-        <span class="logo-mini">{{ env('APP_NAME') }}</span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">{{ env('APP_NAME') }}</span>
     </a>
