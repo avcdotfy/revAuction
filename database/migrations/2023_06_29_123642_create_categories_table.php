@@ -20,7 +20,7 @@ return new class extends Migration
             $t->text('terms_condition')->nullable();
             $t->boolean('item_time_trigger');
             // $t->integer('time_gap_between_each_item');
-            $t->integer('last_minute_closing_time_increment');
+            $t->integer('last_minute_closing_time_increment')->nullable();
             $t->boolean('is_active');
             $t->foreignIdFor(User::class)->comment("Creator ID");
             $t->foreignIdFor(Company::class)->comment("company ID");

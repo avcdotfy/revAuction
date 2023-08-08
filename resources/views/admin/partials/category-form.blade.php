@@ -36,11 +36,12 @@
             <label for="inputPassword3" class="col-sm-12 control-label">Is Enable Item Time
                 Trigger? <span style="color: red; font-size: 13px;">*</span></label>
             <div class="col-sm-12">
-                <select name="item_time_trigger" class="form-control">
-                    <option value=0 {{ $category ? ($category->item_time_trigger == 0 ? 'selected' : '') : '' }}>No
-                    </option>
+                <select name="item_time_trigger" class="form-control" id="item_time_trigger">
                     <option value=1 {{ $category ? ($category->item_time_trigger == 1 ? 'selected' : '') : '' }}>
                         Yes</option>
+
+                    <option value=0 {{ $category ? ($category->item_time_trigger == 0 ? 'selected' : '') : '' }}>No
+                    </option>
 
                 </select>
             </div>
@@ -66,7 +67,7 @@
                 <span id="ContentPlaceHolder1_RequiredFieldValidator4"
                     style="font-size:12px;color:red;font-weight:600;display:none;">Please
                     Enter In Which Last Minutes Time Will be Increment?</span>
-                <input type="number" name="last_minute_closing_time_increment"
+                <input type="number" name="last_minute_closing_time_increment" id="last_minute_time_to_increment"
                     value="{{ $category ? $category->last_minute_closing_time_increment : '' }}" class="form-control"
                     placeholder="Enter In Which Last Minutes Time Will be Increment?">
             </div>

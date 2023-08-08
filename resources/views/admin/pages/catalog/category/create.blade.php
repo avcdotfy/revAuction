@@ -28,4 +28,16 @@
 
 @push('scripts')
     <script src="{{ asset('validations/category-validator.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#item_time_trigger').on('change', function(e) {
+                if (e.target.value == 0) {
+                    $('#last_minute_time_to_increment').prop('disabled', true);
+                } else {
+                    $('#last_minute_time_to_increment').prop('disabled', false);
+                }
+            });
+        });
+    </script>
 @endpush

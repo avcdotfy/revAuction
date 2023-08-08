@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\VendorController;
 use App\Http\Middleware\CheckForVendor;
 use Illuminate\Http\Request;
@@ -39,7 +40,6 @@ Route::group(['middleware' => ['auth', CheckForVendor::class]], function () {
         Route::get('participated-event-reports', [ParticipantController::class, 'participatedEventReports'])->name('vendor.participated-event-reports');
         Route::get('participated-event-reports/filter', [ParticipantController::class, 'filterParticipatedEventList'])->name('vendor.filter-participated-event-reports');
 
-
         Route::get('participated-event-status-reports', [ParticipantController::class, 'participatedEventStatusReports'])->name('vendor.participated-event-status-reports');
 
         Route::get('notice-news', [VendorController::class, 'noticeNews'])->name('vendor.notice-news');
@@ -54,5 +54,11 @@ Route::group(['middleware' => ['auth', CheckForVendor::class]], function () {
             Route::post('live', [BidController::class, 'getLiveDataVendorSite'])->name('vendor.live-data');
         });
         Route::get('logout', [AuthenticateController::class, 'logout'])->name('vendor.logout');
+
+
+
+        Route::group(['prefix' => 'report'], function () {
+            Route::get('participated-event-reports/{eId}', [ReportController::class, 'participatedEventReports'])->name('vendor.report.participatedEventReports');
+        });
     });
 });

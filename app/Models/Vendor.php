@@ -49,4 +49,10 @@ class Vendor extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+
+    public function bidHistory()
+    {
+        return $this->hasMany(Bidhistory::class);
+    }
 }

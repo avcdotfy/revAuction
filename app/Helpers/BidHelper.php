@@ -126,10 +126,13 @@ class BidHelper
     {
         $event = Event::find($eId); //Get Event from Database
 
+        $isTimeTriggerEnabled = (int)Item::find($iId)->category->item_time_trigger;
+
+        if (!$isTimeTriggerEnabled) return; // if minute not available or null then return immediately
+        // dd($minToIncrease); 
+
         $minToIncrease = (int)Item::find($iId)->category->last_minute_closing_time_increment; //get minutes to increase fronm category model
 
-        if (!$minToIncrease) return; // if minute not available or null then return immediately
-        // dd($minToIncrease); 
         $eventCurrentClosingTime = Carbon::createFromTimestampMs($event->closing_date_time_millis); //if minutes available create carbon object from millis 
 
         $givenMinuteBeforeEventCurrentClosingTime = $eventCurrentClosingTime->subMinutes($minToIncrease); //subtract minutes from closing_date_time_millis 

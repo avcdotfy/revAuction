@@ -27,7 +27,9 @@
                                                             <option selected disabled value="">Select Category
                                                             </option>
                                                             @foreach ($categories as $cat)
-                                                                <option value="{{ $cat->id }}">{{ $cat->name }}
+                                                                <option value="{{ $cat->id }}"
+                                                                    {{ $category_id ? ($category_id == $cat->id ? 'selected' : '') : '' }}>
+                                                                    {{ $cat->name }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -36,14 +38,16 @@
                                                         <label for="inputPassword3" class="col-sm-5 control-label">Closed
                                                             From Date :</label>
                                                         <div class="col-sm-7">
-                                                            <input name="fromdate" type="date" class="form-control">
+                                                            <input name="fromdate" type="date" id="formdate"
+                                                                class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4" style="padding: 0px;">
                                                         <label for="inputPassword3" class="col-sm-5 control-label">Closed To
                                                             Date :</label>
                                                         <div class="col-sm-7">
-                                                            <input name="todate" type="date" class="form-control">
+                                                            <input name="todate" type="date" id="todate"
+                                                                class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-1" style="text-align:right;">
@@ -63,6 +67,9 @@
                                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 30px;">
                                                 Action </th>
                                         </tr>
+
+                                    </thead>
+                                    <tbody>
                                         @foreach ($participatedEvents as $key => $p)
                                             <tr role="row">
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
@@ -73,13 +80,12 @@
                                                     style="width: 300.583px;">{{ $p->event->title }}</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
                                                     style="width: 30px;">
-                                                    Download Report </th>
+                                                    <a
+                                                        href="{{ route('vendor.report.participatedEventReports', $p->event_id) }}">Download
+                                                        Report</a>
+                                                </th>
                                             </tr>
                                         @endforeach
-
-                                    </thead>
-                                    <tbody>
-
                                     </tbody>
                                 </table>
                             </div>
@@ -91,3 +97,16 @@
     </section>
     <!-- /.content -->
 @endsection
+
+@push('scripts')
+    {{-- <script>
+        $('#formdate').datepicker({
+            minDate: 0
+
+        });
+        $('#todate').datepicker({
+            minDate: 0
+
+        });
+    </script> --}}
+@endpush

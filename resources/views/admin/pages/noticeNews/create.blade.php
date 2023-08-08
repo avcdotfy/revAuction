@@ -28,10 +28,16 @@
                                             class="form-control" placeholder="Enter Notice &amp; News Title" required>
                                     </div>
                                 </div>
-                                <div class="col-sm-12" style="padding:0px;">
-                                    <label for="inputPassword3" class="col-sm-12 control-label">Notice &amp; News Message
+
+                                <div class="col-sm-12" style=" margin-left: 0px; ">
+
+
+                                    <label for="inputPassword3" class="col-sm-12 control-label">Notice &amp; News
+                                        Message
                                         <span style="color: red; font-size: 13px">*</span></label>
                                     <textarea name="msg" id="default"></textarea>
+
+
                                 </div>
 
                                 <div class="col-sm-12" style="text-align: center; padding: 0px; margin-top: 20px;">
