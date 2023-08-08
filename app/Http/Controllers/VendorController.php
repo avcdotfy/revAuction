@@ -30,14 +30,12 @@ class VendorController extends Controller
     function create()
     {
         $v = null;
-        $countries = Country::where(['company_id' => CompanyHelper::getCompanyFromHost()->id])->get();
+        $countries = Country::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'is_active' => true])->get();
         $categories = CategoryHelper::getCategories();
         $regions = Region::all();
         // return view('public.pages.register.vendor-register', compact('countries', 'categories', 'regions'));
         return view('public.pages.register.vendor-register', compact('countries', 'categories', 'regions', 'v'));
     }
-
-
     function updateToAll()
     {
         return view('admin.pages.vendor.update-to-all');
@@ -213,7 +211,7 @@ class VendorController extends Controller
 
     public function profileUpdate(Request $req)
     {
-        // dd($req->all());
+        dd($req->all());
 
         $v = Vendor::find($req->vendor_id);
         if ($v) {
@@ -221,10 +219,24 @@ class VendorController extends Controller
             $v->regions()->detach();
             $v->vendor_type = $req->vendor_type;
             $v->company_type = $req->vendor_type;
+            $v->company_name = $req->company_name;
+            $v->contact_person = $req->contact_person;
+            $v->GSTIN = $req->GSTIN;
+            $v->pan_tan = $req->pan_tan;
+            $v->mse_registration_number = $req->mse_registration_number;
+            $v->user->email = $req->email;
+            $v->user->phone = $req->phone;
+            $v->user->landline = $req->landline;
+            $v->user->fax_number = $req->fax_number;
+            $v->user->registered_address = $req->registered_address;
             $v->save();
 
             $v->categories()->attach($req->preference_category);
             $v->regions()->attach($req->preference_region);
+
+            if (count($req->docs) > 0) {
+                UploadHelper::uploadFile($req, $req->vendor_id);
+            }
 
             return redirect()->back()->with('success', "Vendor's details updated Successfully");
         }

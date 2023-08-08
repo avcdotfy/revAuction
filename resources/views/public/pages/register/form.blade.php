@@ -240,8 +240,10 @@
       </div>
   </div>
 
-  @if (!Auth::user())
-      <div class="col-sm-12" style="margin-bottom: 20px;">
+
+  <div class="col-sm-12" style="margin-bottom: 20px;">
+
+      @if (!Auth::user())
           <div class="col-sm-6" style="padding: 0px;">
               <label for="inputPassword3" class="col-sm-12 control-label">Logo</label>
               <div class="col-sm-12">
@@ -249,16 +251,19 @@
                       accept=".png , .jpg , .jpeg">
               </div>
           </div>
-          <div class="col-sm-6" style="padding: 0px;">
-              <label for="inputPassword3" class="col-sm-12 control-label">Documents <span
-                      style="color: red; font-size: 13px;">*</span></label>
-              <div class="col-sm-12">
+      @endif
+      <div class="col-sm-6" style="padding: 0px;">
+          <label for="inputPassword3" class="col-sm-12 control-label">Documents <span
+                  style="color: red; font-size: 13px;">*</span></label>
+          <div class="col-sm-12">
 
-                  <input type="file" multiple="multiple" name="docs[]" id="fu_documents" class="form-control"
-                      accept=".pdf,.doc,.docx" style="padding:4px 6px;" required>
-              </div>
+              <input type="file" multiple="multiple" name="docs[]" id="fu_documents" class="form-control"
+                  accept=".pdf,.doc,.docx" style="padding:4px 6px;" {{ !Auth::user() ? 'required' : '' }}>
           </div>
       </div>
+  </div>
+
+  @if (!Auth::user())
       <div class="col-sm-12">
           <div class="col-sm-12" style="text-align: center;">
               <hr>

@@ -56,12 +56,10 @@ class ParticipantController extends Controller
     public function filterParticipatedEventList(Request $req)
     {
         $categories = Category::where('is_active', true)->get();
-        
-        $participatedEvents = Participant::where('vendor_id', Auth::user()->id)->groupBy('event_id')->get();
 
+        $participatedEvents = Participant::where(['vendor_id' => Auth::user()->id, 'category_id' => $req->cat_id])->groupBy('event_id')->get();
         // $cat_id = $req->cat_id;
-        dd($req->all());
-
+        // dd($req->all());
 
         return view('vendor.pages.participated-events-reports', compact('categories'));
     }
