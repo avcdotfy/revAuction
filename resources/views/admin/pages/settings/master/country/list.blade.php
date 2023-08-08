@@ -3,7 +3,7 @@
 @section('main_section')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h3 style="margin-top: 10px; margin-bottom: 20px">Region List </h3>
+        <h3 style="margin-top: 10px; margin-bottom: 20px">Country List </h3>
         <ol class="breadcrumb">
             <a href="{{ route('country.create') }}" style="color: white; font-weight: 600"
                 class="btn-block btn-primary btn-sm">

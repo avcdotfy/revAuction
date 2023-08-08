@@ -17,7 +17,7 @@ return new class extends Migration
     {
         Schema::create('states', function (Blueprint $t) {
             $t->id();
-            $t->string('name')->nullable();
+            $t->string('name')->unique();
             $t->string('code')->nullable();
             $t->string('description')->nullable();
             $t->foreignIdFor(Country::class);

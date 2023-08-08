@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('countries', function (Blueprint $t) {
             $t->id();
-            $t->string('name')->nullable();
+            $t->string('name')->unique();
             $t->string('code')->nullable();
             $t->foreignIdFor(User::class)->comment('Creator ID');
             $t->foreignIdFor(Company::class)->comment('Company creator ID');

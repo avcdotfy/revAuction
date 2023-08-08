@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('regions', function (Blueprint $t) {
             $t->id();
-            $t->string('name')->nullable();
+            $t->string('name')->unique();
             $t->text('description')->nullable();
             $t->boolean('is_alert')->nullable();
             $t->foreignIdFor(User::class)->comment('creator_id');

@@ -91,11 +91,10 @@
                                 </div>
                             </div>
                             <div class="col-sm-7" style="border-left: 1px solid #d2d6de;padding:0px;">
-
                                 <form action="{{ route('vendor.store') }}" method="post" enctype="multipart/form-data"
                                     id="registerForm">
                                     @csrf
-                                    @include('public.pages.register.form')
+                                    @include('public.pages.register.form') 
                                 </form>
                             </div>
                         </div>

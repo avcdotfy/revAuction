@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use App\Models\State;
+use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class StateController extends BaseController
@@ -21,12 +23,13 @@ class StateController extends BaseController
     }
     function store(Request $req)
     {
-        $state = State::create(array_merge($req->all(), ['user_id' => $this->user_id, 'company_id' => $this->company_id]));
-
-        if ($state instanceof State) {
-            return redirect()->route('state.list')->with('success', 'State Created Successfully');
-        } else {
-            return redirect()->back()->with('error', 'Something Went Wrong');
+        try {
+            $state = State::create(array_merge($req->all(), ['user_id' => $this->user_id, 'company_id' => $this->company_id]));
+            if ($state instanceof State) {
+                return redirect()->route('state.list')->with('success', 'State Created Successfully');
+            }
+        } catch (QueryException $e) {
+            return redirect()->back()->with('error', 'State creation failed , May be you have used duplicated state name');
         }
     }
 

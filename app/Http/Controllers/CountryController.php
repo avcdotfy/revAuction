@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class CountryController extends BaseController
@@ -21,12 +23,15 @@ class CountryController extends BaseController
     function store(Request $req)
     {
         // dd($req->all());
-        $country = Country::create(array_merge($req->all(), ['user_id' => $this->user_id, 'company_id' => $this->company_id]));
+        try {
+            $country = Country::create(array_merge($req->all(), ['user_id' => $this->user_id, 'company_id' => $this->company_id]));
+            if ($country instanceof Country) {
+                return redirect()->route('country.list')->with('success', 'Country Created Successfully');
+            }
+        } catch (QueryException $e) {
+            // dd($country);
 
-        if ($country instanceof Country) {
-            return redirect()->route('country.list')->with('success', 'Country Created Successfully');
-        } else {
-            return redirect()->back()->with('error', 'Country creation failed');
+            return redirect()->route('country.list')->with('error', 'Country creation failed , May be you have used duplicated country name');
         }
     }
 

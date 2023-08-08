@@ -234,7 +234,7 @@ class VendorController extends Controller
             $v->categories()->attach($req->preference_category);
             $v->regions()->attach($req->preference_region);
 
-            if ( $req->doc !=null && count($req->docs) > 0) {
+            if ($req->doc != null && count($req->docs) > 0) {
                 UploadHelper::uploadFile($req, $req->vendor_id);
             }
 
