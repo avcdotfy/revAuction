@@ -21,6 +21,7 @@ return new class extends Migration
             $t->foreignIdFor(Event::class);
             $t->foreignIdFor(Item::class);
             $t->foreignIdFor(ItemRPUModel::class);
+            $t->foreignId('category_id');
             $t->timestamps();
         });
     }

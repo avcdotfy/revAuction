@@ -18,37 +18,41 @@
                                 <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
                                     role="grid" aria-describedby="dtable_info">
                                     <thead>
-                                        {{-- <tr role="row">
+                                        <tr role="row">
                                             <td colspan="6" rowspan="1">
-
-                                                <div class="col-sm-3">
-                                                    <select name="product_range_list" class="form-control">
-                                                        <option selected="selected" value="0">Select Category
-                                                        </option>
-                                                        <option value="2">Steel</option>
-
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-4" style="padding: 0px;">
-                                                    <label for="inputPassword3" class="col-sm-5 control-label">Closed
-                                                        From Date :</label>
-                                                    <div class="col-sm-7">
-                                                        <input name="fromdate" type="date" class="form-control">
+                                                <form method="get"
+                                                    action="{{ route('vendor.filter-participated-event-reports') }}">
+                                                    <div class="col-sm-3">
+                                                        <select name="cat_id" class="form-control" required>
+                                                            <option selected disabled value="">Select Category
+                                                            </option>
+                                                            @foreach ($categories as $cat)
+                                                                <option value="{{ $cat->id }}">{{ $cat->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4" style="padding: 0px;">
-                                                    <label for="inputPassword3" class="col-sm-5 control-label">Closed To
-                                                        Date :</label>
-                                                    <div class="col-sm-7">
-                                                        <input name="todate" type="date" class="form-control">
+                                                    <div class="col-sm-4" style="padding: 0px;">
+                                                        <label for="inputPassword3" class="col-sm-5 control-label">Closed
+                                                            From Date :</label>
+                                                        <div class="col-sm-7">
+                                                            <input name="fromdate" type="date" class="form-control">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-1" style="text-align:right;">
-                                                    <input type="button" name="btn_search" value="Search"
-                                                        class="btn btn-sm btn-primary">
-                                                </div>
+                                                    <div class="col-sm-4" style="padding: 0px;">
+                                                        <label for="inputPassword3" class="col-sm-5 control-label">Closed To
+                                                            Date :</label>
+                                                        <div class="col-sm-7">
+                                                            <input name="todate" type="date" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-1" style="text-align:right;">
+                                                        <input type="submit" value="Search" class="btn btn-sm btn-primary">
+                                                    </div>
+
+                                                </form>
                                             </td>
-                                        </tr> --}}
+                                        </tr>
                                         <tr role="row">
                                             <th class="sorting_disabled" rowspan="1" colspan="1"
                                                 style="width: 38.5104px;">S.No.</th>
@@ -59,6 +63,20 @@
                                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 30px;">
                                                 Action </th>
                                         </tr>
+                                        @foreach ($participatedEvents as $key => $p)
+                                            <tr role="row">
+                                                <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                    style="width: 38.5104px;">{{ $key + 1 }}</th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                    style="width: 44.7292px;">{{ EVENT_ID_PREFIX . $p->event->id }}</th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                    style="width: 300.583px;">{{ $p->event->title }}</th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                    style="width: 30px;">
+                                                    Download Report </th>
+                                            </tr>
+                                        @endforeach
+
                                     </thead>
                                     <tbody>
 

@@ -26,13 +26,14 @@ class BidEvent implements ShouldBroadcast
     public $item_id;
     public $vendors;
     public $rpu_id;
-
+    public $cat_id;
     public function __construct($data)
     {
 
         $this->event_id = $data['event_id'];
         $this->item_id = $data['item_id'];
         $this->rpu_id = $data['rpu_id'];
+        $this->cat_id = $data['cat_id'];
 
         $vendors = [];
 

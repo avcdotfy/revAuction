@@ -24,7 +24,7 @@ class BidListener
     public function handle(BidEvent $event): void
     {
         if (!Participant::where(['event_id' => $event->event_id, 'item_id' => $event->item_id, 'item_r_p_u_model_id' => $event->rpu_id, 'vendor_id' => Auth::user()->vendor->id])->first()) {
-            Participant::create(['event_id' => $event->event_id, 'item_id' => $event->item_id, 'item_r_p_u_model_id' => $event->rpu_id, 'vendor_id' => Auth::user()->vendor->id]);
+            Participant::create(['event_id' => $event->event_id, 'item_id' => $event->item_id, 'item_r_p_u_model_id' => $event->rpu_id, 'category_id' => $event->cat_id, 'vendor_id' => Auth::user()->vendor->id]);
         }
     }
 }

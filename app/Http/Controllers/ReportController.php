@@ -70,4 +70,12 @@ class ReportController extends BaseController
     {
         return Excel::download(new DecisionTakenEventL1Report($eId), EVENT_ID_PREFIX . $eId . '_DECISION_TAKEN_EVENT_L1_REPORT_WD_.xlsx');
     }
+
+
+
+    /////////////////////////////////////////////////Vendor Side Reports  //////////////////////////////////////////////////
+
+
+
+
 }

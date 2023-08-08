@@ -103,6 +103,7 @@ class BidController extends Controller
                 $data['item_id'] = $req->item_id;
                 $data['event_id'] = $req->event_id;
                 $data['rpu_id'] = $req->item_rpu_id;
+                $data['cat_id'] = $bid->event->category->id;
                 event(new BidEvent($data));
                 event(new BidStartedEvent($data));
                 BidHelper::increaseClosingTime($req->event_id, $req->item_id);
