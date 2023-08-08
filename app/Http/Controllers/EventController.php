@@ -71,7 +71,7 @@ class EventController extends BaseController
         $event =  Event::create($data);
         $event->vendors()->attach($req->vendor_id);
         $event->items()->attach($req->itemRpu);
-        // $event->regions()->attach($req->itemRpu);
+        $event->regions()->attach($req->itemRpu);
 
         if ($event instanceof Event) {
             $data = [

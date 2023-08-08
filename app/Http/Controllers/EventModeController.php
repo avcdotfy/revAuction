@@ -25,11 +25,13 @@ class EventmodeController extends BaseController
     }
     function store(Request $req)
     {
-        $reg = Eventmode::create(array_merge($req->all(), ['user_id' => $this->user_id, 'company_id' => $this->company_id]));
-        if ($reg instanceof Eventmode) {
-            return redirect()->route('eventmode.list')->with('success', 'event mode Created Successfully');
-        } else {
-            return redirect()->back()->with('error', 'event mode Creation failed')->withInput();
+        try {
+            $reg = Eventmode::create(array_merge($req->all(), ['user_id' => $this->user_id, 'company_id' => $this->company_id]));
+            if ($reg instanceof Eventmode) {
+                return redirect()->route('eventmode.list')->with('success', 'event mode Created Successfully');
+            }
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'event mode Creation failed , please uses different event mode name')->withInput();
         }
     }
 

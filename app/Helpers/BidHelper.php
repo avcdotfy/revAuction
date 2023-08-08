@@ -24,8 +24,11 @@ class BidHelper
 
     public static function getLastBidderPrice($event_id, $item_id, $itemRpu_id = null)
     {
-
+        // dd($event_id); 7
+        // dd($item_id); 1
+        dd($itemRpu_id);
         $bid = Bid::orderBy('created_at', 'desc')->where(['event_id' => $event_id, 'item_id' => $item_id, 'item_r_p_u_model_id' => $itemRpu_id])->first();
+        dd($bid);
         // $bid = Bid::orderBy('created_at', 'desc')->where(['event_id' => 3, 'item_id' => 22, 'item_r_p_u_model_id' => 1])->first();
         return $bid;
     }

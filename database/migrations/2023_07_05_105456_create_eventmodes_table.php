@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('eventmodes', function (Blueprint $t) {
             $t->id();
-            $t->string('mode');
+            $t->string('mode')->unique();
             $t->boolean('is_active');
             $t->foreignIdFor(User::class)->comment('creator id');
             $t->foreignIdFor(Company::class)->comment('company id');

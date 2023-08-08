@@ -69,7 +69,7 @@
                         <div class="row" style="overflow: auto;">
                             <div class="col-sm-12">
                                 <div id="dtable_Il_wrapper" class="dataTables_wrapper no-footer">
-                                    <table id="dtable_Il" class="table table-bordered table-striped dataTable no-footer"
+                                    <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
                                         role="grid">
                                         <thead>
                                             <tr role="row">
@@ -84,10 +84,15 @@
                                                                 class="col-sm-9 control-label">Region</label>
                                                             <div class="col-sm-3">
                                                                 <select name="region" id="region_select">
-                                                                    {{-- @foreach ($event->items as $item) --}}
-                                                                    @foreach ($event->items as $rpu)
-                                                                        <option value="{{ $rpu->region->id }}">
-                                                                            {{ $rpu->region->name }}
+                                                                    {{-- @foreach ($event_rpus as $item) --}}
+                                                                    <option value="" selected disabled> --Select--</option>
+                                                                    <option value="ALL"
+                                                                        {{ $region_id ? ($region_id == 'ALL' ? 'selected' : '') : '' }}>
+                                                                        All</option>
+                                                                    @foreach ($regions as $region)
+                                                                        <option value="{{ $region->id }}"
+                                                                            {{ $region_id ? ($region_id == $region->id ? 'selected' : '') : '' }}>
+                                                                            {{ $region->name }}
                                                                         </option>
                                                                     @endforeach
                                                                     {{-- @endforeach --}}
@@ -107,6 +112,8 @@
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
                                                     style="width: 179.198px;">Quantity</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                    style="width: 72px;">Region</th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1"
                                                     style="width: 72px;">Base Price</th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1"
                                                     style="width: 146.229px;">Current Lowest Price</th>
@@ -117,7 +124,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($event->items as $key => $item)
+                                            @foreach ($event_rpus as $key => $item)
                                                 <tr style="font-weight: 600;" role="row" class="odd">
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $item->item->code }} (<span id="lblitem0"
@@ -131,6 +138,10 @@
                                                         Unit | <span id="lbl_lot_number0">1 Unit = Rs.
                                                             {{ $item->price }}</span>
 
+                                                    </td>
+                                                    <td style="text-align: center; width: 82px">
+                                                        <span id="lbl_fob_price0"
+                                                            title="0.00">{{ $item->region->name }}</span>
                                                     </td>
                                                     <td style="text-align: center; width: 82px">
                                                         <span id="lbl_fob_price0" title="0.00">{{ $item->price }}</span>
@@ -467,7 +478,6 @@
             updateTimer();
 
             setInterval(function() {
-
                 updateTimer();
             }, 1000);
         });

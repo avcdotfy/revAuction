@@ -185,12 +185,29 @@ class VendorController extends Controller
 
     public function liveAuction($eventId)
     {
+        $region_id = null;
         $event = Event::where('id', $eventId)->first();
-        // dd($event->items);
-        return view('vendor.pages.live-auction', compact('event'));
+
+        $event_rpus = Event::where('id', $eventId)->first()->items;
+        $regions = Region::where('is_active', true)->get();
+        return view('vendor.pages.live-auction', compact('event', 'event_rpus', 'regions', 'region_id'));
     }
+
     public function liveAuctionFilterByRegion(Request $r)
     {
+        // dd($r->all());
+
+        $event = Event::where(['id' => $r->event_id])->first();
+        $region_id = $r->region_id;
+
+        $regions = Region::where('is_active', true)->get();
+
+        if ($r->region_id == "ALL") {
+            $event_rpus = Event::where('id', $r->event_id)->first()->items;
+        } else {
+            $event_rpus = $event->items()->where('region_id', $r->region_id)->get();
+        }
+        return view('vendor.pages.live-auction', compact('event', 'event_rpus', 'regions', 'region_id'));
     }
 
 

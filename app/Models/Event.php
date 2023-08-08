@@ -37,7 +37,7 @@ class Event extends Model
 
     public function regions()
     {
-        return $this->belongsToMany(Region::class);
+        return $this->belongsToMany(Region::class, 'event_region');
     }
 
     public function decisions()

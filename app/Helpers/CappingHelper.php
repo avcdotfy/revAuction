@@ -17,7 +17,7 @@ class CappingHelper
         }
 
         $cap = $cap->first();
-
+        // dd($cap);
         return $cap ? $cap->capping_price : null;
     }
 
