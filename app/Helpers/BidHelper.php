@@ -110,14 +110,19 @@ class BidHelper
         $last_status = Bid::select('*', DB::raw('MIN(least_status) as least_status'))->where(['event_id' => $eId, 'item_id' => $iId, 'vendor_id' => $vId, 'item_r_p_u_model_id' => $iRpuId])->min('least_status');
         // dd($last_status);
         // dd($bid->event->vendors()->count());
-        if ($bid->event->vendors()->count() < $last_status) {
-            $least_status = "L" . $bid->event->vendors()->count();
-        } else {
-            $least_status = $bid ? $bid->least_status : null;
-        }
+        if ($bid != null) {
+            if ($bid->event->vendors()->count() < $last_status) {
+                $least_status = "L" . $bid->event->vendors()->count();
+            } else {
+                $least_status = $bid ? $bid->least_status : null;
+            }
 
-        return  $least_status;
+            return  $least_status;
+        } else {
+            return "N/A";
+        }
     }
+
 
     public static function getLeastStatusOfVendr($eId, $iId, $vId)
     {
