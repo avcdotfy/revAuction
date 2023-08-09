@@ -1,4 +1,5 @@
 <?php
+//////////////////////////////////  Dont Touch if you dont understand Nested/Group Routes /////////////////////////////////////////////////////////////
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthenticateController;
@@ -170,7 +171,7 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
         Route::group(['prefix' => 'event'], function () {
-            Route::get('', [EventController::class, 'index'])->name('event.list');
+            // Route::get('', [EventController::class, 'index'])->name('event.list');
             Route::get('create', [EventController::class, 'create'])->name('event.create');
             Route::post('create', [EventController::class, 'store'])->name('event.store');
             Route::get('upcoming', [EventController::class, 'upcoming'])->name('event.upcoming');

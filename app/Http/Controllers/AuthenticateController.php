@@ -115,6 +115,7 @@ class AuthenticateController extends Controller
             $user = User::where('email', $email)->first();
             if ($user) {
                 $data['email'] = $email;
+                $data['username'] = $user->username;
                 $token = base64_encode(json_encode(['email' => $email, 'random_int' => random_int(11111111111111111, 99999999999999999)]));
                 $data['reset_link'] = route('reset-password-form', $token);
                 Mail::to($email)->send(new ForgetPasswordMail($data));

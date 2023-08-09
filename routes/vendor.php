@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth', CheckForVendor::class]], function () {
         Route::get('participated-event-reports/filter', [ParticipantController::class, 'filterParticipatedEventList'])->name('vendor.filter-participated-event-reports');
 
         Route::get('participated-event-status-reports', [ParticipantController::class, 'participatedEventStatusReports'])->name('vendor.participated-event-status-reports');
+        Route::get('participated-event-status-reports/filter', [ParticipantController::class, 'filterParticipatedEventStatusList'])->name('vendor.filter-participated-event-status-reports');
 
         Route::get('notice-news', [VendorController::class, 'noticeNews'])->name('vendor.notice-news');
         Route::get('view-notice-news/{id}', [VendorController::class, 'detailNews'])->name('vendor.details-News');
@@ -55,10 +56,9 @@ Route::group(['middleware' => ['auth', CheckForVendor::class]], function () {
         });
         Route::get('logout', [AuthenticateController::class, 'logout'])->name('vendor.logout');
 
-
-
         Route::group(['prefix' => 'report'], function () {
             Route::get('participated-event-reports/{eId}', [ReportController::class, 'participatedEventReports'])->name('vendor.report.participatedEventReports');
+            Route::get('participated-event-status-reports/{eId}', [ReportController::class, 'participatedEventStatusReports'])->name('vendor.report.participatedEventStatusReports');
         });
     });
 });

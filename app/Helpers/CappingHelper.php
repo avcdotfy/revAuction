@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Models\Bid;
+use App\Models\Cappingprice;
 use App\Models\Leaststatus;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +19,7 @@ class CappingHelper
 
         $cap = $cap->first();
         // dd($cap);
-        return $cap ? $cap->capping_price : null;
+        return $cap instanceof Bid ? $cap->capping_price : null;
     }
 
     // public static function getCappingPriceForReport($eId, $rpuId, $iId, $vId)

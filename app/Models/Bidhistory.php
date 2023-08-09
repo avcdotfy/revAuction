@@ -9,6 +9,8 @@ class Bidhistory extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function event()
     {
         return $this->belongsTo(Event::class);
@@ -20,5 +22,14 @@ class Bidhistory extends Model
     public function bid()
     {
         return $this->belongsTo(Bid::class);
+    }
+
+    public function getPreviousStateAttribute($value)
+    {
+        return "L" . $value;
+    }
+    public function getNewStateAttribute($value)
+    {
+        return "L" . $value;
     }
 }

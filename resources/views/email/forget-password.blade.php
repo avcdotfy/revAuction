@@ -10,6 +10,13 @@
 
 <body>
     <h1>Hi please click on this reset password link to reset your password </h1>
+    Dear {{ $data['username'] }},
+
+    <p> We received a request to reset the password for your account associated with {{ env('APP_NAME') }}.
+        If you didn't initiate this request, you can safely ignore this email.</p>
+
+    <p>To proceed with the password reset, please click the link below:</p>
+
     <a href="{{ $data['reset_link'] }}">{{ $data['reset_link'] }}</a>
 </body>
 

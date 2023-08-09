@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-   return redirect()->route('vendor.login');
+   return view('public.pages.home.index');
 });
 
 Route::get('/vendors/{cat_id}', [VendorController::class, 'getVendors'])->name('vendorsOf.category');

@@ -17,9 +17,9 @@ return new class extends Migration
     {
         Schema::create('bidhistories', function (Blueprint $t) {
             $t->id();
-            $t->foreignIdFor(Bid::class);
-            $t->foreignIdFor(Vendor::class);
-            $t->foreignIdFor(Event::class);
+            $t->foreignIdFor(Bid::class)->onDelete('cascade');
+            $t->foreignIdFor(Vendor::class)->onDelete('cascade');
+            $t->foreignIdFor(Event::class)->onDelete('cascade');
             $t->string('previous_state');
             $t->string('new_state');
             $t->timestamps();

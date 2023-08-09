@@ -135,6 +135,7 @@
         }
     </style>
 
+
     @yield('page_style')
 
 </head>
@@ -162,11 +163,14 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+
     <script src="{{ asset('js/app.js') }}" defer></script>
+
 
     <script>
         ClassicEditor
@@ -179,6 +183,7 @@
             .catch(error => {
                 console.error(error);
             });
+
 
         new DataTable('#dtable', {});
         new DataTable('.dtable', {});

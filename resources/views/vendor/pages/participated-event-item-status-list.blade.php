@@ -63,9 +63,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {{-- {{ dd($decisions) }} --}}
                                         @foreach ($decisions as $key => $d)
                                             <tr style="background-color:ghostwhite" role="row" class="odd">
-
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $d->item->code }}</td>
                                                 <td>{{ $d->item->unit->name }}</td>

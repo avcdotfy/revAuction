@@ -357,7 +357,7 @@
              <h4>Mail Format</h4>
          </div>
          <div class="col-sm-12" style="margin-bottom: 5px;">
-             <textarea id="default" class="default" style="height: 80px">{{ EMAIL_FORMAT }}</textarea>
+             <textarea id="default" class="default" style="height: 80px" name="email_format">{{ EMAIL_FORMAT }}</textarea>
 
          </div>
      </div>
@@ -366,11 +366,11 @@
          <div class="col-sm-12">
              <input type="button" value="Validate" class="btn btn-sm btn-primary" id="validate">
              <input type="submit" value="Submit" class="btn btn-sm btn-success" disabled id="submit">
-             <a href="#" class="btn btn-sm btn-primary" style="margin-left: 4px">Back</a>
+             <a href="{{ route('admin-dashboard') }}" class="btn btn-sm btn-primary"
+                 style="margin-left: 4px">Back</a>
          </div>
      </div>
  </div>
-
 
  @push('scripts')
      <script>

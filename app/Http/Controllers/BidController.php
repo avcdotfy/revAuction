@@ -1,5 +1,5 @@
 <?php
-
+/////////////////////////////////   Dont Touch if you dont understand , This is most imortant and most Complicated Controller ///////////////////// 
 namespace App\Http\Controllers;
 
 use App\Events\BidEvent;
@@ -57,9 +57,9 @@ class BidController extends Controller
         if ($req->bidding_price > $minBidAmount && $minBidAmount != null) {
             return redirect()->route('vendor.liveAuction', $req->event_id)->with('error', 'Bidding price should be less than last bid price :' . $minBidAmount);
         } else {
-
+            $prev_status =  Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id, 'item_r_p_u_model_id' => $req->item_rpu_id, 'vendor_id' => Auth::user()->vendor->id])->min('least_status');
             try {
-                $bid = Bid::create([
+                $newBid = Bid::create([
                     'event_id' => $req->event_id,
                     'item_id' => $req->item_id,
                     'item_r_p_u_model_id' => $req->item_rpu_id,
@@ -68,10 +68,7 @@ class BidController extends Controller
                     'region_id' => $req->region_id ?? 0,
                     'vendor_id' => Auth::user()->vendor->id
                 ]);
-                Auth::user()->vendor->bids()->attach($bid->id);
-
-                // $tbOrderByBidPrice = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id, 'item_r_p_u_model_id' => $req->item_rpu_id])->orderBy('bidding_price', 'asc')->get();
-                // $tbOrderByCapPrice = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id, 'item_r_p_u_model_id' => $req->item_rpu_id])->orderBy('capping_price', 'asc')->get();
+                Auth::user()->vendor->bids()->attach($newBid->id);
 
                 $bidsWithCappingPrice = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id, 'item_r_p_u_model_id' => $req->item_rpu_id])->orderBy('bidding_price', 'asc')->orderBy('capping_price', 'asc')->where('capping_price', '!=', '0')->get();
                 $bidsWithoutCappingPrice = Bid::where(['event_id' => $req->event_id, 'item_id' => $req->item_id, 'item_r_p_u_model_id' => $req->item_rpu_id])->orderBy('bidding_price', 'asc')->orderBy('capping_price', 'asc')->where('capping_price', '=', '0')->get();
@@ -79,9 +76,6 @@ class BidController extends Controller
                 $bidsWithCappingPriceCount = count($bidsWithCappingPrice);
                 $bidsWithoutCappingPriceCount = count($bidsWithoutCappingPrice);
 
-                // dd($tbOrderByBidPrice->mapWithKeys(function ($bid) {
-                //     return [$bid->id => $bid->bidding_price .  ' Capping_price -> ' . $bid->capping_price . ' least rank -> ' . $bid->least_status];
-                // }));
 
                 $leasStatusValue = 1;
                 if ($bidsWithCappingPriceCount > 0) {
@@ -103,7 +97,9 @@ class BidController extends Controller
                 $data['item_id'] = $req->item_id;
                 $data['event_id'] = $req->event_id;
                 $data['rpu_id'] = $req->item_rpu_id;
-                $data['cat_id'] = $bid->event->category->id;
+                $data['cat_id'] = $newBid->event->category->id;
+                $data['bid_id'] = $newBid->id;
+                $data['pre_status'] = $prev_status ? $prev_status : 0;
                 event(new BidEvent($data));
                 event(new BidStartedEvent($data));
                 BidHelper::increaseClosingTime($req->event_id, $req->item_id);
@@ -124,6 +120,7 @@ class BidController extends Controller
             'lastBidderPrice' => BidHelper::getLastBidderPrice($r->eId, $r->iId, $r->iRpuId) ? BidHelper::getLastBidderPrice($r->eId, $r->iId, $r->iRpuId)->bidding_price : 0,
             'decrementAmount' => Item::find($r->iId)->decrement_price,
             'least_status' => BidHelper::getVendorsLeastStatus($r->eId, $r->iId, Auth::user()->vendor->id, $r->iRpuId)
+            
         ];
         return response()->json($data);
     }

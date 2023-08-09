@@ -28,7 +28,7 @@ class EventInviteMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Event Invite ',
+            subject: $this->data['subject'],
         );
     }
 

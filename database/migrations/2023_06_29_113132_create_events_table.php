@@ -28,6 +28,7 @@ return new class extends Migration
             $t->string('opening_date_time_millis');
             $t->foreignIdFor(Category::class);
             $t->text('terms_condition')->nullable();
+            $t->text('email_format')->nullable();
             $t->text('subject_line');
             $t->foreignIdFor(User::class)->comment('creator id');
             $t->foreignIdFor(Company::class)->comment('company creator id');

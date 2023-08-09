@@ -10,7 +10,9 @@
         <td>Base Price</td>
         <td>Item Unit</td>
         <td>Item Unit Details</td>
-        <td>Item Status</td>
+        <td>Previous Status</td>
+        <td> </td>
+        <td>Next Status</td>
         <td>Quantity</td>
         <td>Last Bidding Price</td>
         <td>Capping Price</td>
@@ -28,11 +30,15 @@
             <td>{{ $bid->rpu->price }}</td>
             <td>{{ $bid->rpu->item_unit }}</td>
             <td>{{ $bid->rpu->item_unit_details }}</td>
-            <td>{{ $bid->least_status }} </td>
+            <td>{{ BidHistoryHelper::getBidLeastStatus($bid->id) ? BidHistoryHelper::getBidLeastStatus($bid->id)->previous_state : 'N/A' }}
+            </td>
+            <td> -> </td>
+            <td>{{ BidHistoryHelper::getBidLeastStatus($bid->id) ? BidHistoryHelper::getBidLeastStatus($bid->id)->new_state : 'N/A' }}
+            </td>
             <td>{{ $bid->rpu->item_unit }}</td>
             <td>{{ $bid->bidding_price }}
             </td>
-            <td>{{ CappingHelper::getCappingPrice($bid->event_id, $bid->rpu->id, $bid->item_id, $bid->vendor->id) }}
+            <td> {{ $bid->capping_price }}
             </td>
 
         </tr>

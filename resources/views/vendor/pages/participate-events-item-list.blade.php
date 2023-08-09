@@ -62,7 +62,7 @@
                                                 <td>{{ $p->rpu->price }}</td>
                                                 <td>{{ (BidHelper::getLastBidderPrice($p->event_id, $p->item_id, $p->rpu->id) ? BidHelper::getLastBidderPrice($p->event_id, $p->item_id, $p->rpu->id)->least_status : '' . '' . BidHelper::getLastBidderPrice($p->event_id, $p->item_id, $p->rpu->id)) ? BidHelper::getLastBidderPrice($p->event_id, $p->item_id, $p->rpu->id)->bidding_price : '' }}
                                                 </td>
-                                                <td>{{ CappingHelper::getCappingPrice($p->event_id, $p->rpu->id, $p->item_id) ? 'N/A' : '' }}
+                                                <td><b>{{ CappingHelper::getCappingPrice($p->event_id, $p->rpu->id, $p->item_id, $p->vendor_id) }}</b>
                                             </tr>
                                         @endforeach
                                     </tbody>

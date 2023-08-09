@@ -18,11 +18,11 @@ return new class extends Migration
     {
         Schema::create('bids', function (Blueprint $t) {
             $t->id();
-            $t->foreignIdFor(Event::class);
-            $t->foreignIdFor(Item::class);
-            $t->foreignIdFor(Vendor::class);
-            $t->foreignIdFor(ItemRPUModel::class);
-            $t->foreignIdFor(Region::class)->nullable();
+            $t->foreignIdFor(Event::class)->onDelete('cascade');
+            $t->foreignIdFor(Item::class)->onDelete('cascade');
+            $t->foreignIdFor(Vendor::class)->onDelete('cascade');
+            $t->foreignIdFor(ItemRPUModel::class)->onDelete('cascade');
+            $t->foreignIdFor(Region::class)->onDelete('cascade')->nullable();
             $t->double('bidding_price');
             $t->double('capping_price')->default(0);
             $t->integer('least_status')->nullable();

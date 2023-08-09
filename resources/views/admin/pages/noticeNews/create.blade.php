@@ -31,12 +31,10 @@
 
                                 <div class="col-sm-12" style=" margin-left: 0px; ">
 
-
                                     <label for="inputPassword3" class="col-sm-12 control-label">Notice &amp; News
                                         Message
                                         <span style="color: red; font-size: 13px">*</span></label>
                                     <textarea name="msg" id="default"></textarea>
-
 
                                 </div>
 

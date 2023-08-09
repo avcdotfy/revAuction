@@ -8,6 +8,7 @@ use App\Exports\DecisionTakenEventConsolidateReport;
 use App\Exports\DecisionTakenEventL1Report;
 use App\Exports\ParticipatedEventReports;
 use App\Exports\ParticipatedEventStatusReports;
+use App\Exports\ParticipateEventStatusReport;
 use App\Models\Bid;
 use App\Models\Category;
 use App\Models\Event;
@@ -62,7 +63,6 @@ class ReportController extends BaseController
         return Excel::download(new ClosedEventConsolidateReport($eId), EVENT_ID_PREFIX . $eId . '_EVENT_REPORT_WD_.xlsx');
     }
 
-
     function decisionTakenEventConsolidateReport($eId)
     {
         return Excel::download(new DecisionTakenEventConsolidateReport($eId), EVENT_ID_PREFIX . $eId . '_DECISION_TAKEN_EVENT_REPORT_WD_.xlsx');
@@ -82,6 +82,6 @@ class ReportController extends BaseController
     }
     function participatedEventStatusReports($eId)
     {
-        return Excel::download(new ParticipatedEventStatusReports($eId), EVENT_ID_PREFIX . $eId . '_PARTICIPATED_EVENT_STATUS_REPORT.xlsx');
+        return Excel::download(new ParticipateEventStatusReport($eId), EVENT_ID_PREFIX . $eId . '_PARTICIPATED_EVENT_STATUS_REPORT.xlsx');
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\BidHelper;
+use App\Helpers\BidHistoryHelper;
 use App\Helpers\CappingHelper;
 use App\Helpers\CategoryHelper;
 use App\Helpers\DecisionHelper;
@@ -195,6 +196,7 @@ return [
         'CategoryHelper' => CategoryHelper::class,
         'CappingHelper' => CappingHelper::class,
         'UploadHelper' => UploadHelper::class,
+        'BidHistoryHelper' => BidHistoryHelper::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
