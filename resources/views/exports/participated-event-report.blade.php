@@ -24,13 +24,14 @@
             <td>{{ $bid->event->title }}</td>
             <td>{{ $bid->vendor->company_name }}</td>
             <td>{{ $bid->vendor->user->username }}</td>
-            <td>{{ $bid->item->code }}</td>
+            <td>{{ $bid->item->description }}</td>
             <td>{{ $bid->item->unit->name }}</td>
             <td>{{ $bid->rpu->region->name }}</td>
             <td>{{ $bid->rpu->price }}</td>
             <td>{{ $bid->rpu->item_unit }}</td>
             <td>{{ $bid->rpu->item_unit_details }}</td>
-            <td>{{ BidHistoryHelper::getBidLeastStatus($bid->id) ? BidHistoryHelper::getBidLeastStatus($bid->id)->previous_state : 'N/A' }}
+            <td >
+                {{ BidHistoryHelper::getBidLeastStatus($bid->id) ? BidHistoryHelper::getBidLeastStatus($bid->id)->previous_state : 'N/A' }}
             </td>
             <td> -> </td>
             <td>{{ BidHistoryHelper::getBidLeastStatus($bid->id) ? BidHistoryHelper::getBidLeastStatus($bid->id)->new_state : 'N/A' }}

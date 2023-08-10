@@ -27,7 +27,7 @@
             <td>{{ $bid->event->title }}</td>
             <td>{{ $bid->vendor->company_name }}</td>
             <td>{{ $bid->vendor->user->username }}</td>
-            <td>{{ $bid->item->code }}</td>
+            <td>{{ $bid->item->description }}</td>
             <td>{{ $bid->item->unit->name }}</td>
             <td>{{ $bid->rpu->region->name }}</td>
             <td>{{ $bid->rpu->price }}</td>

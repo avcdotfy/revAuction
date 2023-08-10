@@ -139,7 +139,7 @@ class EventController extends BaseController
     }
     public function closed()
     {
-        $events = Event::where(['status' => EVENT_STATUS[2], 'company_id' => $this->company_id])->get();
+        $events = Event::where(['status' => EVENT_STATUS[2], 'company_id' => $this->company_id])->orderBy('closing_date_time_millis', 'desc')->get();
         return view('admin.pages.event.closed', compact('events'));
     }
     public function decisionTaken()

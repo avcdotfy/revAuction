@@ -20,7 +20,7 @@
         @foreach ($bids as $bid)
             <tr>
                 <td>{{ $bid->vendor->user->username }}</td>
-                <td>{{ $bid->item->code }}</td>
+                <td>{{ $bid->item->description }}</td>
                 <td>{{ $bid->item->unit->code }}</td>
                 <td>{{ $bid->item->regionPriceUnit->first()->region->name }}</td>
                 <td>{{ $bid->item->regionPriceUnit->first()->price }}</td>

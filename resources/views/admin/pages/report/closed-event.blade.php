@@ -11,7 +11,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-sm-12" style="overflow: auto;">
-                                <div class="modal fade" id="model_edit_1">
+                                {{-- <div class="modal fade" id="model_edit_1">
                                     <div class="modal-dialog">
                                         <div class="modal-content" style="border-radius: 4px;">
                                             <div class="modal-header">
@@ -100,7 +100,7 @@
                                         <!-- /.modal-content -->
                                     </div>
                                     <!-- /.modal-dialog -->
-                                </div>
+                                </div> --}}
                                 <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
                                     role="grid" aria-describedby="dtable_info">
                                     <thead>
@@ -137,7 +137,7 @@
                                                             From
                                                             Date :</label>
                                                         <div class="col-sm-7">
-                                                            <input name="closedFromDate" type="text" id="txt_fromdate"
+                                                            <input name="fromdate" type="date" id="txt_fromdate"
                                                                 value="{{ $fromDate }}" class="form-control">
                                                         </div>
                                                     </div>
@@ -146,7 +146,7 @@
                                                             To
                                                             Date :</label>
                                                         <div class="col-sm-7">
-                                                            <input name="closedToDate" type="text" id="txt_todate"
+                                                            <input name="todate" type="date" id="txt_todate"
                                                                 class="form-control" value="{{ $toDate }}">
                                                         </div>
                                                     </div>
@@ -297,12 +297,12 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $('#txt_fromdate').datepicker({
-                minDate: 0
-            });
-            $('#txt_todate').datepicker({
-                minDate: 0
-            });
+            // $('#txt_fromdate').datepicker({
+            //     minDate: 0
+            // });
+            // $('#txt_todate').datepicker({
+            //     minDate: 0
+            // });
         });
     </script>
 @endpush

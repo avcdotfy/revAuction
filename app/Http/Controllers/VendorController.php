@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\Country;
 use App\Models\Event;
+use App\Models\Helpersupport;
 use App\Models\Notice;
 use App\Models\Participant;
 use App\Models\Region;
@@ -178,7 +179,8 @@ class VendorController extends Controller
 
     public function helpSupport()
     {
-        return view('vendor.pages.help-support');
+        $hs = Helpersupport::where('company_id', CompanyHelper::getCompanyFromHost()->id)->first();
+        return view('vendor.pages.help-support', compact('hs'));
     }
 
     public function liveAuction($eventId)

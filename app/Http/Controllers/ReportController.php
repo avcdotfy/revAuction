@@ -12,7 +12,10 @@ use App\Exports\ParticipateEventStatusReport;
 use App\Models\Bid;
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\Participant;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends BaseController
@@ -32,8 +35,26 @@ class ReportController extends BaseController
     {
         $categories = Category::all();
 
+        $fromDateMillis = null;
+        $toDateMillis = null;
+
+        if ($r->fromdate) {
+            $fromDateMillis = Carbon::createFromFormat('Y-m-d', $r->fromdate)->timestamp * 1000;
+        }
+        if ($r->todate) {
+            $toDateMillis = Carbon::createFromFormat('Y-m-d', $r->todate)->timestamp * 1000;
+        }
+
         if ($r->cat_id) {
-            $events =  Event::where(['status' => EVENT_STATUS[2], 'company_id' => $this->company_id, 'category_id' => $r->cat_id])->get();
+            $events =  Event::where(['status' => EVENT_STATUS[2], 'company_id' => $this->company_id, 'category_id' => $r->cat_id])->where(function ($query) use ($fromDateMillis, $toDateMillis) {
+                if ($fromDateMillis && $toDateMillis) {
+                    $query->whereBetween('closing_date_time_millis', [$fromDateMillis, $toDateMillis]);
+                } elseif ($fromDateMillis) {
+                    $query->where('closing_date_time_millis', '>=', $fromDateMillis);
+                } elseif ($toDateMillis) {
+                    $query->where('closing_date_time_millis', '<=', $toDateMillis);
+                }
+            })->get();
         } else {
             $events = Event::where(['status' => EVENT_STATUS[2], 'company_id' => $this->company_id])->get();
         }

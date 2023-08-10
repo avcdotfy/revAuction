@@ -10,28 +10,28 @@
     <!-- Main content -->
     <section class="content">
         <!-- Small boxes (Stat box) -->
+
+        <div class="row">
+            <div class="col-xs-12" style=" text-align: center;">
+                <h4 style="padding-bottom: 15px"> {!! $hs->msg !!}</h4>
+            </div>
+        </div>
+
+
         <div class="row">
             <div class="col-xs-2">
 
             </div>
-
-
             <div class="col-xs-4">
                 <div class="box">
                     <div class="box-body">
-
-
                         <div id="ContentPlaceHolder1_div_list" class="row">
                             <div class="col-sm-12"
                                 style="padding: 20px; padding-top: 0px;  padding-bottom: 0px; text-align: center;">
                                 <h4 style="padding-bottom: 4px"> <i class='bx bx-phone-call' style="font-size: 40px"></i>
                                 </h4>
-                                <h4 style="padding-bottom: 15px">Call Us : 011-25452245</h4>
-
-
+                                <h4 style="padding-bottom: 15px">Call Us : {{ $hs->phone }}</h4>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -40,24 +40,17 @@
             <div class="col-xs-4">
                 <div class="box">
                     <div class="box-body">
-
-
                         <div id="ContentPlaceHolder1_div_list" class="row">
                             <div class="col-sm-12"
                                 style="padding: 20px; padding-top: 0px;  padding-bottom: 0px; text-align: center;">
                                 <h4 style="padding-bottom: 4px"> <i class='bx bx-mail-send' style="font-size: 40px"></i>
                                 </h4>
-                                <h4 style="padding-bottom: 15px">customer.care@helpsupport.com</h4>
-
+                                <h4 style="padding-bottom: 15px">customer.{{ $hs->email }}</h4>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
             </div>
-
-
             <!-- /.row -->
     </section>
     <!-- /.content -->

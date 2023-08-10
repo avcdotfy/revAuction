@@ -15,7 +15,6 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">
-
                         <div id="ContentPlaceHolder1_div_list" class="row">
                             <div class="col-sm-12">
                                 <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
@@ -56,8 +55,16 @@
                                                 <td><a id="ContentPlaceHolder1_lvCe_btn_l1_generate_report_2"
                                                         href="{{ route('report.closedEvenL1Report', $event->id) }}">Generate
                                                         Report</a></td>
-                                                <td><a href="{{ route('decision.take', $event->id) }}" target="_blank">Take
-                                                        Decision</a></td>
+
+                                                <td>
+                                                    @if ($event->decision_status == 'TAKEN')
+                                                        <span>{{ 'DECISION ' . $event->decision_status }}</span>
+                                                    @else
+                                                        <a href="{{ route('decision.take', $event->id) }}"
+                                                            target="_blank">Take Decision</a>
+                                                    @endif
+                                                </td>
+
 
                                             </tr>
                                         @endforeach

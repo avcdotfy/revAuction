@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('helpersupports', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('helpersupports', function (Blueprint $t) {
+            $t->id();
+            $t->text('msg')->nullable();
+            $t->string('email');
+            $t->string('phone');
+            $t->foreignId('company_id');
+            $t->timestamps();
         });
     }
 

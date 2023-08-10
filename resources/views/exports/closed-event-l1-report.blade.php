@@ -23,7 +23,7 @@
                 @if (BidHelper::getVendorsLeastStatus($event_id, $bid->item_id, $v->id, $bid->rpu ? $bid->rpu->id : '') == 'L1')
                     <tr>
                         <td>{{ $v->user->username }}</td>
-                        <td>{{ $bid->item->code }}</td>
+                        <td>{{ $bid->item->description }}</td>
                         <td>{{ $bid->item->unit->code }}</td>
                         <td>{{ $bid->rpu ? $bid->rpu->region->name : 'N/A' }}</td>
                         <td>{{ $bid->rpu ? $bid->rpu->price : 'N/A' }}</td>
