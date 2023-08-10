@@ -61,7 +61,7 @@ class AuthenticateController extends Controller
 
         if (Auth::attempt($data)) {
 
-            if (Auth::user()->user_type == "ADMIN") {
+            if (Auth::user()->user_type == "ADMIN" || Auth::user()->user_type == "EMPLOYEE") {
                 Auth::logout();
                 return redirect()->back()->with('error', 'Unautherized access denied');
             }
