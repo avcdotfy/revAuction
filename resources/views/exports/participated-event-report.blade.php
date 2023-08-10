@@ -30,7 +30,7 @@
             <td>{{ $bid->rpu->price }}</td>
             <td>{{ $bid->rpu->item_unit }}</td>
             <td>{{ $bid->rpu->item_unit_details }}</td>
-            <td >
+            <td>
                 {{ BidHistoryHelper::getBidLeastStatus($bid->id) ? BidHistoryHelper::getBidLeastStatus($bid->id)->previous_state : 'N/A' }}
             </td>
             <td> -> </td>

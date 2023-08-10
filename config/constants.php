@@ -10,6 +10,8 @@ define('COMPLETED', 'COMPLETED');
 define('EVENT_ID_PREFIX', 'AVCDOTFYREVAUC000');
 define('EVENT_STATUS', ['SCHEDULED', 'RUNNING', 'COMPLETED', 'DEACTIVE']);
 
+
+
 define('PERMISSIONS', [
     [
         'name' => 'Dashboard',
@@ -181,6 +183,16 @@ define('PERMISSIONS', [
     ],
 
 ]);
+
+
+
+
+
+
+
+
+
+
 define('REQUEST_STATUS',  ['APPROVED', 'REJECTED', 'NOT REPONDED']);
 define(
     'UOMs',
