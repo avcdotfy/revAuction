@@ -41,8 +41,16 @@ class AuthenticateController extends Controller
     function logout()
     {
         LoginTrailHelper::saveLogoutInfo();
+
+        if (Auth::user()->user_type == 'ADMIN' || Auth::user()->user_type == 'EMPLOYEE') {
+            $redirect_To = 'login';
+        } else {
+            $redirect_To = 'vendor.login';
+        }
+
         Auth::logout();
-        return redirect()->route('vendor.login');
+
+        return redirect()->route($redirect_To);
     }
 
     function loginV()
