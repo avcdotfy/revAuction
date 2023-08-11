@@ -10,12 +10,14 @@
             <div class="modal-body">
                 <p>Are you sure you want to logout ?? </p>
             </div>
-            <div class="modal-footer">
-                <a href="{{ route('logout') }}" class="btn btn-danger">Yes</a>
-                <a class="btn btn-primary" data-dismiss="modal">No</a>
 
-            </div>
+            @if (PermissionHelper::hasSpecifiPermission('logout'))
+                <div class="modal-footer">
+                    <a href="{{ route('logout') }}" class="btn btn-danger">Yes</a>
+                    <a class="btn btn-primary" data-dismiss="modal">No</a>
 
+                </div>
+            @endif
 
         </div>
 

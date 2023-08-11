@@ -6,6 +6,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PublicDataController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\VendorController;
+use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,7 +51,6 @@ Route::group(['middleware' => 'guest'], function () {
 
 Route::get('/get-routes', function (Request $r) {
    $routeCollection = Route::getRoutes();
-
    echo "<table style='width:100%'>";
    echo "<tr>";
    echo "<td width='10%'><h4>HTTP Method</h4></td>";
@@ -68,6 +68,9 @@ Route::get('/get-routes', function (Request $r) {
    }
    echo "</table>";
 });
+Route::get('/get-current-route-name', function (Request $r) {
+   return Route::currentRouteName();
+})->name('current-route-name');
 
 Route::fallback(function () {
    return redirect()->route('404');

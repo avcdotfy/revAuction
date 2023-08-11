@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\CompanyHelper;
 use App\Models\Permission;
+use App\Models\Permissiongroup;
 use App\Models\Role;
 use App\Models\RolePermission;
 use Illuminate\Http\Request;
@@ -20,7 +21,8 @@ class RolePermissionController extends Controller
     public function create()
     {
         $permissions = Permission::all();
-        return view('admin.pages.settings.organization.permissions.create', ['permissions' => $permissions]);
+        $groups = Permissiongroup::all();
+        return view('admin.pages.settings.organization.permissions.create', ['permissions' => $permissions, 'groups' => $groups]);
     }
 
     /**

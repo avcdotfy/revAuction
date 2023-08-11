@@ -5,6 +5,7 @@ use App\Helpers\BidHistoryHelper;
 use App\Helpers\CappingHelper;
 use App\Helpers\CategoryHelper;
 use App\Helpers\DecisionHelper;
+use App\Helpers\Permissionhelper;
 use App\Helpers\UploadHelper;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
@@ -197,6 +198,7 @@ return [
         'CappingHelper' => CappingHelper::class,
         'UploadHelper' => UploadHelper::class,
         'BidHistoryHelper' => BidHistoryHelper::class,
+        'PermissionHelper'=> PermissionHelper::class ,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 

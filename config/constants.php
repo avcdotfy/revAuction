@@ -11,176 +11,578 @@ define('EVENT_ID_PREFIX', 'AVCDOTFYREVAUC000');
 define('EVENT_STATUS', ['SCHEDULED', 'RUNNING', 'COMPLETED', 'DEACTIVE']);
 
 
+define('PERMISSIONS_GROUPs', [
+
+    'Authentication  management',
+    'Dashboard',
+    'Catalog Management',
+    'Vendor Management',
+    'Event Management',
+    'Reports Management',
+    'Login Trails Management',
+    'Notice And News Management',
+    'Help Support Management',
+    'Master Setting Management',
+    'Mail Setting Management',
+    'Organization Setting Management',
+
+
+]);
 
 define('PERMISSIONS', [
     [
+        'permissiongroup_id' => 1,
+        'name' => 'logout',
+        'route_name' => 'logout'
+    ],
+    [
+        'permissiongroup_id' => 1,
+        'name' => 'change password screen',
+        'route_name' => 'change.password'
+    ],
+    [
+        'permissiongroup_id' => 1,
+        'name' => 'change password Process',
+        'route_name' => 'doChangePassword'
+    ],
+    [
+        'permissiongroup_id' => 1,
+        'name' => 'Reset Password Form',
+        'route_name' => 'reset-password-form'
+    ],
+    [
+        'permissiongroup_id' => 1,
+        'name' => 'Reset Password Process',
+        'route_name' => 'reset-password'
+    ],
+    [
+        'permissiongroup_id' => 1,
+        'name' => 'Send Password Reset Link Screen',
+        'route_name' => 'reset-link'
+    ],
+    [
+        'permissiongroup_id' => 1,
+        'name' => 'Send Password Reset Link Process',
+        'route_name' => 'send-reset-link'
+    ],
+
+
+    /////////////////Group 1 Finished ///////////////////
+
+
+    [
+        'permissiongroup_id' => 2,
         'name' => 'Dashboard',
-        'url_path' => 'admin'
+        'route_name' => 'admin-dashboard'
+    ],
+
+
+    /////////////////Group 2 Finished ///////////////////
+
+
+    [
+        'permissiongroup_id' => 3,
+        'name' => 'Show All Item',
+        'route_name' => 'item.list'
     ],
     [
-        'name' => ' Catalog - Category List',
-        'url_path' => 'admin/catalog/category'
+        'permissiongroup_id' => 3,
+        'name' => 'Item Creation Form',
+        'route_name' => 'item.create'
     ],
     [
-        'name' => ' Catalog - Category Create',
-        'url_path' => 'admin/catalog/category/create'
+        'permissiongroup_id' => 3,
+        'name' => 'Item Save',
+        'route_name' => 'item.store'
     ],
     [
-        'name' => 'Vendors - Rejected Vendor',
-        'url_path' => 'admin/vendor/rejected-requests'
+        'permissiongroup_id' => 3,
+        'name' => 'Item Edit form',
+        'route_name' => 'item.edit'
     ],
     [
-        'name' => 'Events - Running Events ',
-        'url_path' => 'admin/event/running'
+        'permissiongroup_id' => 3,
+        'name' => 'Item Update',
+        'route_name' => 'item.update'
     ],
     [
-        'name' => 'Reports - Running Event Report ',
-        'url_path' => ''
+        'permissiongroup_id' => 3,
+        'name' => 'Delete Item Region Price Unit',
+        'route_name' => 'item.rpuDelete'
     ],
     [
-        'name' => 'Notice & News - News ',
-        'url_path' => ''
+        'permissiongroup_id' => 3,
+        'name' => 'Item RPU Details',
+        'route_name' => 'item.rpu-details'
     ],
     [
-        'name' => 'Organization Setting - Department List',
-        'url_path' => 'admin/department'
+        'permissiongroup_id' => 3,
+        'name' => 'Category list',
+        'route_name' => 'category.list'
     ],
     [
-        'name' => 'Organization Setting - Department Create',
-        'url_path' => 'admin/department/create'
+        'permissiongroup_id' => 3,
+        'name' => 'Category Create Form',
+        'route_name' => 'category.create'
     ],
     [
-        'name' => 'SMS Setting - Template ',
-        'url_path' => ''
+        'permissiongroup_id' => 3,
+        'name' => 'Category Save',
+        'route_name' => 'category.store'
     ],
     [
-        'name' => 'Master Setting - UoM List',
-        'url_path' => 'admin/setting/master/uom'
+        'permissiongroup_id' => 3,
+        'name' => 'Category edit form',
+        'route_name' => 'category.edit'
     ],
     [
-        'name' => 'Master Setting - UoM Create',
-        'url_path' => 'admin/setting/master/uom/create'
+        'permissiongroup_id' => 3,
+        'name' => 'Category update',
+        'route_name' => 'category.update'
+    ],
+
+
+    ///////////////////// GRoup 3 finised ////////////////
+
+    [
+        'permissiongroup_id' => 4,
+        'name' => 'Vendor New Request List',
+        'route_name' => 'vendor.new_requests'
     ],
     [
-        'name' => 'Catalog - Items List',
-        'url_path' => 'admin/catalog/item'
+        'permissiongroup_id' => 4,
+        'name' => 'Vendor Approved List',
+        'route_name' => 'vendor.approved_requests'
     ],
     [
-        'name' => 'Catalog - Items create',
-        'url_path' => 'admin/catalog/item/create'
+        'permissiongroup_id' => 4,
+        'name' => 'Vendor Rejected List',
+        'route_name' => 'vendor.rejected_requests'
     ],
     [
-        'name' => 'Vendors - New Items Update To All',
-        'url_path' => ''
+        'permissiongroup_id' => 4,
+        'name' => 'Accept Vendors',
+        'route_name' => 'request.accept'
     ],
     [
-        'name' => 'Events - Closed Events ',
-        'url_path' => 'admin/event/closed'
+        'permissiongroup_id' => 4,
+        'name' => 'Reject Vendors',
+        'route_name' => 'request.reject'
     ],
     [
-        'name' => 'Reports - Closed Event Report ',
-        'url_path' => ''
+        'permissiongroup_id' => 4,
+        'name' => 'View Vendors Profile',
+        'route_name' => 'vendor.profile'
     ],
     [
-        'name' => 'Login Trail - Employee Login Report',
-        'url_path' => ''
+        'permissiongroup_id' => 4,
+        'name' => 'Update Vendors Profile',
+        'route_name' => 'vendor.profile-update'
+    ],
+
+    //////////////////////Group 4 Finished //////////////////////
+
+    [
+        'permissiongroup_id' => 5,
+        'name' => 'Event Creation Form',
+        'route_name' => 'event.create'
     ],
     [
-        'name' => 'Organis. Sett. - Role & Permissions List ',
-        'url_path' => 'admin/permission'
+        'permissiongroup_id' => 5,
+        'name' => 'Event Save',
+        'route_name' => 'event.store'
     ],
     [
-        'name' => 'Organis. Sett. - Role & Permissions Create ',
-        'url_path' => 'admin/permission/create'
+        'permissiongroup_id' => 5,
+        'name' => 'Upcoming Event List',
+        'route_name' => 'event.upcoming'
     ],
     [
-        'name' => ' Master Setting - Country list',
-        'url_path' => 'admin/setting/master/country'
+        'permissiongroup_id' => 5,
+        'name' => 'Running Event List',
+        'route_name' => 'event.running'
     ],
     [
-        'name' => ' Master Setting - Country create',
-        'url_path' => 'admin/setting/master/country/create'
+        'permissiongroup_id' => 5,
+        'name' => 'Decision Taken Event List',
+        'route_name' => 'event.decisionTaken'
     ],
     [
-        'name' => 'Master Setting - Event Mode',
-        'url_path' => 'admin/setting/master/eventmode'
+        'permissiongroup_id' => 5,
+        'name' => 'Closed Event List',
+        'route_name' => 'event.closed'
     ],
     [
-        'name' => 'Vendors - New Vendor Request',
-        'url_path' => 'admin/vendor/new-requests'
+        'permissiongroup_id' => 5,
+        'name' => 'Empty Event List',
+        'route_name' => 'event.empty'
     ],
     [
-        'name' => 'Events - Create New Event',
-        'url_path' => 'admin/event/create'
+        'permissiongroup_id' => 5,
+        'name' => 'Event posted event information',
+        'route_name' => 'event.postedEventInformation'
     ],
     [
-        'name' => 'Events - Decision Taken Events',
-        'url_path' => ''
+        'permissiongroup_id' => 5,
+        'name' => 'Event posted event information',
+        'route_name' => 'event.postedEventInformation'
     ],
     [
-        'name' => 'Reports - Decision Taken Event Report',
-        'url_path' => ''
+        'permissiongroup_id' => 5,
+        'name' => 'Event decision Taken Status',
+        'route_name' => 'event.decisionTakenEventStatus'
     ],
     [
-        'name' => 'Login Trail - Vendor Login Report',
-        'url_path' => ''
+        'permissiongroup_id' => 5,
+        'name' => 'Live Event Statistics',
+        'route_name' => 'event.statistics'
+    ],
+
+
+    ////////////////////// Group 5 Finished ////////////////////////
+
+    [
+        'permissiongroup_id' => 6,
+        'name' => 'Running event Report',
+        'route_name' => 'report.runningEvent'
     ],
     [
-        'name' => 'Organization Setting - Employee List',
-        'url_path' => 'admin/employee'
+        'permissiongroup_id' => 6,
+        'name' => 'Decision Taken  Report',
+        'route_name' => 'report.decisionTaken'
     ],
     [
-        'name' => 'Organization Setting - Employee Create ',
-        'url_path' => 'admin/employee/create'
+        'permissiongroup_id' => 6,
+        'name' => 'Closed event Report',
+        'route_name' => 'report.closedEvent'
     ],
     [
-        'name' => 'Master Setting - State List',
-        'url_path' => 'admin/setting/master/state'
+        'permissiongroup_id' => 6,
+        'name' => 'Closed Event Consollidated Report',
+        'route_name' => 'report.closedEventConsolidateReport'
     ],
     [
-        'name' => 'Master Setting - State Create',
-        'url_path' => 'admin/setting/master/state/create'
+        'permissiongroup_id' => 6,
+        'name' => 'Closed Event L1 Report',
+        'route_name' => 'report.closedEvenL1Report'
     ],
     [
-        'name' => 'Vendors - Approved Vendor',
-        'url_path' => 'admin/vendor/approved-requests'
+        'permissiongroup_id' => 6,
+        'name' => 'Decision Taken Consollidated Report',
+        'route_name' => 'report.decisionTakenEventConsolidateReport'
     ],
     [
-        'name' => 'Events - Upcoming Events',
-        'url_path' => 'admin/event/upcoming'
+        'permissiongroup_id' => 6,
+        'name' => 'Decision Taken L1  Report',
+        'route_name' => 'report.decisionTakenEvenL1Report'
     ],
     [
-        'name' => 'Events - Empty Events',
-        'url_path' => ''
+        'permissiongroup_id' => 6,
+        'name' => 'Decision Taken L1  Report',
+        'route_name' => 'report.decisionTakenEvenL1Report'
+    ],
+
+    ///////////////////////////// Group 6 Finished ////////////////////////////
+    [
+        'permissiongroup_id' => 7,
+        'name' => 'Employee Login Details  ',
+        'route_name' => 'login-trails.employeeLogin'
     ],
     [
-        'name' => 'Notice & News - Notice',
-        'url_path' => ''
+        'permissiongroup_id' => 7,
+        'name' => 'Vendor Login Details  ',
+        'route_name' => 'login-trails.vendorLogin'
+    ],
+    ///////////////////////////// Group 7 Finished ////////////////////////////
+
+    [
+        'permissiongroup_id' => 8,
+        'name' => 'Notice create form',
+        'route_name' => 'notice.create'
     ],
     [
-        'name' => 'Organization Sett. - Company Setup',
-        'url_path' => 'admin/company/create'
+        'permissiongroup_id' => 8,
+        'name' => 'Notice   save',
+        'route_name' => 'notice.store'
     ],
     [
-        'name' => 'Mail Setting - Configuration',
-        'url_path' => ''
+        'permissiongroup_id' => 8,
+        'name' => 'Notice list',
+        'route_name' => 'notice.list'
     ],
     [
-        'name' => 'Master Setting - Region List',
-        'url_path' => 'admin/setting/master/region'
+        'permissiongroup_id' => 8,
+        'name' => 'Notice Edit Form ',
+        'route_name' => 'notice.edit'
     ],
     [
-        'name' => 'Master Setting - Region Create',
-        'url_path' => 'admin/setting/master/region/create'
+        'permissiongroup_id' => 8,
+        'name' => 'Notice update',
+        'route_name' => 'notice.update'
+    ],
+
+    ///////////////////////////// Group 8 Finished ////////////////////////////
+
+    [
+        'permissiongroup_id' => 9,
+        'name' => 'Help Create',
+        'route_name' => 'help.create'
     ],
     [
-        'name' => 'Vendor - Approve Request',
-        'url_path' => 'admin/request/accept'
+        'permissiongroup_id' => 9,
+        'name' => 'Help save',
+        'route_name' => 'help.store'
+    ],
+
+    ///////////////////////////// Group 9 Finished ////////////////////////////
+
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Country List',
+        'route_name' => 'country.list'
     ],
     [
-        'name' => 'Vendor - Reject Request',
-        'url_path' => 'admin/request/reject'
+        'permissiongroup_id' => 10,
+        'name' => 'Country Create form',
+        'route_name' => 'country.create'
     ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Country Save',
+        'route_name' => 'country.store'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Country edit form',
+        'route_name' => 'country.edit'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Country save',
+        'route_name' => 'country.update'
+    ],
+
+
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'State List',
+        'route_name' => 'state.list'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'State Create form',
+        'route_name' => 'state.create'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'State Save',
+        'route_name' => 'state.store'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'State edit form',
+        'route_name' => 'state.edit'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'State save',
+        'route_name' => 'state.update'
+    ],
+
+
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Region List',
+        'route_name' => 'region.list'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Region Create form',
+        'route_name' => 'region.create'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Region Save',
+        'route_name' => 'region.store'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Region edit form',
+        'route_name' => 'region.edit'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Region save',
+        'route_name' => 'region.update'
+    ],
+
+
+
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Uom List',
+        'route_name' => 'uom.list'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Uom Create form',
+        'route_name' => 'uom.create'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Uom Save',
+        'route_name' => 'uom.store'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Uom edit form',
+        'route_name' => 'uom.edit'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Uom save',
+        'route_name' => 'uom.update'
+    ],
+
+
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Event Mode List',
+        'route_name' => 'eventmode.list'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Event Mode Create form',
+        'route_name' => 'eventmode.create'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Event Mode Save',
+        'route_name' => 'eventmode.store'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Event Mode edit form',
+        'route_name' => 'eventmode.edit'
+    ],
+    [
+        'permissiongroup_id' => 10,
+        'name' => 'Event Mode save',
+        'route_name' => 'eventmode.update'
+    ],
+
+    ///////////////////////////// Group 10 Finished ////////////////////////////
+
+    [
+        'permissiongroup_id' => 11,
+        'name' => 'Email template List',
+        'route_name' => 'template.email.list'
+    ],
+    [
+        'permissiongroup_id' => 11,
+        'name' => 'Email template Create',
+        'route_name' => 'template.email.create'
+    ],
+    [
+        'permissiongroup_id' => 11,
+        'name' => 'Email template Save',
+        'route_name' => 'template.email.store'
+    ],
+    [
+        'permissiongroup_id' => 11,
+        'name' => 'Email template edit form',
+        'route_name' => 'template.email.edit'
+    ],
+    [
+        'permissiongroup_id' => 11,
+        'name' => 'Email template update',
+        'route_name' => 'template.email.update'
+    ],
+
+    ///////////////////////////// Group 11 Finished ////////////////////////////
+
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Company Create Form',
+        'route_name' => 'company.create'
+    ],
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Company save',
+        'route_name' => 'company.store'
+    ],
+
+
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Department List',
+        'route_name' => 'department.list'
+    ],
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Department Create',
+        'route_name' => 'department.create'
+    ],
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Department Save',
+        'route_name' => 'department.store'
+    ],
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Department edit form',
+        'route_name' => 'department.edit'
+    ],
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Department update',
+        'route_name' => 'department.update'
+    ],
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Permission role list',
+        'route_name' => 'permission_role.list'
+    ],
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Permission role create  form',
+        'route_name' => 'permission_role.create'
+    ],
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Permission role save',
+        'route_name' => 'permission_role.store'
+    ],
+
+
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Employee List',
+        'route_name' => 'employee.list'
+    ],
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Employee create form',
+        'route_name' => 'employee.create'
+    ],
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Employee save',
+        'route_name' => 'employee.store'
+    ],
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Employee edit form',
+        'route_name' => 'employee.edit'
+    ],
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Employee update',
+        'route_name' => 'employee.update'
+    ],
+
+
+
 
 ]);
 

@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
             EventmodeSeeder::class,
             StateSeeder::class,
             CategorySeeder::class,
-            AdminSeeder::class
+            AdminSeeder::class,
+            PermissionGroupSeeder::class,
         ]);
     }
 }

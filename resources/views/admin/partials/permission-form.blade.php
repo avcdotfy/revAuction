@@ -18,14 +18,21 @@
 <div class="col-sm-12" style="padding:0px;">
     <label for="inputPassword3" class="col-sm-12 control-label" style="margin-bottom: 15px">Assigning Permissions
         *</label>
-
-    @foreach ($permissions as $p)
-        <div class="col-sm-3" style="font-size: 12px;font-weight: 500;margin-bottom: 3px;">
-            <input type="checkbox" checked="" name="permission[]" value="{{ $p->id }}">
-            <label class="tr">
-                {{ $p->name }}
-            </label>
-        </div>
+    @foreach ($groups as $g)
+        <u>
+            <h4 for="inputPassword3" class="col-sm-12 control-label" style="margin-bottom: 15px"> {{ $g->name }}
+        </u>
+        </h4>
+        @foreach ($permissions as $p)
+            @if ($g->id == $p->group->id)
+                <div class="col-sm-3" style="font-size: 12px;font-weight: 500;margin-bottom: 3px;">
+                    <input type="checkbox" checked="" name="permission[]" value="{{ $p->id }}">
+                    <label class="tr">
+                        {{ $p->name }}
+                    </label>
+                </div>
+            @endif
+        @endforeach
     @endforeach
 </div>
 

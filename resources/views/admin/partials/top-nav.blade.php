@@ -28,21 +28,26 @@
                     </a>
                     <ul class="dropdown-menu">
                         <!-- Menu Footer-->
-                        <li>
-                            <a href="{{ route('change.password') }}" style="padding:7px 8px;"><i class="bx bx-lock"
-                                    style="vertical-align:bottom;font-size:22px;color:#7fd0ff"></i> <span
-                                    style="margin-left:9px;">Change Password</span></a>
-                        </li>
+                        @if (PermissionHelper::hasSpecifiPermission('change.password'))
+                            <li>
+                                <a href="{{ route('change.password') }}" style="padding:7px 8px;"><i class="bx bx-lock"
+                                        style="vertical-align:bottom;font-size:22px;color:#7fd0ff"></i> <span
+                                        style="margin-left:9px;">Change Password</span></a>
+                            </li>
+                        @endif
+
                         <li>
                             <hr style="margin-top:0px;margin-bottom:0px;">
                         </li>
-                        <li>
-                            <a data-toggle="modal" data-target="#myModal" id="btn_logout"
-                                href="javascript:__doPostBack(&#39;ctl00$btn_logout&#39;,&#39;&#39;)"
-                                style="padding:8px 9px;"><i class="bx bx-power-off"
-                                    style="color:red;vertical-align:bottom;font-size:20px;"></i> <span
-                                    style="margin-left:10px;">Logout</span></a>
-                        </li>
+                        @if (PermissionHelper::hasSpecifiPermission('logout'))
+                            <li>
+                                <a data-toggle="modal" data-target="#myModal" id="btn_logout"
+                                    href="javascript:__doPostBack(&#39;ctl00$btn_logout&#39;,&#39;&#39;)"
+                                    style="padding:8px 9px;"><i class="bx bx-power-off"
+                                        style="color:red;vertical-align:bottom;font-size:20px;"></i> <span
+                                        style="margin-left:10px;">Logout</span></a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
             </ul>
