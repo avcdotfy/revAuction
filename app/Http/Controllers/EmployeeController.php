@@ -24,8 +24,6 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-
-
         $employees = DB::table('employees')
             ->select('employees.id', 'roles.name as role', 'employees.employee_id', 'employees.designation', 'departments.name as department', 'users.name', 'users.phone', 'users.email', 'users.password')
             ->join('users', 'users.id', '=', 'employees.emp_user_id')
@@ -75,6 +73,18 @@ class EmployeeController extends Controller
         $cat_ids = $req->cat_ids;
 
         try {
+            $user = User::where('phone', $req->phone)->first();
+            if ($user) {
+                return redirect()->back()->with('error', 'phone you are submiting is already exist try another')->withInput();
+            }
+            $user = User::where('email', $req->email)->first();
+            if ($user) {
+                return redirect()->back()->with('error',    'email you are submiting is already exist try another')->withInput();
+            }
+            $user = User::where('username', $req->username)->first();
+            if ($user) {
+                return redirect()->back()->with('error',    'username you are submiting is already exist try another')->withInput();
+            }
             $user = User::create(['name' => $name, 'email' => $email, 'username' => $username, 'password' => Hash::make($password), 'phone' => $phone, 'role_id' => $role_id, 'user_type' => USER_TYPES[2]]);
         } catch (QueryException $e) {
             return redirect()->back()->with('error', 'email or username is already  in use , please try another' . $e)->withInput();

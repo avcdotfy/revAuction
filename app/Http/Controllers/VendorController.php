@@ -44,6 +44,18 @@ class VendorController extends Controller
 
     function store(Request $req)
     {
+        $vendor = User::where('phone', $req->phone)->first();
+        if ($vendor) {
+            return redirect()->route('vendor.create')->with('error',    'phone you are submiting is already exist try another')->withInput();
+        }
+        $vendor = User::where('email', $req->email)->first();
+        if ($vendor) {
+            return redirect()->route('vendor.create')->with('error',    'email you are submiting is already exist try another')->withInput();
+        }
+        $vendor = User::where('username', $req->username)->first();
+        if ($vendor) {
+            return redirect()->route('vendor.create')->with('error',    'username you are submiting is already exist try another')->withInput();
+        }
         try {
             $user =  User::create([
                 'username' => $req->username,
@@ -80,7 +92,7 @@ class VendorController extends Controller
             $user->vendor->categories()->attach($req->preference_category);
             $user->vendor->regions()->attach($req->preference_region);
         } catch (QueryException $exc) {
-            return redirect()->route('vendor.create')->with('error',   'Username or email you are submiting is already exist try another')->withInput();
+            return redirect()->route('vendor.create')->with('error',    'Unable to process your request , please try again later')->withInput();
         }
         UploadHelper::uploadFile($req, $user->vendor->id);
 
