@@ -99,30 +99,38 @@
 
         function acceptReq(ids) {
             let msg = $('#remark').val();
-            $.ajax({
-                type: "get",
-                url: "{{ route('request.accept') }}",
-                data: {
-                    "ids": setIds(),
-                    "msg": msg
-                },
-                success: function(res) {
-                    console.log(res.status);
-                    if (res.status) {
-                        $('#exampleModalLong').modal(
-                            'hide'
-                        )
-                        showToast(res.messages);
-                        setTimeout(() => {
-                            location.reload();
+            if (!setIds()) {
+                showToast('Pleast select atleast one vendors ', 'red');
+            }
 
-                        }, 2000);
+            if (msg) {
+                $.ajax({
+                    type: "get",
+                    url: "{{ route('request.accept') }}",
+                    data: {
+                        "ids": setIds(),
+                        "msg": msg
+                    },
+                    success: function(res) {
+                        console.log(res.status);
+                        if (res.status) {
+                            $('#exampleModalLong').modal(
+                                'hide'
+                            )
+                            showToast(res.messages, 'green');
+                            setTimeout(() => {
+                                location.reload();
+
+                            }, 2000);
+                        }
+                    },
+                    error: function(er) {
+                        console.log(er);
                     }
-                },
-                error: function(er) {
-                    console.log(er);
-                }
-            });
+                });
+            } else {
+                showToast('Remark is required', 'red');
+            }
         }
     </script>
 @endpush

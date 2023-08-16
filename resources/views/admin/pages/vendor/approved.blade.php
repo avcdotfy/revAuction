@@ -99,30 +99,39 @@
 
         function rejectReq(ids) {
             let msg = $('#remark').val();
-            $.ajax({
-                type: "get",
-                url: "{{ route('request.reject') }}",
-                data: {
-                    "ids": setIds(),
-                    "msg": msg
-                },
-                success: function(res) {
-                    if (res.status) {
-                        $('#exampleModalLong').modal(
-                            'hide'
-                        )
-                        showToast(res.messages);
-                        setTimeout(() => {
-                            location.reload();
+            if (!setIds()) {
+                showToast('Pleast select atleast one vendors ', 'red');
+            }
+            if (msg) {
+                $.ajax({
+                    type: "get",
+                    url: "{{ route('request.reject') }}",
+                    data: {
+                        "ids": setIds(),
+                        "msg": msg
+                    },
+                    success: function(res) {
+                        if (res.status) {
+                            $('#exampleModalLong').modal(
+                                'hide'
+                            )
+                            showToast(res.messages, 'green');
+                            setTimeout(() => {
+                                location.reload();
 
-                        }, 2000);
+                            }, 2000);
 
+                        }
+                    },
+                    error: function(er) {
+                        console.log(er);
                     }
-                },
-                error: function(er) {
-                    console.log(er);
-                }
-            });
+                });
+            } else {
+                showToast('Remark Required', 'red');
+
+            }
+
         }
     </script>
 @endpush

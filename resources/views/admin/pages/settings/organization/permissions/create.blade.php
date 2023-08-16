@@ -26,3 +26,19 @@
     </section>
     <!-- /.content -->
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.parent_checkBox').change(function() {
+                if (this.checked) {
+
+                    $('.parent_id_' + this.value).prop('checked', true);
+                } else {
+                    $('.parent_id_' + this.value).prop('checked', false);
+                }
+                $('#textbox1').val(this.checked);
+            });
+        });
+    </script>
+@endpush

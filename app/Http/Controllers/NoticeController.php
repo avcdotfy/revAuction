@@ -25,7 +25,9 @@ class NoticeController extends BaseController
             'title' => $r->title,
             'msg' => $r->msg,
             'user_id' => $this->user_id,
-            'company_id' => $this->company_id
+            'company_id' => $this->company_id,
+            'is_active' => $r->is_active
+
         ]);
         if ($notice instanceof Notice) {
             return redirect()->route('notice.list')->with('success', 'News created successfully');
@@ -47,7 +49,8 @@ class NoticeController extends BaseController
             'title' => $r->title,
             'msg' => $r->msg,
             'user_id' => $this->user_id,
-            'company_id' => $this->company_id
+            'company_id' => $this->company_id,
+            'is_active' => $r->is_active
         ]);
         if ($notice) {
             return redirect()->route('notice.list')->with('success', 'News update successfully');

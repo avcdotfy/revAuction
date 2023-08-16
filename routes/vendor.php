@@ -20,6 +20,7 @@ Route::group(['middleware' => 'guest'], function () {
         Route::get('/create', [VendorController::class, 'create'])->name('vendor.create');
         Route::post('/store', [VendorController::class, 'store'])->name('vendor.store');
         Route::get('/login', [AuthenticateController::class, 'loginV'])->name('vendor.login');
+        Route::get('/verify-email/{token}', [AuthenticateController::class, 'verifyEmail'])->name('vendor.verifyEmail');
         Route::post('/login', [AuthenticateController::class, 'login_processV'])->name('vendor.login');
     });
 });

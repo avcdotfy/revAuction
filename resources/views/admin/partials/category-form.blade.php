@@ -1,6 +1,6 @@
 <div class="col-sm-12" style="margin-bottom: 5px;">
     <div class="col-sm-6" style="padding: 0px;">
-        <label for="inputPassword3" class="col-sm-12 control-label">Category Code <span
+        <label for="inputPassword3" class="col-sm-12 control-label">Category Code<span
                 style="color: red; font-size: 13px;">*</span></label>
         <div class="col-sm-12">
             <span id="ContentPlaceHolder1_RequiredFieldValidator2"
@@ -8,7 +8,7 @@
                 Category Code</span>
             <input type="hidden" name="id" value="{{ $category ? $category->id : '' }}">
             <input name="code" type="text" class="form-control" placeholder="Enter Category Code"
-                value="{{ $category ? $category->code : '' }}">
+                value="{{ $category ? $category->code : old('code') }} ">
         </div>
     </div>
     <div class="col-sm-6" style="padding: 0px;">
@@ -19,7 +19,7 @@
                 style="font-size:12px;color:red;font-weight:600;display:none;">Please Enter
                 Category Name</span>
             <input name="name" type="text" class="form-control" placeholder="Enter Category Name"
-                value="{{ $category ? $category->name : '' }}">
+                value="{{ $category ? $category->name : old('name') }}   ">
         </div>
     </div>
 </div>
@@ -28,7 +28,7 @@
         <label for="inputPassword3" class="col-sm-12 control-label">Terms &amp; Conditions
         </label>
         <div class="col-sm-12" style="margin-bottom: 5px;">
-            <textarea id="default" name="terms_condition" style="height: 80px">{{ $category ? $category->terms_condition : '' }}</textarea>
+            <textarea id="default" name="terms_condition" style="height: 80px">{{ $category ? $category->terms_condition : old('terms_condition') }} </textarea>
         </div>
     </div>
     <div class="col-sm-12" style="margin-bottom: 5px;">
@@ -68,8 +68,8 @@
                     style="font-size:12px;color:red;font-weight:600;display:none;">Please
                     Enter In Which Last Minutes Time Will be Increment?</span>
                 <input type="number" name="last_minute_closing_time_increment" id="last_minute_time_to_increment"
-                    value="{{ $category ? $category->last_minute_closing_time_increment : '' }}" class="form-control"
-                    placeholder="Enter In Which Last Minutes Time Will be Increment?">
+                    value="{{ $category ? $category->last_minute_closing_time_increment : old('last_minute_closing_time_increment') }}"
+                    class="form-control" placeholder="Enter In Which Last Minutes Time Will be Increment?">
             </div>
         </div>
         <div class="col-sm-6" style="padding: 0px;">

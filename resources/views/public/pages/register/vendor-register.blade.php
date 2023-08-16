@@ -94,7 +94,7 @@
                                 <form action="{{ route('vendor.store') }}" method="post" enctype="multipart/form-data"
                                     id="registerForm">
                                     @csrf
-                                    @include('public.pages.register.form') 
+                                    @include('public.pages.register.form')
                                 </form>
                             </div>
                         </div>
@@ -117,6 +117,36 @@
     <script type="text/javascript" src="{{ asset('validations/register-form-validator.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+        @if (old('country_id'))
+            let country_id = $('#countrySelect').find(":selected").val();
+            let selectedState_id = {{ old('state_id') }}
+            $.ajax({
+                type: "get",
+                url: `{{ route('states.byCountry') }}`,
+                data: {
+                    'country_id': country_id
+                },
+                success: function(res) {
+                    $('#stateSelect').empty();
+                    $('#stateSelect').append(
+                        `<option value="">-- select state--</option>`
+                    );
+                    console.log(res.state);
+                    res.state.forEach(state => {
+                        $('#stateSelect').append(
+                            `<option value=${state.id} ${selectedState_id == state.id ? 'selected' : ''} >${state.name}</option>`
+                        );
+                    });
+                    //
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        @endif
+
+
+
         $(document).ready(function() {
 
             $('#countrySelect').on('change', function(ev) {
@@ -151,9 +181,16 @@
                 });
             }
 
-            $(document).ready(function() {
-                $('.select2').select2();
+            $('.select2').select2();
+
+            $('input[type=radio][name=is_mse_registered]').change(function() {
+                if (this.value == 1) {
+                    $("#mse_input").prop('disabled', false);
+                } else if (this.value == 0) {
+                    $("#mse_input").prop('disabled', true);
+                }
             });
+
         });
     </script>
 </body>

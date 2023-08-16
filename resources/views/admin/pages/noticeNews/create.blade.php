@@ -37,6 +37,17 @@
                                     <textarea name="msg" id="default"></textarea>
 
                                 </div>
+                                <div class="col-sm-12" style=" margin-left: 0px; ">
+
+                                    <label for="status" class="col-sm-12 control-label">Status
+                                        <span style="color: red; font-size: 13px">*</span></label>
+
+                                    <select class="form-control" name="is_active">
+                                        <option value=1>Active</option>
+                                        <option value=0>Deactive</option>
+                                    </select>
+
+                                </div>
 
                                 <div class="col-sm-12" style="text-align: center; padding: 0px; margin-top: 20px;">
                                     <div class="col-sm-12">

@@ -38,8 +38,16 @@
                                             <tr role="row" class="odd">
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $n->title }}</td>
-                                                <td><label class="label label-success" title="True"
-                                                        style="font-size:11px;font-weight:600;">Activated</label></td>
+                                                @if ($n->is_active)
+                                                    <td><label class="label label-success"
+                                                            style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
+                                                    </td>
+                                                @else
+                                                    <td><label class="label label-danger"
+                                                            style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Deactived</label>
+                                                    </td>
+                                                @endif
+
                                                 <td>{{ $n->created_at }}</td>
                                                 <td><a href="{{ route('notice.edit', $n->id) }}"><i class="fa fa-edit"></i>
                                                         Edit</a></td>

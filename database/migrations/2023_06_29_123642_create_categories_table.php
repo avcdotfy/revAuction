@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $t) {
             $t->id();
-            $t->string('code');
-            $t->string('name');
+            $t->string('code')->unique();
+            $t->string('name')->unique();
             $t->text('terms_condition')->nullable();
             $t->boolean('item_time_trigger');
             // $t->integer('time_gap_between_each_item');

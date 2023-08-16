@@ -8,6 +8,7 @@
     <!-- Main content -->
     <section class="content">
         <!-- Small boxes (Stat box) -->
+        @include('admin.partials.alerts')
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">

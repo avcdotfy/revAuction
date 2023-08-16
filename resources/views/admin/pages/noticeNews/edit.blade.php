@@ -4,7 +4,7 @@
 @section('main_section')
     <section class="content-header">
         <h1>Home | Notice &amp; News <small id="ContentPlaceHolder1_hTag">Create</small></h1>
-       
+
     </section>
     <section class="content">
         @include('admin.partials.alerts')
@@ -33,6 +33,23 @@
                                         <span style="color: red; font-size: 13px">*</span></label>
                                     <textarea name="msg" id="default">{{ $n->msg }}</textarea>
                                 </div>
+
+                                <div class="col-sm-12" style=" margin-left: 0px; ">
+
+                                    <label for="status" class="col-sm-12 control-label">Status
+                                        <span style="color: red; font-size: 13px">*</span></label>
+
+
+                                    <select class="form-control" name="is_active" required>
+                                        <option value=1 {{ $n ? ($n->is_active == 1 ? 'selected' : '') : '' }}>
+                                            Activate</option>
+                                        <option value=0 {{ $n ? ($n->is_active == 0 ? 'selected' : '') : '' }}>
+                                            Deactive</option>
+                                    </select>
+
+
+                                </div>
+
 
                                 <div class="col-sm-12" style="text-align: center; padding: 0px; margin-top: 20px;">
                                     <div class="col-sm-12">

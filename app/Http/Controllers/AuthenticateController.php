@@ -6,6 +6,7 @@ use App\Helpers\CaptchaHelper;
 use App\Helpers\LoginTrailHelper;
 use App\Mail\ForgetPasswordMail;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -87,7 +88,7 @@ class AuthenticateController extends Controller
 
     function changePassword()
     {
-        if (Auth::user()->user_type == USER_TYPES[0]) {
+        if (Auth::user()->user_type == USER_TYPES[0] || Auth::user()->user_type == USER_TYPES[2]) {
             $source = 'admin';
         } else {
             $source = 'vendor';
@@ -153,5 +154,22 @@ class AuthenticateController extends Controller
         $user->password = Hash::make($req->password);
         $user->save();
         return redirect()->back()->with('success', 'Password changed successfully');
+    }
+
+
+    function verifyEmail($token)
+    {
+        $decode = base64_decode($token);
+        $user =  User::where('email', $decode)->first();
+        if ($user) {
+            if ($user->email_verified_at) {
+                return redirect()->route('vendor.login')->with('info', 'Email already verified');
+            } else {
+                $user->update(['email_verified_at' => Carbon::now()]);
+                return redirect()->route('vendor.login')->with('success', 'Email verified successfully');
+            }
+        } else {
+            return redirect()->route('vendor.login')->with('error', 'Account not found');
+        }
     }
 }

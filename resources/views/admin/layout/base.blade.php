@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/logo/favicon.ico') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('media/logo/favDotfy.png') }}" />
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}" />
     <!-- Font Awesome -->
@@ -194,7 +194,7 @@
     </script>
 
     <script>
-        function showToast(message) {
+        function showToast(message, color) {
             Toastify({
                 text: message,
                 duration: 3000,
@@ -204,7 +204,7 @@
                 position: "right", // `left`, `center` or `right`
                 stopOnFocus: true, // Prevents dismissing of toast on hover
                 style: {
-                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                    background: color,
                 },
                 onClick: function() {} // Callback after click
             }).showToast();

@@ -18,7 +18,7 @@
                 <div class="" style="border:1px solid #eaeaea; padding: 12px">
                     <h6 style="margin-top: 0px; margin-bottom: 4px;">Accept Reason</h6>
                     <textarea class="form-control" name="remark" id="remark" rows="2" placeholder="Please write reason "
-                        style="margin-bottom: 0px; "></textarea>
+                        style="margin-bottom: 0px; " required></textarea>
                 </div>
 
                 <div class="modal-footer">

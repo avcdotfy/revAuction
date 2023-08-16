@@ -6,8 +6,8 @@
               <select name="vendor_type" id="vendor_type" class="form-control" required>
                   <option value="">Select Company Type</option>
                   @foreach (COMPANY_TYPE as $c_type)
-                      <option value="{{ $c_type }}"
-                          {{ $v ? ($c_type == $v->vendor_type ? 'selected' : '') : '' }}>
+                      <option value="{{ $c_type }}" {{ $v ? ($c_type == $v->vendor_type ? 'selected' : '') : '' }}
+                          {{ old('vendor_type') ? ($c_type == old('vendor_type') ? 'selected' : '') : '' }}>
                           {{ $c_type }}</option>
                   @endforeach
               </select>
@@ -66,15 +66,15 @@
               <label for="inputPassword3" class="col-sm-12 control-label">Is MSME
                   Registered? <span style="color: red; font-size: 13px;">*</span></label>
               <div class="col-sm-12">
-                  <input type="checkbox" value="{{ old('is_mse_registered') }}" name="is_mse_registered"> Yes <input
-                      type="checkbox" name=""> No
+                  <input type="radio" value=1 id="is_mse_registered" name="is_mse_registered" checked>Yes
+                  <input type="radio" value=0 id="is_mse_not_registered" name="is_mse_registered"> No
               </div>
           </div>
           <div class="col-sm-6" style="padding: 0px;">
               <label for="inputPassword3" class="col-sm-12 control-label">MSME
                   Registration Number </label>
               <div class="col-sm-12">
-                  <input name="mse_registration_number"
+                  <input name="mse_registration_number" id="mse_input"
                       value="{{ $v ? $v->mse_registration_number : old('mse_registration_number') }}" type="text"
                       class="aspNetDisabled form-control" placeholder="Enter MSME Registration Number">
               </div>
@@ -167,7 +167,9 @@
                           required>
                           <option value="">Select Country</option>
                           @foreach ($countries as $c)
-                              <option value="{{ $c->id }}">{{ $c->name }}</option>
+                              <option value="{{ $c->id }}"
+                                  {{ old('country_id') ? (old('country_id') == $c->id ? 'selected' : '') : '' }}>
+                                  {{ $c->name }}</option>
                           @endforeach
 
                       </select>
@@ -217,7 +219,9 @@
                   @foreach ($categories as $category)
                       <option value="{{ $category->id }}"
                           @if ($v) @foreach ($v->categories as $cat)
-                            {{ $cat->id == $category->id ? 'selected' : '' }} @endforeach @endif>
+                            {{ $cat->id == $category->id ? 'selected' : '' }} @endforeach @endif
+                          @if (old('preference_category')) @foreach (old('preference_category') as $cat)
+                            {{ $cat == $category->id ? 'selected' : '' }} @endforeach @endif>
                           {{ $category->name }}</option>
                   @endforeach
               </select>
@@ -232,7 +236,9 @@
                   @foreach ($regions as $reg)
                       <option value="{{ $reg->id }}"
                           @if ($v) @foreach ($v->regions as $region)
-                        {{ $region->id == $reg->id ? 'selected' : '' }} @endforeach @endif>
+                        {{ $region->id == $reg->id ? 'selected' : '' }} @endforeach @endif
+                          @if (old('preference_region')) @foreach (old('preference_region') as $region)
+                        {{ $region == $reg->id ? 'selected' : '' }} @endforeach @endif>
                           {{ $reg->name }}</option>
                   @endforeach
               </select>
@@ -256,7 +262,6 @@
           <label for="inputPassword3" class="col-sm-12 control-label">Documents <span
                   style="color: red; font-size: 13px;">*</span></label>
           <div class="col-sm-12">
-
               <input type="file" multiple="multiple" name="docs[]" id="fu_documents" class="form-control"
                   accept=".pdf,.doc,.docx" style="padding:4px 6px;" {{ !Auth::user() ? 'required' : '' }}>
           </div>

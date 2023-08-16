@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>
-        Dotfy | Admin | Login
+        Dotfy | Vendor | Login
     </title>
     <!-- Favicon -->
     {{-- <link rel="icon" type="image/png" href="images/logo/favicon.ico" /> --}}

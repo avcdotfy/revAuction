@@ -2,7 +2,7 @@
     <div class="login-box-msg" style="margin-bottom:0px;font-size:16px;color:#000;">
         <span style="border-bottom:1px solid #000"><b>{{ env('APP_NAME') }}</b> <span
                 style="font-size: 16px;font-weight:300;">
-                | Admin</span></span>
+                | Vendor</span></span>
     </div>
 
     <span id="RequiredFieldValidator2" style="color:red;font-size:12px;display:none;">Please enter employee
@@ -18,7 +18,7 @@
 
     <div class="form-group row">
         <div class="col-sm-2"></div>
-            <div class="col-sm-4">
+        <div class="col-sm-4">
             <input name="captcha" type="text" id="txt_password" class="form-control" required />
         </div>
         <div class="col-sm-4">

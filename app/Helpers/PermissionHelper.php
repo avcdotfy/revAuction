@@ -10,6 +10,7 @@ class PermissionHelper
 
     public static function hasPermission()
     {
+        // dd(Auth::user()->role->permissions);
         foreach (Auth::user()->role->permissions as $key => $p) {
 
             if (Route::currentRouteName() == $p->route_name) {

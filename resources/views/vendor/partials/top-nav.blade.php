@@ -61,6 +61,7 @@
     <!-- Logo -->
     <a href="{{ route('vendor.dashboard') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
+        {{-- {{ Auth::user()->vendor->logo}} --}}
         @if (Auth::user()->vendor->logo)
             <img src="{{ Storage::url('company_logo/' . Auth::user()->vendor->logo) }}" alt="" width="80"
                 height="80" srcset="">

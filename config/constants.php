@@ -214,6 +214,16 @@ define('PERMISSIONS', [
     ],
     [
         'permissiongroup_id' => 5,
+        'name' => 'Take Decision',
+        'route_name' => 'decision.take'
+    ],
+    [
+        'permissiongroup_id' => 5,
+        'name' => 'Save Decision',
+        'route_name' => 'decision.store'
+    ],
+    [
+        'permissiongroup_id' => 5,
         'name' => 'Empty Event List',
         'route_name' => 'event.empty'
     ],

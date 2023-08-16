@@ -38,13 +38,20 @@ class CategoryController extends BaseController
     public function store(Request $req)
     {
         // dd($req->all());
+        $category = Category::where('code', $req->code)->first();
+        if ($category) {
+            return redirect()->back()->with('error', 'Category code already exists ')->withInput();
+        }
+        $category = Category::where('name', $req->name)->first();
+        if ($category) {
+            return redirect()->back()->with('error', 'Category name already exists ')->withInput();
+        }
         $category = Category::create([
             'code' => $req->code,
             'name' => $req->name,
             'terms_condition' => $req->terms_condition,
             'item_time_trigger' => $req->item_time_trigger,
             // 'time_gap_between_each_item' => $req->time_gap_between_each_item,
-            'last_minute_closing_time_increment' => $req->last_minute_closing_time_increment,
             'last_minute_closing_time_increment' => $req->last_minute_closing_time_increment,
             'is_active' => $req->is_active,
             'company_id' => $this->company_id,
@@ -64,7 +71,15 @@ class CategoryController extends BaseController
 
     function update(Request $req)
     {
-        // dd($req->all());
+        // dd($req->id);
+        $category = Category::where('code', $req->code)->first();
+        if ($category && $category->id != $req->id) {
+            return redirect()->back()->with('error', 'Category code already exists ')->withInput();
+        }
+        $category = Category::where('name', $req->name)->first();
+        if ($category  && $category->id != $req->id) {
+            return redirect()->back()->with('error', 'Category name already exists ')->withInput();
+        }
         $category = Category::find($req->id)->update([
             'code' => $req->code,
             'name' => $req->name,

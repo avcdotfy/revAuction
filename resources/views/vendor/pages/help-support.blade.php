@@ -45,7 +45,7 @@
                                 style="padding: 20px; padding-top: 0px;  padding-bottom: 0px; text-align: center;">
                                 <h4 style="padding-bottom: 4px"> <i class='bx bx-mail-send' style="font-size: 40px"></i>
                                 </h4>
-                                <h4 style="padding-bottom: 15px">customer.{{ $hs->email }}</h4>
+                                <h4 style="padding-bottom: 15px">{{ $hs->email }}</h4>
                             </div>
                         </div>
                     </div>

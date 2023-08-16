@@ -45,7 +45,8 @@
                                                 <td>{{ $event->title }}</td>
 
                                                 <td>{{ $event->eventmode->mode }}</td>
-                                                <td>-</td>
+                                                <td><a href="{{ route('event.postedEventInformation', $event->id) }}">View
+                                                        Information</a></td>
                                             </tr>
                                         @endforeach
 

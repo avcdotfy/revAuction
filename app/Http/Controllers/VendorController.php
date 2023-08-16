@@ -6,6 +6,7 @@ use App\Helpers\CategoryHelper;
 use App\Helpers\CompanyHelper;
 use App\Helpers\UploadHelper;
 use App\Mail\NewVendorMail;
+use App\Mail\VerifyEmail;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Country;
@@ -108,6 +109,11 @@ class VendorController extends Controller
                 'category_id' => $req->preference_category[0],
             ]);
 
+            $data['encodedEmail'] = base64_encode($req->email);
+            $data['username'] = $req->username;
+            $data['link'] = route('vendor.verifyEmail', $data['encodedEmail']);
+
+            Mail::to($req->email)->send(new VerifyEmail($data));
 
             if ($r instanceof VendorRequest)
                 Mail::to($company->user->email)->send(new NewVendorMail($user));
@@ -180,7 +186,7 @@ class VendorController extends Controller
 
     public function noticeNews()
     {
-        $notices = Notice::all();
+        $notices = Notice::where('is_active', true)->orderBy('created_at', 'desc')->get();
         return view('vendor.pages.notice-news', compact('notices'));
     }
     public function detailNews($id)

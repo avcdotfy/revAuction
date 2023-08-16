@@ -21,12 +21,14 @@
     @foreach ($groups as $g)
         <u>
             <h4 for="inputPassword3" class="col-sm-12 control-label" style="margin-bottom: 15px"> {{ $g->name }}
+                <input type="checkbox" checked class="parent_checkBox" value="{{ $g->id }}">
         </u>
         </h4>
         @foreach ($permissions as $p)
             @if ($g->id == $p->group->id)
                 <div class="col-sm-3" style="font-size: 12px;font-weight: 500;margin-bottom: 3px;">
-                    <input type="checkbox" checked="" name="permission[]" value="{{ $p->id }}">
+                    <input type="checkbox" checked="" name="permission[]" value="{{ $p->id }}"
+                        class="parent_id_{{ $g->id }}">
                     <label class="tr">
                         {{ $p->name }}
                     </label>
