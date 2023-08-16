@@ -11,7 +11,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-sm-12" style="overflow: auto;">
-                                <div class="modal fade" id="model_edit_1">
+                                {{-- <div class="modal fade" id="model_edit_1">
                                     <div class="modal-dialog">
                                         <div class="modal-content" style="border-radius: 4px;">
                                             <div class="modal-header">
@@ -100,7 +100,7 @@
                                         <!-- /.modal-content -->
                                     </div>
                                     <!-- /.modal-dialog -->
-                                </div>
+                                </div> --}}
                                 <table id="dtable" class="table table-bordered table-striped dataTable no-footer"
                                     role="grid" aria-describedby="dtable_info">
                                     <thead>
@@ -116,39 +116,47 @@
 
                                                     </select>
                                                 </div>
-                                                <div class="col-sm-3">
-                                                    <select name="ctl00$ContentPlaceHolder1$ddl_product_range_list"
-                                                        id="ContentPlaceHolder1_ddl_product_range_list"
-                                                        class="form-control">
-                                                        <option selected="selected" value="0">Select Category
-                                                        </option>
-                                                        <option value="2">Steel</option>
 
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-4" style="padding: 0px;">
-                                                    <label for="inputPassword3" class="col-sm-5 control-label">Closed
-                                                        From Date :</label>
-                                                    <div class="col-sm-7">
-                                                        <input name="ctl00$ContentPlaceHolder1$txt_fromdate" type="date"
-                                                            id="ContentPlaceHolder1_txt_fromdate" class="form-control">
+                                                <form action="{{ route('report.decisionTaken') }}" id="categoryForm"
+                                                    method="get">
+                                                    <div class="col-sm-3">
+
+                                                        <select id="categorySelect" class="form-control" name="cat_id">
+                                                            <option {{ $catId == null ? 'selected' : '' }} value="">
+                                                                Select Category
+                                                            </option>
+                                                            @foreach ($categories as $cat)
+                                                                <option {{ $cat->id == $catId ? 'selected' : '' }}
+                                                                    value="{{ $cat->id }}">
+                                                                    {{ $cat->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4" style="padding: 0px;">
-                                                    <label for="inputPassword3" class="col-sm-5 control-label">Closed
-                                                        To Date :</label>
-                                                    <div class="col-sm-7">
-                                                        <input name="ctl00$ContentPlaceHolder1$txt_todate" type="date"
-                                                            id="ContentPlaceHolder1_txt_todate" class="form-control">
+                                                    <div class="col-sm-4" style="padding: 0px;">
+                                                        <label for="inputPassword3" class="col-sm-5 control-label">Closed
+                                                            From
+                                                            Date :</label>
+                                                        <div class="col-sm-7">
+                                                            <input name="fromdate" type="date" id="txt_fromdate"
+                                                                value="{{ $fromDate }}" class="form-control">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-1" style="text-align:right;">
-                                                    <input type="button" name="ctl00$ContentPlaceHolder1$btn_search"
-                                                        value="Search"
-                                                        onclick="this.disabled=true;this.value='Searching';__doPostBack('ctl00$ContentPlaceHolder1$btn_search','')"
-                                                        id="ContentPlaceHolder1_btn_search"
-                                                        class="btn btn-sm btn-primary">
-                                                </div>
+                                                    <div class="col-sm-4" style="padding: 0px;">
+                                                        <label for="inputPassword3" class="col-sm-5 control-label">Closed
+                                                            To
+                                                            Date :</label>
+                                                        <div class="col-sm-7">
+                                                            <input name="todate" type="date" id="txt_todate"
+                                                                class="form-control" value="{{ $toDate }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-1" style="text-align:right;">
+                                                        <input type="submit" value="Search" id="btn_search"
+                                                            class="btn btn-sm btn-primary">
+                                                    </div>
+                                                </form>
+
                                             </td>
                                         </tr>
                                         <tr role="row">
@@ -214,7 +222,8 @@
                                                                                     class="col-sm-4 control-label">Open
                                                                                     Date &amp; Time : </label>
                                                                                 <div class="col-sm-8">
-                                                                                    <label>{{ $bid->event->opening_date }} -
+                                                                                    <label>{{ $bid->event->opening_date }}
+                                                                                        -
                                                                                         {{ $bid->event->opening_time }}</label>
                                                                                 </div>
                                                                             </div>
