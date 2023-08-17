@@ -36,10 +36,7 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::group(['middleware' => ['auth', CheckForAdmin::class]], function () {
-        Route::group(['prefix' => 'request'], function () {
-            Route::get('/accept', [RequestController::class, 'accept'])->name('request.accept');
-            Route::get('/reject', [RequestController::class, 'reject'])->name('request.reject');
-        });
+
 
         Route::get('vendors', [VendorController::class, 'getVendorsFromCategoryId'])->name('event.vendors');
         Route::get('itemsRpu', [ItemController::class, 'getItemRPUsFromCategoryId'])->name('event.itemsRpu');
@@ -47,6 +44,13 @@ Route::group(['prefix' => 'admin'], function () {
         Route::group(['middleware' => PermissionChecker::class], function () {
 
             Route::get('/', [AdminController::class, 'index'])->name('admin-dashboard');
+
+
+            Route::group(['prefix' => 'request'], function () {
+                Route::get('/accept', [RequestController::class, 'accept'])->name('request.accept');
+                Route::get('/reject', [RequestController::class, 'reject'])->name('request.reject');
+            });
+
 
             Route::group(['prefix' => 'company'], function () {
                 Route::get('/create', [CompanyController::class, 'create'])->name('company.create');

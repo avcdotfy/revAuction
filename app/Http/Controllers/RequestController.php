@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\CompanyHelper;
+use App\Mail\VendorRequestStatusMail;
 use App\Models\Request as ModelsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 use function PHPSTORM_META\type;
 
@@ -43,10 +45,8 @@ class RequestController extends Controller
             'status' => REQUEST_STATUS[0]
         ]);
 
-
         // dd($requests);
         foreach ($requests->get() as $key => $req) {
-
 
             $req->vendor->update([
                 'is_approved' => true
@@ -57,6 +57,10 @@ class RequestController extends Controller
                 'request_id' => $req->id,
                 'user_id' =>  Auth::user()->id
             ]);
+            $data['vendor_name'] = $req->vendor->user->username;
+            $data['status'] = 'Approved';
+            $data['remarks'] = $r->msg;
+            Mail::to($req->vendor->user->email)->send(new VendorRequestStatusMail($data));
         }
 
         if ($rowsAffected) {
@@ -86,6 +90,11 @@ class RequestController extends Controller
                 'request_id' => $req->id,
                 'user_id' =>  Auth::user()->id
             ]);
+
+            $data['vendor_name'] = $req->vendor->user->username;
+            $data['status'] = 'Rejected';
+            $data['remarks'] = $r->msg;
+            Mail::to($req->vendor->user->email)->send(new VendorRequestStatusMail($data));
         }
 
         if ($rowsAffected) {
