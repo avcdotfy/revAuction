@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('media/logo/favDotfy.png') }}" />
+    <link rel="icon" type="image/png" href="{{ Storage::url('fav_ico/' . CompanyHelper::getCompanyFavIcon()) }}" />
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}" />
     <!-- Font Awesome -->

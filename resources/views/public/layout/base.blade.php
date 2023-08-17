@@ -15,7 +15,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <!-- Bootstrap 3.3.7 -->
-    <link rel="icon" type="image/png" href="{{ asset('media/logo/favDotfy.png') }}" />
+    <link rel="icon" type="image/png" href="{{ Storage::url('fav_ico/' . CompanyHelper::getCompanyFavIcon()) }}" />
 
     <link rel="stylesheet" href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}" />
     <!-- Font Awesome -->

@@ -9,7 +9,7 @@
         {{ env('APP_NAME') }} | Admin | Forgot Password
     </title>
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/logo/favicon.ico') }}" />
+    <link rel="icon" type="image/png" href="{{ Storage::url('fav_ico/' . CompanyHelper::getCompanyFavIcon()) }}" />
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <!-- Bootstrap 3.3.7 -->

@@ -3,15 +3,22 @@
     <!-- Logo -->
     <a href="{{ route('admin-dashboard') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini">{{ env('APP_NAME') }}</span>
+        <span class="logo-mini">
+            <img src="{{ Storage::url('company_logo/' . CompanyHelper::getCompanyLogo()) }}" width="50" height="50"
+                alt="" srcset="">
+        </span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg">{{ env('APP_NAME') }}</span>
+        <span class="logo-lg">
+            <img src="{{ Storage::url('company_logo/' . CompanyHelper::getCompanyLogo()) }}" width="150"
+                height="70" alt="" srcset="">
+        </span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
-        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" style="text-decoration-line:none;">
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"
+            style="text-decoration-line:none;">
             <span class="sr-only">Toggle navigation</span>
         </a>
         <!-- Navbar Right Menu -->

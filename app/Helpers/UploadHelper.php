@@ -41,4 +41,16 @@ class UploadHelper
 
         return $fileName;
     }
+    public static function uploadFavIco($req)
+    {
+        $fileName = null;
+
+        if ($req->hasFile('fav_icon')) {
+            $logo = $req->file('fav_icon');
+            $fileName = time() . '-' . $logo->getClientOriginalName();
+            $logo->storeAs('fav_ico', $fileName, 'public');
+        }
+
+        return $fileName;
+    }
 }

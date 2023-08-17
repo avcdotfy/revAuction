@@ -28,4 +28,16 @@ class CompanyHelper
         // dd($company);
         return $company;
     }
+
+    static public function getCompanyLogo()
+    {
+        $company = Company::where('web_url',   request()->getHost())->first();
+        return $company ? $company->logo : null;
+    }
+
+    static public function getCompanyFavIcon()
+    {
+        $company = Company::where('web_url',   request()->getHost())->first();
+        return $company ? $company->fav_icon : null;
+    }
 }
