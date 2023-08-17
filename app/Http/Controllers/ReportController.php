@@ -114,7 +114,7 @@ class ReportController extends BaseController
         $toDate = $r->closedToDate;
 
         $bids = Bid::groupBy('event_id')->where('decision_status', 'Accepted')->get();
-        dd($bids);
+        // dd($bids);
         return view('admin.pages.report.decision-taken', compact('bids', 'categories', 'catId', 'categories', 'fromDate',  'toDate'));
     }
 
