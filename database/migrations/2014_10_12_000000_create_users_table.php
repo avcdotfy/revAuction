@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Company;
 use App\Models\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -29,6 +30,7 @@ return new class extends Migration
             $t->timestamp('email_verified_at')->nullable();
             $t->string('password');
             $t->foreignIdFor(Role::class)->nullable();
+            $t->foreignIdFor(Company::class)->nullable();
             $t->rememberToken();
             $t->timestamps();
         });

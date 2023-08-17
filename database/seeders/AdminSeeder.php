@@ -19,6 +19,7 @@ class AdminSeeder extends Seeder
             'name' => 'Admin', 'password' => Hash::make('Admin'),
             'email' => 'dotfyauction@gmail.com',
             'user_type' => "ADMIN",
+            'company_id' => 1,
             'role_id' => 1
         ]);
     }

@@ -65,9 +65,15 @@
 
                                                 {{-- <td>{{ $emp->password }}</td> --}}
 
-                                                <td><label class="label label-success"
-                                                        style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
-                                                </td>
+                                                @if ($emp->is_active)
+                                                    <td><label class="label label-success"
+                                                            style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Activated</label>
+                                                    </td>
+                                                @else
+                                                    <td><label class="label label-danger"
+                                                            style="font-size: 11px; font-weight: 600;text-transform:capitalize;">Deactived</label>
+                                                    </td>
+                                                @endif
 
                                                 <td><a href="{{ route('employee.edit', $emp->id) }}"><i
                                                             class="fa fa-edit"></i> Edit</a></td>

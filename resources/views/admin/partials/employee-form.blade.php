@@ -87,15 +87,19 @@
             placeholder="Email ID" value="{{ $employee ? $employee->user->email : old('email') }}">
     </div>
 </div>
-<div class="col-sm-12" style="padding:0px;">
-    <label for="inputPassword3" class="col-sm-12 control-label">Password <span
-            style="color: red; font-size: 13px">*</span></label>
-    <div class="col-sm-12">
 
-        <input name="password" type="text" id="ContentPlaceHolder1_txt_password" class="form-control" required
-            placeholder="Password" value="{{ old('password') }}">
+@if (!$employee)
+    <div class="col-sm-12" style="padding:0px;">
+        <label for="inputPassword3" class="col-sm-12 control-label">Password <span
+                style="color: red; font-size: 13px">*</span></label>
+        <div class="col-sm-12">
+
+            <input name="password" type="text" id="ContentPlaceHolder1_txt_password" class="form-control"
+                required placeholder="Password" value="{{ old('password') }}">
+        </div>
     </div>
-</div>
+@endif
+
 <div class="col-sm-12" style="padding: 0px;">
 
     <label for="inputPassword3" class="col-sm-12 control-label">Assigning Category <span
@@ -108,6 +112,19 @@
                     @if ($employee) @foreach ($employee->categories as $key => $empCat) {{ $empCat->id == $cat->id ? 'selected' : '' }} @endforeach @endif>
                     {{ $cat->name }}</option>
             @endforeach
+        </select>
+    </div>
+</div>
+
+
+<div class="col-sm-12" style="padding: 5px;">
+    <label for="inputPassword3" class="col-sm-12 control-label"> Status <span
+            style="color: red; font-size: 13px;">*</span></label>
+    <div class="col-sm-12">
+        <select class="form-control" name="is_active" required>
+            <option value=1 {{ $employee ? ($employee->is_active == 1 ? 'selected' : '') : 'selected' }}>Activate
+            </option>
+            <option value=0 {{ $employee ? ($employee->is_active == 0 ? 'selected' : '') : '' }}>Deactive</option>
         </select>
     </div>
 </div>

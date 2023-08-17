@@ -25,7 +25,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = DB::table('employees')
-            ->select('employees.id', 'roles.name as role', 'employees.employee_id', 'employees.designation', 'departments.name as department', 'users.name', 'users.phone', 'users.email', 'users.password')
+            ->select('employees.id','employees.is_active' , 'roles.name as role', 'employees.employee_id', 'employees.designation', 'departments.name as department', 'users.name', 'users.phone', 'users.email', 'users.password')
             ->join('users', 'users.id', '=', 'employees.emp_user_id')
             ->join('roles', 'roles.id', '=', 'employees.role_id')
             ->join('departments', 'departments.id', '=', 'employees.department_id')
@@ -71,6 +71,7 @@ class EmployeeController extends Controller
         $designation = $req->designation;
         $emp_id = $req->employee_id;
         $cat_ids = $req->cat_ids;
+        $company_id = Auth::user()->company_id;
 
         try {
             $user = User::where('phone', $req->phone)->first();
@@ -85,7 +86,7 @@ class EmployeeController extends Controller
             if ($user) {
                 return redirect()->back()->with('error',    'username you are submiting is already exist try another')->withInput();
             }
-            $user = User::create(['name' => $name, 'email' => $email, 'username' => $username, 'password' => Hash::make($password), 'phone' => $phone, 'role_id' => $role_id, 'user_type' => USER_TYPES[2]]);
+            $user = User::create(['name' => $name, 'email' => $email, 'username' => $username, 'company_id' => $company_id, 'password' => Hash::make($password), 'phone' => $phone, 'role_id' => $role_id, 'user_type' => USER_TYPES[2]]);
         } catch (QueryException $e) {
             return redirect()->back()->with('error', 'email or username is already  in use , please try another' . $e)->withInput();
         }
@@ -97,6 +98,7 @@ class EmployeeController extends Controller
             'user_id' => Auth::user()->id,
             'company_id' => CompanyHelper::getCompany()->id,
             'emp_user_id' => $user->id,
+            'is_active' => $req->is_active
         ]);
 
         foreach ($cat_ids  as $cat) {
@@ -139,7 +141,7 @@ class EmployeeController extends Controller
         $name = $req->name;
         $email = $req->email;
         $username = $req->username;
-        $password = $req->password;
+
         $phone = $req->phone;
         $role_id = $req->role_id;
         $department_id = $req->department_id;
@@ -148,7 +150,7 @@ class EmployeeController extends Controller
         $cat_ids = $req->cat_ids;
 
         try {
-            User::find($req->emp_user_id)->update(['name' => $name, 'email' => $email, 'username' => $username, 'password' => Hash::make($password), 'phone' => $phone, 'role_id' => $role_id]);
+            User::find($req->emp_user_id)->update(['name' => $name, 'email' => $email, 'username' => $username, 'phone' => $phone, 'role_id' => $role_id]);
         } catch (QueryException $e) {
             return redirect()->back()->with('error', 'email or username is already  in use , please try another' . $e)->withInput();
         }
@@ -158,6 +160,7 @@ class EmployeeController extends Controller
             'department_id' => $department_id,
             'designation' => $designation,
             'employee_id' => $emp_id,
+            'is_active' => $req->is_active
         ]);
         $emp->categories()->detach();
 

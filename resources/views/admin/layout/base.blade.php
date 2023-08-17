@@ -196,7 +196,7 @@
     <script>
         $(document).ready(function() {
 
-            Echo.private('new-vendor.register.' + {{ Auth::user()->company ? Auth::user()->company->id : 1 }})
+            Echo.private('new-vendor.register.' + {{ Auth::user()->company_id ? Auth::user()->company_id : 1 }})
                 .listen(
                     'NewVendorRegisterEvent',
                     function(data) {

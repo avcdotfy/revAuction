@@ -31,6 +31,11 @@ class AuthenticateController extends Controller
             if (Auth::user()->user_type == 'VENDOR') {
                 Auth::logout();
                 return redirect()->back()->withErrors('Unautherized access denied');
+            }
+            if (Auth::user()->user_type == 'EMPLOYEE') {
+                if (!Auth::user()->employee->is_active) {
+                    return redirect()->back()->withErrors('Account has been disabled , please contact the administrator');
+                }
             } else {
                 LoginTrailHelper::saveLoginInfo();
                 return redirect()->route('admin-dashboard');
