@@ -15,11 +15,11 @@ class LoginTrailHelper
             'login_date_time' => Carbon::now()->toDateTimeString(),
             'public_ip' => request()->ip(),
             'user_id' => Auth::user()->id,
-            'company_id' => CompanyHelper::getCompanyFromHost()->id
+            'company_id' => CompanyHelper::getCompanyFromHost() ? CompanyHelper::getCompanyFromHost()->id : 1
         ]);
         session(['loginTrailId' =>  $l->id]);
         return $l;
-    }
+}
 
 
     public static function saveLogoutInfo()

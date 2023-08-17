@@ -11,22 +11,27 @@ use function PHPSTORM_META\type;
 
 class RequestController extends Controller
 {
+    protected $cId;
+    function __construct()
+    {
+        $this->cId =  CompanyHelper::getCompanyFromHost() ?  CompanyHelper::getCompanyFromHost()->id : 1;
+    }
 
     function new_requests()
     {
-        $new_reqs = ModelsRequest::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => REQUEST_STATUS[2]])->get();
+        $new_reqs = ModelsRequest::where(['company_id' =>  $this->cId, 'status' => REQUEST_STATUS[2]])->get();
 
         return view('admin.pages.vendor.new-request', compact('new_reqs'));
     }
 
     function approved()
     {
-        $requests  = ModelsRequest::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => REQUEST_STATUS[0]])->get();
+        $requests  = ModelsRequest::where(['company_id' =>  $this->cId, 'status' => REQUEST_STATUS[0]])->get();
         return view('admin.pages.vendor.approved', compact('requests'));
     }
     function rejected()
     {
-        $requests  = ModelsRequest::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'status' => REQUEST_STATUS[1]])->get();
+        $requests  = ModelsRequest::where(['company_id' =>  $this->cId, 'status' => REQUEST_STATUS[1]])->get();
         return view('admin.pages.vendor.rejected', compact('requests'));
     }
 

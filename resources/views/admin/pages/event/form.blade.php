@@ -357,7 +357,7 @@
              <h4>Mail Format</h4>
          </div>
          <div class="col-sm-12" style="margin-bottom: 5px;">
-             <textarea id="default" class="default" style="height: 80px" name="email_format">{{ EMAIL_FORMAT }}</textarea>
+             <textarea  class="email_format" style="height: 80px" name="email_format">{{ EMAIL_FORMAT }}</textarea>
 
          </div>
      </div>

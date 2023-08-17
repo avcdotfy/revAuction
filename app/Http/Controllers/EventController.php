@@ -84,6 +84,7 @@ class EventController extends BaseController
                 "vendor_ids" => $req->vendor_id,
                 "item_ids" => $req->itemRpu,
                 "event_title" =>  $req->title,
+                "event_id" =>  $event->id,
                 "format" => $event->email_format,
                 "subject" => $event->subject_line
             ];

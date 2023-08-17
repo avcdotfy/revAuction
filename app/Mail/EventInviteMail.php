@@ -17,9 +17,18 @@ class EventInviteMail extends Mailable implements ShouldQueue
      * Create a new message instance.
      */
     public $data;
+    public $vendor_name;
+
+
+
+
+    public $email_template;
+
     public function __construct($data)
     {
         $this->data = $data;
+        $this->vendor_name = $data['vendor_name'];
+        $this->email_template = $data['format'];
     }
 
     /**

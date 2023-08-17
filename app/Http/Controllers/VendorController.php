@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewVendorRegisterEvent;
 use App\Helpers\CategoryHelper;
 use App\Helpers\CompanyHelper;
 use App\Helpers\UploadHelper;
@@ -18,6 +19,7 @@ use App\Models\Region;
 use App\Models\Request as VendorRequest;
 use App\Models\User;
 use App\Models\Vendor;
+use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +34,8 @@ class VendorController extends Controller
     function create()
     {
         $v = null;
-        $countries = Country::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'is_active' => true])->get();
+        $cId = CompanyHelper::getCompanyFromHost() ? CompanyHelper::getCompanyFromHost()->id : 1;
+        $countries = Country::where(['company_id' => $cId, 'is_active' => true])->get();
         $categories = CategoryHelper::getCategories();
         $regions = Region::all();
         // return view('public.pages.register.vendor-register', compact('countries', 'categories', 'regions'));
@@ -45,6 +48,9 @@ class VendorController extends Controller
 
     function store(Request $req)
     {
+
+        // dd($req->all());
+
         $vendor = User::where('phone', $req->phone)->first();
         if ($vendor) {
             return redirect()->route('vendor.create')->with('error',    'phone you are submiting is already exist try another')->withInput();
@@ -82,6 +88,7 @@ class VendorController extends Controller
                 'establish_year' => $req->establish_year,
                 'establish_year' => $req->establish_year,
                 'mse_registration_number' => $req->mse_registration_number,
+                'is_mse_registered' => $req->is_mse_registered,
                 'pan_tan' => $req->pan_tan,
                 'user_id' => $user->id,
                 'preference_category' => $req->preference_category[0],
@@ -117,6 +124,7 @@ class VendorController extends Controller
 
             if ($r instanceof VendorRequest)
                 Mail::to($company->user->email)->send(new NewVendorMail($user));
+            event(new NewVendorRegisterEvent($req->username, $company->id));
             return redirect()->route('vendor.create')->with('success', 'Your vendor Account Created Successfully');
         } else {
             return redirect()->route('vendor.create')->with('error', 'Something Went Wrong');
@@ -231,8 +239,7 @@ class VendorController extends Controller
 
     public function profileUpdate(Request $req)
     {
-        // dd($req->all());
-
+        // dd($req->is_verified);
         $v = Vendor::find($req->vendor_id);
         if ($v) {
             $v->categories()->detach();
@@ -248,8 +255,9 @@ class VendorController extends Controller
             $v->user->phone = $req->phone;
             $v->user->landline = $req->landline;
             $v->user->fax_number = $req->fax_number;
-            $v->user->registered_address = $req->registered_address;
+            $v->user->registered_address = $req->registered_address;;
             $v->save();
+            $v->user->update(['email_verified_at' =>  $req->is_verified == 1 ? Carbon::now() : null]);
 
             $v->categories()->attach($req->preference_category);
             $v->regions()->attach($req->preference_region);

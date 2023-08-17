@@ -14,7 +14,7 @@ class EventmodeSeeder extends Seeder
     public function run(): void
     {
         //
-        for ($i = 1; $i < 4; $i++) {
+        for ($i = 1; $i < 3; $i++) {
             Eventmode::create([
                 'mode' => 'MODE' . $i,
                 'is_active' => 1,

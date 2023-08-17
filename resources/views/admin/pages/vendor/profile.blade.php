@@ -31,7 +31,6 @@
                                     </div>
 
                                     <div class="col-sm-12" style="padding:0px;">
-
                                         <div class="col-sm-12">
                                             <span class="multiselect-native-select">
                                                 <div class="btn-group">
@@ -102,6 +101,17 @@
             $(document).ready(function() {
                 $('.select2').select2();
             });
+        });
+    </script>
+
+
+    <script>
+        $('input[type=radio][name=is_mse_registered]').change(function() {
+            if (this.value == 1) {
+                $("#mse_input").prop('disabled', false);
+            } else if (this.value == 0) {
+                $("#mse_input").prop('disabled', true);
+            }
         });
     </script>
 @endpush

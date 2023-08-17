@@ -13,7 +13,7 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i < 5; $i++) {
+        for ($i = 1; $i < 2; $i++) {
             Department::create([
                 'code' => 'D00' . $i,
                 'name' => 'IT' . $i,

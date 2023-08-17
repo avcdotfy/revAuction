@@ -13,7 +13,7 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i < 11; $i++) {
+        for ($i = 1; $i < 2; $i++) {
             Category::create([
                 'code' => 'CAT_CODE' . $i,
                 'name' => 'CAT_NAME' . $i,

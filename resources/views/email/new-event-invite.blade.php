@@ -10,14 +10,8 @@
 
 <body>
     <h1>New Event at {{ $data['company_name'] }}</h1>
-    <p>
-        hi , You have been invited for the event at {{ $data['company_name'] }}
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe repellat debitis provident ipsam ut eius odio
-        odit dolorem assumenda explicabo. Repudiandae accusamus nam consectetur possimus. Quas earum excepturi natus
-        eaque?
-    </p>
 
-    <h1>Details of Events</h1>
+    {!! $email_template !!}
 
     <p>opening Time : {{ $data['opening_time'] }}</p>
     <p> Opening Date : {{ $data['opening_date'] }}</p>

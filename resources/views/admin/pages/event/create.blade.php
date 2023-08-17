@@ -24,8 +24,6 @@
                         <!-- /.box-body -->
                     </div>
                 </div>
-
-
                 <!-- /.row -->
     </section>
     <!-- /.content -->
@@ -47,11 +45,13 @@
             let openingAmPM = '';
 
             $('#opening_hrs').on('change', function(ev) {
+
                 console.log(ev.target.value);
                 openingHrs = ev.target.value
                 openingMinutes = $('#opening_minutes option:selected').val();
                 $('#full_opening_time').val(openingHrs + ":" + openingMinutes + " " + openingAmPM);
                 setTitle()
+
             })
             $('#opening_minutes').on('change', function(ev) {
                 console.log(ev.target.value);
@@ -248,6 +248,54 @@
                 "#full_closing_time").val() + " " + "(" + $("#eventMode :selected").text() + ")"
 
             $("#title_box").val(title);
+
+            setTemplate()
+
+
+        }
+    </script>
+
+    <script>
+        let instancess = null;
+
+        ClassicEditor
+            .create(document.querySelector('.email_format'))
+            .then(editor => {
+                instancess = editor
+                let template =
+                    `
+            <p>Dear Vendor,</p><p>We are writing to invite you to participate in an upcoming reverse auction event that we are organizing. We believe that your products and services would be a great addition to the auction, and we are excited to have you as a potential vendor.</p><p>The auction event will be held on&nbsp;<strong>${ $("#opening_date").val() }&nbsp;</strong>at&nbsp;<strong>${  $('#full_opening_time').val() }</strong>, and it will attract a large number of vendors who are interested to sell their items at reasonable price. As a vendor, you will have the opportunity to sell your products to us .</p><p><strong>Auction Detail:</strong></p><p><strong>Opening Date &amp; Time (IST): ${ $("#opening_date").val() }  -  ${$('#full_opening_time').val() } </strong></p><p><strong>Closing Date &amp; Time (IST): ${ $("#closing_date").val() } -&nbsp; ${ $('#full_closing_time').val() }</strong></p> Event Title : ${ $("#title_box").val() }</strong></p><p>To participate in the auction, please review the attached vendor application and return it to us by [deadline]. Once we receive your application, we will review it and confirm your participation in the event.</p><p>If you have any questions or concerns regarding the auction event or the vendor application, please do not hesitate to contact us. We are happy to provide any additional information that you may need.</p><p>Thank you for your consideration, and we look forward to your participation in the auction event.</p><p><br>...<br>Thanks &amp; Regards,<br><strong>AVC Dotfy&nbsp;</strong><br> </p><p>Ph: +919211788450 , +919891316303<br>Email: hello@dotfy.co</p>   `
+
+                console.log(editor.setData(template));
+                instancess = editor
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+
+        function setTemplate() {
+
+            if (instancess !== null) {
+                instancess.destroy().then(() => {
+                    ClassicEditor
+                        .create(document.querySelector('.email_format'))
+                        .then(editor => {
+                            instancess = editor
+                            let template =
+                                `
+            <p>Dear Vendor,</p><p>We are writing to invite you to participate in an upcoming reverse auction event that we are organizing. We believe that your products and services would be a great addition to the auction, and we are excited to have you as a potential vendor.</p><p>The auction event will be held on&nbsp;<strong>${ $("#opening_date").val() }&nbsp;</strong>at&nbsp;<strong>${  $('#full_opening_time').val() }</strong>, and it will attract a large number of vendors who are interested to sell their items at reasonable price. As a vendor, you will have the opportunity to sell your products to us .</p><p><strong>Auction Detail:</strong></p><p><strong>Opening Date &amp; Time (IST): ${ $("#opening_date").val() }  -  ${$('#full_opening_time').val() } </strong></p><p><strong>Closing Date &amp; Time (IST): ${ $("#closing_date").val() } -&nbsp; ${ $('#full_closing_time').val() }</strong></p> Event Title : ${ $("#title_box").val() }</strong></p><p>To participate in the auction, please review the attached vendor application and return it to us by [deadline]. Once we receive your application, we will review it and confirm your participation in the event.</p><p>If you have any questions or concerns regarding the auction event or the vendor application, please do not hesitate to contact us. We are happy to provide any additional information that you may need.</p><p>Thank you for your consideration, and we look forward to your participation in the auction event.</p><p><br>...<br>Thanks &amp; Regards,<br><strong>AVC Dotfy&nbsp;</strong><br><strong> </strong></p><p>Ph: +919211788450 , +919891316303<br>Email: hello@dotfy.co</p>   `
+
+                            console.log(editor.setData(template));
+                            instancess = editor
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                })
+
+            }
+
 
         }
     </script>

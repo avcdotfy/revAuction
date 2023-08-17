@@ -8,6 +8,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\VendorController;
+use App\Http\Middleware\CheckApprovedOrNot;
 use App\Http\Middleware\CheckForVendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,7 @@ Route::group(['middleware' => 'guest'], function () {
     });
 });
 
-Route::group(['middleware' => ['auth', CheckForVendor::class]], function () {
+Route::group(['middleware' => ['auth', CheckForVendor::class, CheckApprovedOrNot::class]], function () {
     Route::group(['prefix' => 'vendor'], function () {
         Route::get('dashboard', [VendorController::class, 'dashboard'])->name('vendor.dashboard');
         Route::get('upcomming-events', [VendorController::class, 'upCommingEvents'])->name('vendor.upcoming-events');

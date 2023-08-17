@@ -194,10 +194,24 @@
     </script>
 
     <script>
+        $(document).ready(function() {
+
+            Echo.private('new-vendor.register.' + {{ Auth::user()->company->id }}).listen(
+                'NewVendorRegisterEvent',
+                function(data) {
+                    console.log(data);
+                    showToast("New Vendor Registration " + data.v_name, "green");
+                    var audio = new Audio("{{ asset('assets/sound/notification.mp3') }} ")
+                    audio.play();
+                })
+        });
+    </script>
+
+    <script>
         function showToast(message, color) {
             Toastify({
                 text: message,
-                duration: 3000,
+                duration: 10000,
                 newWindow: true,
                 close: true,
                 gravity: "bottom", // `top` or `bottom`

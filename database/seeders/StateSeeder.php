@@ -14,14 +14,14 @@ class StateSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i < 11; $i++) {
+        for ($i = 1; $i < 3; $i++) {
             State::create([
                 'name' => 'State' . $i,
                 'code' => 'StCode' . $i,
                 'description' => 'Description' . $i,
                 'user_id' => 1,
                 'company_id' => 1,
-                'country_id' => random_int(1, 10),
+                'country_id' => random_int(1, 2),
                 'is_active' => 1,
             ]);
         }

@@ -26,7 +26,7 @@
     </div>
 </div>
 <div class="col-sm-12" style="margin-bottom: 5px;">
-    <div class="col-sm-6" style="padding: 0px;">
+    {{-- <div class="col-sm-6" style="padding: 0px;">
         <label for="inputPassword3" class="col-sm-12 control-label">Is Alert ? <span
                 style="color: red; font-size: 13px;">*</span></label>
         <div class="col-sm-12">
@@ -36,7 +36,7 @@
 
             </select>
         </div>
-    </div>
+    </div> --}}
     <div class="col-sm-6" style="padding: 0px;">
         <label for="inputPassword3" class="col-sm-12 control-label">Region Status <span
                 style="color: red; font-size: 13px;">*</span></label>

@@ -14,7 +14,7 @@ class RegionSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i < 10; $i++) {
+        for ($i = 1; $i < 2; $i++) {
             Region::create([
                 'name' => 'Region' . $i,
                 'description' => 'Region' . $i . ' description',

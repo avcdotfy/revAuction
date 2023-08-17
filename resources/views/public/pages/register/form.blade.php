@@ -55,7 +55,7 @@
           <label for="inputPassword3" class="col-sm-12 control-label">Establishment
               Year</label>
           <div class="col-sm-12">
-              <input name="establish_year" type="text" value="{{ $v ? $v->establish_year : old('establish_year') }}"
+              <input name="establish_year" type="date" value="{{ $v ? $v->establish_year : old('establish_year') }}"
                   id="establishment_year" class="form-control" placeholder="Enter Establishment Year">
           </div>
       </div>
@@ -112,7 +112,7 @@
           <label for="inputPassword3" class="col-sm-12 control-label">Email ID <span
                   style="color: red; font-size: 13px;">*</span></label>
           <div class="col-sm-12">
-              <input name="email" type="text" value="{{ $v ? $v->user->email : old('email') }}" id="email"
+              <input name="email" type="email" value="{{ $v ? $v->user->email : old('email') }}" id="email"
                   class="form-control" placeholder="Enter Email ID">
           </div>
       </div>
@@ -121,8 +121,8 @@
               <span style="color: red; font-size: 13px;">*</span></label>
           <div class="col-sm-12">
 
-              <input name="phone" type="text" value="{{ $v ? $v->user->phone : old('phone') }}" id="phone"
-                  class="form-control" placeholder="Enter Contact Number">
+              <input name="phone" type="number" min=1 value="{{ $v ? $v->user->phone : old('phone') }}"
+                  id="phone" class="form-control" placeholder="Enter Contact Number">
           </div>
       </div>
   </div>
@@ -131,7 +131,7 @@
           <label for="inputPassword3" class="col-sm-12 control-label">Landline
               Number</label>
           <div class="col-sm-12">
-              <input name="landline" type="text" value="{{ $v ? $v->user->landline : old('landline') }}"
+              <input name="landline" type="number" value="{{ $v ? $v->user->landline : old('landline') }}"
                   id="landline_number" class="form-control" placeholder="Enter Landline Number">
           </div>
       </div>
@@ -201,7 +201,7 @@
                   <span style="color: red; font-size: 13px;">*</span></label>
               <div class="col-sm-12">
 
-                  <input name="pin_code" type="text" id="pin_code" class="form-control"
+                  <input name="pin_code" type="number" id="pin_code" class="form-control"
                       value="{{ old('pin_code') }}" placeholder="Pin / Zip Code">
               </div>
           </div>
@@ -266,6 +266,18 @@
                   accept=".pdf,.doc,.docx" style="padding:4px 6px;" {{ !Auth::user() ? 'required' : '' }}>
           </div>
       </div>
+
+      @if (Auth::user())
+          <div class="col-sm-6" style="padding: 0px;">
+              <label for="inputPassword3" class="col-sm-12 control-label">Is Verified ? <span
+                      style="color: red; font-size: 13px;">*</span></label>
+              <div class="col-sm-12">
+                  <input type="checkbox" name="is_verified" id="is_verified" value="1"
+                      {{ $v ? ($v->user->email_verified_at ? 'checked' : '') : '' }}>
+                  {{ $v ? ($v->user->email_verified_at ? 'Verified ' : '') : '' }}
+              </div>
+          </div>
+      @endif
   </div>
 
   @if (!Auth::user())

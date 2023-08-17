@@ -19,6 +19,7 @@ class EventInvitationHelper
             $data['items'] = $items;
 
             foreach ($vendors as $key => $v) {
+                $data['vendor_name'] = $v->user->username;
                 Mail::to($v->user->email)->send(new EventInviteMail($data));
                 $data['vendor_id'] = $v->id;
                 event(new EventCreated($data));

@@ -28,3 +28,6 @@ Broadcast::channel('eventCreated.{vendor_id}', function ($user, $vendor_id) {
 Broadcast::channel('event-time-increament.{event_id}', function ($user, $event_id) {
     return true;
 });
+Broadcast::channel('new-vendor.register.{company_id}', function ($user, $company_id) {
+    return true;
+});

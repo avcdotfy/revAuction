@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CompanyHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,7 @@ class BaseController extends Controller
     {
         $this->middleware(function ($request, $next) {
             try {
-                $this->company_id = Auth::user()->company->id;
+                $this->company_id = CompanyHelper::getCompanyFromHost() ? CompanyHelper::getCompanyFromHost()->id : 1;
             } catch (\Throwable $th) {
             }
 
