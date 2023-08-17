@@ -22,7 +22,8 @@ class RolePermissionController extends Controller
     {
         $permissions = Permission::all();
         $groups = Permissiongroup::all();
-        return view('admin.pages.settings.organization.permissions.create', ['permissions' => $permissions, 'groups' => $groups]);
+        $role = null;
+        return view('admin.pages.settings.organization.permissions.create', ['permissions' => $permissions, 'groups' => $groups, 'role' => $role]);
     }
 
     /**
@@ -44,17 +45,46 @@ class RolePermissionController extends Controller
         $role = Role::create($role_data);
 
         if ($role instanceof Role) {
-            foreach ($req->permission as $key => $p) {
-                RolePermission::create([
-                    'role_id' => $role->id,
-                    'permission_id' => $p,
-                    'user_id' => Auth::user()->id,
-                    'company_id' => CompanyHelper::getCompanyFromHost()->id
-                ]);
-            }
+            $role->permissions()->attach($req->permission);
             return redirect()->route('permission_role.list')->with('success', 'Role added successfully');
         } else {
             return redirect()->back()->with('error', 'Role creation failed');
+        }
+    }
+
+
+    public function edit($roleId)
+    {
+        $role = Role::find($roleId);
+        $permissions = Permission::all();
+        $groups = Permissiongroup::all();
+
+        return  view('admin.pages.settings.organization.permissions.edit', compact('role', 'permissions', 'groups'));
+    }
+
+    public function update(Request $req)
+    {
+
+        if (empty($req->permission)) {
+            return redirect()->back()->with('error', 'Please select atleast one permission');
+        }
+        $role_data = [
+            'name' => $req->name,
+            'description' => $req->description,
+            'user_id' =>  Auth::user()->id,
+            'company_id' => CompanyHelper::getCompanyFromHost()->id
+        ];
+
+        $role = Role::find($req->id);
+        $updated = $role->update($role_data);
+
+        $role->permissions()->detach();
+        $role->permissions()->attach($req->permission);
+
+        if ($updated) {
+            return redirect()->route('permission_role.list')->with('success', 'Role added successfully');
+        } else {
+            return redirect()->back()->with('error', 'Role update failed');
         }
     }
 }

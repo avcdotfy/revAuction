@@ -563,7 +563,17 @@ define('PERMISSIONS', [
         'name' => 'Permission role save',
         'route_name' => 'permission_role.store'
     ],
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Permission role Edit From',
+        'route_name' => 'permission_role.edit'
 
+    ],
+    [
+        'permissiongroup_id' => 12,
+        'name' => 'Permission role update',
+        'route_name' => 'permission_role.update'
+    ],
 
     [
         'permissiongroup_id' => 12,

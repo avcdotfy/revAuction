@@ -196,14 +196,15 @@
     <script>
         $(document).ready(function() {
 
-            Echo.private('new-vendor.register.' + {{ Auth::user()->company->id }}).listen(
-                'NewVendorRegisterEvent',
-                function(data) {
-                    console.log(data);
-                    showToast("New Vendor Registration " + data.v_name, "green");
-                    var audio = new Audio("{{ asset('assets/sound/notification.mp3') }} ")
-                    audio.play();
-                })
+            Echo.private('new-vendor.register.' + {{ Auth::user()->company ? Auth::user()->company->id : 1 }})
+                .listen(
+                    'NewVendorRegisterEvent',
+                    function(data) {
+                        console.log(data);
+                        showToast("New Vendor Registration " + data.v_name, "green");
+                        var audio = new Audio("{{ asset('assets/sound/notification.mp3') }} ")
+                        audio.play();
+                    })
         });
     </script>
 

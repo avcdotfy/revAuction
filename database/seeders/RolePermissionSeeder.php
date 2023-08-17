@@ -13,7 +13,7 @@ class RolePermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 102; $i++) {
+        for ($i = 1; $i <= 104; $i++) {
             RolePermission::create([
                 'role_id' => 1,
                 'permission_id' => $i,

@@ -67,6 +67,8 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::get('/', [RolePermissionController::class, 'index'])->name('permission_role.list');
                 Route::get('/create', [RolePermissionController::class, 'create'])->name('permission_role.create');
                 Route::post('/create', [RolePermissionController::class, 'store'])->name('permission_role.store');
+                Route::get('/edit/{roleId}', [RolePermissionController::class, 'edit'])->name('permission_role.edit');
+                Route::post('/update', [RolePermissionController::class, 'update'])->name('permission_role.update');
             });
             Route::group(['prefix' => 'employee'], function () {
                 Route::get('/', [EmployeeController::class, 'index'])->name('employee.list');
