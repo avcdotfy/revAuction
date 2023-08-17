@@ -176,27 +176,26 @@
                                     </thead>
                                     <tbody>
 
-                                        @foreach ($bids as $key => $bid)
+                                        @foreach ($events as $key => $e)
                                             <tr role="row" class="odd">
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>
                                                     <a data-toggle="modal"
-                                                        href="#model_edit_{{ $key }}">{{ EVENT_ID_PREFIX . $bid->event->id }}</a>
+                                                        href="#model_edit_{{ $key }}">{{ EVENT_ID_PREFIX . $e->id }}</a>
                                                 </td>
-                                                <td> {{ $bid->event->title }} </td>
+                                                <td> {{ $e->title }} </td>
 
                                                 <td>
                                                     <a
-                                                        href="{{ route('report.decisionTakenEventConsolidateReport', $bid->event->id) }} ">Download
+                                                        href="{{ route('report.decisionTakenEventConsolidateReport', $e->id) }} ">Download
                                                         Report</a>
                                                 </td>
                                                 <td>
-                                                    <a
-                                                        href="{{ route('report.decisionTakenEvenL1Report', $bid->event->id) }}">Download
+                                                    <a href="{{ route('report.decisionTakenEvenL1Report', $e->id) }}">Download
                                                         Report</a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('event.postedEventInformation', $bid->event->id) }}">View
+                                                    <a href="{{ route('event.postedEventInformation', $e->id) }}">View
                                                         Information</a>
                                                 </td>
                                             </tr>
@@ -222,9 +221,9 @@
                                                                                     class="col-sm-4 control-label">Open
                                                                                     Date &amp; Time : </label>
                                                                                 <div class="col-sm-8">
-                                                                                    <label>{{ $bid->event->opening_date }}
+                                                                                    <label>{{ $e->opening_date }}
                                                                                         -
-                                                                                        {{ $bid->event->opening_time }}</label>
+                                                                                        {{ $e->opening_time }}</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-12">
@@ -236,9 +235,9 @@
                                                                                     class="col-sm-4 control-label">Close
                                                                                     Date &amp; Time : </label>
                                                                                 <div class="col-sm-8">
-                                                                                    <label>{{ $bid->event->closing_date }}
+                                                                                    <label>{{ $e->closing_date }}
                                                                                         -
-                                                                                        {{ $bid->event->closing_time }}</label>
+                                                                                        {{ $e->closing_time }}</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-12">
@@ -250,7 +249,7 @@
                                                                                     class="col-sm-4 control-label">Created
                                                                                     By : </label>
                                                                                 <div class="col-sm-8">
-                                                                                    <label>{{ $bid->event->user->name }}</label>
+                                                                                    <label>{{ $e->user->name }}</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-12">
@@ -262,7 +261,7 @@
                                                                                     class="col-sm-4 control-label">Created
                                                                                     Date : </label>
                                                                                 <div class="col-sm-8">
-                                                                                    <label>{{ $bid->event->created_at }}</label>
+                                                                                    <label>{{ $e->created_at }}</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-12" style="display:none">

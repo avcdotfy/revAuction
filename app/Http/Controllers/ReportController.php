@@ -88,7 +88,7 @@ class ReportController extends BaseController
         }
         // dd($r->cat_id);
         if ($r->cat_id) {
-            $events =  Event::where(['status' => EVENT_STATUS[2], 'company_id' => $this->company_id, 'category_id' => $r->cat_id])->where(function ($query) use ($fromDateMillis, $toDateMillis) {
+            $events =  Event::where(['status' => EVENT_STATUS[2], 'decision_status' => 'TAKEN', 'company_id' => $this->company_id, 'category_id' => $r->cat_id])->where(function ($query) use ($fromDateMillis, $toDateMillis) {
                 if ($fromDateMillis && $toDateMillis) {
                     $query->whereBetween('closing_date_time_millis', [$fromDateMillis, $toDateMillis]);
                 } elseif ($fromDateMillis) {
@@ -98,7 +98,7 @@ class ReportController extends BaseController
                 }
             })->get();
         } else {
-            $events = Event::where(['status' => EVENT_STATUS[2], 'company_id' => $this->company_id])->where(function ($query) use ($fromDateMillis, $toDateMillis) {
+            $events = Event::where(['status' => EVENT_STATUS[2], 'decision_status' => 'TAKEN', 'company_id' => $this->company_id])->where(function ($query) use ($fromDateMillis, $toDateMillis) {
                 if ($fromDateMillis && $toDateMillis) {
                     $query->whereBetween('closing_date_time_millis', [$fromDateMillis, $toDateMillis]);
                 } elseif ($fromDateMillis) {
@@ -113,9 +113,7 @@ class ReportController extends BaseController
         $fromDate = $r->closedFromDate;
         $toDate = $r->closedToDate;
 
-        $bids = Bid::groupBy('event_id')->where('decision_status', 'Accepted')->get();
-        // dd($bids);
-        return view('admin.pages.report.decision-taken', compact('bids', 'categories', 'catId', 'categories', 'fromDate',  'toDate'));
+        return view('admin.pages.report.decision-taken', compact('events', 'categories', 'catId', 'categories', 'fromDate',  'toDate'));
     }
 
 
