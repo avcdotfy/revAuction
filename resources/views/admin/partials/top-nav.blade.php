@@ -4,13 +4,22 @@
     <a href="{{ route('admin-dashboard') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">
-            <img src="{{ Storage::url('company_logo/' . CompanyHelper::getCompanyLogo()) }}" width="50" height="50"
-                alt="" srcset="">
+
+            @if (CompanyHelper::getCompanyLogo())
+                <img src="{{ Storage::url('company_logo/' . CompanyHelper::getCompanyLogo()) }}" width="50"
+                    height="50" />
+            @else
+                <img src="{{ asset('media/logo/logo.png') }}" width="100" height="40" />
+            @endif
         </span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">
-            <img src="{{ Storage::url('company_logo/' . CompanyHelper::getCompanyLogo()) }}" width="150"
-                height="70" alt="" srcset="">
+            @if (CompanyHelper::getCompanyLogo())
+                <img src="{{ Storage::url('company_logo/' . CompanyHelper::getCompanyLogo()) }}" width="50"
+                    height="50" />
+            @else
+                <img src="{{ asset('media/logo/logo.png') }}" width="100" height="40" />
+            @endif
         </span>
     </a>
 

@@ -11,7 +11,11 @@
         Dotfy | Vendor | Login
     </title>
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ Storage::url('fav_ico/' . CompanyHelper::getCompanyFavIcon()) }}" />
+    @if (CompanyHelper::getCompanyFavIcon())
+        <link rel="icon" type="image/png" href="{{ Storage::url('fav_ico/' . CompanyHelper::getCompanyFavIcon()) }}" />
+    @else
+        <link rel="icon" type="image/png" href="{{ asset('media/logo/favDotfy.png') }}" />
+    @endif
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <!-- Bootstrap 3.3.7 -->
@@ -42,7 +46,11 @@
 
     <div class="login-box" style="border-radius:6px;background-color:#fff;border:1px solid #d2d6de;">
         <div class="login-logo" style="margin-bottom:0px;padding-top:20px;">
-            <img src="{{ Storage::url('company_logo/' . CompanyHelper::getCompanyLogo()) }}" style="height:66px;">
+            @if (CompanyHelper::getCompanyLogo())
+                <img src="{{ Storage::url('company_logo/' . CompanyHelper::getCompanyLogo()) }}" style="height:76px;" />
+            @else
+                <img src="{{ asset('media/logo/logo.png') }}" width="100" height="40" />
+            @endif
         </div>
         @include('vendor.partials.alerts')
         <form action="{{ route('vendor.login') }}" method="post">

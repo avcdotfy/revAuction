@@ -80,7 +80,7 @@ class AuthenticateController extends Controller
                 return redirect()->back()->with('error', 'Unautherized access denied');
             }
 
-            if (Auth::user()->email_verified_at == null) {
+            if (!Auth::user()->email_verified_at instanceof Carbon) {
                 Auth::logout();
                 return redirect()->back()->with('error', 'please verify your email address first, Verification link has already been sent to your email address');
             }

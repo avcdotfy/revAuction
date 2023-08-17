@@ -2,12 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckApprovedOrNot
+class CheckEmailVerified
 {
     /**
      * Handle an incoming request.
@@ -16,12 +17,12 @@ class CheckApprovedOrNot
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-        if (Auth::user()->vendor->is_approved) {
+        // dd(Auth::user()->email_verified_at);
+        if (Auth::user()->email_verified_at instanceof Carbon) {
             return $next($request);
         } else {
             Auth::logout();
-            return redirect()->back()->with('info', 'Your account is under process.');
+            return redirect()->back()->with('error', 'Your Email is not verified, please verify your email address');
         }
     }
 }
