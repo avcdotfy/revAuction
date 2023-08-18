@@ -41,6 +41,10 @@ class BidController extends Controller
                 return redirect()->route('vendor.liveAuction', $req->event_id)->with('error', 'Capping price should be less than last bid price :' . $minBidAmount);
             }
 
+            if (BidHelper::getLowestCappingPrice($req->event_id, $req->item_id, $req->item_rpu_id) != null && $req->capping_price >= BidHelper::getLowestCappingPrice($req->event_id, $req->item_id, $req->item_rpu_id)) {
+                return redirect()->route('vendor.liveAuction', $req->event_id)->with('error', 'Capping price is very high , please place a low bid !');
+            }
+
             if ($req->capping_price <= 0) {
                 return redirect()->route('vendor.liveAuction', $req->event_id)->with('error', 'Capping price  should not be less than or equal to zero');
             }
@@ -120,7 +124,7 @@ class BidController extends Controller
             'lastBidderPrice' => BidHelper::getLastBidderPrice($r->eId, $r->iId, $r->iRpuId) ? BidHelper::getLastBidderPrice($r->eId, $r->iId, $r->iRpuId)->bidding_price : 0,
             'decrementAmount' => Item::find($r->iId)->decrement_price,
             'least_status' => BidHelper::getVendorsLeastStatus($r->eId, $r->iId, Auth::user()->vendor->id, $r->iRpuId)
-            
+
         ];
         return response()->json($data);
     }

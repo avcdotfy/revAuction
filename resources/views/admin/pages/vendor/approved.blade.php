@@ -6,9 +6,7 @@
         <h3 style="margin-top: 10px; margin-bottom: 20px">Approved Vendor List </h3>
         <ol class="breadcrumb">
             <button id="myBtn" style="color: white; font-weight: 600" class="btn-block btn-primary btn-sm"
-                data-toggle="modal" data-target="#exampleModalLong">
-
-                Reject Vendor </button>
+                data-toggle="modal" data-target="#exampleModalLong"> Reject Vendor </button>
         </ol>
     </section>
     <!-- Main content -->
@@ -47,7 +45,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         @foreach ($requests as $key => $req)
                                             <tr role="row" class="odd">
                                                 <td>{{ $key + 1 }}</td>
@@ -56,22 +53,17 @@
                                                 </td>
                                                 <td>{{ $req->vendor->company_name }}</td>
                                                 <td>{{ $req->vendor->vendor_type }}</td>
-                                                <td><span
-                                                        id="ContentPlaceHolder1_lvNvR_lblusername_0">{{ $req->vendor->user->username }}</span>
+                                                <td><span id="">{{ $req->vendor->user->username }}</span>
                                                 </td>
-                                                <td><span
-                                                        id="ContentPlaceHolder1_lvNvR_lblmobile_0">{{ $req->vendor->user->phone }}</span>
+                                                <td><span id="">{{ $req->vendor->user->phone }}</span>
                                                 </td>
-                                                <td><span
-                                                        id="ContentPlaceHolder1_lvNvR_lblemail_0">{{ $req->vendor->user->email }}</span>
+                                                <td><span id="">{{ $req->vendor->user->email }}</span>
                                                 </td>
                                                 <td>{{ $req->vendor->created_at }}</td>
                                                 <td>{{ $req->remark->message }}</td>
                                                 <td><a href="{{ route('vendor.profile', [$req->vendor->id]) }}">View</a>
-
                                             </tr>
                                         @endforeach
-
                                     </tbody>
                                 </table>
                             </div>
@@ -81,10 +73,8 @@
             </div>
 
     </section>
-
     @include('admin.partials.reject-request-remark-modal')
 @endsection
-
 
 @push('scripts')
     <script>

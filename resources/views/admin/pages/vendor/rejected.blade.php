@@ -55,14 +55,11 @@
                                                 </td>
                                                 <td>{{ $req->vendor->company_name }}</td>
                                                 <td>{{ $req->vendor->vendor_type }}</td>
-                                                <td><span
-                                                        id="ContentPlaceHolder1_lvNvR_lblusername_0">{{ $req->vendor->user->username }}</span>
+                                                <td><span id="">{{ $req->vendor->user->username }}</span>
                                                 </td>
-                                                <td><span
-                                                        id="ContentPlaceHolder1_lvNvR_lblmobile_0">{{ $req->vendor->user->phone }}</span>
+                                                <td><span id="">{{ $req->vendor->user->phone }}</span>
                                                 </td>
-                                                <td><span
-                                                        id="ContentPlaceHolder1_lvNvR_lblemail_0">{{ $req->vendor->user->email }}</span>
+                                                <td><span id="">{{ $req->vendor->user->email }}</span>
                                                 </td>
                                                 <td>{{ $req->vendor->created_at }}</td>
                                                 <td>{{ $req->remark->message }}</td>
@@ -70,10 +67,6 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-
-
-
-
                                     </tbody>
                                 </table>
                             </div>

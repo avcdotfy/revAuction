@@ -23,6 +23,13 @@ class BidHelper
         return $bid;
     }
 
+    public static function getLowestCappingPrice($event_id, $item_id, $itemRpu_id = null)
+    {
+        $bid = Bid::where(['event_id' => $event_id, 'item_id' => $item_id, 'item_r_p_u_model_id' => $itemRpu_id])->where('capping_price', '!=', 0)->min('capping_price');
+        return $bid;
+    }
+    
+
     public static function getLastBidderPrice($event_id, $item_id, $itemRpu_id = null)
     {
         // dd($event_id); 7
