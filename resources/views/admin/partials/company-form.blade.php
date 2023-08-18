@@ -38,7 +38,7 @@
     <div class="col-sm-12" style="padding:0px;">
         <label for="inputPassword3" class="col-sm-12 control-label">Company Website Url </label>
         <div class="col-sm-12">
-            <input type="text" name="web_url" class="form-control" placeholder="Enter Company Website Url" required
+            <input type="text" name="web_url" class="form-control" placeholder="Enter Company Website Url" required readonly
                 value="{{ $company ? $company->web_url : '' }}">
         </div>
     </div>

@@ -38,6 +38,7 @@ class RolePermissionController extends Controller
         $role_data = [
             'name' => $req->name,
             'description' => $req->description,
+            'is_active' => $req->is_active,
             'user_id' =>  Auth::user()->id,
             'company_id' => CompanyHelper::getCompanyFromHost()->id
         ];
@@ -71,6 +72,7 @@ class RolePermissionController extends Controller
         $role_data = [
             'name' => $req->name,
             'description' => $req->description,
+            'is_active' => $req->is_active,
             'user_id' =>  Auth::user()->id,
             'company_id' => CompanyHelper::getCompanyFromHost()->id
         ];

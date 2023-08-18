@@ -18,6 +18,7 @@ return new class extends Migration
             $t->id();
             $t->string('name')->nullable();
             $t->string('description')->nullable();
+            $t->boolean('is_active');
             $t->foreignIdFor(User::class)->comment('Creator ID');
             $t->foreignIdFor(Company::class)->comment('Creator Company ID');
             $t->timestamps();

@@ -25,7 +25,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = DB::table('employees')
-            ->select('employees.id','employees.is_active' , 'roles.name as role', 'employees.employee_id', 'employees.designation', 'departments.name as department', 'users.name', 'users.phone', 'users.email', 'users.password')
+            ->select('employees.id', 'employees.is_active', 'roles.name as role', 'employees.employee_id', 'employees.designation', 'departments.name as department', 'users.name', 'users.phone', 'users.email', 'users.password')
             ->join('users', 'users.id', '=', 'employees.emp_user_id')
             ->join('roles', 'roles.id', '=', 'employees.role_id')
             ->join('departments', 'departments.id', '=', 'employees.department_id')
@@ -38,7 +38,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $roles = Role::where('user_id', Auth::user()->id)->get();
+        $roles = Role::where('is_active', 1)->get();
         $departments = Department::where('company_id', CompanyHelper::getCompanyFromHost()->id)->get();
         // dd($departments);
         $employee = null;
@@ -125,7 +125,7 @@ class EmployeeController extends Controller
     public function edit(string $id)
     {
         $employee = Employee::find($id);
-        $roles = Role::where('user_id', Auth::user()->id)->get();
+        $roles = Role::where('is_active', 1)->get();
         $departments = Department::where('company_id', CompanyHelper::getCompanyFromHost()->id)->get();
         return view(
             'admin.pages.settings.organization.employee.edit',

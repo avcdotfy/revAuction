@@ -18,6 +18,7 @@ class RoleSeeder extends Seeder
             'name' => 'Super Admin',
             'description' => 'Can Acces Every things',
             'user_id' => 1,
+            'is_active' => 1,
             'company_id' => 1,
         ]);
     }
