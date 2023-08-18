@@ -9,6 +9,7 @@ use App\Exports\DecisionTakenEventL1Report;
 use App\Exports\ParticipatedEventReports;
 use App\Exports\ParticipatedEventStatusReports;
 use App\Exports\ParticipateEventStatusReport;
+use App\Helpers\EventHelper;
 use App\Models\Bid;
 use App\Models\Category;
 use App\Models\Event;
@@ -116,38 +117,42 @@ class ReportController extends BaseController
         return view('admin.pages.report.decision-taken', compact('events', 'categories', 'catId', 'categories', 'fromDate',  'toDate'));
     }
 
-
     //////////////////////////////////////////// Report Making ///////////////////////////////////////////////
 
     function closedEvenL1Report($eId)
     {
+        if (EventHelper::checkEventExist($eId)) return EventHelper::checkEventExist($eId);
         return Excel::download(new ClosedEventL1Report($eId), EVENT_ID_PREFIX . $eId . '_EVENT_L1_REPORT_WD_.xlsx');
     }
 
     function closedEventConsolidateReport($eId)
     {
+        if (EventHelper::checkEventExist($eId)) return EventHelper::checkEventExist($eId);
         return Excel::download(new ClosedEventConsolidateReport($eId), EVENT_ID_PREFIX . $eId . '_EVENT_REPORT_WD_.xlsx');
     }
 
     function decisionTakenEventConsolidateReport($eId)
     {
+        if (EventHelper::checkEventExist($eId)) return EventHelper::checkEventExist($eId);
         return Excel::download(new DecisionTakenEventConsolidateReport($eId), EVENT_ID_PREFIX . $eId . '_DECISION_TAKEN_EVENT_REPORT_WD_.xlsx');
     }
 
     function decisionTakenEvenL1Report($eId)
     {
+        if (EventHelper::checkEventExist($eId)) return EventHelper::checkEventExist($eId);
         return Excel::download(new DecisionTakenEventL1Report($eId), EVENT_ID_PREFIX . $eId . '_DECISION_TAKEN_EVENT_L1_REPORT_WD_.xlsx');
     }
 
     ///////////////////////////////////////////////// Vendor Side Reports  //////////////////////////////////////////////////
 
-
     function participatedEventReports($eId)
     {
+        if (EventHelper::checkEventExist($eId)) return EventHelper::checkEventExist($eId);
         return Excel::download(new ParticipatedEventReports($eId), EVENT_ID_PREFIX . $eId . '_PARTICIPATED_EVENT_REPORT.xlsx');
     }
     function participatedEventStatusReports($eId)
     {
+        if (EventHelper::checkEventExist($eId)) return EventHelper::checkEventExist($eId);
         return Excel::download(new ParticipateEventStatusReport($eId), EVENT_ID_PREFIX . $eId . '_PARTICIPATED_EVENT_STATUS_REPORT.xlsx');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\NewVendorRegisterEvent;
 use App\Helpers\CategoryHelper;
 use App\Helpers\CompanyHelper;
+use App\Helpers\EventHelper;
 use App\Helpers\UploadHelper;
 use App\Mail\NewVendorMail;
 use App\Mail\VerifyEmail;
@@ -146,12 +147,14 @@ class VendorController extends Controller
     function profile($id)
     {
         $v = Vendor::find($id);
+        if (!$v) {
+            return redirect()->route('vendor.new_requests')->with('error', 'Vendor you are trying to access, does not exist');
+        }
         $countries = Country::where(['company_id' => CompanyHelper::getCompanyFromHost()->id])->get();
         $categories = CategoryHelper::getCategories();
         $regions = Region::all();
         return view('admin.pages.vendor.profile', compact('v', 'countries', 'regions', 'categories'));
     }
-
 
     public function getVendorsFromCategoryId(Request $req)
     {
@@ -187,6 +190,7 @@ class VendorController extends Controller
 
     public function postedEventInfo($eId)
     {
+        if (EventHelper::checkEventExist($eId)) return EventHelper::checkEventExist($eId);
         $event = Event::find($eId);
         $participates = Participant::where(['event_id' => $eId, 'vendor_id' => Auth::user()->vendor->id])->get();
         return view('vendor.pages.post-event-info', compact('participates', 'event'));
@@ -241,6 +245,9 @@ class VendorController extends Controller
     {
         // dd($req->is_verified);
         $v = Vendor::find($req->vendor_id);
+        if (!$v) {
+            return redirect()->route('vendor.new_requests')->with('error', 'Vendor you are trying to access, does not exist');
+        }
         if ($v) {
             $v->categories()->detach();
             $v->regions()->detach();

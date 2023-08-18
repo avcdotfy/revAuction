@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CategoryHelper;
 use App\Helpers\CompanyHelper;
 use App\Helpers\DepartmentHelper;
 use App\Models\Category;
@@ -14,12 +15,9 @@ use RoleHelper;
 
 class CategoryController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $categories = Category::where('company_id', $this->company_id)->orderBy('created_at', 'desc')->get();
+        $categories = CategoryHelper::getCategoriesBasedOnUserType();
         return view('admin.pages.catalog.category.list', compact('categories'));
     }
 
@@ -66,7 +64,11 @@ class CategoryController extends BaseController
     public function edit($id)
     {
         $category = Category::find($id);
-        return view('admin.pages.catalog.category.edit', compact('category'));
+        if ($category) {
+            return view('admin.pages.catalog.category.edit', compact('category'));
+        } else {
+            return redirect()->route('category.list')->with('error', 'category you are trying to access does not exist');
+        }
     }
 
     function update(Request $req)

@@ -2,6 +2,7 @@
 //////////////////////////////////////////////////////////// Dont Touch if you dont understand /////////////////////////////////////////////////////////////
 namespace App\Http\Controllers;
 
+use App\Helpers\EventHelper;
 use App\Models\Category;
 use App\Models\Decision;
 use App\Models\Participant;
@@ -22,6 +23,7 @@ class ParticipantController extends Controller
 
     public function getParticipatedEventItemList($eid)
     {
+        if (EventHelper::checkEventExist($eid)) return EventHelper::checkEventExist($eid);
         $participates = Participant::where(['vendor_id' => Auth::user()->vendor->id, 'event_id' => $eid])->get();
         return view('vendor.pages.participate-events-item-list', compact('participates'));
     }
@@ -34,6 +36,7 @@ class ParticipantController extends Controller
 
     public function getParticipatedEventItemStatusList($eid)
     {
+        if (EventHelper::checkEventExist($eid)) return EventHelper::checkEventExist($eid);
         $decisions = Decision::where(['vendor_id' => Auth::user()->vendor->id, 'event_id' => $eid])->get();
         // dd($decisions);
         return view('vendor.pages.participated-event-item-status-list', compact('decisions'));

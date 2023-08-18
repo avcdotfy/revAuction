@@ -125,6 +125,9 @@ class EmployeeController extends Controller
     public function edit(string $id)
     {
         $employee = Employee::find($id);
+        if (!$employee) {
+            return redirect()->route('employee.list')->with('error', 'Employee you are trying to access, does not exist');
+        }
         $roles = Role::where('is_active', 1)->get();
         $departments = Department::where('company_id', CompanyHelper::getCompanyFromHost()->id)->get();
         return view(
@@ -138,23 +141,25 @@ class EmployeeController extends Controller
      */
     public function update(Request $req)
     {
+        $emp = Employee::find($req->id);
+        if (!$emp) {
+            return redirect()->route('employee.list')->with('error', 'Employee you are trying to access, does not exist');
+        }
         $name = $req->name;
         $email = $req->email;
         $username = $req->username;
-
         $phone = $req->phone;
         $role_id = $req->role_id;
         $department_id = $req->department_id;
         $designation = $req->designation;
         $emp_id = $req->employee_id;
         $cat_ids = $req->cat_ids;
-
         try {
             User::find($req->emp_user_id)->update(['name' => $name, 'email' => $email, 'username' => $username, 'phone' => $phone, 'role_id' => $role_id]);
         } catch (QueryException $e) {
             return redirect()->back()->with('error', 'email or username is already  in use , please try another' . $e)->withInput();
         }
-        $emp = Employee::find($req->id);
+
         $emp->update([
             'role_id' => $role_id,
             'department_id' => $department_id,

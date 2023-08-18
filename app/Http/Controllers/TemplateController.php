@@ -14,7 +14,7 @@ class TemplateController extends Controller
     {
         $et = null;
         $template = null;
-        return view('admin.pages.settings.mail.template.create', compact('et' , 'template'));
+        return view('admin.pages.settings.mail.template.create', compact('et', 'template'));
     }
 
     public function emailTemplateList()
@@ -37,15 +37,23 @@ class TemplateController extends Controller
     function emailTemplateEdit($id)
     {
         $template = EmailTemplate::find($id);
+        if (!$template) {
+            return redirect()->route('template.email.list')->with('error', 'Template you are trying to access, does not exist');
+        }
         return view('admin.pages.settings.mail.template.edit', compact('template'));
     }
 
     function  emailTemplateUpdate(Request $req)
     {
-        $et = EmailTemplate::find($req->id)->update($req->all());
+        $et = EmailTemplate::find($req->id);
 
-        if ($et) {
-            return redirect()->route('template.email.list')->with('success', 'Template updated successfully');
+        if (!$et) {
+            return redirect()->route('template.email.list')->with('error', 'Template you are trying to access, does not exist');
+        } else {
+            $et = $et->update($req->all());
+            if ($et) {
+                return redirect()->route('template.email.list')->with('success', 'Template updated successfully');
+            }
         }
     }
 

@@ -36,6 +36,9 @@ class StateController extends BaseController
     function edit($id)
     {
         $state = State::find($id);
+        if (!$state) {
+            return redirect()->route('state.list')->with('error', 'State you are trying to access, does not exist');
+        }
         $countries = Country::where(['company_id' => $this->company_id, 'is_active' => true])->get();
         return view('admin.pages.settings.master.state.edit', compact('countries', 'state'));
     }
@@ -43,12 +46,16 @@ class StateController extends BaseController
 
     function update(Request $req)
     {
-        $state = State::find($req->id)->update(array_merge($req->all(), ['user_id' => $this->user_id, 'company_id' => $this->company_id]));
-
-        if ($state) {
-            return redirect()->route('state.list')->with('success', 'State updated Successfully');
+        $state = State::find($req->id);
+        if (!$state) {
+            return redirect()->route('state.list')->with('error', 'State you are trying to access, does not exist');
         } else {
-            return redirect()->back()->with('error', 'Something Went Wrong');
+            $state = $state->update(array_merge($req->all(), ['user_id' => $this->user_id, 'company_id' => $this->company_id]));
+            if ($state) {
+                return redirect()->route('state.list')->with('success', 'State updated Successfully');
+            } else {
+                return redirect()->back()->with('error', 'Something Went Wrong');
+            }
         }
     }
 }

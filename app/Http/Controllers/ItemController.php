@@ -38,7 +38,7 @@ class ItemController extends BaseController
      */
     public function create()
     {
-        $categories = Category::where(['user_id' => Auth::user()->id, 'is_active' => true])->get();
+        $categories = Category::where(['company_id' => CompanyHelper::getCompanyFromHost()->id, 'is_active' => true])->get();
         $uOm = UnitOfMeasure::where('user_id', Auth::user()->id)->where('is_active', true)->get();
         $regions = Region::where('user_id', Auth::user()->id)->where('is_active', true)->get();
         $item = null;
@@ -127,6 +127,9 @@ class ItemController extends BaseController
     function edit($id)
     {
         $item = Item::find($id);
+        if (!$item) {
+            return redirect()->route('item.list')->with('error', 'Item you are trying to access, does not exist');
+        }
         $categories = Category::where('user_id', Auth::user()->id)->get();
         $uOm = UnitOfMeasure::where('user_id', Auth::user()->id)->get();
         $regions = Region::where('user_id', Auth::user()->id)->get();
@@ -136,7 +139,11 @@ class ItemController extends BaseController
     function update(Request $req)
     {
         // dd($req->all());
-        $item = Item::find($req->id)->update([
+        $item = Item::find($req->id);
+        if (!$item) {
+            return redirect()->route('item.list')->with('error', 'Item you are trying to access, does not exist');
+        }
+        $item->update([
             'code' => $req->code,
             'category_id' => $req->category_id,
             'unit_of_measure_id' => $req->unit_of_measure_id,

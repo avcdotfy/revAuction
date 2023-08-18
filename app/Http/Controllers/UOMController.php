@@ -31,16 +31,24 @@ class UOMController extends Controller
     function edit($id)
     {
         $uom = UnitOfMeasure::find($id);
+        if (!$uom) {
+            return redirect()->route('uom.list')->with('error', 'UOM you are trying to access, does not exist');
+        }
         return view('admin.pages.settings.master.uom.edit', compact('uom'));
     }
 
     function update(Request $req)
     {
-        $uom = UnitOfMeasure::find($req->id)->update(array_merge($req->all(), ['user_id' => Auth::user()->id]));
-        if ($uom) {
-            return redirect()->route('uom.list')->with('success', 'UOM updated Successfully');
+        $uom = UnitOfMeasure::find($req->id);
+        if (!$uom) {
+            return redirect()->route('uom.list')->with('error',  'UOM you are trying to access, does not exist');
         } else {
-            return redirect()->back()->with('error', 'UOM update failed')->withInput();
+            $uom = $uom->update(array_merge($req->all(), ['user_id' => Auth::user()->id]));
+            if ($uom) {
+                return redirect()->route('uom.list')->with('success', 'UOM updated Successfully');
+            } else {
+                return redirect()->back()->with('error', 'UOM update failed')->withInput();
+            }
         }
     }
 }

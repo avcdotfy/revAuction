@@ -57,6 +57,9 @@ class RolePermissionController extends Controller
     public function edit($roleId)
     {
         $role = Role::find($roleId);
+        if (!$role) {
+            return redirect()->route('permission_role.list')->with('error', 'Role you are trying to access, does not exist');
+        }
         $permissions = Permission::all();
         $groups = Permissiongroup::all();
 
@@ -65,6 +68,10 @@ class RolePermissionController extends Controller
 
     public function update(Request $req)
     {
+        $role = Role::find($req->id);
+        if (!$role) {
+            return redirect()->route('permission_role.list')->with('error', 'Role you are trying to access, does not exist');
+        }
 
         if (empty($req->permission)) {
             return redirect()->back()->with('error', 'Please select atleast one permission');
@@ -76,10 +83,7 @@ class RolePermissionController extends Controller
             'user_id' =>  Auth::user()->id,
             'company_id' => CompanyHelper::getCompanyFromHost()->id
         ];
-
-        $role = Role::find($req->id);
         $updated = $role->update($role_data);
-
         $role->permissions()->detach();
         $role->permissions()->attach($req->permission);
 

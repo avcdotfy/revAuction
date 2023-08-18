@@ -19,6 +19,7 @@
                 <div class="box">
                     <div class="box-body">
 
+                        @include('admin.partials.alerts')
 
                         <div id="ContentPlaceHolder1_div_list" class="row">
                             <div class="col-sm-12">

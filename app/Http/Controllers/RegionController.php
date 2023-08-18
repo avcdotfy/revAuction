@@ -34,16 +34,24 @@ class RegionController extends Controller
     function edit($id)
     {
         $region = Region::find($id);
+        if (!$region) {
+            return redirect()->route('region.list')->with('error', 'Region you are trying to access, does not exist');
+        }
         return view('admin.pages.settings.master.region.edit', compact('region'));
     }
 
     function update(Request $req)
     {
-        $reg = Region::find($req->id)->update(array_merge($req->all(), ['user_id' => Auth::user()->id]));
-        if ($reg) {
-            return redirect()->route('region.list')->with('success', 'Region update Successfully');
+        $reg = Region::find($req->id);
+        if (!$reg) {
+            return redirect()->route('region.list')->with('error', 'Region you are trying to access, does not exist');
         } else {
-            return redirect()->back()->with('error', 'Region update failed')->withInput();
+            $reg = $reg->update(array_merge($req->all(), ['user_id' => Auth::user()->id]));
+            if ($reg) {
+                return redirect()->route('region.list')->with('success', 'Region update Successfully');
+            } else {
+                return redirect()->back()->with('error', 'Region update failed')->withInput();
+            }
         }
     }
 }

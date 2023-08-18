@@ -38,16 +38,25 @@ class EventmodeController extends BaseController
     function edit($id)
     {
         $eventmode = Eventmode::find($id);
+
+        if (!$eventmode) {
+            return redirect()->route('eventmode.list')->with('error', 'Event mode you are trying to access, does not exist');
+        }
         return view('admin.pages.settings.master.eventmode.edit', compact('eventmode'));
     }
 
     function update(Request $req)
     {
-        $em = Eventmode::find($req->id)->update(array_merge($req->all(), ['user_id' => $this->user_id, 'company_id' => $this->company_id]));
-        if ($em) {
-            return redirect()->route('eventmode.list')->with('success', 'Event Mode update Successfully');
+        $em = Eventmode::find($req->id);
+        if (!$em) {
+            return redirect()->route('eventmode.list')->with('error', 'Event mode you are trying to access, does not exist');
         } else {
-            return redirect()->back()->with('error', 'Event Mode update failed')->withInput();
+            $em =  $em->update(array_merge($req->all(), ['user_id' => $this->user_id, 'company_id' => $this->company_id]));
+            if ($em) {
+                return redirect()->route('eventmode.list')->with('success', 'Event Mode update Successfully');
+            } else {
+                return redirect()->back()->with('error', 'Event Mode update failed')->withInput();
+            }
         }
     }
 }

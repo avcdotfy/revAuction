@@ -64,6 +64,9 @@ class DepartmentController extends Controller
     public function edit(string $id)
     {
         $department = Department::find($id);
+        if (!$department) {
+            return redirect()->route('department.list')->with('error', 'Department you are trying to access, does not exist');
+        }
         return view('admin.pages.settings.organization.department.edit', compact('department'));
     }
 
@@ -72,11 +75,16 @@ class DepartmentController extends Controller
      */
     public function update(Request $req)
     {
-        $dep = Department::find($req->id)->update(array_merge($req->all()));
-        if ($dep) {
-            return redirect()->route('department.list')->with('success', 'Department updated successfully');
+        $dep = Department::find($req->id);
+        if (!$dep) {
+            return redirect()->route('department.list')->with('error', 'Department you are trying to access, does not exist');
         } else {
-            return redirect()->back()->with('error', 'Department update failed');
+            $dep = $dep->update(array_merge($req->all()));
+            if ($dep) {
+                return redirect()->route('department.list')->with('success', 'Department updated successfully');
+            } else {
+                return redirect()->back()->with('error', 'Department update failed');
+            }
         }
     }
 

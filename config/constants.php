@@ -1,6 +1,9 @@
 <?php
 
-define('USER_TYPES', ['ADMIN',  'VENDOR', 'EMPLOYEE']);
+define('ADMIN', 'ADMIN');
+define('VENDOR', 'VENDOR');
+define('EMPLOYEE', 'EMPLOYEE');
+define('USER_TYPES', [ADMIN, VENDOR, EMPLOYEE]);
 
 define('ADMIN_SIDE', 'Admin Side');
 define('VENDOR_SIDE', 'Vendor Side');
@@ -605,13 +608,6 @@ define('PERMISSIONS', [
 
 
 ]);
-
-
-
-
-
-
-
 
 
 

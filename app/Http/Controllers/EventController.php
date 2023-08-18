@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\BidHelper;
+use App\Helpers\EventHelper;
 use App\Helpers\EventInvitationHelper;
 use App\Models\Bid;
 use App\Models\Category;
@@ -33,7 +34,17 @@ class EventController extends BaseController
     public function create()
     {
         $eventModes = Eventmode::where(['company_id' => $this->company_id, 'is_active' => true])->get();
-        $categories = Category::where(['company_id' => $this->company_id, 'is_active' => true])->get();
+
+        // $categories = Category::where(['company_id' => $this->company_id, 'is_active' => true])->get();
+        if (Auth::user()->user_type == ADMIN) {
+            $categories = Category::where('company_id', $this->company_id)->where('is_active', true)->orderBy('created_at', 'desc')->get();
+        }
+        if (Auth::user()->user_type == EMPLOYEE) {
+            $categories = Category::where('company_id', $this->company_id)->where('is_active', true)->where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get(); //Employee can access those categories that are created by employee
+            $assignedCats = Auth::user()->employee->categories;  //Employee can access only those categories that are assigned during employee creation
+            $categories = $categories->merge($assignedCats);
+        }
+
         $requests = ModelsRequest::where(['company_id' => $this->user_id, 'status' => REQUEST_STATUS[0]])->get();
         $itemRpus = ItemRPUModel::where(['company_id' => $this->company_id])->get();
         return view('admin.pages.event.create', compact('eventModes', 'categories', 'requests', 'itemRpus'));
@@ -166,6 +177,7 @@ class EventController extends BaseController
 
     public function statistics($eId)
     {
+        if (EventHelper::checkEventExist($eId)) return EventHelper::checkEventExist($eId);
         $event = BidHelper::getBidStatistics($eId)[0];
         $bidStarted = BidHelper::getBidStatistics($eId)[1];
         $eventWithAllRPus = BidHelper::getBidStatistics($eId)[2];
@@ -189,14 +201,15 @@ class EventController extends BaseController
 
     public function postedEventInformation($eId)
     {
+        if (EventHelper::checkEventExist($eId)) return EventHelper::checkEventExist($eId);
         $event = Event::find($eId);
-
         return view('admin.pages.event.post-event-info', compact('event'));
     }
 
 
     public function decisionTakenEventStatus($eId)
     {
+        if (EventHelper::checkEventExist($eId)) return EventHelper::checkEventExist($eId);
         $decisions = Decision::groupBy('vendor_id')->where('event_id', $eId)->orderBy('bid_id', 'desc')->get();
         // echo json_encode($decisions);
         // dd('');

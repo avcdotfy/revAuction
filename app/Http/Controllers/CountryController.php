@@ -39,18 +39,26 @@ class CountryController extends BaseController
     {
         $country = Country::find($id);
         // dd($country);
+        if (!$country) {
+            return redirect()->route('country.list')->with('error', 'Country you are trying to access, does not exist');
+        }
         return view('admin.pages.settings.master.country.edit', compact('country'));
     }
 
     function  update(Request $req)
     {
         // dd($req->all());
-        $country = Country::find($req->id)->update(array_merge($req->all(), ['user_id' => $this->user_id, 'company_id' => $this->company_id]));
+        $country = Country::find($req->id);
 
-        if ($country) {
-            return redirect()->route('country.list')->with('success', 'Country updated Successfully');
+        if (!$country) {
+            return redirect()->route('country.list')->with('error', 'Country you are trying to access, does not exist');
         } else {
-            return redirect()->back()->with('error', 'Country update failed');
+            $country =  $country->update(array_merge($req->all(), ['user_id' => $this->user_id, 'company_id' => $this->company_id]));
+            if ($country) {
+                return redirect()->route('country.list')->with('success', 'Country updated Successfully');
+            } else {
+                return redirect()->back()->with('error', 'Country update failed');
+            }
         }
     }
 }
