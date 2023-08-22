@@ -85,7 +85,8 @@
                                                             <div class="col-sm-3">
                                                                 <select name="region" id="region_select">
                                                                     {{-- @foreach ($event_rpus as $item) --}}
-                                                                    <option value="" selected disabled> --Select--</option>
+                                                                    <option value="" selected disabled> --Select--
+                                                                    </option>
                                                                     <option value="ALL"
                                                                         {{ $region_id ? ($region_id == 'ALL' ? 'selected' : '') : '' }}>
                                                                         All</option>

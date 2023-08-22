@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\EventHelper;
 use App\Models\Bid;
 use App\Models\Decision;
 use App\Models\Event;
@@ -32,6 +33,8 @@ class DecisionController extends Controller
     function store(Request $r)
     {
         // dd($r->all());
+        if (EventHelper::checkEventExist($r->event_id)) return EventHelper::checkEventExist($r->event_id);
+
         foreach ($r->vendor as $ukey => $v) {
             // dd($v['item']);
             if (!$v['item'])  return redirect()->back()->with('error', 'Item not found , may be decision has alrady been taken for this event');
@@ -56,7 +59,7 @@ class DecisionController extends Controller
                 }
             }
         }
-
+        Event::find($r->event_id)->update(['decision_status' => 'TAKEN']);
         if ($bid) {
             return redirect()->route('event.closed')->with('success', 'decision has been stored successfully');
         }
